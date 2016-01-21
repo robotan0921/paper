@@ -64,23 +64,23 @@ Java script, Perl, Python, Lua and Ruby are well-known as representative script 
 
 Although script languages are easy to use and read, their execution time are slower than C language's.
 For embedded systems, the real-time properties such as worst-execution time, response time are very important factors.
-That is why it is difficult to apply the script languages to embedded systems.
+Therefore, it is difficult to apply the script languages to embedded systems.
 
 mruby on TECS is a component-based framework for running script program \cite{7153813}.
 It is integrated two technologies.
 One is mruby, which is a script language for embedded systems \cite{5959588}.
 The other is TECS (TOPPERS Embedded Component System), which is a component-based framework for embedded systems \cite{4208825}.
 TECS supports to effectively run mruby script language on embedded systems.
-It also makes execution time 100 times faster than that of mruby.
+mruby on TECS also makes execution time 100 times faster than that of mruby.
 
 This paper proposes two additional functions of mruby on TECS, Bluetooth Loader and user-friendly multithread.
 mruby on TECS has some problems at present.
-One of these is that working efficiency is low because only supports a SD card in mruby on TECS platform for LEGO MINDSTORMS EV3 to load mruby programs.
+One of these is that working efficiency is low because mruby on TECS only supports a SD card in the platform for LEGO MINDSTORMS EV3 to load mruby programs.
 In the current development process, it is annoying that the SD card should be insert and pulled out repeatedly.
 If a new function, Bluetooth Loader, is used, the procedure is carried out only once at the beginning and a program code is transferred from a host to a target device by Bluetooth.
 It can improve the efficiency.
 Moreover, in the current system if users attempt to run multiple tasks with the same priority, a task with first execution only runs and all other tasks would not run unless a OS's function must be called by users.
-In addition users must prepare as many VMs as the number of threads because a RiteVM supports only a thread.
+In addition users must prepare as many VMs as the number of threads because one RiteVM supports only one thread.
 Thus that is a big burden on users.
 Another new function enables users to run a multithread programs more easily.
 Specifically, a cycle handler of switching tasks is implemented.
@@ -110,7 +110,7 @@ Section \ref{sec:Evaluation} evaluates the proposed framework, Section \ref{sec:
 Figure \ref{fig:proposed} shows the system proposed in this paper.
 The bytecodes are transferred from the host to the target device with Bluetooth.
 The RiteVMs and mruby library are assumed to be prepared in advance.
-Each bytecode are allocated respectively with its own RiteVM.
+Each bytecode is allocated respectively with its own RiteVM.
 Users can run some bytecodes transferred with Bluetooth Loader in multi-thread.
 
 \begin{figure}[t]
@@ -121,7 +121,7 @@ Users can run some bytecodes transferred with Bluetooth Loader in multi-thread.
 \end{figure}
 
 This section describes the basic technology, which is mruby on TECS, a component-based framework for running script programs.
-In mruby on TECS two technologies are used, mruby and TECS which are the basis for mruby on TECS.
+In mruby on TECS, two technologies are used, mruby and TECS which are the basis for mruby on TECS.
 To explain the system, mruby and TECS are also respectively described in this section.
 
 \subsection{mruby}
@@ -149,7 +149,7 @@ The bytecodes can run on a Rite VM, thus mruby programs can be executed on any t
 \subsection{TECS}
 \label{sec:TECS}
 TECS (TOPPERS Embedded Component System) is a component system suitable for embedded systems.
-TECS help decrease the complexity and difficulty because the generated component diagram can visualize the structure of whole software.
+TECS helps decrease the complexity and difficulty because the generated component diagram can visualize the structure of whole software.
 It can also help increase the productivity and reduce development duplication  because a common part of software is regarded as a component.
 
 The component deployment and composition in TECS are statically performed, which gives optimization.
@@ -453,7 +453,7 @@ eMrubyBody_main(CELLIDX idx)
 This section describes implementation of multithreading in the proposed framework.
 mruby on TECS has supported multithreading.
 However, multithread processing in mruby on TECS requires the knowledge of the RTOS (TOPPERS/HRP2) for users.
-In the proposed framework, multithread processing is user-friendly because users do not need the knowledge than before.
+In the proposed framework, multithread processing is user-friendly because users need the less knowledge than before.
 A cyclic handler that switches tasks is implemented, and that enables users to develop applications without concern for multithreading.
 
  \subsection{rot\_rdq}
@@ -587,9 +587,9 @@ This paper demonstrates the proposed system on a LEGO MINDSTORMS EV3 (300MHz ARM
 The open-source run-time systems for scripting languages have been developed such as follow: mruby on TECS \cite{7153813}, mruby \cite{5959588}, the Owl system \cite{180964}, and Lua \cite{Ierusalimschy:2007:EL:1238844.1238846}
 
 mruby on TECS is a component-based framework for running mruby programs.
-The programs on mruby-on-TECS can execute about one hundred times faster than the mruby programs.
+The programs on mruby-on-TECS can execute about 100 times faster than the mruby programs.
 Software can be also developed with component base by mruby on TECS.
-However, despite the fact that multithreading has been supported in the current mruby on TECS, users need to be familiar with functions of a RTOS to use multithreading.
+Although multithreading has been supported in the current mruby on TECS, users need to be familiar with functions of a RTOS to use multithreading.
 The co-routine is supported as same as mruby.
 
 mruby, the lightweight implementation of the Ruby language, has been proposed for embedded systems.
