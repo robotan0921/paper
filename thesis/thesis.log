@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  21 JAN 2016 16:11
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  23 JAN 2016 10:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -269,23 +269,22 @@ File: figure/mruby.pdf Graphic file (type pdf)
  <figure/mruby.pdf>
 File: figure/component_diagram.pdf Graphic file (type pdf)
  <figure/component_diagram.pdf>
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 196.
+[2]
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 197.
 
-
-(c:/w32tex/share/texmf-dist/tex/latex/psnfss/omsptm.fd
+ (c:/w32tex/share/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9.03374> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 196.
- [2]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 197.
 LaTeX Font Info:    Calculating math sizes for size <10.03749> on input line 27
-7.
-LaTeX Font Info:    Try loading font information for U+msa on input line 277.
+8.
+LaTeX Font Info:    Try loading font information for U+msa on input line 278.
 
 (c:/w32tex/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 277.
+LaTeX Font Info:    Try loading font information for U+msb on input line 278.
 
 (c:/w32tex/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -295,8 +294,6 @@ File: figure/system_model.pdf Graphic file (type pdf)
 <figure/system_model.pdf> [3]
 File: figure/mruby_TECS_bridge.pdf Graphic file (type pdf)
  <figure/mruby_TECS_bridge.pdf>
-Underfull \vbox (badness 6559) has occurred while \output is active []
-
 File: figure/bluetooth_loader.pdf Graphic file (type pdf)
 
 <figure/bluetooth_loader.pdf>
@@ -305,16 +302,16 @@ File: figure/component_bluetooth.pdf Graphic file (type pdf)
 File: figure/control_flow.pdf Graphic file (type pdf)
 
 <figure/control_flow.pdf> [4]
-LaTeX Font Info:    Calculating math sizes for size <9.03374> on input line 437
+LaTeX Font Info:    Calculating math sizes for size <9.03374> on input line 438
 .
-LaTeX Font Info:    Try loading font information for OML+ptm on input line 437.
+LaTeX Font Info:    Try loading font information for OML+ptm on input line 438.
 
 
 (c:/w32tex/share/texmf-dist/tex/latex/psnfss/omlptm.fd
 File: omlptm.fd 
 )
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <9.03374> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 437.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 438.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -322,15 +319,13 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: figure/rot_rdq.pdf Graphic file (type pdf)
 
 <figure/rot_rdq.pdf>
-Underfull \hbox (badness 1454) in paragraph at lines 492--499
-\OT1/ptm/m/n/10.03749 part of CyclicHan-dler \OT1/ptm/m/it/10.03749 cell\OT1/pt
-m/m/n/10.03749 , con-fig-u-ra-tions of a cyclic
- []
-
 File: figure/cyclic_handler.pdf Graphic file (type pdf)
-<figure/cyclic_handler.pdf>
-LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 577.
- [6] (./thesis.bbl)
+ <figure/cyclic_handler.pdf>
+LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 573.
+ [6] (./thesis.bbl
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -344,12 +339,12 @@ Before submitting the final camera ready copy, remember to:
 
 [7] (./thesis.aux) ) 
 Here is how much of TeX's memory you used:
- 3250 strings out of 493777
- 50957 string characters out of 6153182
- 187101 words of memory out of 5000000
- 6711 multiletter control sequences out of 15000+600000
+ 3249 strings out of 493777
+ 50959 string characters out of 6153182
+ 191106 words of memory out of 5000000
+ 6710 multiletter control sequences out of 15000+600000
  49085 words of font info for 153 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  28i,11n,32p,282b,1376s stack positions out of 5000i,500n,10000p,500000b,80000s
 
-Output written on thesis.dvi (7 pages, 45992 bytes).
+Output written on thesis.dvi (7 pages, 46120 bytes).

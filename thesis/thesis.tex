@@ -1,4 +1,4 @@
-%%
+%
 % File: thesis.tex
 % Created: 月 11 30 08:00 午後 2015 東京 (標準時)
 % Last Change: 月 11 30 08:00 午後 2015 東京 (標準時)
@@ -29,7 +29,7 @@
     lineskip=-0.5ex%
 }
 
-\title{mruby Bytecode Loader Using Bluetooth Supported Multi-VM}
+\title{mruby Bytecode Loader Using Bluetooth in Multi-VM Environment}
 \author{Takuro Yamamoto}
 \date{\today}
 
@@ -37,13 +37,13 @@
 \maketitle
 
 \begin{abstract}
-In recent years, the productivity of embedded systems has become a problem due to its complexity and large-scale.
+In recent years, the productivity of embedded systems has become a problem due to their complexity and large-scale.
 For the purpose of improving the productivity for embedded software development, the mruby on TECS framework has been proposed that is applied mruby (Lightweight Ruby) and supports component-based development.
 In the current mruby on TECS, the mruby programs have to be compiled and linked every time the programs are modified because the mruby bytecodes are incorporated in the platform.
-Moreover, while the framework supports multi-VM, developers needs to be familiar with the functions of real-time operating systems to execute effectively multiple mruby programs in concurrent or/and parallel.
-In this paper, to improve the development efficiency, the Bluetooth Loader that transferres bytecodes of mruby applications is implemented as an extension of mruby on TECS.
+Moreover, while the framework supports multi-VM, developers needs to be familiar with the functions of real-time operating systems to effectively execute multiple mruby programs in concurrent or/and parallel.
+In this paper, to improve the development efficiency, the mruby bytecode loader using Bluetooth is implemented as an extension of mruby on TECS.
 In addition, multiple mruby programs run cooperatively in the proposed framework.
-This paper demonstrates the advantages of the proposed framework with experimental results.
+Experimental results demonstrates the advantages of the proposed framework.
 \end{abstract}
 \section{Introduction}
 In these days, embedded systems have been required the high-quality and the high-performance.
@@ -73,55 +73,56 @@ The other is TECS (TOPPERS Embedded Component System), which is a component-base
 TECS supports to effectively run mruby script language on embedded systems.
 mruby on TECS also makes execution time 100 times faster than that of mruby.
 
-This paper proposes two additional functions of mruby on TECS, Bluetooth Loader and user-friendly multithread.
+This paper proposes two additional features of mruby on TECS, mruby bytecode loader using Bluetooth and user-friendly multitask.
 mruby on TECS has some problems at present.
 One of these is that working efficiency is low because mruby on TECS only supports a SD card in the platform for LEGO MINDSTORMS EV3 to load mruby programs.
 In the current development process, it is annoying that the SD card should be insert and pulled out repeatedly.
-If a new function, Bluetooth Loader, is used, the procedure is carried out only once at the beginning and a program code is transferred from a host to a target device by Bluetooth.
+If a new feature, mruby bytecode loader Bluetooth, is used, the procedure is carried out only once at the beginning and a program code is transferred from a host to a target device by Bluetooth.
 It can improve the efficiency.
-Moreover, in the current system if users attempt to run multiple tasks with the same priority, a task with first execution only runs and all other tasks would not run unless a OS's function must be called by users.
-In addition users must prepare as many VMs as the number of threads because one RiteVM supports only one thread.
-Thus that is a big burden on users.
-Another new function enables users to run a multithread programs more easily.
+Moreover, in the current system if developers attempt to run multiple tasks with the same priority, a task with first execution only runs and all other tasks would not run unless a OS's function must be called by developers.
+In addition developers must prepare as many VMs as the number of threads because one RiteVM supports only one thread.
+Thus that is a big burden on developers.
+Another new feature enables developers to run a multitask programs more easily.
 Specifically, a cycle handler of switching tasks is implemented.
 This paper evaluates the proposed framework in term of data transfer rate, overhead of cyclic handler and execution time.
 \\
 
 {\bf Contributions}
 \begin{enumerate}
-\item Improve the work efficiency in development: \mbox{}\\
-\ Bluetooth Loader helps users develop software.
-Users do not need to insert and pull out repeatedly, and that improves the software development efficiency.
-\item Implement multithreads in mruby on TECS: \mbox{}\\
-\ There is a probrem in multithreading of the current mruby on TECS.
-It is that users need to be well acquainted the RTOS if multiple mruby programs execute in multithreading. 
-In this proposed framework, it is easy for users to use multithreading because multiple tasks are switched cyclically.
-Users can easily program multithreading.
-Multithreaded programing makes the range of software expand.
+\item To improve the  work efficiency in software development on mruby on TECS: \mbox{}\\
+\ mruby bytecode loader using Bluetooth helps developers develop software.
+Developers do not need to insert and pull out repeatedly, and that improves the software development efficiency.
+\item To effectively execute multiple mruby programs in concurrent or/and parallel: \mbox{}\\
+\ There is a probrem in multitasking of the current mruby on TECS.
+It is that developers need to be well acquainted the RTOS if multiple mruby programs execute in multitasking. 
+In the proposed framework, it is easy for developers to use multitasking because multiple tasks are switched cyclically.
+Developers can easily program multitasking.
+Multitasked programing makes the range of software expand.
 \end{enumerate}
 
 The paper is organized as follows:
 Section \ref{sec:Background} introduces the basic technologies i.e. mruby, TECS and mruby on TECS.
-Section \ref{sec:Bluetooth Loader} and Section \ref{sec:Multithread} describe the design and implementation of the proposed framework in detail.
+Section \ref{sec:mruby bytecode loader using Bluetooth} and Section \ref{sec:Multitask} describe the design and implementation of the proposed framework in detail.
 Section \ref{sec:Evaluation} evaluates the proposed framework, Section \ref{sec:Related work} discuses related work, and then Section \ref{sec:Conclusion} concludes.
 
 \section{Background}
 \label{sec:Background}
-Figure \ref{fig:proposed} shows the system proposed in this paper.
+Figure \ref{fig:proposed} shows a system model of the proposed framework.
 The bytecodes are transferred from the host to the target device with Bluetooth.
 The RiteVMs and mruby library are assumed to be prepared in advance.
-Each bytecode is allocated respectively with its own RiteVM.
-Users can run some bytecodes transferred with Bluetooth Loader in multi-thread.
+Each bytecode is allocated to a RiteVM, respectively.
+Developers can run some bytecodes transferred with Bluetooth in multitask.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{figure/proposed.pdf}
-    \caption{Proposed Framework}
+    \caption{System Model}
     \label{fig:proposed}
 \end{figure}
 
-This section describes the basic technology, which is mruby on TECS, a component-based framework for running script programs.
-In mruby on TECS, two technologies are used, mruby and TECS which are the basis for mruby on TECS.
+This section describes mruby on TECS on which the proposed framework is based.
+mruby on TECS is a component-based framework for running script programs.
+In mruby on TECS, two technologies are integrated: mruby and TECS.
 To explain the system, mruby and TECS are also respectively described in this section.
 
 \subsection{mruby}
@@ -137,7 +138,7 @@ mruby is suitable for embedded systems because of faster execution with less amo
 In addition VM (Virtual Machine) mechanism is used in mruby, so mruby programs can run on any operating system as long as VM is implemented.
 RiteVM is a VM in mruby, that runs mruby programs.
 The RiteVM mechanism is shown in Figure \ref{fig:mruby}.
-The mruby compiler translates a mruby code into a bytecode, which is a intermidiate code that can be interpreted by RiteVM.
+The mruby compiler translates a mruby code into a bytecode, which is an intermidiate code that can be interpreted by RiteVM.
 The bytecodes can run on a Rite VM, thus mruby programs can be executed on any target devices if only RiteVMs are implemented.
 \begin{figure}[t]
     \centering
@@ -314,16 +315,16 @@ The methods in an mruby class are defined by generation codes for an mruby-TECS 
 Thus, when a method is called in a mruby program, an mruby-TECS bridge calls the function defined in the TECS component such as a Motor {\it cell}.
 
  
-\section{Bluetooth Loader}
-\label{sec:Bluetooth Loader}
-This section describes an additional function of mruby on TECS, Bluetooth Loader.
+\section{mruby Bytecode Loader Using Bluetooth}
+\label{sec:mruby bytecode loader using Bluetooth}
+This section describes an additional function of mruby on TECS, mruby bytecode loader using Bluetooth.
 In the current system, all binary data including bytecodes are in a SD card.
-Users must insert and pull out the SD card every time the source program are modified.
+Developers must insert and pull out the SD card every time the source program are modified.
 It causes a low work efficiency that such a work must be repeated.
-In the system with Bluetooth Loader, the users' burden can be reduced.
+mruby bytecode loader using Bluetooth makes the developers' burden decrease.
 The work that a SD card is in and out needs to be done just once in the beginning.
 
-The development flow using Bluetooth Loader is shown in Figure \ref{fig:bluetooth_loader}.
+The development flow in mruby bytecode loader using Bluetooth is shown in Figure \ref{fig:bluetooth_loader}.
 The RiteVM and mruby library are compiled and copied in the SD card at the first.
 These are assumed not to be modified.
 The binary data transferred with Bluetooth is the bytecode of the main source.
@@ -333,31 +334,31 @@ The generated bytecodes are transferred from the host to the target device with 
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{figure/bluetooth_loader.pdf}
-    \caption{Development Flow using Bluetooth Loader}
+    \caption{Development Flow in mruby bytecode loader using Bluetooth}
     \label{fig:bluetooth_loader}
 \end{figure}
 
-\subsection{Component of Bluetooth Loader}
-The proposed framework provides components of Bluetooth Loader to use the function.
-A component of Bluetooth Loader is an extension of the RiteVM component, which is described in \cite{7153813}.
+\subsection{Component of mruby bytecode loader using Bluetooth}
+The proposed framework provides components of mruby bytecode loader using Bluetooth to use the function.
+A component of mruby bytecode loader using Bluetooth is an extension of the RiteVM component, which is described in \cite{7153813}.
 The component plays a role in receiving bytecodes via Bluetooth, and also manages RiteVM configuration such as automatically generates the bytecode in the build description.
 This bytecode in the build description means that prepared beforehand in the SD card such as mruby libraries, and different from a bytecode transferred with Bluetooth.
 
 Figure \ref{fig:component_bluetooth} shows a component diagram of MrubyTask1 and MrubyBluetooth1 {\it cell}s.
 The MrubyTask1 {\it cell} is a componentized task of the RTOS (TOPPERS/HRP2).
 TOPPERS/HRP2 is described in \cite{6913200}.
-The MrubyBluetooth1 is a component of Bluetooth Loader.
-A bytecode which is a compiled mruby program in the host is transferred and received at the top of the Bluetooth Loader component.
+The MrubyBluetooth1 is a component of mruby bytecode loader using Bluetooth.
+A bytecode which is a compiled mruby program in the host is transferred and received at the top of the mruby bytecode loader using Bluetooth component.
 In this framework, ZMODEM \cite{forsberg1988zmodem} is used as a binary transfer protocol.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{figure/component_bluetooth.pdf}
-    \caption{Component Diagram of Bluetooth Loader}
+    \caption{Component Diagram of mruby bytecode loader using Bluetooth}
     \label{fig:component_bluetooth}
 \end{figure}
 
-Figure \ref{fig:control_flow} shows the process of executing mruby program in a component of Bluetooth Loader, which is like MrubyBluetooth1.
+Figure \ref{fig:control_flow} shows the process of executing mruby program in a component of mruby bytecode loader using Bluetooth, which is like MrubyBluetooth1.
 First, a pointer of mrb\_state structure is initialized.
 mrb\_state is a set of states and global variables used in mruby.
 Second, the bytecode of mruby libraries is read.
@@ -379,7 +380,7 @@ The concrete main code of tMrubyBluetooth is shown in Figure \ref{maincode_mruby
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{figure/control_flow.pdf}
-    \caption{Control Flow of Bluetooth Loader}
+    \caption{Control Flow of mruby bytecode loader using Bluetooth}
     \label{fig:control_flow}
 \end{figure}
 \begin{figure}[t]
@@ -393,7 +394,7 @@ celltype tMrubyBluetooth{
     };
 }; 
 \end{lstlisting}
-\caption{Celltype Description for Bluetooth Loader}
+\caption{Celltype Description for mruby bytecode loader using Bluetooth}
 \label{celltype_mrubybluetooth}
 \end{figure}
 
@@ -404,7 +405,7 @@ void
 eMrubyBody_main(CELLIDX idx)
 {
   /* Receive the bytecode via Bluetooth */
-  test_serial_loader(SIO_PORT_BT);
+  serial_loader(SIO_PORT_BT);
 
   /* Declaration variables */
   CELLCB	*p_cellcb;
@@ -418,45 +419,46 @@ eMrubyBody_main(CELLIDX idx)
   /* New interpreter instance */
   mrb = mrb_open();
   if (mrb == NULL) {
-  //cSerialPort_write("Invalid mrb_state, exiting test driver\n", 39);
+    /* Invalid mrb_state */
     return;
   }
-  /* New */
+  /* New mruby context */
   c = mrbc_context_new(mrb);
 
   if(is_cInit_joined()){
-    // TECS Bridge
+    /* Initialization of mruby TECS Bridge */
     cInit_initializeBridge( mrb );
   }
   
   /* Load mruby liblary bytecode and run */
   mrb_load_irep_cxt(mrb, ATTR_irep, c);
-  /* Load main mruby bytecode and run */
+  /* Load mruby application bytecode and run */
   mrb_load_irep_cxt(mrb, app_binary_buf, c);
   
   if (mrb->exc) {
+    /* Failure to execute */
     mrb_p(mrb, mrb_obj_value(mrb->exc));
     exit(0);
   }
-  /* Free */ 
+  /* Free mruby context */ 
   mrbc_context_free(mrb, c);
   /* Free interpreter instance */
   mrb_close(mrb);
 }
 
 \end{lstlisting}
-\caption{Main code for Bluetooth Loader}
+\caption{Main code for mruby bytecode loader using Bluetooth}
 \label{maincode_mrubybluetooth}
 \end{figure}
-\section{Multi-thread}
-\label{sec:Multithread}
-This section describes implementation of multithreading in the proposed framework.
-mruby on TECS has supported multithreading.
-However, multithread processing in mruby on TECS requires the knowledge of the RTOS (TOPPERS/HRP2) for users.
-In the proposed framework, multithread processing is user-friendly because users need the less knowledge than before.
-A cyclic handler that switches tasks is implemented, and that enables users to develop applications without concern for multithreading.
+\section{Multitask}
+\label{sec:Multitask}
+This section describes implementation of multitasking in the proposed framework.
+mruby on TECS has supported multitasking.
+However, multitask processing in mruby on TECS requires the knowledge of the RTOS (TOPPERS/HRP2) for developers.
+In the proposed framework, multitask processing is user-friendly because developers need the less knowledge than before.
+A cyclic handler that switches tasks is implemented, and that enables developers to develop applications without concern for multitasking.
 
- \subsection{rot\_rdq}
+\subsection{rot\_rdq}
 The case is assumed that there are two tasks with the same priority, and both are in a infinite loop.
 In the current system, when one task is executed first, another task would not be executed.
 That is because the task with first execution runs in a loop. 
@@ -492,7 +494,7 @@ The attribute, priority is used as an arguments of rot\_rdq.
 Figure \ref{build_cyclic_handler} shows a build description that corresponds to the component diagram shown in Figure \ref{fig:cyclic_handler}.
 In the part of CyclicHandler {\it cell}, configurations of a cyclic handler is described such as attribute, cyclicTime and cyclicPhase.
 In this case, the cyclic handler is executed when it is generated because the attribute is TA\_STA.
-Also, the cyclic handler is executed every 100 microseconds.
+The cyclic handler is executed every 1 msec.
 In another part, the priority of CyclicMain {\it cell} is described.
 EV3\_MRUBY\_VM\_PRIORITY defines the priority of mruby tasks.
 In the main of CyclicMain, rot\_rdq is implemented and the priority is passed as the argument.
@@ -517,12 +519,6 @@ celltype tCyclicHandler {
         [omit] ACPTN  accessPattern[4] = 
             { C_EXP("OMIT"), C_EXP("OMIT"), C_EXP("OMIT"), C_EXP("OMIT") };
     };
-    FACTORY{
-    	write( "tecsgen.cfg",
-            "#include \"$ct$_tecsgen.h\"" );
-    	write( "$ct$_factory.h",
-            "#include \"kernel_cfg.h\"" );
-    };
 };
 
 celltype tCyclicMain{
@@ -544,7 +540,7 @@ celltype tCyclicMain{
 cell tCyclicHandler CyclicHandler{
     ciBody = CyclicMain.eiBody;
     attribute = C_EXP("TA_STA");
-    cyclicTime = 100;
+    cyclicTime = 1;
     cyclicPhase = 0;
 };
 
@@ -563,7 +559,7 @@ To analyze the advantages and disadvantages of the proposed framework, the evalu
 \begin{itemize}
         \item the comparison of the size and transfer time between an mruby application including mruby libraries and not.
         \item the comparison of the overheads for each cyclic period of calling rot\_rdq.
-        \item the comparison of the application execution time with singlethreading, co-routine and multithreading.
+        \item the comparison of the application execution time with singletasking, co-routine and multitasking.
 \end{itemize}
 
 This paper demonstrates the proposed system on a LEGO MINDSTORMS EV3 (300MHz ARM9-based Sitara AM1808 system-on-a-chip) compiled with gcc 4.9.3 -O2 and mruby version 1.1.0.
@@ -575,7 +571,7 @@ This paper demonstrates the proposed system on a LEGO MINDSTORMS EV3 (300MHz ARM
     \centering
     \caption{Comparion of the proposed and previous work}
     \begin{tabular}{c||c|ccc}
-        & Bluetooth & \shortstack{Preemptive-multithread\\(multiVM)} & \shortstack{Nonpreemptive-multithread\\(co-routine)} & GIL \\ \hline
+        & \shortstack{mruby bytecode loader\\using Bluetooth} & \shortstack{Preemptive-multitask\\(multi-VM)} & \shortstack{Nonpreemptive-multitask\\(co-routine)} & GIL \\ \hline
         mruby on TECS& & \checkmark & \checkmark & \\
         mruby & & & \checkmark &\\
         Owl system & & \checkmark & & \checkmark \\
@@ -589,28 +585,28 @@ The open-source run-time systems for scripting languages have been developed suc
 mruby on TECS is a component-based framework for running mruby programs.
 The programs on mruby-on-TECS can execute about 100 times faster than the mruby programs.
 Software can be also developed with component base by mruby on TECS.
-Although multithreading has been supported in the current mruby on TECS, users need to be familiar with functions of a RTOS to use multithreading.
+Although multitasking has been supported in the current mruby on TECS, developers need to be familiar with functions of a RTOS to use multitasking.
 The co-routine is supported as same as mruby.
 
 mruby, the lightweight implementation of the Ruby language, has been proposed for embedded systems.
 mruby programs can run on a RiteVM, which is the VM for mruby and reads the mruby bytecode.
-mruby has supported co-routine, but not supported multithreading for RTOSs.
+mruby has supported co-routine, but not supported multitasking for RTOSs.
 
 The Owl system is an embedded Python run-time system.
 The Owl is a complete system for ARM Cortex-M3 microcontrollers.
 The Owl toolchain produces relocatable memory images, that are directly runnable on the microcontroller, from Python code objects.
 The interpreter of the Owl system is the same as that of python-on-a-chip [].
-python-on-a-chip supports multithread managed by GIL (Global Interpreter Lock).
+python-on-a-chip supports multitask managed by GIL (Global Interpreter Lock).
 GIL locks a CPU in order to prevent the non-thread-safe code from sharing the other threads.
-GIL leads the limitation of the concurrency on multithreading.
+GIL leads the limitation of the concurrency on multitasking.
 
 Lua is one of the most popular script languages for embedded systems.
-Lua supports co-routines, referred to collaborative multithreading.
+Lua supports co-routines, referred to collaborative multitasking.
 A co-routine in Lua is used as an independently executed thread.
 A co-routine can just suspend and resume multiple routines. 
-Thus, a Lua co-routine is not like multithreads in multithread systems.
+Thus, a Lua co-routine is not like multitasks in multitask systems.
 
-Table \ref{tab:comparion} shows a comparison between the proposed work and previous works.
+Table \ref{tab:comparion} shows a comparison between the proposed framework and previous work.
 
 \section{Conclusion}
 \label{sec:Conclusion}
