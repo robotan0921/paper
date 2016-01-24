@@ -35,7 +35,6 @@
 
 \begin{document}
 \maketitle
-
 \begin{abstract}
 In recent years, the productivity of embedded systems has become a problem due to their complexity and large-scale.
 For the purpose of improving the productivity for embedded software development, the mruby on TECS framework has been proposed that is applied mruby (Lightweight Ruby) and supports component-based development.
@@ -85,13 +84,14 @@ Thus that is a big burden on developers.
 Another new feature enables developers to run a multitask programs more easily.
 Specifically, a cycle handler of switching tasks is implemented.
 This paper evaluates the proposed framework in term of data transfer rate, overhead of cyclic handler and execution time.
-\\
 
-{\bf Contributions}
+{\bf Contribution}: This paper proposes mruby bytecode loader using Bluetooth and user-friendly multitasking.
+The proposed framework gives the contribution in the following points. 
 \begin{enumerate}
 \item To improve the  work efficiency in software development on mruby on TECS: \mbox{}\\
 \ mruby bytecode loader using Bluetooth helps developers develop software.
-Developers do not need to insert and pull out repeatedly, and that improves the software development efficiency.
+Developers do not need to insert and pull out repeatedly and also to restart an OS.
+Thus, the software development efficiency is improved.
 \item To effectively execute multiple mruby programs in concurrent or/and parallel: \mbox{}\\
 \ There is a probrem in multitasking of the current mruby on TECS.
 It is that developers need to be well acquainted the RTOS if multiple mruby programs execute in multitasking. 
@@ -100,7 +100,7 @@ Developers can easily program multitasking.
 Multitasked programing makes the range of software expand.
 \end{enumerate}
 
-The paper is organized as follows:
+{\bf Organization}: The paper is organized as follows.
 Section \ref{sec:Background} introduces the basic technologies i.e. mruby, TECS and mruby on TECS.
 Section \ref{sec:mruby bytecode loader using Bluetooth} and Section \ref{sec:Multitask} describe the design and implementation of the proposed framework in detail.
 Section \ref{sec:Evaluation} evaluates the proposed framework, Section \ref{sec:Related work} discuses related work, and then Section \ref{sec:Conclusion} concludes.
@@ -555,6 +555,7 @@ cell tCyclicMain CyclicMain{
 
 \section{Evaluation}
 \label{sec:Evaluation}
+This section mentions experimental results and their consideration.
 To analyze the advantages and disadvantages of the proposed framework, the evaluations are performed as follows.
 \begin{itemize}
         \item the comparison of the size and transfer time between an mruby application including mruby libraries and not.
@@ -564,6 +565,21 @@ To analyze the advantages and disadvantages of the proposed framework, the evalu
 
 This paper demonstrates the proposed system on a LEGO MINDSTORMS EV3 (300MHz ARM9-based Sitara AM1808 system-on-a-chip) compiled with gcc 4.9.3 -O2 and mruby version 1.1.0.
 
+The 100,000 times loop program is used as mruby application for evaluation.
+In detail, the singletask program loops 100,000 times, and the multitask and co-routine programs loop 50,000 times in each task.
+
+The comparison of the application execution time with singletasking, co-routine and multitasking is shown in Figure \ref{fig:comparison_s_c_m}.
+In Figure \ref{fig:comparison_s_c_m}, the cyclic time of the cyclic handler for multitasking is 1 msec.
+Co-routine takes twice the time of singletask to execute an mruby application.
+On the other hands, multitasking's execution time is about the same as singletasking's.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/comparison_s_c_m.pdf}
+    \caption{Comparison of the application execution time with singletask, co-routine and multitask}
+    \label{fig:comparison_s_c_m}
+\end{figure}
+
 \section{Related work}
 \label{sec:Related work}
 
@@ -571,12 +587,12 @@ This paper demonstrates the proposed system on a LEGO MINDSTORMS EV3 (300MHz ARM
     \centering
     \caption{Comparion of the proposed and previous work}
     \begin{tabular}{c||c|ccc}
-        & \shortstack{mruby bytecode loader\\using Bluetooth} & \shortstack{Preemptive-multitask\\(multi-VM)} & \shortstack{Nonpreemptive-multitask\\(co-routine)} & GIL \\ \hline
-        mruby on TECS& & \checkmark & \checkmark & \\
-        mruby & & & \checkmark &\\
-        Owl system & & \checkmark & & \checkmark \\
-        Lua & & \checkmark & \checkmark \\
-        Proposed framework& \checkmark & \checkmark & \checkmark \\
+        & Bluetooth Loader & \shortstack{Preemptive-multitask\\(multi-VM)} & \shortstack{Nonpreemptive-multitask\\(co-routine)} & GIL \\ \hline
+        mruby on TECS     &            & \checkmark & \checkmark &            \\
+        mruby             &            &            & \checkmark &            \\
+        Owl system        &            & -          & -          & \checkmark \\
+        Lua               &            & -          & \checkmark &            \\
+        Proposed framework& \checkmark & \checkmark & \checkmark &            \\
     \end{tabular}
     \label{tab:comparion}
 \end{table*}
@@ -610,10 +626,13 @@ Table \ref{tab:comparion} shows a comparison between the proposed framework and 
 
 \section{Conclusion}
 \label{sec:Conclusion}
+This paper has presented the mruby bytecode loader using Bluetooth in multi-VM on mruby on TECS.
+The proposed framework provides developers the efficient development without disconnecting a SD card and restarting an OS.
+Furthermore, the proposed user-friendly multitasking can be used as the same as singletasking because of the low overhead.
 
-%&=& &=& &=& 
-% Reference
-%&=& &=& &=& 
+%%%%%%%%%%%%%
+% Reference %
+%%%%%%%%%%%%%
 \bibliography{ref.bib}
 
 \end{document}
