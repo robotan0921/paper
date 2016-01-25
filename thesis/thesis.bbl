@@ -4,27 +4,27 @@
 T.~Azumi, Y.~Nagahara, H.~Oyama, and N.~Nishio.
 \newblock {mruby on TECS: Component-Based Framework for Running Script
   Program}.
-\newblock In {\em Real-Time Distributed Computing (ISORC), 2015 IEEE 18th
-  International Symposium on}, pages 252--259, April 2015.
+\newblock In {\em Proceedings of Real-Time Distributed Computing (ISORC), IEEE
+  18th International Symposium on}, pages 252--259, April 2015.
 
 \bibitem{4208825}
 T.~Azumi, M.~Yamamoto, Y.~Kominami, N.~Takagi, H.~Oyama, and H.~Takada.
 \newblock {A New Specification of Software Components for Embedded Systems}.
-\newblock In {\em Object and Component-Oriented Real-Time Distributed
-  Computing, 2007. ISORC '07. 10th IEEE International Symposium on}, pages
-  46--50, May 2007.
+\newblock In {\em Proceedings of Object and Component-Oriented Real-Time
+  Distributed Computing. 10th IEEE International Symposium on}, pages 46--50,
+  May 2007.
 
 \bibitem{180964}
 Thomas~W. Barr, Rebecca Smith, and Scott Rixner.
 \newblock {Design and Implementation of an Embedded Python Run-Time System}.
-\newblock In {\em Presented as part of the 2012 USENIX Annual Technical
-  Conference (USENIX ATC 12)}, pages 297--308, Boston, MA, 2012. USENIX.
+\newblock In {\em Proceedings of the USENIX Annual Technical Conference (USENIX
+  ATC 12)}, pages 297--308, 2012.
 
 \bibitem{Crnkovic:2005:CSE:1062455.1062631}
 Ivica Crnkovic.
 \newblock {Component-based Software Engineering for Embedded Systems}.
 \newblock In {\em Proceedings of the 27th International Conference on Software
-  Engineering}, ICSE '05, pages 712--713, New York, NY, USA, 2005. ACM.
+  Engineering}, ICSE '05, pages 712--713. ACM, 2005.
 
 \bibitem{forsberg1988zmodem}
 Chuck Forsberg.
@@ -34,29 +34,28 @@ Chuck Forsberg.
 Roberto Ierusalimschy, Luiz~Henrique de~Figueiredo, and Waldemar Celes.
 \newblock {The Evolution of Lua}.
 \newblock In {\em Proceedings of the Third ACM SIGPLAN Conference on History of
-  Programming Languages}, HOPL III, pages 2--1--2--26, New York, NY, USA, 2007.
-  ACM.
+  Programming Languages}, HOPL III, pages 2--1--2--26. ACM, 2007.
 
 \bibitem{6913200}
 T.~Ishikawa, T.~Azumi, H.~Oyama, and H.~Takada.
 \newblock {HR-TECS: Component technology for embedded systems with memory
   protection}.
-\newblock In {\em Object/Component/Service-Oriented Real-Time Distributed
-  Computing (ISORC), 2013 IEEE 16th International Symposium on}, pages 1--8,
-  June 2013.
+\newblock In {\em Proceedings of Object/Component/Service-Oriented Real-Time
+  Distributed Computing (ISORC), 2013 IEEE 16th International Symposium on},
+  pages 1--8, June 2013.
 
 \bibitem{6332346}
 A.~Ohno, T.~Azumi, and N.~Nishio.
 \newblock {TECS Components Providing Functionalities of OSEK Specification for
   ITRON OS}.
-\newblock In {\em High Performance Computing and Communication 2012 IEEE 9th
-  International Conference on Embedded Software and Systems (HPCC-ICESS), 2012
-  IEEE 14th International Conference on}, pages 1434--1441, June 2012.
+\newblock In {\em Proceedings of IEEE 9th International Conference on Embedded
+  Software and Systems (ICESS), IEEE 14th International Conference on}, pages
+  1434--1441, June 2012.
 
 \bibitem{5959588}
 K.~Tanaka, Y.~Matsumoto, and H.~Arimori.
 \newblock {Embedded System Development by Lightweight Ruby}.
-\newblock In {\em Computational Science and Its Applications (ICCSA), 2011
-  International Conference on}, pages 282--285, June 2011.
+\newblock In {\em Proceedings of Computational Science and Its Applications
+  (ICCSA), International Conference on}, pages 282--285, June 2011.
 
 \end{thebibliography}
