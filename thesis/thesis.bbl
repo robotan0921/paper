@@ -4,14 +4,14 @@
 T.~Azumi, Y.~Nagahara, H.~Oyama, and N.~Nishio.
 \newblock {mruby on TECS: Component-Based Framework for Running Script
   Program}.
-\newblock In {\em Proceedings of Real-Time Distributed Computing (ISORC), IEEE
-  18th International Symposium on}, pages 252--259, April 2015.
+\newblock In {\em Proceedings of the IEEE 18th International Symposium on
+  Real-Time Distributed Computing (ISORC)}, pages 252--259, April 2015.
 
 \bibitem{4208825}
 T.~Azumi, M.~Yamamoto, Y.~Kominami, N.~Takagi, H.~Oyama, and H.~Takada.
 \newblock {A New Specification of Software Components for Embedded Systems}.
-\newblock In {\em Proceedings of Object and Component-Oriented Real-Time
-  Distributed Computing. 10th IEEE International Symposium on}, pages 46--50,
+\newblock In {\em Proceedings of the 10th IEEE International Symposium on
+  Object and Component-Oriented Real-Time Distributed Computing}, pages 46--50,
   May 2007.
 
 \bibitem{180964}
@@ -40,22 +40,21 @@ Roberto Ierusalimschy, Luiz~Henrique de~Figueiredo, and Waldemar Celes.
 T.~Ishikawa, T.~Azumi, H.~Oyama, and H.~Takada.
 \newblock {HR-TECS: Component technology for embedded systems with memory
   protection}.
-\newblock In {\em Proceedings of Object/Component/Service-Oriented Real-Time
-  Distributed Computing (ISORC), 2013 IEEE 16th International Symposium on},
+\newblock In {\em Proceedings of the IEEE 16th International Symposium on
+  Object/Component/Service-Oriented Real-Time Distributed Computing (ISORC)},
   pages 1--8, June 2013.
 
 \bibitem{6332346}
 A.~Ohno, T.~Azumi, and N.~Nishio.
 \newblock {TECS Components Providing Functionalities of OSEK Specification for
   ITRON OS}.
-\newblock In {\em Proceedings of IEEE 9th International Conference on Embedded
-  Software and Systems (ICESS), IEEE 14th International Conference on}, pages
-  1434--1441, June 2012.
+\newblock In {\em Proceedings of the IEEE 9th International Conference on
+  Embedded Software and Systems (ICESS)}, pages 1434--1441, June 2012.
 
 \bibitem{5959588}
 K.~Tanaka, Y.~Matsumoto, and H.~Arimori.
 \newblock {Embedded System Development by Lightweight Ruby}.
-\newblock In {\em Proceedings of Computational Science and Its Applications
-  (ICCSA), International Conference on}, pages 282--285, June 2011.
+\newblock In {\em Proceedings of the International Conference on Computational
+  Science and Its Applications (ICCSA)}, pages 282--285, June 2011.
 
 \end{thebibliography}

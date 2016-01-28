@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  26 JAN 2016 15:24
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  27 JAN 2016 05:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -338,10 +338,10 @@ Before submitting the final camera ready copy, remember to:
 Here is how much of TeX's memory you used:
  3252 strings out of 493777
  51028 string characters out of 6153182
- 300115 words of memory out of 5000000
+ 299115 words of memory out of 5000000
  6712 multiletter control sequences out of 15000+600000
  49085 words of font info for 153 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  28i,11n,32p,282b,1376s stack positions out of 5000i,500n,10000p,500000b,80000s
 
-Output written on thesis.dvi (8 pages, 47756 bytes).
+Output written on thesis.dvi (8 pages, 47660 bytes).
