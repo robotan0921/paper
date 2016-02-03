@@ -1,58 +1,68 @@
 This is pBibTeX, Version 0.99d-j0.33 (utf8.euc) (TeX Live 2015/Cygwin)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
-The style file: plain.bst
-Database file #1: ref.bib.bib
-You're missing a field name---line 14 of file ref.bib.bib
+The style file: IEEEtranBST2/IEEEtran.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: ref.bib
+You're missing a field name---line 14 of file ref.bib
  : 
  : %% address = {New York, NY, USA},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-You're missing a field name---line 83 of file ref.bib.bib
+You're missing a field name---line 83 of file ref.bib
  : 
  : %% address = {New York, NY, USA},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-You've used 9 entries,
-            2118 wiz_defined-function locations,
-            554 strings with 6053 characters,
-and the built_in function-call counts, 4056 in all, are:
-= -- 398
-> -- 165
-< -- 8
-+ -- 65
-- -- 56
-* -- 257
-:= -- 591
-add.period$ -- 28
-call.type$ -- 9
-change.case$ -- 55
-chr.to.int$ -- 0
-cite$ -- 9
-duplicate$ -- 183
-empty$ -- 344
-format.name$ -- 56
-if$ -- 931
+-- IEEEtran.bst version 1.12 (2007/01/11) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+
+Done.
+You've used 11 entries,
+            4024 wiz_defined-function locations,
+            876 strings with 9585 characters,
+and the built_in function-call counts, 8220 in all, are:
+= -- 604
+> -- 177
+< -- 64
++ -- 101
+- -- 28
+* -- 392
+:= -- 1160
+add.period$ -- 24
+call.type$ -- 11
+change.case$ -- 11
+chr.to.int$ -- 168
+cite$ -- 11
+duplicate$ -- 593
+empty$ -- 759
+format.name$ -- 35
+if$ -- 1922
 int.to.chr$ -- 0
-int.to.str$ -- 9
-missing$ -- 8
-newline$ -- 47
-num.names$ -- 18
-pop$ -- 78
+int.to.str$ -- 11
+missing$ -- 111
+newline$ -- 60
+num.names$ -- 9
+pop$ -- 294
 preamble$ -- 1
-purify$ -- 46
-quote$ -- 0
-skip$ -- 156
+purify$ -- 0
+quote$ -- 2
+skip$ -- 630
 stack$ -- 0
-substring$ -- 264
-swap$ -- 81
+substring$ -- 398
+swap$ -- 450
 text.length$ -- 8
 text.prefix$ -- 0
-top$ -- 0
-type$ -- 36
+top$ -- 5
+type$ -- 11
 warning$ -- 0
-while$ -- 37
-width$ -- 10
-write$ -- 102
+while$ -- 36
+width$ -- 13
+write$ -- 121
 is.kanji.str$ -- 0
 (There were 2 error messages)

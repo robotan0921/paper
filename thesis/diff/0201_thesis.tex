@@ -5,7 +5,7 @@
 %
 \input{dummy/dummy.tex}
 \documentclass[conference,compsoc]{IEEEtran}
-\bibliographystyle{IEEEtranBST2/IEEEtran}
+\bibliographystyle{plain}
 \usepackage[dvipdfmx]{graphicx}
 \usepackage{amssymb}
 \usepackage{listings,jlisting}
@@ -41,11 +41,7 @@ For the purpose of improving the productivity for embedded software development,
 In the current mruby on TECS, the mruby programs have to be compiled and linked every time the programs are modified because the mruby bytecodes are incorporated in the platform.
 Moreover, while the framework supports multi-VM, developers needs to be familiar with the functions of real-time operating systems to effectively execute multiple mruby programs in concurrent or/and parallel.
 To improve the development efficiency, this paper proposes an mruby bytecode loader using Bluetooth as an extension of mruby on TECS.
-The loader executes two mruby bytecodes, mruby application bytecode and mruby library bytecode.
-mruby application bytecode modified frequently is sent from a host to a target device by developers.
-mruby library bytecode modified infrequently is preserved beforehand in an SD card at the time of the first compailation.
 In addition, multiple mruby programs run cooperatively in the proposed framework.
-In the proposed framework, the cyclic handler switching tasks is implemented, and multitasking processing is more easy-to-use than that of mruby on TECS.
 Experimental results demonstrate the advantages of the proposed framework.
 \end{abstract}
 \section{Introduction}
@@ -184,7 +180,7 @@ A {\it celltype} is the definition of a {\it cell}.
 \subsubsection{Component Description}\mbox{}\\
 
 The description of a component in TECS is divided into three parts, {\it signature}, {\it celltype}, and build description.
-TECS code is written in .cdl (component description language) file.
+TECS is written in .cdl file (component description language).
 The component description is mentioned with an example shown in Figure \ref{fig:component} as follow.
 
 \begin{description}
@@ -460,8 +456,8 @@ This section describes implementation of multitasking in the proposed framework.
 mruby on TECS has supported multitasking.
 However, multitask processing in mruby on TECS requires the knowledge of the RTOS (TOPPERS/HRP2) for developers.
 One of approaches for multitasking is co-routine.
-Co-routine is scheduled by developers with the functions such as {\it resume} and {\it yield}, and thus co-routine does not receive the OS's support.
-Besides, as another method, {\it delay}, a service call of $\mu$ITRON, can be used for multitasking, but it leaves the scheduling to developers such as co-routine.
+Co-routines are scheduled by developers with APIs such as {\it resume} and {\it yield}, and thus co-routine does not receive the OS's support.
+Besides, {\it delay}, a service call of $\mu$ITRON, can be used for multitasking, but it leaves the scheduling to developers such as co-routine.
 In the proposed framework, as an approach for multitask processing, {\it rotateReadyQueue}, a service call of $\mu$ITRON, is implemented.
 A cyclic handler calls {\it rotateReadyQueue} that switches tasks, which enables developers to develop applications without concern for multitasking.
 
@@ -490,7 +486,7 @@ In this case, the order is changed, task 2, 3 and 1, when the {\it rotateReadyQu
 Figure \ref{fig:cyclic_handler} shows a component diagram of the cyclic handler.
 The components of cyclic handler consist of two components: CyclicHandler and CyclicMain.
 CyclicHandler {\it cell} configures the cyclic handler based on ITRON.
-Cyclic handlers based on ITRON are described in detail \cite{ITRON_spec}.
+Cyclic handlers based on ITRON are described in detail [].
 The cyclic handler has five arguments: ID, attribute, cyclic time, cyclic phase and access pattern.
 CyclicHandler {\it cell} has these arguments as attributes of the {\it cell}.
 CyclicMain {\it cell} is a component to perform the processing body of a cyclic handler.
@@ -566,41 +562,25 @@ Eventflag, one of synchronous processing, is applied to synchronize the starting
 Each task sets the flag pattern such as 0x01 (01) and 0x02 (10), and then waits the flag pattern, 0x3 (11), with AND.
 This process can also apply to the case of the more tasks.
 For example, in the case of the four tasks, each task sets the flag pattern such as 0x01 (0001), 0x02 (0010), 0x04 (0100)  and 0x08 (1000), and then waits 0x0f (1111) with AND.
-In the proposed framework, the set pattern and wait pattern are defined as attributes of the component as shown in Figure \ref{fig:Eventflag}.
-This design such as {\it cEventflag\_set(ATTR\_setPattern)} enables the program without "if" statements.
+In the proposed framework, the set pattern and wait pattern is defined as attributes of the component.
+This design such as {\it cEventflag\_set(ATTR\_setPattern)} enables the program without if statements.
 The components of eventflag are built with {\it [optional]} in TECS.
 {\it [optional]} means that the codes are run only when the call port is connected.
-The identical file can be used even if developers would not like to use eventflag.
+The same file can be used even if developers would not like to use eventflag.
 In other words, it is not necessary to compile/link the different file.
 These features are also advantages of component-based development.
-
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=8cm,clip]{figure/Eventflag.pdf}
-    \caption{The design for Eventflag using TECS}
-    \label{fig:Eventflag}
-\end{figure}
 
 \section{Experimental Evaluation}
 \label{sec:Evaluation}
 This section mentions experimental results and their consideration.
 To analyze the advantages and disadvantages of the proposed framework, the evaluations are performed as follows.
 \begin{itemize}
-        \item the comparison of the size and transfer time between an mruby application including mruby library and not.
-        \item the comparison of the application execution time with singletasking, co-routine, and multitasking.
+        \item the comparison of the size and transfer time between an mruby application including mruby libraries and not.
         \item the comparison of the overheads for each cyclic period of calling {\it rotateReadyQueue}.
+        \item the comparison of the application execution time with singletasking, co-routine, and multitasking.
 \end{itemize}
 
-This paper demonstrates the proposed system on a LEGO MINDSTORMS EV3 (300MHz ARM9-based Sitara AM1808 system-on-a-chip) compiled with gcc 4.9.3 -O2 and mruby version 1.2.0.
-The 100,000 times loop program is used as mruby application for evaluation of execution time.
-In detail, the singletask program loops 100,000 times, and the multitask and co-routine programs loop 50,000 times in each task.
-
-The size and transfer time for mruby application and mruby application including library is shown in Table \ref{tab:size_and_time}.
-The bytecode of mruby application including library is larger and slower than that of only mruby application in terms of size and transfer time.
-In the proposed framework, developers send only mruby application and prepare mruby library in advance.
-Therefore, the design can send the bytecode faster.
-In addition, the design can save the time to insert an SD card.
-These advantages lead to improving the work efficiency.
+This paper demonstrates the proposed system on a LEGO MINDSTORMS EV3 (300MHz ARM9-based Sitara AM1808 system-on-a-chip) compiled with gcc 4.9.3 -O2 and mruby version 1.1.0.
 
 \begin{table}[t]
     \centering
@@ -613,33 +593,28 @@ These advantages lead to improving the work efficiency.
     \label{tab:size_and_time}
 \end{table}
 
-The comparison of the application execution time with singletasking, co-routine, and multitasking is shown in Figure \ref{fig:comparison_s_c_m}.
-In Figure \ref{fig:comparison_s_c_m}, the cyclic time of the cyclic handler for multitasking is one msec.
-Multitasking's execution time is about the same as singletasking's while co-routine takes more time than them to execute an mruby application.
-This result shows the proposed design is superior to co-routine in terms of execution time.
-Switching tasks's overhead is also evaluated, that is about three $\mu$sec on average.
-The number of switching tasks is from 500 to 600 because singletasking process in Figure \ref{fig:comparison_s_c_m} takes about 540 msec.
-Therefore, the overheads of multitasking is 0.5 \% or less, and multitasking can be used without the overheads.
-
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=8cm,clip]{figure/comparison_s_c_m.pdf}
-    \caption{Comparison of the application execution time with singletask, co-routine, and multitask}
-    \label{fig:comparison_s_c_m}
-\end{figure}
-
-Figure \ref{fig:comparison_msec} shows the execution time of multitasking with the cyclic handler.
-A lower limit of the cyclic time is one msec due to the specification of TOPPERS/HRP2, the used RTOS.
-More than 10 msec do not be evaluated in this paper because it is thought the larger cyclic time influences applications.
-The execution time of each cyclic time are much the same.
-That is because the overhead of switching tasks (about 3 $\mu$sec) is small in comparison with the execution time.
-The smaller cyclic time is better in multitasking due to concurrent and/or parallel processing.
+The 100,000 times loop program is used as mruby application for evaluation of execution time.
+In detail, the singletask program loops 100,000 times, and the multitask and co-routine programs loop 50,000 times in each task.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{figure/comparison_msec.pdf}
     \caption{Comparison of the overheads for each cyclic period of calling rotateReadyQueue}
     \label{fig:comparison_msec}
+\end{figure}
+
+The comparison of the application execution time with singletasking, co-routine, and multitasking is shown in Figure \ref{fig:comparison_s_c_m}.
+In Figure \ref{fig:comparison_s_c_m}, the cyclic time of the cyclic handler for multitasking is one msec.
+Co-routine takes twice the time of singletask to execute an mruby application.
+On the other hands, multitasking's execution time is about the same as singletasking's.
+Switching tasks's overhead is also evaluated, that is about three micro seconds on average.
+Therefore, the overheads of multitasking is 1 \% or less because the number of switching tasks is about 500.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/comparison_s_c_m.pdf}
+    \caption{Comparison of the application execution time with singletask, co-routine, and multitask}
+    \label{fig:comparison_s_c_m}
 \end{figure}
 
 \section{Related work}
@@ -661,7 +636,7 @@ The smaller cyclic time is better in multitasking due to concurrent and/or paral
 The open-source run-time systems for scripting languages have been proposed such as follow: mruby on TECS \cite{7153813}, mruby \cite{5959588}, the Owl system \cite{180964}, and Lua \cite{Ierusalimschy:2007:EL:1238844.1238846}.
 
 Lua is one of the most popular script languages for embedded systems.
-Lua supports co-routine, referred to collaborative multitasking.
+Lua supports co-routines, referred to collaborative multitasking.
 A co-routine in Lua is used as an independently executed thread.
 A co-routine can just suspend and resume multiple routines.
 Thus, a Lua co-routine is not like multitasks in multitask systems.
@@ -670,7 +645,7 @@ Thus, a Lua co-routine is not like multitasks in multitask systems.
 The Owl system is an embedded Python run-time system.
 The Owl is a complete system for ARM Cortex-M3 microcontrollers.
 The Owl toolchain produces relocatable memory images, that are directly runnable on the microcontroller, from Python code objects.
-The interpreter of the Owl system is the same as that of python-on-a-chip \cite{python-on-a-chip}.
+The interpreter of the Owl system is the same as that of python-on-a-chip [].
 python-on-a-chip supports multitask managed by GIL (Global Interpreter Lock).
 GIL locks a CPU in order to prevent the non-thread-safe code from sharing the other threads.
 GIL leads the limitation of the concurrency on multitasking.
@@ -680,7 +655,7 @@ mruby programs can run on a RiteVM, which is the VM for mruby and reads the mrub
 mruby has supported co-routine, but not supported multitasking for RTOSs.
 
 mruby on TECS is a component-based framework for running mruby programs.
-The programs on mruby on TECS can execute about 100 times faster than the mruby programs.
+The programs on mruby-on-TECS can execute about 100 times faster than the mruby programs.
 Software can be also developed with component base by mruby on TECS.
 Although multitasking has been supported in the current mruby on TECS, developers need to be familiar with functions of an RTOS to use multitasking.
 The co-routine is supported as same as mruby.
@@ -693,17 +668,12 @@ This paper has presented the mruby bytecode loader using Bluetooth in multi-VM o
 The proposed framework provides developers the efficient development without disconnecting an SD card and restarting an OS.
 Furthermore, the proposed multitasking can be use more easily than the current mruby on TECS.
 In the evaluation, experimental results of the mruby bytecode loader and proposed multitasking show their advantages.
-mruby bytecode loader using Bluetooth can improve the work efficiency.
 The proposed multitasking is compared with singletasking and co-routine.
-This experimental result shows the effectiveness of the proposed framework because of the low overhead.
 
-The proposed framework is developed in component-base by TECS.
-The facilities such as the loader, the cyclic handler, and the eventflag are implemented as components.
-Developers can easily add or remove the facilities as necessary.
 
 %%%%%%%%%%%%%
 % Reference %
 %%%%%%%%%%%%%
-\bibliography{ref}
+\bibliography{ref.bib}
 
 \end{document}
