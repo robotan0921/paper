@@ -30,7 +30,7 @@ I.~Crnkovic, ``{Component-based Software Engineering for Embedded Systems},''
 \bibitem{7153813}
 T.~Azumi, Y.~Nagahara, H.~Oyama, and N.~Nishio, ``{mruby on TECS:
   Component-Based Framework for Running Script Program},'' in \emph{Proceedings
-  of the IEEE 18th International Symposium on Real-Time Distributed Computing
+  of the 18th IEEE International Symposium on Real-Time Distributed Computing
   (ISORC)}, April 2015, pp. 252--259.
 
 \bibitem{5959588}
@@ -47,42 +47,37 @@ T.~Azumi, M.~Yamamoto, Y.~Kominami, N.~Takagi, H.~Oyama, and H.~Takada, ``{A
 \bibitem{6913200}
 T.~Ishikawa, T.~Azumi, H.~Oyama, and H.~Takada, ``{HR-TECS: Component
   technology for embedded systems with memory protection},'' in
-  \emph{Proceedings of the IEEE 16th International Symposium on
+  \emph{Proceedings of the 16th IEEE International Symposium on
   Object/Component/Service-Oriented Real-Time Distributed Computing (ISORC)},
   June 2013, pp. 1--8.
 
 \bibitem{6332346}
 A.~Ohno, T.~Azumi, and N.~Nishio, ``{TECS Components Providing Functionalities
-  of OSEK Specification for ITRON OS},'' in \emph{Proceedings of the IEEE 9th
+  of OSEK Specification for ITRON OS},'' in \emph{Proceedings of the 9th IEEE
   International Conference on Embedded Software and Systems (ICESS)}, June
   2012, pp. 1434--1441.
 
 \bibitem{forsberg1988zmodem}
-C.~Forsberg, ``{The ZMODEM Inter Application File Transfer Protocol},'' 1988.
+C.~Forsberg, ``{The ZMODEM Inter Application File Transfer Protocol},''
+  \url{http://pauillac.inria.fr/~doligez/zmodem/zmodem.txt}, 1988.
 
 \bibitem{ITRON_spec}
 ``{Micro-ITRON4.0 Specification},''
-  http://www.ertl.jp/ITRON/SPEC/mitron4-e.html.
-
-\bibitem{180964}
-\BIBentryALTinterwordspacing
-T.~W. Barr, R.~Smith, and S.~Rixner, ``{Design and Implementation of an
-  Embedded Python Run-Time System},'' in \emph{Proceedings of the USENIX Annual
-  Technical Conference (USENIX ATC 12)}, 2012, pp. 297--308. [Online].
-  Available:
-  \url{https://www.usenix.org/conference/atc12/technical-sessions/presentation/barr}
-\BIBentrySTDinterwordspacing
+  \url{http://www.ertl.jp/ITRON/SPEC/mitron4-e.html}.
 
 \bibitem{Ierusalimschy:2007:EL:1238844.1238846}
-\BIBentryALTinterwordspacing
 R.~Ierusalimschy, L.~H. de~Figueiredo, and W.~Celes, ``{The Evolution of
   Lua},'' in \emph{Proceedings of the Third ACM SIGPLAN Conference on History
   of Programming Languages}, ser. HOPL III.\hskip 1em plus 0.5em minus
-  0.4em\relax ACM, 2007, pp. 2--1--2--26. [Online]. Available:
-  \url{http://doi.acm.org/10.1145/1238844.1238846}
-\BIBentrySTDinterwordspacing
+  0.4em\relax ACM, 2007, pp. 2--1--2--26.
+
+\bibitem{180964}
+T.~W. Barr, R.~Smith, and S.~Rixner, ``{Design and Implementation of an
+  Embedded Python Run-Time System},'' in \emph{Proceedings of the USENIX Annual
+  Technical Conference (USENIX ATC 12)}, 2012, pp. 297--308.
 
 \bibitem{python-on-a-chip}
-``{python-on-a-chip},'' http://code.google.com/archive/p/python-on-a-chip/.
+``{python-on-a-chip},''
+  \url{http://code.google.com/archive/p/python-on-a-chip/}.
 
 \end{thebibliography}

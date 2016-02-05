@@ -8,16 +8,6 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: ref.bib
-You're missing a field name---line 14 of file ref.bib
- : 
- : %% address = {New York, NY, USA},
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-You're missing a field name---line 83 of file ref.bib
- : 
- : %% address = {New York, NY, USA},
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
 -- IEEEtran.bst version 1.12 (2007/01/11) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
@@ -25,34 +15,34 @@ I'm skipping whatever remains of this entry
 Done.
 You've used 11 entries,
             4024 wiz_defined-function locations,
-            876 strings with 9585 characters,
-and the built_in function-call counts, 8220 in all, are:
-= -- 604
+            875 strings with 9536 characters,
+and the built_in function-call counts, 8172 in all, are:
+= -- 598
 > -- 177
 < -- 64
 + -- 101
 - -- 28
-* -- 392
-:= -- 1160
+* -- 384
+:= -- 1141
 add.period$ -- 24
 call.type$ -- 11
 change.case$ -- 11
 chr.to.int$ -- 168
 cite$ -- 11
-duplicate$ -- 593
-empty$ -- 759
+duplicate$ -- 594
+empty$ -- 760
 format.name$ -- 35
-if$ -- 1922
+if$ -- 1917
 int.to.chr$ -- 0
 int.to.str$ -- 11
 missing$ -- 111
-newline$ -- 60
+newline$ -- 56
 num.names$ -- 9
 pop$ -- 294
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 630
+skip$ -- 627
 stack$ -- 0
 substring$ -- 398
 swap$ -- 450
@@ -63,6 +53,5 @@ type$ -- 11
 warning$ -- 0
 while$ -- 36
 width$ -- 13
-write$ -- 121
+write$ -- 116
 is.kanji.str$ -- 0
-(There were 2 error messages)
