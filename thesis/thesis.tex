@@ -56,10 +56,11 @@ For example, IoT (Internet of Things) applications.
 The low production cost and the short developing period of time are also needed.
 
 An approach of efficient software development is to use component-based techniques.
-CBD (Component-Based Development) is a design technique for constituting reusable components \cite{Crnkovic:2005:CSE:1062455.1062631}.
+CBD (Component-Based Development) is a design technique for constituting reusable components \cite{par:Crnkovic}.
 Complex and large scale software systems can be developed efficiently using component-based techniques.
 That is because software componentization provides high-reusability and easy verification.
 It also makes a system flexible in extensions and specification changes.
+There are TECS \cite{par:TECS}, AUTOSAR \cite{url:AUTOSAR}, and SaveCCM \cite{par:SAVEapproach} as a typical component-based development for embedded systems 
 
 In addition, another approach of efficient software development is to develop with script languages.
 Most of current software are programmed in C language, and the development with C takes a high cost and more time to develop.
@@ -70,16 +71,16 @@ Although script languages are easy to use and read, their execution time are slo
 For embedded systems, the real-time properties such as worst-execution time, response time are very important factors.
 Therefore, it is difficult to apply the script languages to embedded systems.
 
-mruby on TECS is a component-based framework for running script program \cite{7153813}.
+mruby on TECS is a component-based framework for running script program \cite{par:mrubyonTECS}.
 It is integrated two technologies.
-One is mruby, which is a script language for embedded systems \cite{5959588}.
-The other is TECS (TOPPERS Embedded Component System), which is a component-based framework for embedded systems \cite{4208825}.
+One is mruby, which is a script language for embedded systems \cite{par:mruby}, \cite{url:mruby}.
+The other is TECS (TOPPERS Embedded Component System), which is a component-based framework for embedded systems \cite{par:TECS}.
 TECS supports to effectively run mruby script language on embedded systems.
 mruby on TECS also makes execution time 100 times faster than that of mruby.
 
 This paper proposes two additional features of mruby on TECS, mruby bytecode loader using Bluetooth and user-friendly multitask.
 mruby on TECS has some problems at present.
-One of these is that working efficiency is low because mruby on TECS only supports an SD card in the platform for LEGO MINDSTORMS EV3 to load mruby programs.
+One of the problems is that working efficiency is low because mruby on TECS only supports an SD card in the platform for LEGO MINDSTORMS EV3 \cite{par:EV3} to load mruby programs.
 In the current development process, it is annoying that the SD card should be insert and pulled out repeatedly.
 If a new feature, mruby bytecode loader Bluetooth, is used, the procedure is carried out only once at the beginning and a program code is transferred from a host to a target device by Bluetooth.
 It can improve the efficiency.
@@ -87,7 +88,7 @@ Moreover, in the current system if developers attempt to run multiple tasks with
 In addition developers must prepare as many VMs as the number of threads because one RiteVM supports only one thread.
 Thus that is a big burden on developers.
 Another new feature enables developers to run a multitask programs more easily.
-Specifically, a cycle handler of switching tasks is implemented.
+Specifically, a cyclic handler of switching tasks is implemented.
 This paper evaluates the proposed framework in term of data transfer rate, overhead of cyclic handler and execution time.
 
 {\bf Contributions}: This paper proposes mruby bytecode loader using Bluetooth and user-friendly multitasking.
@@ -133,7 +134,7 @@ To explain the system, mruby and TECS are also respectively described in this se
 \label{sec:mruby}
 mruby is the light-weight implementation of Ruby programming language complying to part of the ISO standard.
 
-Ruby is a object-oriented script language.
+Ruby is a object-oriented script language \cite{url:Ruby}.
 As the main feature, Ruby is easy-to-use and easy-to-read due to its simple grammar.
 Ruby can run a program with fewer code lines than C language.
 Ruby improves the productivity of a software development owing to not only simple grammar also object-oriented functions such as classes and methods, exceptions, and garbage collection.
@@ -226,7 +227,6 @@ signature sMotor{
 celltype tCaller{
     call sMotor cMotor;
 };
-
 celltype tMotor{
     entry sMotor eMotor;
     attr{
@@ -252,7 +252,6 @@ celltype tMotor{
 \begin{lstlisting}
 cell tMotor Motor{
 };
-
 cell tCaller Caller{
     cMotor = Motor.eMotor;
 };
@@ -279,9 +278,9 @@ The mruby-TECS bridge provides native libraries for mruby.
 It also gives TECS components to receive the invocation from an mruby program.
 The mruby-TECS bridge is described in more detail bellow.
 
-As the target RTOS, TOPPERS/HRP2 \cite{6913200} is used in this paper.
+As the target RTOS, TOPPERS/HRP2 \cite{url:HRP2}, \cite{par:hr-tecs} is used in this paper.
 TOPPERS/HRP2 is an RTOS based on $\mu$ITRON with memory protection.
-However, mruby on TECS does not depend on the RTOS because TECS supports not only TOPPERS/HRP2 but also the other RTOSs such as OSEK \cite{6332346} and TOPPERS/ASP.
+However, mruby on TECS does not depend on the RTOS because TECS supports not only TOPPERS/HRP2 but also the other RTOSs such as OSEK \cite{par:OSEK} and TOPPERS/ASP \cite{url:ASP}.
 
 \begin{figure}[t]
     \centering
@@ -293,7 +292,7 @@ However, mruby on TECS does not depend on the RTOS because TECS supports not onl
 \subsubsection{mruby-TECS Bridge}\mbox{}\\
 
 There is a great difference between the execution time of mruby and C language.
-According to  \cite{7153813}, mruby programs are several hundreds times slower than C programs.
+According to  \cite{par:mrubyonTECS}, mruby programs are several hundreds times slower than C programs.
 The execution of mruby bytecode on a RiteVM is not as efficient as that of C language.
 Thus it is difficult to use mruby for all of code.
 
@@ -345,16 +344,16 @@ The generated bytecodes are transferred from the host to the target device with 
 
 \subsection{Component of mruby bytecode loader using Bluetooth}
 The proposed framework provides components of mruby bytecode loader using Bluetooth to use the function.
-A component of mruby bytecode loader using Bluetooth is an extension of the RiteVM component, which is described in \cite{7153813}.
+A component of mruby bytecode loader using Bluetooth is an extension of the RiteVM component, which is described in \cite{par:mrubyonTECS}.
 The component plays a role in receiving bytecodes via Bluetooth, and also manages RiteVM configuration such as automatically generates the bytecode in the build description.
 This generated bytecode is prepared beforehand in the SD card such as mruby libraries, and different from a bytecode transferred with Bluetooth.
 
 Figure \ref{fig:component_bluetooth} shows a component diagram of MrubyTask1 and MrubyBluetooth1 {\it cell}s.
 The MrubyTask1 {\it cell} is a componentized task of the RTOS (TOPPERS/HRP2).
-TOPPERS/HRP2 is described in \cite{6913200}.
+TOPPERS/HRP2 is described in \cite{url:HRP2}, \cite{par:ht-tecs}.
 The MrubyBluetooth1 is a component of mruby bytecode loader using Bluetooth.
 A bytecode which is a compiled mruby program in the host is transferred and received at the top of the mruby bytecode loader using Bluetooth component.
-In this framework, ZMODEM \cite{forsberg1988zmodem} is used as a binary transfer protocol.
+In this framework, ZMODEM \cite{par:zmodem} is used as a binary transfer protocol.
 
 \begin{figure}[t]
     \centering
@@ -395,8 +394,9 @@ celltype tMrubyBluetooth{
     entry sTaskBody eMrubyBody;
     attr{
       [omit]char_t *mrubyFile;
-      char_t *irep_lib=C_EXP("&$cell_global$_irep");
-      uint8_t irep_app[COUNT_STK_T(TMAX_APP_BINARY_SIZE)] __attribute__((nocommon));
+      char_t *irepLib=C_EXP("&$cell_global$_irep");
+      uint8_t irepApp[COUNT_STK_T(TMAX_APP_BINARY_SIZE)]
+              __attribute__((nocommon));
     };
 };
 \end{lstlisting}
@@ -413,24 +413,18 @@ eMrubyBody_main(CELLIDX idx)
   /* Declaration variables */
   mrb_state *mrb;
   mrbc_context *c;
-
   /* New interpreter instance */
   mrb = mrb_open();
-  // Error Check for mrb_state
-
+  // Omit: error check for mrb_state
   /* New mruby context */
   c = mrbc_context_new(mrb);
-
-  // Initialization of mruby TECS Bridge
-
+  // Omit: initialization of mruby-TECS bridge
   /* Receive the bytecode via Bluetooth */
   bluetooth_loader( ATTR_app );
-
   /* Load mruby library bytecode and run */
   mrb_load_irep_cxt(mrb, ATTR_lib, c);
   /* Load mruby application bytecode and run */
   mrb_load_irep_cxt(mrb, ATTR_app, c);
-
   if (mrb->exc) {
     /* Failure to execute */
     mrb_p(mrb, mrb_obj_value(mrb->exc));
@@ -480,7 +474,7 @@ In this case, the order is changed, task 2, 3 and, 1, when the {\it rotateReadyQ
 Figure \ref{fig:cyclic_handler} shows a component diagram of the cyclic handler.
 The components of cyclic handler consist of two components: CyclicHandler and CyclicMain.
 CyclicHandler {\it cell} configures the cyclic handler based on ITRON.
-Cyclic handlers based on ITRON are described in detail \cite{ITRON_spec}.
+Cyclic handlers based on ITRON are described in detail \cite{par:microITRON}.
 The cyclic handler has five arguments: ID, attribute, cyclic time, cyclic phase and access pattern.
 CyclicHandler {\it cell} has these arguments as attributes of the {\it cell}.
 CyclicMain {\it cell} is a component to perform the processing body of a cyclic handler.
@@ -517,7 +511,6 @@ celltype tCyclicHandler {
     	[omit] RELTIM cyclicPhase = 0;
     };
 };
-
 celltype tCyclicMain{
     require tKernel.eiKernel;
     entry siHandlerBody eiBody;
@@ -538,7 +531,6 @@ cell tCyclicHandler CyclicHandler{
     cyclicTime = 1;
     cyclicPhase = 1;
 };
-
 cell tCyclicMain CyclicMain{
     priority =
         C_EXP("RITEVM_PRIORITY");
@@ -639,16 +631,16 @@ The smaller cyclic time is better in multitasking due to concurrent and/or paral
     \caption{Comparion of the proposed and previous work}
     \begin{tabular}{c||c|ccc}
         & Bluetooth Loader & \shortstack{Preemptive-multitask\\(multi-VM)} & \shortstack{Nonpreemptive-multitask\\(co-routine)} & GIL \\ \hline
-        Lua \cite{Ierusalimschy:2007:EL:1238844.1238846} &            & -          & \checkmark &            \\
-        Owl system \cite{180964}                         &            & -          & -          & \checkmark \\
-        mruby \cite{5959588}                             &            &            & \checkmark &            \\
-        mruby on TECS \cite{7153813}                     &            & \checkmark & \checkmark &            \\
+        Lua \cite{url:Lua}, \cite{par:Lua} &            & -          & \checkmark &            \\
+        Owl system \cite{par:owl}                         &            & -          & -          & \checkmark \\
+        mruby \cite{par:mruby}, \cite{url:mruby}                             &            &            & \checkmark &            \\
+        mruby on TECS \cite{par:mrubyonTECS}                     &            & \checkmark & \checkmark &            \\
         Proposed framework& \checkmark & \checkmark & \checkmark &            \\
     \end{tabular}
     \label{tab:comparion}
 \end{table*}
 The open-source run-time systems for scripting languages have been proposed such as follow:
-Lua \cite{Ierusalimschy:2007:EL:1238844.1238846}, the Owl system \cite{180964}, mruby \cite{5959588}, and mruby on TECS \cite{7153813}.
+Lua \cite{url:Lua}, \cite{par:Lua}, the Owl system \cite{par:owl}, mruby \cite{par:mruby}, \cite{url:mruby}, and mruby on TECS \cite{par:mrubyonTECS}.
 
 Lua is one of the most popular script languages for embedded systems.
 Lua supports co-routine, referred to collaborative multitasking.
@@ -659,7 +651,7 @@ Thus, a Lua co-routine is not like multitasks in multitask systems.
 The Owl system is an embedded Python run-time system.
 The Owl is a complete system for ARM Cortex-M3 microcontrollers.
 The Owl toolchain produces relocatable memory images, that are directly runnable on the microcontroller, from Python code objects.
-The interpreter of the Owl system is the same as that of python-on-a-chip \cite{python-on-a-chip}.
+The interpreter of the Owl system is the same as that of python-on-a-chip \cite{url:python-on-a-chip}.
 python-on-a-chip supports multitask managed by GIL (Global Interpreter Lock).
 GIL locks a CPU in order to prevent the non-thread-safe code from sharing the other threads.
 GIL leads the limitation of the concurrency on multitasking.
@@ -690,6 +682,8 @@ The proposed framework is developed in component-base by TECS.
 The facilities such as the loader, the cyclic handler, and the eventflag are implemented as components.
 Developers can easily add or remove the facilities as necessary.
 
+In the future, the mruby bytecode loader using Bluetooth will be supported to handle multiple bytecodes and run the application in muliti-VM.
+Moreover, the .cdl files for RiteVM and mruby-TECS bridge are generated automatically using a plugin, and developers can send a bytecode with ZMODEM protocol on the command line.
 %%%%%%%%%%%%%
 % Reference %
 %%%%%%%%%%%%%
