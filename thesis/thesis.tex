@@ -319,14 +319,21 @@ The methods in an mruby class are defined by generation codes for an mruby-TECS 
 Thus, when a method is called in an mruby program, an mruby-TECS bridge calls the function defined in the TECS component such as a Motor {\it cell}.
 
 
-\section{mruby Bytecode Loader Using Bluetooth}
+ \section{mruby Bytecode Loader Using Bluetooth}
 \label{sec:mruby bytecode loader using Bluetooth}
-This section describes an additional function of mruby on TECS, mruby bytecode loader using Bluetooth.
+This section describes an additional feature of mruby on TECS, mruby bytecode loader using Bluetooth.
 In the current system, all binary data including bytecodes are in an SD card.
-Developers must insert and pull out the SD card every time the source program are modified.
+Developers must insert and pull out the SD card every time the source programs are modified.
 It causes a low work efficiency that such a work must be repeated.
 mruby bytecode loader using Bluetooth makes the developers' burden decrease.
 The work that an SD card is in and out needs to be done just once in the beginning.
+
+mruby programs are consisted of mruby application and libraries.
+mruby application is the main code of the application.
+mruby libraries are the code defining the functions for application such as Ruby class. 
+The mruby bytecodes including mruby application and libraries can be sent and run.
+However it is wasteful in terms of the size and time to send because libraries are not frequently modified. 
+In the proposed framework, mruby application only sends, and mruby libraries are preserved in the SD card beforehand.
 
 The development flow in mruby bytecode loader using Bluetooth is shown in Figure \ref{fig:bluetooth_loader}.
 The RiteVM and mruby library are compiled and copied in the SD card at the first.
@@ -420,11 +427,11 @@ eMrubyBody_main(CELLIDX idx)
   c = mrbc_context_new(mrb);
   // Omit: initialization of mruby-TECS bridge
   /* Receive the bytecode via Bluetooth */
-  bluetooth_loader( ATTR_app );
+  bluetooth_loader( ATTR_irepApp );
   /* Load mruby library bytecode and run */
-  mrb_load_irep_cxt(mrb, ATTR_lib, c);
+  mrb_load_irep_cxt(mrb, ATTR_irepLib, c);
   /* Load mruby application bytecode and run */
-  mrb_load_irep_cxt(mrb, ATTR_app, c);
+  mrb_load_irep_cxt(mrb, ATTR_irepApp, c);
   if (mrb->exc) {
     /* Failure to execute */
     mrb_p(mrb, mrb_obj_value(mrb->exc));
@@ -445,11 +452,20 @@ eMrubyBody_main(CELLIDX idx)
 This section describes implementation of multitasking in the proposed framework.
 mruby on TECS has supported multitasking.
 However, multitask processing in mruby on TECS requires the knowledge of the RTOS (TOPPERS/HRP2) for developers.
+
 One of approaches for multitasking is co-routine.
-Co-routine is scheduled by developers with the functions such as {\it resume} and {\it yield}, and thus co-routine does not receive the OS's support.
-Besides, as another method, {\it delay}, a service call of $\mu$ITRON, can be used for multitasking, but developers have to schedule as the same as co-routine.
+Co-routine is a cooperative thread, and scheduled by developers with the functions such as {\it resume} and {\it yield}. 
+(Ruby co-routine is defined in class Fiber \cite{url:co-routine})
+Co-routine is a non-preemptive mulititasking, and does not receive the OS's support because developers have to switch tasks manually.
+Co-routine can not take advantege of multi core processing.
+
+Besides, as another method, {\it delay}, a service call of $\mu$ITRON, can be used for multitasking.
+This service call delays the execution of the own task for the time of the argument.
+In the approach of {\it delay} fubction, developers have to schedule as the same as co-routine.
+
 In the proposed framework, as an approach for multitask processing, {\it rotateReadyQueue}, a service call of $\mu$ITRON, is implemented.
-A cyclic handler calls {\it rotateReadyQueue} that switches tasks, which enables developers to develop applications without concern for multitasking.
+{\it rotateReadyQueue} rotates the precedence of the task with the priority of the argument.
+A cyclic handler calls {\it rotateReadyQueue}, which enables developers to develop applications without concern for multitasking.
 
 \subsection{rotateReadyQueue}
 The case is assumed that there are two tasks with the same priority, and both tasks are in an infinite loop.
@@ -461,7 +477,7 @@ The argument of {\it rotateReadyQueue} is the priority.
 
 The {\it rotateReadyQueue} can be performed if the number of tasks is more than two.
 For example, three tasks are in the order: task 1, 2, and 3.
-In this case, the order is changed, task 2, 3 and, 1, when the {\it rotateReadyQueue} is called.
+In this case, the order is rotated, task 2, 3 and, 1, when the {\it rotateReadyQueue} is called.
 
 \begin{figure}[t]
     \centering
@@ -473,7 +489,7 @@ In this case, the order is changed, task 2, 3 and, 1, when the {\it rotateReadyQ
 \subsection{Component of Cyclic Handler}
 Figure \ref{fig:cyclic_handler} shows a component diagram of the cyclic handler.
 The components of cyclic handler consist of two components: CyclicHandler and CyclicMain.
-CyclicHandler {\it cell} configures the cyclic handler based on ITRON.
+CyclicHandler {\it cell} configures the cyclic handler based on $\mu$ITRON.
 Cyclic handlers based on ITRON are described in detail \cite{par:microITRON}.
 The cyclic handler has five arguments: ID, attribute, cyclic time, cyclic phase and access pattern.
 CyclicHandler {\it cell} has these arguments as attributes of the {\it cell}.
@@ -485,12 +501,12 @@ The attribute is used as an arguments of {\it rotateReadyQueue}.
 
 Figure \ref{build_cyclic_handler} shows a build description that corresponds to the component diagram shown in Figure \ref{fig:cyclic_handler}.
 In the part of CyclicHandler {\it cell}, configurations of a cyclic handler is described such as attribute, cyclicTime and cyclicPhase.
-In this case, the cyclic handler is executed when it is generated because the attribute is {\it TA\_STA}.
+In this case, the cyclic handler is executed when it is generated because the attribute is {\it TA\_STA} that represents the cyclic handler is in an operational state after the creation.
 The cyclic handler is executed every one msec.
 In another part, the priority of CyclicMain {\it cell} is described.
 EV3\_MRUBY\_VM\_PRIORITY defines the priority of mruby tasks.
 In the main of CyclicMain, {\it rotateReadyQueue} is implemented and the priority is passed as the argument.
-If developers do not need the cyclic handler, the .cdl files shown as Figures \ref{celltype_cyclic_handler} and \ref{build_cyclic_handler} should be commented out such as {\it //import($<$**.cdl$>$);}.
+If developers do not need the cyclic handler, the .cdl files shown as Figures \ref{celltype_cyclic_handler} and \ref{build_cyclic_handler} should be commented out such as {\it //import($<$tCyclicHandler.cdl$>$);}.
 This ease comes from component-based development with TECS.
 
 \begin{figure}[t]
@@ -548,11 +564,11 @@ This process can also apply to the case of the more tasks.
 For example, in the case of the four RiteVM tasks, each task sets the flag pattern such as 0x01 (0001), 0x02 (0010), 0x04 (0100)  and 0x08 (1000), and then waits 0x0f (1111) with AND.
 
 In the proposed framework, the set pattern and wait pattern are defined as attributes of the component as shown in Figure \ref{fig:Eventflag}.
-This design such as {\it cEventflag\_set(ATTR\_setPattern)} enables the program without ``if" statements.
-The components of eventflag are built with {\it [optional]} in TECS.
+This design such as {\it cEventflag\_set(ATTR\_setPattern)} enables the program without ``if" statements and reuses the identical .c file.
+Developers do not need to modify the .c file because the .cdl files in accordance with the number of RiteVMs are prepared. 
+In additon, the components of Eventflag are built with {\it [optional]} in TECS.
 {\it [optional]} means that the codes are run only when the call port is connected.
-The identical file can be used even if developers do not use eventflag.
-In other words, it is not necessary to compile/link the different file.
+The .c file does not be rewritten even if developers do not use Eventflag. 
 These features are also advantages of component-based development.
 
 \begin{figure}[t]
@@ -565,16 +581,15 @@ These features are also advantages of component-based development.
 \section{Experimental Evaluation}
 \label{sec:Evaluation}
 This section mentions experimental results and their consideration.
-To analyze the advantages and disadvantages of the proposed framework, the evaluations are performed as follows.
+To analyze the advantages of the proposed framework, the evaluations are performed as follows.
 \begin{itemize}
-        \item the comparison of the size and transfer time between an mruby application including mruby library and not
-        \item the comparison of the application execution time with singletasking, co-routine, and multitasking
-        \item the comparison of the overhead for each cyclic period of calling {\it rotateReadyQueue}
+    \item the comparison of the size and transfer time between an mruby application including mruby library and not
+    \item the comparison of the application execution time with singletasking, co-routine, and multitasking
+    \item the comparison of the overhead for each cyclic period of calling {\it rotateReadyQueue}
 \end{itemize}
 
+These evaluations are performed in order to indicate that mruby bytecode loader improves the work efficiency, and that the proposed multitask processing effectively executes compared with singletasking or co-routine, and also the overhead of the cyclic period.
 This paper demonstrates the proposed system on a LEGO MINDSTORMS EV3 (300MHz ARM9-based Sitara AM1808 system-on-a-chip) compiled with gcc 4.9.3 -O2 and mruby version 1.2.0.
-The 100,000 times loop program is used as mruby application for evaluation of execution time.
-In detail, the singletask program loops 100,000 times, and the multitask and co-routine programs loop 50,000 times in each task.
 
 The size and transfer time for mruby application and mruby application including library is shown in Table \ref{tab:size_and_time}.
 The bytecode of mruby application including library is larger and slower than that of only mruby application in terms of size and transfer time.
@@ -595,6 +610,8 @@ These advantages lead to improving the work efficiency.
 \end{table}
 
 The comparison of the application execution time with singletasking, co-routine, and multitasking is shown in Figure \ref{fig:comparison_s_c_m}.
+The 100,000 times loop program is used as mruby application for evaluation of execution time.
+In detail, the singletask program loops 100,000 times, and the multitask and co-routine programs loop 50,000 times in each task.
 In Figure \ref{fig:comparison_s_c_m}, the cyclic time of the cyclic handler for multitasking is one msec.
 Multitasking's execution time is about the same as singletasking's while co-routine takes more time than them to execute an mruby application.
 This result shows the proposed design is superior to co-routine in terms of execution time.
@@ -675,14 +692,14 @@ The proposed framework provides developers the efficient development without dis
 Furthermore, the proposed multitasking can be use more easily than the current mruby on TECS.
 In the evaluation, experimental results of the mruby bytecode loader and proposed multitasking show their advantages.
 mruby bytecode loader using Bluetooth can improve the work efficiency.
-The proposed multitasking is compared with singletasking and co-routine.
-This experimental result shows the effectiveness of the proposed framework because of the low overhead.
+The proposed multitasking has the effectiveness in terms of execution time compared with singletasking and co-routine because of the low overhead.
 
 The proposed framework is developed in component-base by TECS.
-The facilities such as the loader, the cyclic handler, and the eventflag are implemented as components.
+The facilities such as the loader, the cyclic handler, and the Eventflag are implemented as components.
 Developers can easily add or remove the facilities as necessary.
+Component-based development can increase the productivity and decrease the complexity.
 
-In the future, the mruby bytecode loader using Bluetooth will be supported to handle multiple bytecodes and run the application in muliti-VM.
+In the future, the mruby bytecode loader using Bluetooth will be supported to handle multiple bytecodes and run the application in multi-VM.
 Moreover, the .cdl files for RiteVM and mruby-TECS bridge are generated automatically using a plugin, and developers can send a bytecode with ZMODEM protocol on the command line.
 %%%%%%%%%%%%%
 % Reference %

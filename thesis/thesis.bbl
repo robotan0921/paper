@@ -89,6 +89,9 @@ TOPPERS, ``{TOPPERS/ASP kernel},''
 C.~Forsberg, ``{The ZMODEM Inter Application File Transfer Protocol},''
   \url{http://pauillac.inria.fr/~doligez/zmodem/zmodem.txt}, 1988.
 
+\bibitem{url:co-routine}
+``{class Fiber},'' \url{http://docs.ruby-lang.org/en/2.3.0/Fiber.html}.
+
 \bibitem{par:microITRON}
 H.~Takada and K.~Sakamura, ``{$\mu$ITRON for Small-Scale Embedded Systems},''
   \emph{IEEE Micro}, vol.~15, no.~6, pp. 46--54, 1995.
