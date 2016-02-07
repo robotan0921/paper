@@ -8,52 +8,50 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: ref.bib
-Warning--I didn't find a database entry for "par:ht-tecs"
 -- IEEEtran.bst version 1.12 (2007/01/11) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 
 Done.
-You've used 20 entries,
+You've used 21 entries,
             4024 wiz_defined-function locations,
-            928 strings with 10526 characters,
-and the built_in function-call counts, 12328 in all, are:
-= -- 926
+            923 strings with 10433 characters,
+and the built_in function-call counts, 12326 in all, are:
+= -- 920
 > -- 260
-< -- 85
-+ -- 145
+< -- 84
++ -- 146
 - -- 44
-* -- 548
-:= -- 1802
+* -- 531
+:= -- 1804
 add.period$ -- 42
-call.type$ -- 20
+call.type$ -- 21
 change.case$ -- 21
-chr.to.int$ -- 204
-cite$ -- 20
-duplicate$ -- 947
-empty$ -- 1125
+chr.to.int$ -- 201
+cite$ -- 21
+duplicate$ -- 949
+empty$ -- 1140
 format.name$ -- 54
-if$ -- 2856
+if$ -- 2855
 int.to.chr$ -- 0
-int.to.str$ -- 20
-missing$ -- 182
-newline$ -- 83
+int.to.str$ -- 21
+missing$ -- 179
+newline$ -- 86
 num.names$ -- 14
-pop$ -- 469
+pop$ -- 470
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 973
+skip$ -- 990
 stack$ -- 0
-substring$ -- 497
-swap$ -- 688
+substring$ -- 489
+swap$ -- 675
 text.length$ -- 17
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 20
+type$ -- 21
 warning$ -- 0
-while$ -- 48
-width$ -- 22
-write$ -- 188
+while$ -- 49
+width$ -- 23
+write$ -- 191
 is.kanji.str$ -- 0
-(There was 1 warning)

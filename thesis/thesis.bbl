@@ -24,35 +24,34 @@
 \bibitem{par:Crnkovic}
 I.~Crnkovic, ``{Component-based Software Engineering for Embedded Systems},''
   in \emph{Proceedings of the 27th International Conference on Software
-  Engineering}, ser. ICSE '05.\hskip 1em plus 0.5em minus 0.4em\relax ACM,
-  2005, pp. 712--713.
+  Engineering}, 2005, pp. 712--713.
 
 \bibitem{par:TECS}
 T.~Azumi, M.~Yamamoto, Y.~Kominami, N.~Takagi, H.~Oyama, and H.~Takada, ``{A
   New Specification of Software Components for Embedded Systems},'' in
-  \emph{Proceedings of the 10th IEEE International Symposium on Object and
-  Component-Oriented Real-Time Distributed Computing}, May 2007, pp. 46--50.
+  \emph{Proceedings of the 10th IEEE International Symposium on
+  Object/Component/Service-Oriented Real-Time Distributed Computing (ISORC)},
+  2007, pp. 46--50.
 
 \bibitem{url:AUTOSAR}
 ``{AUTOSAR},'' \url{http://www.autosar.org/}.
 
 \bibitem{par:SAVEapproach}
-M.~^^c3^^85kerholm, J.~Carlson, J.~Fredriksson, H.~Hansson,
-  J.~H^^c3^^a5kansson, A.~M^^c3^^b6ller, P.~Pettersson, and M.~Tivoli, ``{The
-  SAVE approach to component-based development of vehicular systems},''
-  \emph{Journal of Systems and Software}, vol.~80, no.~5, pp. 655 -- 667, 2007,
-  component-Based Software Engineering of Trustworthy Embedded Systems.
+M.~kerholm, J.~Carlson, J.~Fredriksson, H.~Hansson, J.~H{\aa}kansson,
+  A.~M\"{o}ller, P.~Pettersson, and M.~Tivoli, ``{The SAVE Approach to
+  Component-based Development of Vehicular Systems},'' \emph{Journal of Systems
+  and Software}, vol.~80, no.~5, pp. 655--667, 2007.
 
 \bibitem{par:mrubyonTECS}
 T.~Azumi, Y.~Nagahara, H.~Oyama, and N.~Nishio, ``{mruby on TECS:
   Component-Based Framework for Running Script Program},'' in \emph{Proceedings
   of the 18th IEEE International Symposium on Real-Time Distributed Computing
-  (ISORC)}, April 2015, pp. 252--259.
+  (ISORC)}, 2015, pp. 252--259.
 
 \bibitem{par:mruby}
 K.~Tanaka, Y.~Matsumoto, and H.~Arimori, ``{Embedded System Development by
   Lightweight Ruby},'' in \emph{Proceedings of the International Conference on
-  Computational Science and Its Applications (ICCSA)}, June 2011, pp. 282--285.
+  Computational Science and Its Applications (ICCSA)}, 2011, pp. 282--285.
 
 \bibitem{url:mruby}
 ``{mruby},'' \url{https://github.com/mruby/mruby}.
@@ -74,7 +73,7 @@ T.~Ishikawa, T.~Azumi, H.~Oyama, and H.~Takada, ``{HR-TECS: Component
   technology for embedded systems with memory protection},'' in
   \emph{Proceedings of the 16th IEEE International Symposium on
   Object/Component/Service-Oriented Real-Time Distributed Computing (ISORC)},
-  June 2013, pp. 1--8.
+  2013, pp. 1--8.
 
 \bibitem{par:OSEK}
 A.~Ohno, T.~Azumi, and N.~Nishio, ``{TECS Components Providing Functionalities
@@ -102,16 +101,18 @@ H.~Takada and K.~Sakamura, ``{$\mu$ITRON for Small-Scale Embedded Systems},''
 \bibitem{par:Lua}
 R.~Ierusalimschy, L.~H. de~Figueiredo, and W.~Celes, ``{The Evolution of
   Lua},'' in \emph{Proceedings of the Third ACM SIGPLAN Conference on History
-  of Programming Languages}, ser. HOPL III.\hskip 1em plus 0.5em minus
-  0.4em\relax ACM, 2007, pp. 2--1--2--26.
+  of Programming Languages}, 2007, pp. 2--1--2--26.
+
+\bibitem{url:python-on-a-chip}
+``{python-on-a-chip},''
+  \url{http://code.google.com/archive/p/python-on-a-chip/}.
 
 \bibitem{par:owl}
 T.~W. Barr, R.~Smith, and S.~Rixner, ``{Design and Implementation of an
   Embedded Python Run-Time System},'' in \emph{Proceedings of the USENIX Annual
   Technical Conference (USENIX ATC 12)}, 2012, pp. 297--308.
 
-\bibitem{url:python-on-a-chip}
-``{python-on-a-chip},''
-  \url{http://code.google.com/archive/p/python-on-a-chip/}.
+\bibitem{url:eLua}
+``{eLua},'' \url{http://www.eluaproject.net}.
 
 \end{thebibliography}
