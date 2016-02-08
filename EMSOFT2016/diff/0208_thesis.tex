@@ -4,12 +4,11 @@
 % Last Change: 月 11 30 08:00 午後 2015 東京 (標準時)
 %
 \input{dummy/dummy.tex}
-\documentclass[a4j,12pt,oneside,openany,english]{jsbook}
+\documentclass[conference,compsoc]{IEEEtran}
+\bibliographystyle{IEEEtranBST2/IEEEtran}
 \usepackage{url}
 \usepackage[dvipdfmx]{graphicx}
 \usepackage{amssymb}
-\usepackage{utf8/book2report}
-\usepackage{utf8/thesis}
 \usepackage{listings,jlisting}
 \lstset{%
     language={},
@@ -31,41 +30,12 @@
     lineskip=-0.5ex%
 }
 
-% \title{mruby Bytecode Loader Using Bluetooth in Multi-VM Environment}
-% \author{Takuro Yamamoto}
-% \date{\today}
+\title{mruby Bytecode Loader Using Bluetooth in Multi-VM Environment}
+\author{Takuro Yamamoto}
+\date{\today}
 
 \begin{document}
-\thispagestyle{empty}
-\begin{center}
-\vspace*{5mm}
-{\Huge {\bf 特 \hspace{12pt} 別 \hspace{12pt} 研 \hspace{12pt} 究 \hspace{12pt} 報 \hspace{12pt} 告}}\\
-\vspace{2cm}
-{\Large 題\hspace{8mm}目}\\
-\vspace{1cm}
-\underline{\LARGE{mruby Bytecode Loader}} \\
-\vspace{0.5cm}
-\underline{\Large{Using Bluetooth in Multi-VM Environment}} \\
-\vspace{12mm}
-{\large 指 導 教 員}\\
-\vspace{6mm}
-\underline{\Large  潮　俊光　教授}\\
-　\\
-\underline{\Large 安積　卓也　助教}\\
-\vspace{8mm}
-{\large 報 告 者}\\
-\vspace{6mm}
-\underline{\Large 山本　拓朗}\\
-\vspace{10mm}
-{\Large 平成28年2月吉日}\\
-\vspace{14mm}
-{\Large 大阪大学基礎工学部システム科学科\\知能システム学コース}\\
-\end{center}
-\clearpage
-\setcounter{page}{0}
-\pagenumbering{roman}
-%\maketitle
-
+\maketitle
 \begin{abstract}
 In recent years, the productivity of embedded systems has become a problem due to their complexity and large-scale.
 For the purpose of improving the productivity for embedded software development, the mruby on TECS framework has been proposed that is applied mruby (Lightweight Ruby) and supports component-based development.
@@ -79,12 +49,7 @@ In addition, multiple mruby programs cooperatively run in the proposed framework
 In the proposed framework, the cyclic handler switching tasks is implemented, and multitasking processing is more easy-to-use than that of mruby on TECS.
 Experimental results demonstrate the advantages of the proposed framework.
 \end{abstract}
-\clearpage
-\tableofcontents
-\clearpage
-\setcounter{page}{0}
-\pagenumbering{arabic}
-\chapter{Introduction}
+\section{Introduction}
 In these days, embedded systems have been required the high-quality and the high-performance.
 Due to this trend, the complexity of embedded systems also increases and the scale is larger.
 For example, IoT (Internet of Things) applications.
@@ -145,7 +110,7 @@ Section \ref{sec:Background} introduces the basic technologies i.e. mruby, TECS 
 Section \ref{sec:mruby bytecode loader using Bluetooth} and Section \ref{sec:Multitask} describe the design and implementation of the proposed framework in detail.
 Section \ref{sec:Evaluation} evaluates the proposed framework, Section \ref{sec:Related work} discuses related work, and then Section \ref{sec:Conclusion} concludes.
 
-\chapter{Background}
+\section{Background}
 \label{sec:Background}
 Figure \ref{fig:proposed} shows a system model of the proposed framework.
 The bytecodes are transferred from the host to the target device with Bluetooth.
@@ -165,7 +130,7 @@ mruby on TECS is a component-based framework for running script programs.
 In mruby on TECS, two technologies are integrated: mruby and TECS.
 To explain the system, mruby and TECS are also respectively described in this section.
 
-\section{mruby}
+\subsection{mruby}
 \label{sec:mruby}
 mruby is the light-weight implementation of Ruby programming language complying to part of the ISO standard.
 
@@ -187,7 +152,7 @@ The bytecodes can run on a Rite VM, and thus mruby programs can be executed on a
     \label{fig:mruby}
 \end{figure}
 
-\section{TECS}
+\subsection{TECS}
 \label{sec:TECS}
 TECS (TOPPERS Embedded Component System) is a component system suitable for embedded systems.
 TECS helps decrease the complexity and difficulty because the generated component diagram can visualize the structure of whole software.
@@ -197,7 +162,7 @@ The component deployment and composition in TECS are statically performed, which
 As a result, the overhead of execution time and memory consumption can be reduced.
 There are other features of TECS, implementation in C language, source level portability, fine-grained component, etc.
 
-\subsection{Component Model}\mbox{}\\
+\subsubsection{Component Model}\mbox{}\\
 
 Figure \ref{fig:component} shows a component diagram.
 A {\it cell} which is an instance of a component in TECS consists of {\it entry} ports, {\it call} ports, attributes and internal variables.
@@ -218,7 +183,7 @@ A {\it celltype} is the definition of a {\it cell}.
     \label{fig:component}
 \end{figure}
 
-\subsection{Component Description}\mbox{}\\
+\subsubsection{Component Description}\mbox{}\\
 
 The description of a component in TECS is divided into three parts, {\it signature}, {\it celltype}, and build description.
 TECS code is written in .cdl (component description language) file.
@@ -297,12 +262,12 @@ cell tCaller Caller{
 
 \end{description}
 
-\section{mruby on TECS}
+\subsection{mruby on TECS}
 \label{sec:mruby on TECS}
 mruby on TECS is a component-based framework for running script language.
 This framework uses two technologies, mruby and TECS.
 
-\subsection{System Model}\mbox{}\\
+\subsubsection{System Model}\mbox{}\\
 
 The system model of mruby on TECS is shown in Figure \ref{fig:mrubyontecs}.
 Each mruby program, which is bytecode, runs on its own RiteVM as a componentized task of an RTOS.
@@ -330,7 +295,7 @@ However, mruby on TECS does not depend on the RTOS because TECS supports not onl
     \label{fig:system_model}
 \end{figure}
 
-\subsection{mruby-TECS Bridge}\mbox{}\\
+\subsubsection{mruby-TECS Bridge}\mbox{}\\
 
 There is a great difference between the execution time of mruby and C language.
 According to  \cite{par:mrubyonTECS}, mruby programs are several hundreds times slower than C programs.
@@ -360,7 +325,7 @@ The methods in an mruby class are defined by generation codes for an mruby-TECS 
 Thus, when a method is called in an mruby program, an mruby-TECS bridge calls the function defined in the TECS component such as a Motor {\it cell}.
 
 
-\chapter{mruby Bytecode Loader Using Bluetooth}
+\section{mruby Bytecode Loader Using Bluetooth}
 \label{sec:mruby bytecode loader using Bluetooth}
 This section describes an additional feature of mruby on TECS, mruby bytecode loader using Bluetooth.
 In the current system, all binary data including bytecodes are in an SD card.
@@ -390,7 +355,7 @@ The generated bytecodes are transferred from the host to the target device with 
     \label{fig:bluetooth_loader}
 \end{figure}
 
-\section{Component of mruby bytecode loader using Bluetooth}
+\subsection{Component of mruby bytecode loader using Bluetooth}
 The proposed framework provides components of mruby bytecode loader using Bluetooth to use the function.
 A component of mruby bytecode loader using Bluetooth is an extension of the RiteVM component, which is described in \cite{par:mrubyonTECS}.
 The component plays a role in receiving bytecodes via Bluetooth, and also manages RiteVM configuration such as automatically generates the bytecode in the build description.
@@ -488,7 +453,7 @@ eMrubyBody_main(CELLIDX idx)
 \caption{Main code for mruby bytecode loader using Bluetooth}
 \label{maincode_mrubybluetooth}
 \end{figure}
-\chapter{Multitask}
+\section{Multitask}
 \label{sec:Multitask}
 This section describes implementation of multitasking in the proposed framework.
 mruby on TECS has supported multitasking.
@@ -508,7 +473,7 @@ In the proposed framework, as an approach for multitask processing, {\it rotateR
 {\it rotateReadyQueue} rotates the precedence of the task with the priority of the argument.
 A cyclic handler calls {\it rotateReadyQueue}, which enables developers to develop applications without concern for multitasking.
 
-\section{rotateReadyQueue}
+\subsection{rotateReadyQueue}
 The case is assumed that there are two tasks with the same priority, and both tasks are in an infinite loop.
 In the current system, when one task is executed first, another task would not be executed.
 That is because the task with first execution runs in the loop.
@@ -527,7 +492,7 @@ In this case, the order is rotated, task 2, 3 and, 1, when the {\it rotateReadyQ
     \label{fig:rotateReadyQueue}
 \end{figure}
 
-\section{Component of Cyclic Handler}
+\subsection{Component of Cyclic Handler}
 Figure \ref{fig:cyclic_handler} shows a component diagram of the cyclic handler.
 The components of cyclic handler consist of two components: CyclicHandler and CyclicMain.
 CyclicHandler {\it cell} configures the cyclic handler based on $\mu$ITRON.
@@ -597,7 +562,7 @@ cell tCyclicMain CyclicMain{
     \label{build_cyclic_handler}
 \end{figure}
  
-\section{Synchronization of Multiple RiteVM Tasks}
+\subsection{Synchronization of Multiple RiteVM Tasks}
 In the proposed framework, RiteVMs read mruby bytecodes, and then execute the applications.
 Eventflag, one of synchronous processing, is applied to synchronize the starting of multiple mruby applications.
 Each task sets the flag pattern such as 0x01 (01) and 0x02 (10), and then waits the flag pattern, 0x3 (11), with AND.
@@ -619,7 +584,7 @@ These features are also advantages of component-based development.
     \label{fig:Eventflag}
 \end{figure}
  
-\chapter{Experimental Evaluation}
+\section{Experimental Evaluation}
 \label{sec:Evaluation}
 This section mentions experimental results and their consideration.
 To analyze the advantages of the proposed framework, the evaluations are performed as follows.
@@ -681,7 +646,7 @@ The smaller cyclic time is better in multitasking due to concurrent and/or paral
     \label{fig:comparison_msec}
 \end{figure}
  
-\chapter{Related Work}
+\section{Related Work}
 \label{sec:Related work}
 
 \begin{table*}[t]
@@ -729,7 +694,7 @@ The co-routine is supported as same as mruby.
 
 Table \ref{tab:comparion} shows a comparison between the proposed framework and previous work.
  
-\chapter{Conclusion}
+\section{Conclusion}
 \label{sec:Conclusion}
 This paper has presented the mruby bytecode loader using Bluetooth in multi-VM on mruby on TECS.
 The proposed framework provides developers the efficient development without disconnecting an SD card and restarting an OS.
@@ -745,11 +710,9 @@ Component-based development can increase the productivity and decrease the compl
 
 In the future, the mruby bytecode loader using Bluetooth will be supported to handle multiple bytecodes and run the application in multi-VM.
 Moreover, the .cdl files for RiteVM and mruby-TECS bridge are generated automatically using a plugin, and developers can send a bytecode with ZMODEM protocol on the command line.
-
 %%%%%%%%%%%%%
 % Reference %
 %%%%%%%%%%%%%
-\bibliographystyle{utf8/myjunsrt}
 \bibliography{ref}
 
 \end{document}

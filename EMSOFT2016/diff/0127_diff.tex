@@ -1,0 +1,701 @@
+%DIF 1c1
+%DIF LATEXDIFF DIFFERENCE FILE
+%DIF DEL 0123_thesis.tex   Sun Jan 24 18:23:44 2016
+%DIF ADD 0127_thesis.tex   Wed Jan 27 01:03:10 2016
+%DIF < %%
+%DIF -------
+% %DIF > 
+%DIF -------
+% File: thesis.tex
+% Created: 月 11 30 08:00 午後 2015 東京 (標準時)
+% Last Change: 月 11 30 08:00 午後 2015 東京 (標準時)
+%
+\input{dummy/dummy.tex}
+\documentclass[conference,compsoc]{IEEEtran}
+\bibliographystyle{plain}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{amssymb}
+\usepackage{listings,jlisting}
+\lstset{%
+    language={},
+    basicstyle={\small},%
+    identifierstyle={\small},%
+    commentstyle={\small\itshape},%
+    keywordstyle={\small\bfseries},%
+    ndkeywordstyle={\small},%
+    stringstyle={\small\ttfamily},
+    frame={tb},
+    breaklines=true,
+    columns=[l]{fullflexible},%
+    numbers=left,%
+    xrightmargin=0zw,%
+    xleftmargin=3zw,%
+    numberstyle={\scriptsize},%
+    stepnumber=1,
+    numbersep=1zw,%
+    lineskip=-0.5ex%
+}
+
+\title{mruby Bytecode Loader Using Bluetooth \DIFdelbegin \DIFdel{Supported }\DIFdelend \DIFaddbegin \DIFadd{in }\DIFaddend Multi-VM \DIFaddbegin \DIFadd{Environment}\DIFaddend }
+\author{Takuro Yamamoto}
+\date{\today}
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
+
+\begin{document}
+\maketitle
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend \begin{abstract}
+In recent years, the productivity of embedded systems has become a problem due to \DIFdelbegin \DIFdel{its }\DIFdelend \DIFaddbegin \DIFadd{their }\DIFaddend complexity and large-scale.
+For the purpose of improving the productivity for embedded software development, the mruby on TECS framework has been proposed that is applied mruby (Lightweight Ruby) and supports component-based development.
+In the current mruby on TECS, the mruby programs have to be compiled and linked every time the programs are modified because the mruby bytecodes are incorporated in the platform.
+Moreover, while the framework supports multi-VM, developers needs to be familiar with the functions of real-time operating systems to \DIFdelbegin \DIFdel{execute effectively }\DIFdelend \DIFaddbegin \DIFadd{effectively execute }\DIFaddend multiple mruby programs in concurrent or/and parallel.
+In this paper, to improve the development efficiency, the \DIFdelbegin \DIFdel{Bluetooth Loader that transferres bytecodes of mruby applications }\DIFdelend \DIFaddbegin \DIFadd{mruby bytecode loader using Bluetooth }\DIFaddend is implemented as an extension of mruby on TECS.
+In addition, multiple mruby programs run cooperatively in the proposed framework.
+\DIFdelbegin \DIFdel{This paper demonstrates }\DIFdelend \DIFaddbegin \DIFadd{Experimental results demonstrate }\DIFaddend the advantages of the proposed framework\DIFdelbegin \DIFdel{with experimental results}\DIFdelend .
+\end{abstract}
+\section{Introduction}
+In these days, embedded systems have been required the high-quality and the high-performance.
+Due to this trend, the complexity of embedded systems also increases and the scale is larger.
+For example, IoT (Internet of Things) applications.
+The low production cost and the short developing period of time are also needed.
+
+An approach of efficient software development is to use component-based techniques.
+CBD (Component-Based Development) is a design technique for constituting reusable components \cite{Crnkovic:2005:CSE:1062455.1062631}.
+Complex and large scale software systems can be developed efficiently using component-based techniques.
+That is because software componentization provides high-reusability and easy verification.
+It also makes a system flexible in extensions and specification changes.
+
+In addition, another approach of efficient software development is to develop with script languages.
+Most of current software are programmed in C language, and the development with C takes a high cost and more time to develop.
+Script languages make software engineering more efficient and shorten a development period because script languages have high-productivity from their usability.
+Java script, Perl, Python, Lua and Ruby are well-known as representative script languages.
+
+Although script languages are easy to use and read, their execution time are slower than C language's.
+For embedded systems, the real-time properties such as worst-execution time, response time are very important factors.
+Therefore, it is difficult to apply the script languages to embedded systems.
+
+mruby on TECS is a component-based framework for running script program \cite{7153813}.
+It is integrated two technologies.
+One is mruby, which is a script language for embedded systems \cite{5959588}.
+The other is TECS (TOPPERS Embedded Component System), which is a component-based framework for embedded systems \cite{4208825}.
+TECS supports to effectively run mruby script language on embedded systems.
+mruby on TECS also makes execution time 100 times faster than that of mruby.
+
+This paper proposes two additional \DIFdelbegin \DIFdel{functions }\DIFdelend \DIFaddbegin \DIFadd{features }\DIFaddend of mruby on TECS, \DIFdelbegin \DIFdel{Bluetooth Loader }\DIFdelend \DIFaddbegin \DIFadd{mruby bytecode loader using Bluetooth }\DIFaddend and user-friendly \DIFdelbegin \DIFdel{multithread}\DIFdelend \DIFaddbegin \DIFadd{multitask}\DIFaddend .
+mruby on TECS has some problems at present.
+One of these is that working efficiency is low because mruby on TECS only supports a SD card in the platform for LEGO MINDSTORMS EV3 to load mruby programs.
+In the current development process, it is annoying that the SD card should be insert and pulled out repeatedly.
+If a new \DIFdelbegin \DIFdel{function, Bluetooth Loader}\DIFdelend \DIFaddbegin \DIFadd{feature, mruby bytecode loader Bluetooth}\DIFaddend , is used, the procedure is carried out only once at the beginning and a program code is transferred from a host to a target device by Bluetooth.
+It can improve the efficiency.
+Moreover, in the current system if \DIFdelbegin \DIFdel{users }\DIFdelend \DIFaddbegin \DIFadd{developers }\DIFaddend attempt to run multiple tasks with the same priority, a task with first execution only runs and all other tasks would not run unless a OS's function must be called by \DIFdelbegin \DIFdel{users}\DIFdelend \DIFaddbegin \DIFadd{developers}\DIFaddend .
+In addition \DIFdelbegin \DIFdel{users }\DIFdelend \DIFaddbegin \DIFadd{developers }\DIFaddend must prepare as many VMs as the number of threads because one RiteVM supports only one thread.
+Thus that is a big burden on \DIFdelbegin \DIFdel{users}\DIFdelend \DIFaddbegin \DIFadd{developers}\DIFaddend .
+Another new \DIFdelbegin \DIFdel{function enables users }\DIFdelend \DIFaddbegin \DIFadd{feature enables developers }\DIFaddend to run a \DIFdelbegin \DIFdel{multithread }\DIFdelend \DIFaddbegin \DIFadd{multitask }\DIFaddend programs more easily.
+Specifically, a cycle handler of switching tasks is implemented.
+This paper evaluates the proposed framework in term of data transfer rate, overhead of cyclic handler and execution time.
+\DIFdelbegin %DIFDELCMD < \\
+%DIFDELCMD < %%%
+\DIFdelend 
+
+{\bf \DIFdelbegin \DIFdel{Contributions}\DIFdelend \DIFaddbegin \DIFadd{Contribution}\DIFaddend }\DIFaddbegin \DIFadd{: This paper proposes mruby bytecode loader using Bluetooth and user-friendly multitasking.
+The proposed framework gives the contribution in the following points. 
+}\DIFaddend \begin{enumerate}
+\item \DIFdelbegin \DIFdel{Improve }\DIFdelend \DIFaddbegin \DIFadd{To improve }\DIFaddend the  work efficiency in \DIFdelbegin \DIFdel{development}\DIFdelend \DIFaddbegin \DIFadd{software development on mruby on TECS}\DIFaddend : \mbox{}\\
+\ \DIFdelbegin \DIFdel{Bluetooth Loader helps users }\DIFdelend \DIFaddbegin \DIFadd{mruby bytecode loader using Bluetooth helps developers }\DIFaddend develop software.
+\DIFdelbegin \DIFdel{Users }\DIFdelend \DIFaddbegin \DIFadd{Developers }\DIFaddend do not need to insert and pull out \DIFdelbegin \DIFdel{repeatedly, and that improves }\DIFdelend \DIFaddbegin \DIFadd{a SD card repeatedly and also to restart an OS.
+Thus, }\DIFaddend the software development efficiency \DIFaddbegin \DIFadd{is improved}\DIFaddend .
+\item \DIFdelbegin \DIFdel{Implement multithreads in mruby on TECS}\DIFdelend \DIFaddbegin \DIFadd{To effectively execute multiple mruby programs in concurrent or/and parallel}\DIFaddend : \mbox{}\\
+\ There is a probrem in \DIFdelbegin \DIFdel{multithreading }\DIFdelend \DIFaddbegin \DIFadd{multitasking }\DIFaddend of the current mruby on TECS.
+It is that \DIFdelbegin \DIFdel{users }\DIFdelend \DIFaddbegin \DIFadd{developers }\DIFaddend need to be well acquainted the RTOS if multiple mruby programs execute in \DIFdelbegin \DIFdel{multithreading. 
+In this }\DIFdelend \DIFaddbegin \DIFadd{multitasking. 
+In the }\DIFaddend proposed framework, it is easy for \DIFdelbegin \DIFdel{users to use multithreading }\DIFdelend \DIFaddbegin \DIFadd{developers to use multitasking }\DIFaddend because multiple tasks are switched cyclically.
+\DIFdelbegin \DIFdel{Users can easily program multithreading.
+Multithreaded }\DIFdelend \DIFaddbegin \DIFadd{Multitasked }\DIFaddend programing makes the range of software expand.
+\end{enumerate}
+
+\DIFaddbegin {\bf \DIFadd{Organization}}\DIFadd{: }\DIFaddend The paper is organized as follows\DIFdelbegin \DIFdel{:
+}\DIFdelend \DIFaddbegin \DIFadd{.
+}\DIFaddend Section \ref{sec:Background} introduces the basic technologies i.e. mruby, TECS and mruby on TECS.
+Section \DIFdelbegin \DIFdel{\ref{sec:Bluetooth Loader} and Section \ref{sec:Multithread} }\DIFdelend \DIFaddbegin \DIFadd{\ref{sec:mruby bytecode loader using Bluetooth} and Section \ref{sec:Multitask} }\DIFaddend describe the design and implementation of the proposed framework in detail.
+Section \ref{sec:Evaluation} evaluates the proposed framework, Section \ref{sec:Related work} discuses related work, and then Section \ref{sec:Conclusion} concludes.
+
+\section{Background}
+\label{sec:Background}
+Figure \ref{fig:proposed} shows \DIFdelbegin \DIFdel{the system proposed in this paper}\DIFdelend \DIFaddbegin \DIFadd{a system model of the proposed framework}\DIFaddend .
+The bytecodes are transferred from the host to the target device with Bluetooth.
+The RiteVMs and mruby library are assumed to be prepared in advance.
+Each bytecode is allocated \DIFdelbegin \DIFdel{respectively with its own RiteVM.
+Users }\DIFdelend \DIFaddbegin \DIFadd{to a RiteVM, respectively.
+Developers }\DIFaddend can run some bytecodes transferred with Bluetooth \DIFdelbegin \DIFdel{Loader in multi-thread}\DIFdelend \DIFaddbegin \DIFadd{in multitask}\DIFaddend .
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/proposed.pdf}
+    \caption{\DIFdelbeginFL \DIFdelFL{Proposed Framework}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{System Model}\DIFaddendFL }
+    \label{fig:proposed}
+\end{figure}
+
+This section describes \DIFdelbegin \DIFdel{the basic technology, which is }\DIFdelend \DIFaddbegin \DIFadd{mruby on TECS on which the proposed framework is based.
+}\DIFaddend mruby on TECS \DIFdelbegin \DIFdel{, }\DIFdelend \DIFaddbegin \DIFadd{is }\DIFaddend a component-based framework for running script programs.
+In mruby on TECS, two technologies are \DIFdelbegin \DIFdel{used, }\DIFdelend \DIFaddbegin \DIFadd{integrated: }\DIFaddend mruby and TECS\DIFdelbegin \DIFdel{which are the basis for mruby on TECS}\DIFdelend .
+To explain the system, mruby and TECS are also respectively described in this section.
+
+\subsection{mruby}
+\label{sec:mruby}
+mruby is the light-weight implementation of Ruby programming language complying to part of the ISO standard.
+
+Ruby is a object-oriented script language.
+As the main feature, Ruby is easy-to-use and easy-to-read due to its simple grammar.
+Ruby can run a program with fewer code lines than C language.
+Ruby improves the productivity of a software development owing to not only simple grammar also object-oriented functions such as classes and methods, exceptions, and garbage collection.
+
+mruby is suitable for embedded systems because of faster execution with less amount of resources and takes over the usability and readability of Ruby.
+In addition VM (Virtual Machine) mechanism is used in mruby, so mruby programs can run on any operating system as long as VM is implemented.
+RiteVM is a VM in mruby, that runs mruby programs.
+The RiteVM mechanism is shown in Figure \ref{fig:mruby}.
+The mruby compiler translates a mruby code into a bytecode, which is \DIFdelbegin \DIFdel{a }\DIFdelend \DIFaddbegin \DIFadd{an }\DIFaddend intermidiate code that can be interpreted by RiteVM.
+The bytecodes can run on a Rite VM, thus mruby programs can be executed on any target devices if only RiteVMs are implemented.
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/mruby.pdf}
+    \caption{Mechanism of mruby/RiteVM}
+    \label{fig:mruby}
+\end{figure}
+
+\subsection{TECS}
+\label{sec:TECS}
+TECS (TOPPERS Embedded Component System) is a component system suitable for embedded systems.
+TECS helps decrease the complexity and difficulty because the generated component diagram can visualize the structure of whole software.
+It can also help increase the productivity and reduce development duplication  because a common part of software is regarded as a component.
+
+The component deployment and composition in TECS are statically performed, which gives optimization.
+As a result, the overheads of execution time and memory consumption can be reduced.
+There are other features of TECS, implementation in C language, source level portability, fine-grained component, etc.
+
+\subsubsection{Component Model}\mbox{}\\
+
+Figure \ref{fig:component} shows a component diagram.
+A {\it cell} which is an instance of a component in TECS consists of {\it entry} ports, {\it call} ports, attributes and internal variables.
+A {\it entry} port is an interface to provide functions with other {\it cell}s, and a {\it call} port is an interface to use functions of other {\it cell}s.
+A {\it cell} has one or more {\it entry} ports and {\it call} ports.
+Functions of a {\it cell} are implemented in the C language.
+
+A type of a {\it entry}/{\it call} port is defined by a {\it signature} which is a set of functions.
+A {\it signature} is the interface definition of a {\it cell}.
+The {\it call} port of a {\it cell} can be connected to the {\it entry} port of another {\it cell} with the same {\it signature}.
+A {\it celltype} is the definition of a {\it cell}.
+{\it Celltype} defines one or more {\it call}/{\it entry} ports, attributes and internal variables.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/component_diagram.pdf}
+    \caption{Component Diagram}
+    \label{fig:component}
+\end{figure}
+
+\subsubsection{Component Description}\mbox{}\\
+
+The description of a component in TECS is divided into three parts, {\it signature}, {\it celltype}, and build description.
+The component description in TECS is mentioned with an example shown in Figure \ref{fig:component} as follow.
+
+\begin{description}
+    \item[{\bf Signature Description}]\mbox{}\\
+        The {\it signature} description defines an interface of a {\it cell}.
+        A {\it signature} name is described following the keyword {\it signature}.
+        It also has the prefix ``s".
+        In this way, a {\it signature} is defined such as sMotor shown in Figure \ref{signature}.
+        To make the definition of an interface clear, specifiers such as in and out are used in TECS.
+        [in] and [out] represent input and output, respectively.\\
+\begin{figure}[t]
+\centering
+\begin{lstlisting}
+signature sMotor{
+    int32_t getCounts(void);
+    ER resetCounts(void);
+    ER setPower([in]int power);
+    ER stop([in] bool_t brake);
+    ER rotate([in] int degrees, [in] uint32_t speed_abs,
+              [in] bool_t blocking);
+    void initializePort([in]int32_t type);
+};
+\end{lstlisting}
+\caption{Signature Description}
+\label{signature}
+\end{figure}
+
+    \item[{\bf Celltype Description}]\mbox{}\\
+        The {\it celltype} description defines {\it entry} ports, {\it call} ports, attributes, and valuables of a {\it celltype}.
+        An example of a {\it celltype} description is shown in Figure \ref{celltype}.
+        A {\it celltype} name following the keyword {\it celltype} with the prefix ``t" and elements of a {\it celltype} is described.
+        To define {\it entry} ports, a {\it signature} such as sMotor, and an {\it entry} port name such as eMotor follow the keyword {\it entry}.
+        In the same way, {\it call} ports can be declared.
+        Attributes and valuables follow the keyword attr and var respectively.\\
+\begin{figure}[t]
+\centering
+\begin{lstlisting}
+celltype tCaller{
+    call sMotor cMotor;
+};
+
+celltype tMotor{
+    entry sMotor eMotor;
+    attr{
+        int32_t attr = 100;
+    };
+    var{
+        int32_t var;
+    };
+};
+\end{lstlisting}
+\caption{Celltype Description}
+\label{celltype}
+\end{figure}
+
+    \item[{\bf Build Description}]\mbox{}\\
+        The build description is used to instantiate {\it cell}s and connect {\it cell}s.
+        Figure \ref{build} shows an example of a build description.
+        A {\it celltype} name such as tMotor, and a {\it cell} name such as Motor follow the keyword {\it cell}.
+        To compose {\it cell}s a {\it call} port, a {\it signature}, a {\it entry} port in order are described.
+        In this example, a {\it entry} port eMotor in a {\it cell} Motor is connected to a {\it call} port cMotor in a {\it cell} Caller.\\
+\begin{figure}[t]
+\centering
+\begin{lstlisting}
+cell tMotor Motor{
+};
+
+cell tCaller Caller{
+    cMotor = Motor.eMotor;
+};
+\end{lstlisting}
+\caption{Build Description}
+\label{build}
+\end{figure}
+
+\end{description}
+
+\subsection{mruby on TECS}
+\label{sec:mruby on TECS}
+mruby on TECS is a component-based framework for running script language.
+This framework uses two technologies, mruby and TECS. 
+
+\subsubsection{System Model}\mbox{}\\
+
+The system model of mruby on TECS is shown in Figure \ref{fig:system_model}.
+Each mruby program, which is bytecode, runs on its own RiteVM as a componentized task of an RTOS.
+TECS components support various embedded drivers such as motor and sensor drivers.
+
+An mruby-TECS bridge plays a role to call a native program (e.g.,C legacy code) from an mruby program.
+The mruby-TECS bridge provides native libraries for mruby.
+It also gives TECS components to receive the invocation from an mruby program.
+The mruby-TECS bridge is described in more detail bellow.
+
+As the target RTOS, TOPPERS/HRP2 \cite{6913200} is used in this paper.
+TOPPERS/HRP2 is an RTOS based on $\mu$ITRON with memory protection.
+However, mruby on TECS does not depend on the RTOS because TECS supports not only TOPPERS/HRP2 but also the other RTOSs such as OSEK \cite{6332346} and TOPPERS/ASP.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/system_model.pdf}
+    \caption{System Model}
+    \label{fig:system_model}
+\end{figure}
+
+\subsubsection{mruby-TECS Bridge}\mbox{}\\
+
+There is a great difference between the execution time of mruby and C language.
+According to  \cite{7153813}, mruby programs are several hundreds times slower than C programs.
+The execution of mruby bytecode on a RiteVM is not as efficient as that of C language.
+Thus it is difficult to use mruby for all of code.
+
+The use of Ruby on embedded devices provides the benefit of productivity and maintainability due to the ease to use and read.
+On the other hands, it is necessary to implement parts of applications in C language in order to manipulate actuators and sensors, and also make a critical section of code run quickly.
+
+Figure \ref{fig:mruby_TECS_bridge} shows an example of use of an mruby-TECS bridge for controlling a motor.
+The left side of BridgeMotor belongs to the mruby program.
+The right side of BridgeMotor belongs to TECS component.
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/mruby_TECS_bridge.pdf}
+    \caption{mruby-TECS Bridge}
+    \label{fig:mruby_TECS_bridge}
+\end{figure}
+
+The mruby-TECS bridge generates two things.
+One is a {\it celltype} to receive invocation from the mruby program.
+The other thing is an mruby class that corresponds to the TECS component specified by the developers to invoke a C function from the mruby program.
+
+A code of an mruby-TECS bridge is generated.
+The generation code supports registration of classes and methods for mruby.
+The methods in an mruby class are defined by generation codes for an mruby-TECS bridge, such as setPower and stop.
+Thus, when a method is called in a mruby program, an mruby-TECS bridge calls the function defined in the TECS component such as a Motor {\it cell}.
+
+ 
+\section{\DIFdelbegin \DIFdel{Bluetooth }\DIFdelend \DIFaddbegin \DIFadd{mruby Bytecode }\DIFaddend Loader \DIFaddbegin \DIFadd{Using Bluetooth}\DIFaddend }
+\DIFdelbegin %DIFDELCMD < \label{sec:Bluetooth Loader}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \label{sec:mruby bytecode loader using Bluetooth}
+\DIFaddend This section describes an additional function of mruby on TECS, \DIFdelbegin \DIFdel{Bluetooth Loader}\DIFdelend \DIFaddbegin \DIFadd{mruby bytecode loader using Bluetooth}\DIFaddend .
+In the current system, all binary data including bytecodes are in a SD card.
+\DIFdelbegin \DIFdel{Users }\DIFdelend \DIFaddbegin \DIFadd{Developers }\DIFaddend must insert and pull out the SD card every time the source program are modified.
+It causes a low work efficiency that such a work must be repeated.
+\DIFdelbegin \DIFdel{In the system with Bluetooth Loader, the users' burden can be reduced}\DIFdelend \DIFaddbegin \DIFadd{mruby bytecode loader using Bluetooth makes the developers' burden decrease}\DIFaddend .
+The work that a SD card is in and out needs to be done just once in the beginning.
+
+The development flow \DIFdelbegin \DIFdel{using Bluetooth Loader }\DIFdelend \DIFaddbegin \DIFadd{in mruby bytecode loader using Bluetooth }\DIFaddend is shown in Figure \ref{fig:bluetooth_loader}.
+The RiteVM and mruby library are compiled and copied in the SD card at the first.
+These are assumed not to be modified.
+The binary data transferred with Bluetooth is the bytecode of the main source.
+In the host, the source files, which is identified by the .rb extension, are edited and compiled into the bytecodes by a mruby compiler.
+The generated bytecodes are transferred from the host to the target device with Bluetooth.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/bluetooth_loader.pdf}
+    \caption{Development Flow \DIFaddbeginFL \DIFaddFL{in mruby bytecode loader }\DIFaddendFL using Bluetooth\DIFdelbeginFL \DIFdelFL{Loader}\DIFdelendFL }
+    \label{fig:bluetooth_loader}
+\end{figure}
+
+\subsection{Component of \DIFaddbegin \DIFadd{mruby bytecode loader using }\DIFaddend Bluetooth\DIFdelbegin \DIFdel{Loader}\DIFdelend }
+The proposed framework provides components of \DIFdelbegin \DIFdel{Bluetooth Loader }\DIFdelend \DIFaddbegin \DIFadd{mruby bytecode loader using Bluetooth }\DIFaddend to use the function.
+A component of \DIFdelbegin \DIFdel{Bluetooth Loader }\DIFdelend \DIFaddbegin \DIFadd{mruby bytecode loader using Bluetooth }\DIFaddend is an extension of the RiteVM component, which is described in \cite{7153813}.
+The component plays a role in receiving bytecodes via Bluetooth, and also manages RiteVM configuration such as automatically generates the bytecode in the build description.
+This bytecode in the build description means that prepared beforehand in the SD card such as mruby libraries, and different from a bytecode transferred with Bluetooth.
+
+Figure \ref{fig:component_bluetooth} shows a component diagram of MrubyTask1 and MrubyBluetooth1 {\it cell}s.
+The MrubyTask1 {\it cell} is a componentized task of the RTOS (TOPPERS/HRP2).
+TOPPERS/HRP2 is described in \cite{6913200}.
+The MrubyBluetooth1 is a component of \DIFdelbegin \DIFdel{Bluetooth Loader}\DIFdelend \DIFaddbegin \DIFadd{mruby bytecode loader using Bluetooth}\DIFaddend .
+A bytecode which is a compiled mruby program in the host is transferred and received at the top of the \DIFdelbegin \DIFdel{Bluetooth Loader }\DIFdelend \DIFaddbegin \DIFadd{mruby bytecode loader using Bluetooth }\DIFaddend component.
+In this framework, ZMODEM \cite{forsberg1988zmodem} is used as a binary transfer protocol.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/component_bluetooth.pdf}
+    \caption{Component Diagram of \DIFaddbeginFL \DIFaddFL{mruby bytecode loader using }\DIFaddendFL Bluetooth\DIFdelbeginFL \DIFdelFL{Loader}\DIFdelendFL }
+    \label{fig:component_bluetooth}
+\end{figure}
+
+Figure \ref{fig:control_flow} shows the process of executing mruby program in a component of \DIFdelbegin \DIFdel{Bluetooth Loader}\DIFdelend \DIFaddbegin \DIFadd{mruby bytecode loader using Bluetooth}\DIFaddend , which is like MrubyBluetooth1.
+First, a pointer of mrb\_state structure is initialized.
+mrb\_state is a set of states and global variables used in mruby.
+Second, the bytecode of mruby libraries is read.
+mruby libraries are a set of Ruby classes such as motor class and sensor class.
+For example, motor class defines methods to rotate and stop a motor.
+The tMrubyBluetooth {\it cell} has two attributes as shown in Figure \ref{celltype_mrubybluetooth}: mrubyFile and irep.
+Here, the mrubyFile indicates the program files of mruby libraries.
+[omit] is only used for the TECS generator, thus the attribute, mrubyFile, does not consume memory.
+The irep is the pointer of the array stored the bytecode of mruby libraries.
+In short the bytecode of mruby libraries is stored as an attribute of the component when compiling for the first time.
+Third, the bytecode of the mruby program transferred with Bluetooth is read .
+The bytecode transmitted via Bluetooth is stored in an array of type uint8\_t, which is the same as type char.
+The array is different from that of holding the mruby library bytecode.
+Two bytecodes are read separately in the mrb\_state.
+Finally, a mruby task runs.
+When the mruby program is modified, only the bytecode of the modified program should be transferred.
+mruby libraries need not be touched because libraries are not normally changed.
+The concrete main code of tMrubyBluetooth is shown in Figure \ref{maincode_mrubybluetooth}.
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/control_flow.pdf}
+    \caption{Control Flow of \DIFaddbeginFL \DIFaddFL{mruby bytecode loader using }\DIFaddendFL Bluetooth\DIFdelbeginFL \DIFdelFL{Loader}\DIFdelendFL }
+    \label{fig:control_flow}
+\end{figure}
+\begin{figure}[t]
+\centering
+\begin{lstlisting}
+celltype tMrubyBluetooth{
+    entry sTaskBody eMrubyBody;
+    attr{
+      [omit]char_t *mrubyFile;
+      char_t *irep=C_EXP("&$cell_global$_irep");
+    };
+}; 
+\end{lstlisting}
+\caption{Celltype Description for \DIFaddbeginFL \DIFaddFL{mruby bytecode loader using }\DIFaddendFL Bluetooth\DIFdelbeginFL \DIFdelFL{Loader}\DIFdelendFL }
+\label{celltype_mrubybluetooth}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\begin{lstlisting}
+void
+eMrubyBody_main(CELLIDX idx)
+{
+  /* Receive the bytecode via Bluetooth */
+  \DIFdelbeginFL \DIFdelFL{test_serial}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{serial}\DIFaddendFL _loader(SIO_PORT_BT);
+
+  /* Declaration variables */
+  CELLCB	*p_cellcb;
+  mrb_state *mrb;
+  mrbc_context *c;
+
+  if (VALID_IDX(idx)) {
+    p_cellcb = GET_CELLCB(idx);
+  }
+
+  /* New interpreter instance */
+  mrb = mrb_open();
+  if (mrb == NULL) {
+    /\DIFdelbeginFL \DIFdelFL{/cSerialPort_write("}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{* }\DIFaddendFL Invalid mrb_state \DIFdelbeginFL \DIFdelFL{, exiting test driver}%DIFDELCMD < \n%%%
+\DIFdelFL{", 39);
+    }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{*/
+    }\DIFaddendFL return;
+  }
+  /* New \DIFaddbeginFL \DIFaddFL{mruby context }\DIFaddendFL */
+  c = mrbc_context_new(mrb);
+
+  if(is_cInit_joined()){
+    /\DIFdelbeginFL \DIFdelFL{/ TECS Bridge }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{* Initialization of mruby TECS Bridge */
+    }\DIFaddendFL cInit_initializeBridge( mrb );
+  }
+
+  /* Load mruby liblary bytecode and run */
+  mrb_load_irep_cxt(mrb, ATTR_irep, c);
+  /* Load \DIFdelbeginFL \DIFdelFL{main mruby }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{mruby application }\DIFaddendFL bytecode and run */
+  mrb_load_irep_cxt(mrb, app_binary_buf, c);
+
+  if (mrb->exc) {
+    \DIFaddbeginFL \DIFaddFL{/* Failure to execute */
+    }\DIFaddendFL mrb_p(mrb, mrb_obj_value(mrb->exc));
+    exit(0);
+  }
+  /* Free \DIFaddbeginFL \DIFaddFL{mruby context }\DIFaddendFL */ 
+  mrbc_context_free(mrb, c);
+  /* Free interpreter instance */
+  mrb_close(mrb);
+}
+
+\end{lstlisting}
+\caption{Main code for \DIFaddbeginFL \DIFaddFL{mruby bytecode loader using }\DIFaddendFL Bluetooth\DIFdelbeginFL \DIFdelFL{Loader}\DIFdelendFL }
+\label{maincode_mrubybluetooth}
+\end{figure}
+\section{\DIFdelbegin \DIFdel{Multi-thread}\DIFdelend \DIFaddbegin \DIFadd{Multitask}\DIFaddend }
+\DIFdelbegin %DIFDELCMD < \label{sec:Multithread}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \label{sec:Multitask}
+\DIFaddend This section describes implementation of \DIFdelbegin \DIFdel{multithreading }\DIFdelend \DIFaddbegin \DIFadd{multitasking }\DIFaddend in the proposed framework.
+mruby on TECS has supported \DIFdelbegin \DIFdel{multithreading}\DIFdelend \DIFaddbegin \DIFadd{multitasking}\DIFaddend .
+However, \DIFdelbegin \DIFdel{multithread }\DIFdelend \DIFaddbegin \DIFadd{multitask }\DIFaddend processing in mruby on TECS requires the knowledge of the RTOS (TOPPERS/HRP2) for \DIFdelbegin \DIFdel{users}\DIFdelend \DIFaddbegin \DIFadd{developers}\DIFaddend .
+In the proposed framework, \DIFdelbegin \DIFdel{multithread }\DIFdelend \DIFaddbegin \DIFadd{multitask }\DIFaddend processing is user-friendly because \DIFdelbegin \DIFdel{users }\DIFdelend \DIFaddbegin \DIFadd{developers }\DIFaddend need the less knowledge than before.
+A cyclic handler that switches tasks is implemented, and that enables \DIFdelbegin \DIFdel{users }\DIFdelend \DIFaddbegin \DIFadd{developers }\DIFaddend to develop applications without concern for \DIFdelbegin \DIFdel{multithreading}\DIFdelend \DIFaddbegin \DIFadd{multitasking}\DIFaddend .
+
+\subsection{rot\_rdq}
+The case is assumed that there are two tasks with the same priority, and both are in a infinite loop.
+In the current system, when one task is executed first, another task would not be executed.
+That is because the task with first execution runs in a loop. 
+
+The rot\_rdq is a service call of $\mu$ITRON.
+When rot\_rdq is called, tasks with the same priority are switched as shown Figure \ref{fig:rot_rdq}.
+The argument of rot\_rdq is the priority.
+
+
+The rot\_rdq can be performed if the number of tasks is more than two.
+For example, three tasks are in the order: task 1, 2 and 3.
+In this case, the order is changed, task 2, 3 and 1, when the rot\_rdq is called.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/rot_rdq.pdf}
+    \caption{rot\_rdq}
+    \label{fig:rot_rdq}
+\end{figure}
+
+\subsection{Component of Cyclic Handler}
+Figure \ref{fig:cyclic_handler} shows a component diagram of the cyclic handler.
+The components of cyclic handler consist of two components: CyclicHandler and CyclicMain.
+CyclicHandler {\it cell} configurates the cyclic handler based on ITRON.
+Cyclic handlers based on ITRON are described in detail [].
+The cyclic handler has five arguments: ID, attribute, cyclic time, cyclic phase and access pattern.
+CyclicHandler {\it cell} has these arguments as attributes of the {\it cell}.
+CyclicMain {\it cell} is a component to perform the processing body of a cyclic handler.
+Here, rot\_rdq is implemented as the body.
+Figure \ref{celltype_cyclic_handler} shows tCyclicMain {\it celltype}, which has a {\it call} port which is connected tkernel.eiKernel to call functions of the kernel, an {\it entry} port and an attribute, priority.
+The attribute, priority is used as an arguments of rot\_rdq.
+
+Figure \ref{build_cyclic_handler} shows a build description that corresponds to the component diagram shown in Figure \ref{fig:cyclic_handler}.
+In the part of CyclicHandler {\it cell}, configurations of a cyclic handler is described such as attribute, cyclicTime and cyclicPhase.
+In this case, the cyclic handler is executed when it is generated because the attribute is TA\_STA.
+\DIFdelbegin \DIFdel{Also, the }\DIFdelend \DIFaddbegin \DIFadd{The }\DIFaddend cyclic handler is executed every \DIFdelbegin \DIFdel{100 microseconds}\DIFdelend \DIFaddbegin \DIFadd{1 msec}\DIFaddend .
+In another part, the priority of CyclicMain {\it cell} is described.
+EV3\_MRUBY\_VM\_PRIORITY defines the priority of mruby tasks.
+In the main of CyclicMain, rot\_rdq is implemented and the priority is passed as the argument.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/cyclic_handler.pdf}
+    \caption{Component Diagram of Cyclic Handler}
+    \label{fig:cyclic_handler}
+\end{figure}
+\begin{figure}[t]
+    \centering
+    \begin{lstlisting}
+celltype tCyclicHandler {
+    [inline] entry sCyclic eCyclic;
+    call  siHandlerBody  ciBody; 
+    attr {
+    	ID     id = C_EXP( "CYCHDLRID_$id\DIFdelbeginFL \DIFdelFL{$" );
+    	[omit] ATR    attribute = C_EXP("TA_NULL");
+    	[omit] RELTIM cyclicTime;
+    	[omit] RELTIM cyclicPhase = 0;
+        [omit] ACPTN  accessPattern[4] = 
+            { C_EXP("OMIT"), C_EXP("OMIT"), C_EXP("OMIT"), C_EXP("OMIT") };
+    };
+    FACTORY{
+    	write( "tecsgen.cfg",
+            "#include \"$ct$_tecsgen.h\"" );
+    	write( "$ct}\DIFdelendFL $\DIFdelbeginFL \DIFdelFL{_factory.h}\DIFdelendFL " \DIFdelbeginFL \DIFdelFL{,
+            }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{);
+    	}[\DIFaddFL{omit}] \DIFaddFL{ATR    attribute = C_EXP(}\DIFaddendFL "\DIFdelbeginFL \DIFdelFL{#include \"kernel_cfg.h\"}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{TA_NULL}\DIFaddendFL "\DIFaddbeginFL \DIFaddFL{);
+    	}[\DIFaddFL{omit}] \DIFaddFL{RELTIM cyclicTime;
+    	}[\DIFaddFL{omit}] \DIFaddFL{RELTIM cyclicPhase = 0;
+        }[\DIFaddFL{omit}] \DIFaddFL{ACPTN  accessPattern}[\DIFaddFL{4}] \DIFaddFL{= 
+            }{ \DIFaddFL{C_EXP("OMIT"), C_EXP("OMIT"}\DIFaddendFL )\DIFaddbeginFL \DIFaddFL{, C_EXP("OMIT"), C_EXP("OMIT") }}\DIFaddendFL ;
+    };
+};
+
+celltype tCyclicMain{
+    require tKernel.eiKernel;
+    entry siHandlerBody eiBody;
+    attr {
+        PRI priority;
+    };
+};
+    \end{lstlisting}
+    \caption{Celltype Description of Cyclic Handler}
+    \label{celltype_cyclic_handler}
+\end{figure}
+
+
+\begin{figure}[t]
+    \centering
+    \begin{lstlisting}
+cell tCyclicHandler CyclicHandler{
+    ciBody = CyclicMain.eiBody;
+    attribute = C_EXP("TA_STA");
+    cyclicTime = \DIFdelbeginFL \DIFdelFL{100}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{1}\DIFaddendFL ;
+    cyclicPhase = 0;
+};
+
+cell tCyclicMain CyclicMain{
+    priority = 
+        C_EXP("EV3_MRUBY_VM_PRIORITY");
+};
+   \end{lstlisting}
+    \caption{Build Description of Cyclic Handler}
+    \label{build_cyclic_handler}
+\end{figure}
+
+\section{Evaluation}
+\label{sec:Evaluation}
+\DIFaddbegin \DIFadd{This section mentions experimental results and their consideration.
+}\DIFaddend To analyze the advantages and disadvantages of the proposed framework, the evaluations are performed as follows.
+\begin{itemize}
+        \item the comparison of the size and transfer time between an mruby application including mruby libraries and not.
+        \item the comparison of the overheads for each cyclic period of calling rot\_rdq.
+        \item the comparison of the application execution time with \DIFdelbegin \DIFdel{singlethreading}\DIFdelend \DIFaddbegin \DIFadd{singletasking}\DIFaddend , co-routine and \DIFdelbegin \DIFdel{multithreading}\DIFdelend \DIFaddbegin \DIFadd{multitasking}\DIFaddend .
+\end{itemize}
+
+This paper demonstrates the proposed system on a LEGO MINDSTORMS EV3 (300MHz ARM9-based Sitara AM1808 system-on-a-chip) compiled with gcc 4.9.3 -O2 and mruby version 1.1.0.
+
+\DIFaddbegin \DIFadd{The 100,000 times loop program is used as mruby application for evaluation of execution time.
+In detail, the singletask program loops 100,000 times, and the multitask and co-routine programs loop 50,000 times in each task.
+}
+
+\DIFadd{The comparison of the application execution time with singletasking, co-routine and multitasking is shown in Figure \ref{fig:comparison_s_c_m}.
+In Figure \ref{fig:comparison_s_c_m}, the cyclic time of the cyclic handler for multitasking is 1 msec.
+Co-routine takes twice the time of singletask to execute an mruby application.
+On the other hands, multitasking's execution time is about the same as singletasking's.
+}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/comparison_s_c_m.pdf}
+    \caption{\DIFaddFL{Comparison of the application execution time with singletask, co-routine and multitask}}
+    \label{fig:comparison_s_c_m}
+\end{figure}
+
+\DIFaddend \section{Related work}
+\label{sec:Related work}
+
+\begin{table*}[t]
+    \centering
+    \caption{Comparion of the proposed and previous work}
+    \begin{tabular}{c||c|ccc}
+        & Bluetooth \DIFaddbeginFL \DIFaddFL{Loader }\DIFaddendFL & \shortstack{\DIFdelbeginFL \DIFdelFL{Preemptive-multithread}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Preemptive-multitask}\DIFaddendFL \\(\DIFdelbeginFL \DIFdelFL{multiVM}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{multi-VM}\DIFaddendFL )} & \shortstack{\DIFdelbeginFL \DIFdelFL{Nonpreemptive-multithread}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Nonpreemptive-multitask}\DIFaddendFL \\(co-routine)} & GIL \\ \hline
+        mruby on TECS     &            & \checkmark & \checkmark &            \\
+        mruby             &            &            & \checkmark &            \\
+        Owl system        &            & \DIFdelbeginFL %DIFDELCMD < \checkmark %%%
+\DIFdelendFL \DIFaddbeginFL \DIFaddFL{-          }\DIFaddendFL & \DIFaddbeginFL \DIFaddFL{-          }\DIFaddendFL & \checkmark \\
+        Lua               &            & \DIFdelbeginFL %DIFDELCMD < \checkmark %%%
+\DIFdelendFL \DIFaddbeginFL \DIFaddFL{-          }\DIFaddendFL & \checkmark \DIFaddbeginFL &            \DIFaddendFL \\
+        Proposed framework& \checkmark & \checkmark & \checkmark \DIFaddbeginFL &            \DIFaddendFL \\
+    \end{tabular}
+    \label{tab:comparion}
+\end{table*}
+The open-source run-time systems for scripting languages have been developed such as follow: mruby on TECS \cite{7153813}, mruby \cite{5959588}, the Owl system \cite{180964}, and Lua \cite{Ierusalimschy:2007:EL:1238844.1238846}
+
+mruby on TECS is a component-based framework for running mruby programs.
+The programs on mruby-on-TECS can execute about 100 times faster than the mruby programs.
+Software can be also developed with component base by mruby on TECS.
+Although \DIFdelbegin \DIFdel{multithreading }\DIFdelend \DIFaddbegin \DIFadd{multitasking }\DIFaddend has been supported in the current mruby on TECS, \DIFdelbegin \DIFdel{users }\DIFdelend \DIFaddbegin \DIFadd{developers }\DIFaddend need to be familiar with functions of a RTOS to use \DIFdelbegin \DIFdel{multithreading}\DIFdelend \DIFaddbegin \DIFadd{multitasking}\DIFaddend .
+The co-routine is supported as same as mruby.
+
+mruby, the lightweight implementation of the Ruby language, has been proposed for embedded systems.
+mruby programs can run on a RiteVM, which is the VM for mruby and reads the mruby bytecode.
+mruby has supported co-routine, but not supported \DIFdelbegin \DIFdel{multithreading }\DIFdelend \DIFaddbegin \DIFadd{multitasking }\DIFaddend for RTOSs.
+
+The Owl system is an embedded Python run-time system.
+The Owl is a complete system for ARM Cortex-M3 microcontrollers.
+The Owl toolchain produces relocatable memory images, that are directly runnable on the microcontroller, from Python code objects.
+The interpreter of the Owl system is the same as that of python-on-a-chip [].
+python-on-a-chip supports \DIFdelbegin \DIFdel{multithread }\DIFdelend \DIFaddbegin \DIFadd{multitask }\DIFaddend managed by GIL (Global Interpreter Lock).
+GIL locks a CPU in order to prevent the non-thread-safe code from sharing the other threads.
+GIL leads the limitation of the concurrency on \DIFdelbegin \DIFdel{multithreading}\DIFdelend \DIFaddbegin \DIFadd{multitasking}\DIFaddend .
+
+Lua is one of the most popular script languages for embedded systems.
+Lua supports co-routines, referred to collaborative \DIFdelbegin \DIFdel{multithreading}\DIFdelend \DIFaddbegin \DIFadd{multitasking}\DIFaddend .
+A co-routine in Lua is used as an independently executed thread.
+A co-routine can just suspend and resume multiple routines. 
+Thus, a Lua co-routine is not like \DIFdelbegin \DIFdel{multithreads in multithread }\DIFdelend \DIFaddbegin \DIFadd{multitasks in multitask }\DIFaddend systems.
+
+Table \ref{tab:comparion} shows a comparison between the proposed \DIFdelbegin \DIFdel{work and previous works}\DIFdelend \DIFaddbegin \DIFadd{framework and previous work}\DIFaddend .
+
+\section{Conclusion}
+\label{sec:Conclusion}
+\DIFaddbegin \DIFadd{This paper has presented the mruby bytecode loader using Bluetooth in multi-VM on mruby on TECS.
+The proposed framework provides developers the efficient development without disconnecting a SD card and restarting an OS.
+Furthermore, the proposed multitasking can be use more easily than the current mruby on TECS.
+In the evaluation, experimental results of the mruby bytecode loader and proposed multitasking shows their advantages.
+The proposed multitasking is compared with singletasking and co-routine.
+}\DIFaddend 
+
+
+%DIF < &=& &=& &=& 
+%DIF <  Reference
+%DIF < &=& &=& &=& 
+%DIF > %%%%%%%%%%%%
+%DIF >  Reference %
+%DIF > %%%%%%%%%%%%
+\bibliography{ref.bib}
+
+\end{document}

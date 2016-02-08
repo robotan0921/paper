@@ -1,0 +1,20 @@
+\contentsline {chapter}{Abstract}{i}
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {chapter}{\numberline {2}Background}{3}
+\contentsline {section}{\numberline {2.1}mruby}{3}
+\contentsline {section}{\numberline {2.2}TECS}{3}
+\contentsline {subsection}{\numberline {2.2.1}Component Model}{4}
+\contentsline {subsection}{\numberline {2.2.2}Component Description}{5}
+\contentsline {section}{\numberline {2.3}mruby on TECS}{6}
+\contentsline {subsection}{\numberline {2.3.1}System Model}{7}
+\contentsline {subsection}{\numberline {2.3.2}mruby-TECS Bridge}{7}
+\contentsline {chapter}{\numberline {3}mruby Bytecode Loader Using Bluetooth}{9}
+\contentsline {section}{\numberline {3.1}Component of mruby bytecode loader using Bluetooth}{9}
+\contentsline {chapter}{\numberline {4}Multitask}{13}
+\contentsline {section}{\numberline {4.1}rotateReadyQueue}{13}
+\contentsline {section}{\numberline {4.2}Component of Cyclic Handler}{13}
+\contentsline {section}{\numberline {4.3}Synchronization of Multiple RiteVM Tasks}{15}
+\contentsline {chapter}{\numberline {5}Experimental Evaluation}{17}
+\contentsline {chapter}{\numberline {6}Related Work}{20}
+\contentsline {chapter}{\numberline {7}Conclusion}{22}
+\contentsline {chapter}{References}{23}
