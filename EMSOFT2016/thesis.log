@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  9 FEB 2016 11:51
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  9 FEB 2016 16:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -273,27 +273,26 @@ File: figure/mruby.pdf Graphic file (type pdf)
  <figure/mruby.pdf> [2]
 File: figure/component_diagram.pdf Graphic file (type pdf)
  <figure/component_diagram.pdf>
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 204.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 208.
 
 
 (c:/w32tex/share/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9.03374> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 204.
- [3]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 208.
 LaTeX Font Info:    Calculating math sizes for size <10.03749> on input line 28
-3.
-LaTeX Font Info:    Try loading font information for U+msa on input line 283.
+7.
+LaTeX Font Info:    Try loading font information for U+msa on input line 287.
 
 (c:/w32tex/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 283.
+LaTeX Font Info:    Try loading font information for U+msb on input line 287.
 
 (c:/w32tex/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
+) [3]
 File: figure/mrubyontecs.pdf Graphic file (type pdf)
 
 <figure/mrubyontecs.pdf>
@@ -301,51 +300,58 @@ File: figure/mruby_TECS_bridge.pdf Graphic file (type pdf)
  <figure/mruby_TECS_bridge.pdf>
 File: figure/system_model.pdf Graphic file (type pdf)
 
-<figure/system_model.pdf>
+<figure/system_model.pdf> [4]
 File: figure/bluetooth_loader.pdf Graphic file (type pdf)
  <figure/bluetooth_loader.pdf>
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [4]
 File: figure/component_bluetooth.pdf Graphic file (type pdf)
 
 <figure/component_bluetooth.pdf>
 File: figure/control_flow.pdf Graphic file (type pdf)
  <figure/control_flow.pdf>
-LaTeX Font Info:    Calculating math sizes for size <9.03374> on input line 437
+LaTeX Font Info:    Calculating math sizes for size <9.03374> on input line 446
 .
-LaTeX Font Info:    Try loading font information for OML+ptm on input line 444.
+LaTeX Font Info:    Try loading font information for OML+ptm on input line 453.
 
 
 (c:/w32tex/share/texmf-dist/tex/latex/psnfss/omlptm.fd
 File: omlptm.fd 
 )
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <9.03374> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 444.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 453.
  [5]
 File: figure/rotateReadyQueue.pdf Graphic file (type pdf)
 
 <figure/rotateReadyQueue.pdf>
 File: figure/cyclic_handler.pdf Graphic file (type pdf)
  <figure/cyclic_handler.pdf> [6]
-Underfull \hbox (badness 3612) in paragraph at lines 575--582
-[]\OT1/ptm/m/n/10.03749 In the pro-posed frame-work, the set pat-tern and
+File: figure/Eventflag.pdf Graphic file (type pdf)
+
+<figure/Eventflag.pdf>
+Underfull \hbox (badness 1552) in paragraph at lines 598--601
+\OT1/ptm/m/n/10.03749 vel-op-ers can eas-ily add or re-move these com-po-nents
  []
 
-File: figure/Eventflag.pdf Graphic file (type pdf)
-<figure/Eventflag.pdf>
-LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 613.
- [7]
+
+Underfull \hbox (badness 1867) in paragraph at lines 598--601
+\OT1/ptm/m/n/10.03749 and also reuse them. For ex-am-ple, if de-vel-op-ers do
+ []
+
+
+Underfull \hbox (badness 1596) in paragraph at lines 598--601
+\OT1/ptm/m/n/10.03749 not need the cyclic han-dler, the .cdl files shown as
+ []
+
+LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 635.
+[7]
 File: figure/comparison_s_c_m.pdf Graphic file (type pdf)
  <figure/comparison_s_c_m.pdf>
 File: figure/comparison_msec.pdf Graphic file (type pdf)
-
-<figure/comparison_msec.pdf>
-Overfull \hbox (19.8322pt too wide) in paragraph at lines 658--668
+ <figure/comparison_msec.pdf>
+Overfull \hbox (19.8322pt too wide) in paragraph at lines 680--690
  [][] 
  []
 
-(./thesis.bbl [8]
+[8] (./thesis.bbl
 Underfull \hbox (badness 6063) in paragraph at lines 71--73
 []\OT1/ptm/m/n/8.03 TOPPERS, ``TOP-PER-S/HRP2 ker-nel,'' $http : / / www . topp
 ers . jp / en /
@@ -377,12 +383,12 @@ Before submitting the final camera ready copy, remember to:
 
 [9] (./thesis.aux) ) 
 Here is how much of TeX's memory you used:
- 3355 strings out of 493777
- 52361 string characters out of 6153182
- 225272 words of memory out of 5000000
- 6808 multiletter control sequences out of 15000+600000
+ 3356 strings out of 493777
+ 52393 string characters out of 6153182
+ 225284 words of memory out of 5000000
+ 6809 multiletter control sequences out of 15000+600000
  49085 words of font info for 153 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  27i,11n,32p,275b,1376s stack positions out of 5000i,500n,10000p,500000b,80000s
 
-Output written on thesis.dvi (9 pages, 58524 bytes).
+Output written on thesis.dvi (9 pages, 59640 bytes).
