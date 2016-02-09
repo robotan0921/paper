@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  8 FEB 2016 07:44
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  9 FEB 2016 11:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -231,37 +231,37 @@ Package: jlisting 2006/02/20 0.2 (Thor)
 ) (./thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
 
 -- Lines per column: 58 (exact).
 \c@lstlisting=\count105
 (I search kanjifont definition file: . . ) (I search font definition file: . .
 . . . . . )
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 38.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 37.
  (c:/w32tex/share/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.05249> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 38.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 37.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.05249> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 38.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 37.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.05249> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 38.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 37.
  [1
 
 
@@ -273,83 +273,92 @@ File: figure/mruby.pdf Graphic file (type pdf)
  <figure/mruby.pdf> [2]
 File: figure/component_diagram.pdf Graphic file (type pdf)
  <figure/component_diagram.pdf>
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 203.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 204.
 
 
 (c:/w32tex/share/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9.03374> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 203.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 204.
+ [3]
 LaTeX Font Info:    Calculating math sizes for size <10.03749> on input line 28
-2.
-LaTeX Font Info:    Try loading font information for U+msa on input line 282.
+3.
+LaTeX Font Info:    Try loading font information for U+msa on input line 283.
 
 (c:/w32tex/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 282.
+LaTeX Font Info:    Try loading font information for U+msb on input line 283.
 
 (c:/w32tex/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [3]
+)
 File: figure/mrubyontecs.pdf Graphic file (type pdf)
 
 <figure/mrubyontecs.pdf>
-File: figure/system_model.pdf Graphic file (type pdf)
- <figure/system_model.pdf>
 File: figure/mruby_TECS_bridge.pdf Graphic file (type pdf)
+ <figure/mruby_TECS_bridge.pdf>
+File: figure/system_model.pdf Graphic file (type pdf)
 
-<figure/mruby_TECS_bridge.pdf>
+<figure/system_model.pdf>
 File: figure/bluetooth_loader.pdf Graphic file (type pdf)
- <figure/bluetooth_loader.pdf> [4]
+ <figure/bluetooth_loader.pdf>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [4]
 File: figure/component_bluetooth.pdf Graphic file (type pdf)
 
 <figure/component_bluetooth.pdf>
 File: figure/control_flow.pdf Graphic file (type pdf)
  <figure/control_flow.pdf>
-LaTeX Font Info:    Calculating math sizes for size <9.03374> on input line 434
+LaTeX Font Info:    Calculating math sizes for size <9.03374> on input line 437
 .
-LaTeX Font Info:    Try loading font information for OML+ptm on input line 441.
+LaTeX Font Info:    Try loading font information for OML+ptm on input line 444.
 
 
 (c:/w32tex/share/texmf-dist/tex/latex/psnfss/omlptm.fd
 File: omlptm.fd 
 )
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <9.03374> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 441.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 444.
  [5]
 File: figure/rotateReadyQueue.pdf Graphic file (type pdf)
 
 <figure/rotateReadyQueue.pdf>
 File: figure/cyclic_handler.pdf Graphic file (type pdf)
- <figure/cyclic_handler.pdf>
-Underfull \hbox (badness 3612) in paragraph at lines 572--579
+ <figure/cyclic_handler.pdf> [6]
+Underfull \hbox (badness 3612) in paragraph at lines 575--582
 []\OT1/ptm/m/n/10.03749 In the pro-posed frame-work, the set pat-tern and
  []
 
-[6]
 File: figure/Eventflag.pdf Graphic file (type pdf)
- <figure/Eventflag.pdf>
-LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 610.
+<figure/Eventflag.pdf>
+LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 613.
+ [7]
 File: figure/comparison_s_c_m.pdf Graphic file (type pdf)
- <figure/comparison_s_c_m.pdf> [7]
+ <figure/comparison_s_c_m.pdf>
 File: figure/comparison_msec.pdf Graphic file (type pdf)
 
-<figure/comparison_msec.pdf> (./thesis.bbl [8]
-Underfull \hbox (badness 6063) in paragraph at lines 68--70
+<figure/comparison_msec.pdf>
+Overfull \hbox (19.8322pt too wide) in paragraph at lines 658--668
+ [][] 
+ []
+
+(./thesis.bbl [8]
+Underfull \hbox (badness 6063) in paragraph at lines 71--73
 []\OT1/ptm/m/n/8.03 TOPPERS, ``TOP-PER-S/HRP2 ker-nel,'' $http : / / www . topp
 ers . jp / en /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 84--86
+Underfull \hbox (badness 10000) in paragraph at lines 91--93
 []\OT1/ptm/m/n/8.03 TOPPERS, ``TOP-PER-S/ASP ker-nel,'' $https : / / www . topp
 ers . jp / en /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 107--109
+Underfull \hbox (badness 10000) in paragraph at lines 105--107
 []\OT1/ptm/m/n/8.03 ``python-on-a-chip,'' $http : / / code . google . com / arc
 hive / p /
  []
@@ -366,16 +375,14 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[9
-
-] (./thesis.aux) ) 
+[9] (./thesis.aux) ) 
 Here is how much of TeX's memory you used:
- 3354 strings out of 493777
- 52348 string characters out of 6153182
- 223300 words of memory out of 5000000
- 6807 multiletter control sequences out of 15000+600000
+ 3355 strings out of 493777
+ 52361 string characters out of 6153182
+ 225272 words of memory out of 5000000
+ 6808 multiletter control sequences out of 15000+600000
  49085 words of font info for 153 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  27i,11n,32p,275b,1376s stack positions out of 5000i,500n,10000p,500000b,80000s
 
-Output written on thesis.dvi (9 pages, 57956 bytes).
+Output written on thesis.dvi (9 pages, 58524 bytes).

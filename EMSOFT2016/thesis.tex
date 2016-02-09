@@ -1,11 +1,10 @@
-%
+% 
 % File: thesis.tex
 % Created: 月 11 30 08:00 午後 2015 東京 (標準時)
 % Last Change: 月 11 30 08:00 午後 2015 東京 (標準時)
 %
 \input{dummy/dummy.tex}
 \documentclass[conference,compsoc]{IEEEtran}
-\bibliographystyle{IEEEtranBST2/IEEEtran}
 \usepackage{url}
 \usepackage[dvipdfmx]{graphicx}
 \usepackage{amssymb}
@@ -44,9 +43,10 @@ Moreover, while the framework supports multi-VM, developers need to be familiar 
 To improve the development efficiency, this paper proposes an mruby bytecode loader using Bluetooth as an extension of mruby on TECS.
 The loader executes two mruby bytecodes, mruby application bytecode and mruby library bytecode.
 mruby application bytecode modified frequently is sent from a host to a target device by developers.
-mruby library bytecode modified infrequently is preserved beforehand in an SD card at the time of the first compailation.
+mruby library bytecode modified infrequently is preserved beforehand in an SD card at the time of the first compilation.
 In addition, multiple mruby programs cooperatively run in the proposed framework.
 In the proposed framework, the cyclic handler switching tasks is implemented, and multitasking processing is more easy-to-use than that of mruby on TECS.
+Synchronization of starting multiple tasks is also implemented with Eventflag. 
 Experimental results demonstrate the advantages of the proposed framework.
 \end{abstract}
 \section{Introduction}
@@ -68,26 +68,26 @@ Script languages make software engineering more efficient and shorten a developm
 Java script, Perl, Python, Lua and Ruby are well-known as representative script languages.
 
 Although script languages are easy to use and read, their execution time are slower than C language's.
-For embedded systems, the real-time properties such as worst-execution time, response time are very important factors.
+For embedded systems, the real-time properties such as worst-execution time and response time are very important factors.
 Therefore, it is difficult to apply the script languages to embedded systems.
 
 mruby on TECS is a component-based framework for running script program \cite{par:mrubyonTECS}.
 It is integrated two technologies.
 One is mruby, which is a script language for embedded systems \cite{par:mruby}, \cite{url:mruby}.
-The other is TECS (TOPPERS Embedded Component System), which is a component-based framework for embedded systems \cite{par:TECS}.
-TECS supports to effectively run mruby script language on embedded systems.
+The other is TECS (TOPPERS Embedded Component System), which is a component-based framework for embedded systems \cite{par:TECS} \cite{url:TOPPERS}.
+mruby on TECS supports to effectively run mruby script language on embedded systems.
 mruby on TECS also makes execution time 100 times faster than that of mruby.
 
 This paper proposes two additional features of mruby on TECS, mruby bytecode loader using Bluetooth and user-friendly multitask.
-mruby on TECS has some problems at present.
+mruby on TECS has several problems at present.
 One of the problems is that working efficiency is low because mruby on TECS only supports an SD card in the platform for LEGO MINDSTORMS EV3 \cite{par:EV3} to load mruby programs.
-In the current development process, it is annoying that the SD card should be insert and pulled out repeatedly.
-If a new feature, mruby bytecode loader Bluetooth, is used, the procedure is carried out only once at the beginning and a program code is transferred from a host to a target device by Bluetooth.
+In the current development process, it is annoying that the SD card should be insert and pulled out repeatedly and the OS should be restarted.
+If a new feature, mruby bytecode loader Bluetooth, is used, the procedure is carried out only once at the beginning and mruby application codes are transferred from a host to a target device by Bluetooth.
 It can improve the efficiency.
 Moreover, in the current system if developers attempt to run multiple tasks with the same priority, a task with first execution only runs and all other tasks would not run unless a OS's function must be called by developers.
 In addition developers must prepare as many VMs as the number of threads because one RiteVM supports only one thread.
 Thus that is a big burden on developers.
-Another new feature enables developers to run a multitask programs more easily.
+Another new feature enables developers to run multitasking programs more easily.
 Specifically, a cyclic handler of switching tasks is implemented.
 This paper evaluates the proposed framework in term of data transfer rate, overhead of cyclic handler and execution time.
 
@@ -102,21 +102,22 @@ Thus, the software development efficiency is improved.
 \ There is a problem in multitasking of the current mruby on TECS.
 It is that developers need to be well acquainted the RTOS if multiple mruby programs execute in multitasking.
 In the proposed framework, it is easy for developers to use multitasking because multiple tasks are switched cyclically.
+Synchronization of tasks is implemented.
 Multitasked programing makes the range of software expand.
 \end{enumerate}
 
 {\bf Organization}: The paper is organized as follows.
 Section \ref{sec:Background} introduces the basic technologies i.e. mruby, TECS and mruby on TECS.
 Section \ref{sec:mruby bytecode loader using Bluetooth} and Section \ref{sec:Multitask} describe the design and implementation of the proposed framework in detail.
-Section \ref{sec:Evaluation} evaluates the proposed framework, Section \ref{sec:Related work} discuses related work, and then Section \ref{sec:Conclusion} concludes.
+Section \ref{sec:Evaluation} evaluates the proposed framework, Section \ref{sec:Related work} discusses related work, and then Section \ref{sec:Conclusion} concludes this paper.
 
 \section{Background}
 \label{sec:Background}
-Figure \ref{fig:proposed} shows a system model of the proposed framework.
+Figure \ref{fig:proposed} shows the system model of the proposed framework.
 The bytecodes are transferred from the host to the target device with Bluetooth.
 The RiteVMs and mruby library are assumed to be prepared in advance.
 Each bytecode is allocated to a RiteVM, respectively.
-Developers can run some bytecodes transferred with Bluetooth in multitask.
+Developers can run bytecodes transferred with Bluetooth in multitask.
 
 \begin{figure}[t]
     \centering
@@ -140,7 +141,7 @@ Ruby can run a program with fewer code lines than C language.
 Ruby improves the productivity of a software development owing to not only simple grammar also object-oriented functions such as classes and methods, exceptions, and garbage collection.
 
 mruby is suitable for embedded systems because of faster execution with less amount of resources and takes over the usability and readability of Ruby.
-In addition, VM (Virtual Machine) mechanism is used in mruby, so mruby programs can run on any operating system as long as VM is implemented.
+In addition, VM (Virtual Machine) mechanism is used in mruby, therefore mruby programs can run on any operating system as long as VM is implemented.
 RiteVM is a VM in mruby, that runs mruby programs.
 The RiteVM mechanism is shown in Figure \ref{fig:mruby}.
 The mruby compiler translates an mruby code into a bytecode, which is an intermediate code that can be interpreted by RiteVM.
@@ -220,7 +221,7 @@ signature sMotor{
         A {\it celltype} name following the keyword {\it celltype} with the prefix ``t" and elements of a {\it celltype} is described.
         To define {\it entry} ports, a {\it signature} such as sMotor, and an {\it entry} port name such as eMotor follow the keyword {\it entry}.
         In the same way, {\it call} ports can be declared.
-        Attributes and valuables follow the keyword attr and var respectively.\\
+        Attributes and valuables follow the keyword {\it attr} and {\it var} respectively.\\
 \begin{figure}[t]
 \centering
 \begin{lstlisting}
@@ -245,7 +246,7 @@ celltype tMotor{
         The build description is used to instantiate {\it cell}s and connect {\it cell}s.
         Figure \ref{build} shows an example of a build description.
         A {\it celltype} name such as tMotor, and a {\it cell} name such as Motor follow the keyword {\it cell}.
-        To compose {\it cell}s a {\it call} port, a {\it signature}, a {\it entry} port in order are described.
+        To compose {\it cell}s, a {\it call} port, a {\it signature}, a {\it entry} port in order are described.
         In this example, a {\it entry} port eMotor in a {\it cell} Motor is connected to a {\it call} port cMotor in a {\it cell} Caller.\\
 \begin{figure}[t]
 \centering
@@ -273,13 +274,13 @@ The system model of mruby on TECS is shown in Figure \ref{fig:mrubyontecs}.
 Each mruby program, which is bytecode, runs on its own RiteVM as a componentized task of an RTOS.
 TECS components support various embedded drivers such as motor and sensor drivers.
 
-An mruby-TECS bridge plays a role to call a native program (e.g.,C legacy code) from an mruby program.
+An mruby-TECS bridge plays a role to call a native program (e.g. C legacy code) from an mruby program.
 The mruby-TECS bridge provides native libraries for mruby.
 It also gives TECS components to receive the invocation from an mruby program.
 The mruby-TECS bridge is described in more detail bellow.
 
 As the target RTOS, TOPPERS/HRP2 \cite{url:HRP2}, \cite{par:hr-tecs} is used in this paper.
-TOPPERS/HRP2 is an RTOS based on $\mu$ITRON with memory protection.
+TOPPERS/HRP2 is an RTOS based on $\mu$ITRON \cite{par:microITRON} with memory protection.
 However, mruby on TECS does not depend on the RTOS because TECS supports not only TOPPERS/HRP2 but also the other RTOSs such as OSEK \cite{par:OSEK} and TOPPERS/ASP \cite{url:ASP}.
 
 \begin{figure}[t]
@@ -287,12 +288,6 @@ However, mruby on TECS does not depend on the RTOS because TECS supports not onl
     \includegraphics[width=8cm,clip]{figure/mrubyontecs.pdf}
     \caption{System Model of existing mruby on TECS}
     \label{fig:mrubyontecs}
-\end{figure}
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=8cm,clip]{figure/system_model.pdf}
-    \caption{Specific System Model of the proposed framework}
-    \label{fig:system_model}
 \end{figure}
 
 \subsubsection{mruby-TECS Bridge}\mbox{}\\
@@ -327,9 +322,17 @@ Thus, when a method is called in an mruby program, an mruby-TECS bridge calls th
 
 \section{mruby Bytecode Loader Using Bluetooth}
 \label{sec:mruby bytecode loader using Bluetooth}
+Figure \ref{fig:system_model} shows the detailed system model of the proposed framework.
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/system_model.pdf}
+    \caption{Detailed System Model of the proposed framework}
+    \label{fig:system_model}
+\end{figure}
 This section describes an additional feature of mruby on TECS, mruby bytecode loader using Bluetooth.
 In the current system, all binary data including bytecodes are in an SD card.
 Developers must insert and pull out the SD card every time the source programs are modified.
+The OS in the target device should be also restarted.
 It causes a low work efficiency that such a work must be repeated.
 mruby bytecode loader using Bluetooth makes the developers' burden decrease.
 The work that an SD card is in and out needs to be done just once in the beginning.
@@ -462,12 +465,12 @@ However, multitask processing in mruby on TECS requires the knowledge of the RTO
 One of approaches for multitasking is co-routine.
 Co-routine is a cooperative thread, and scheduled by developers with the functions such as {\it resume} and {\it yield}. 
 (Ruby co-routine is defined in class Fiber \cite{url:co-routine})
-Co-routine is a non-preemptive mulititasking, and does not receive the OS's support because developers have to switch tasks manually.
-Co-routine can not take advantege of multi core processing.
+Co-routine is a non-preemptive multitasking, and does not receive the OS's support because developers have to switch tasks manually.
+Co-routine can not take advantage of multi core processing.
 
 Besides, as another method, {\it delay}, a service call of $\mu$ITRON, can be used for multitasking.
 This service call delays the execution of the own task for the time of the argument.
-In the approach of {\it delay} fubction, developers have to schedule as the same as co-routine.
+In the approach of {\it delay} function, developers have to schedule as the same as co-routine.
 
 In the proposed framework, as an approach for multitask processing, {\it rotateReadyQueue}, a service call of $\mu$ITRON, is implemented.
 {\it rotateReadyQueue} rotates the precedence of the task with the priority of the argument.
@@ -496,7 +499,7 @@ In this case, the order is rotated, task 2, 3 and, 1, when the {\it rotateReadyQ
 Figure \ref{fig:cyclic_handler} shows a component diagram of the cyclic handler.
 The components of cyclic handler consist of two components: CyclicHandler and CyclicMain.
 CyclicHandler {\it cell} configures the cyclic handler based on $\mu$ITRON.
-Cyclic handlers based on ITRON are described in detail \cite{par:microITRON}.
+Cyclic handlers based on $\mu$ITRON are described in detail \cite{par:microITRON}.
 The cyclic handler has five arguments: ID, attribute, cyclic time, cyclic phase and access pattern.
 CyclicHandler {\it cell} has these arguments as attributes of the {\it cell}.
 CyclicMain {\it cell} is a component to perform the processing body of a cyclic handler.
@@ -510,7 +513,7 @@ In the part of CyclicHandler {\it cell}, configurations of a cyclic handler is d
 In this case, the cyclic handler is executed when it is generated because the attribute is {\it TA\_STA} that represents the cyclic handler is in an operational state after the creation.
 The cyclic handler is executed every one msec.
 In another part, the priority of CyclicMain {\it cell} is described.
-EV3\_MRUBY\_VM\_PRIORITY defines the priority of mruby tasks.
+RITEVM\_PRIORITY defines the priority of mruby tasks.
 In the main of CyclicMain, {\it rotateReadyQueue} is implemented and the priority is passed as the argument.
 If developers do not need the cyclic handler, the .cdl files shown as Figures \ref{celltype_cyclic_handler} and \ref{build_cyclic_handler} should be commented out such as {\it //import($<$tCyclicHandler.cdl$>$);}.
 This ease comes from component-based development with TECS.
@@ -621,7 +624,7 @@ In detail, the singletask program loops 100,000 times, and the multitask and co-
 In Figure \ref{fig:comparison_s_c_m}, the cyclic time of the cyclic handler for multitasking is one msec.
 Multitasking's execution time is about the same as singletasking's while co-routine takes more time than them to execute an mruby application.
 This result shows the proposed design is superior to co-routine in terms of execution time.
-Switching tasks's overhead is also evaluated, that is about three $\mu$sec on average.
+Switching tasks' overhead is also evaluated, that is about three $\mu$sec on average.
 The number of switching tasks is from 500 to 600 because singletasking process in Figure \ref{fig:comparison_s_c_m} takes about 540 msec.
 Therefore, the overhead of multitasking is 0.5 \% or less, and multitasking can be used without the overhead.
 
@@ -652,26 +655,19 @@ The smaller cyclic time is better in multitasking due to concurrent and/or paral
 \begin{table*}[t]
     \centering
     \caption{Comparion of the proposed and previous work}
-    \begin{tabular}{c||c|cccccc}
-        & Bluetooth Loader & \shortstack{Call\\C function} & \shortstack{Legacy code of\\embedded system} & VM managenment & \shortstack{Synchronization of\\application} & Co-routine \\ \hline
-        Lua \cite{url:Lua}, \cite{par:Lua}           &            & \checkmark & Partially  &            &            & \checkmark \\
-        python-on-a-chip \cite{url:python-on-a-chip} &            &            &            &            &            & \checkmark \\
-        Owl system \cite{par:owl}                    &            & \checkmark & Partially  &            &            & \checkmark \\
-        mruby \cite{par:mruby}, \cite{url:mruby}     &            & \checkmark &            &            &            & \checkmark \\
-        mruby on TECS \cite{par:mrubyonTECS}         &            & \checkmark & \checkmark & \checkmark &            & \checkmark \\
-        Proposed framework                           & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+    \begin{tabular}{c||c|ccccccc}
+        & Bluetooth Loader & \shortstack{Call\\C function} & \shortstack{Legacy code of\\embedded system} & VM managenment & VM Scheduler & \shortstack{Synchronization of\\application} & Co-routine \\ \hline
+        python-on-a-chip \cite{url:python-on-a-chip} &            &            &            &            &            &            & \checkmark \\
+        Owl system \cite{par:owl}                    &            & \checkmark & Partially  &            &            &            & \checkmark \\
+        eLua \cite{url:eLua}                         &            & \checkmark & Partially  &            &            &            & \checkmark \\
+        mruby \cite{par:mruby}                       &            & \checkmark &            &            &            &            & \checkmark \\
+        mruby on TECS \cite{par:mrubyonTECS}         &            & \checkmark & \checkmark & \checkmark &            &            & \checkmark \\
+        Proposed framework                           & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
     \end{tabular}
     \label{tab:comparion}
 \end{table*}
 The open-source run-time systems for scripting languages have been proposed such as follow:
-eLua \cite{url:eLua},  python-on-a-chip \cite{url:python-on-a-chip}, the Owl system \cite{par:owl}, mruby \cite{par:mruby}, \cite{url:mruby}, and mruby on TECS \cite{par:mrubyonTECS}.
-
-eLua offers the full implementation of Lua programming language to the embedded systems.
-Lua is one of the most popular script languages for embedded systems \cite{url:Lua}, \cite{par:Lua}.
-Lua supports co-routine, referred to collaborative multitasking.
-A co-routine in Lua is used as an independently executed thread.
-A co-routine can just suspend and resume multiple routines.
-Thus, a Lua co-routine is not like multitasks in multitask systems.
+python-on-a-chip \cite{url:python-on-a-chip}, the Owl system \cite{par:owl}, eLua \cite{url:eLua}, mruby \cite{par:mruby}, \cite{url:mruby}, and mruby on TECS \cite{par:mrubyonTECS}.
 
 python-on-a-chip (p14p) is a Python run-time system that uses a reduced Python VM called PyMite.
 The VM runs a significant subset of Python language with few resources on a microcontroller.
@@ -681,6 +677,13 @@ The Owl system is an embedded Python run-time system.
 The Owl is a complete system for ARM Cortex-M3 microcontrollers.
 The Owl toolchain produces relocatable memory images, that are directly runnable on the microcontroller, from Python code objects.
 The interpreter of the Owl system is the same as that of python-on-a-chip.
+
+eLua offers the full implementation of Lua programming language to the embedded systems.
+Lua is one of the most popular script languages for embedded systems \cite{url:Lua}, \cite{par:Lua}.
+Lua supports co-routine, referred to collaborative multitasking.
+A co-routine in Lua is used as an independently executed thread.
+A co-routine can just suspend and resume multiple routines.
+Thus, a Lua co-routine is not like multitasks in multitask systems.
 
 mruby, the lightweight implementation of the Ruby language, has been proposed for embedded systems.
 mruby programs can run on a RiteVM, which is the VM for mruby and reads the mruby bytecode.
@@ -713,6 +716,7 @@ Moreover, the .cdl files for RiteVM and mruby-TECS bridge are generated automati
 %%%%%%%%%%%%%
 % Reference %
 %%%%%%%%%%%%%
+\bibliographystyle{IEEEtranBST2/IEEEtran}
 \bibliography{ref}
 
 \end{document}
