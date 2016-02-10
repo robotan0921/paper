@@ -27,7 +27,7 @@ I.~Crnkovic, ``{Component-based Software Engineering for Embedded Systems},''
   Engineering}, 2005, pp. 712--713.
 
 \bibitem{par:TECS}
-{T. Azumi, M. Yamamoto, Y. Kominami, N. Takagi, H. Oyama, and H. Takada}, ``{A
+T.~Azumi, M.~Yamamoto, Y.~Kominami, N.~Takagi, H.~Oyama, and H.~Takada, ``{A
   New Specification of Software Components for Embedded Systems},'' in
   \emph{Proceedings of the 10th IEEE International Symposium on
   Object/Component/Service-Oriented Real-Time Distributed Computing (ISORC)},
@@ -37,19 +37,19 @@ I.~Crnkovic, ``{Component-based Software Engineering for Embedded Systems},''
 ``{AUTOSAR},'' \url{http://www.autosar.org/}.
 
 \bibitem{par:SAVEapproach}
-{M. kerholm, J. Carlson, J. Fredriksson, H. Hansson, J. H{\aa}kansson, A.
-  M\"{o}ller, P. Pettersson, and M. Tivoli}, ``{The SAVE Approach to
+M.~kerholm, J.~Carlson, J.~Fredriksson, H.~Hansson, J.~H{\aa}kansson,
+  A.~M\"{o}ller, P.~Pettersson, and M.~Tivoli, ``{The SAVE Approach to
   Component-based Development of Vehicular Systems},'' \emph{Journal of Systems
   and Software}, vol.~80, no.~5, pp. 655--667, 2007.
 
 \bibitem{par:mrubyonTECS}
-{T. Azumi, Y. Nagahara, H. Oyama, and N. Nishio}, ``{mruby on TECS:
+T.~Azumi, Y.~Nagahara, H.~Oyama, and N.~Nishio, ``{mruby on TECS:
   Component-Based Framework for Running Script Program},'' in \emph{Proceedings
   of the 18th IEEE International Symposium on Real-Time Distributed Computing
   (ISORC)}, 2015, pp. 252--259.
 
 \bibitem{par:mruby}
-{K. Tanaka, Y. Matsumoto, and H. Arimori}, ``{Embedded System Development by
+K.~Tanaka, Y.~Matsumoto, and H.~Arimori, ``{Embedded System Development by
   Lightweight Ruby},'' in \emph{Proceedings of the International Conference on
   Computational Science and Its Applications (ICCSA)}, 2011, pp. 282--285.
 
@@ -60,7 +60,7 @@ I.~Crnkovic, ``{Component-based Software Engineering for Embedded Systems},''
 ``{TOPPERS Project},'' \url{http://www.toppers.jp/en/index.html}.
 
 \bibitem{par:EV3}
-{Y. Li, T. Ishikawa, Y. Matsubara, and H. Takada}, ``{A Platform for LEGO
+Y.~Li, T.~Ishikawa, Y.~Matsubara, and H.~Takada, ``{A Platform for LEGO
   Mindstorms EV3 Based on an RTOS with MMU Support},'' \emph{OSPERT 2014},
   p.~51, 2014.
 
@@ -72,20 +72,20 @@ TOPPERS, ``{TOPPERS/HRP2 kernel},''
   \url{http://www.toppers.jp/en/hrp2-kernel.html}.
 
 \bibitem{par:hr-tecs}
-{T. Ishikawa, T. Azumi, H. Oyama, and H. Takada}, ``{HR-TECS: Component
+T.~Ishikawa, T.~Azumi, H.~Oyama, and H.~Takada, ``{HR-TECS: Component
   technology for embedded systems with memory protection},'' in
   \emph{Proceedings of the 16th IEEE International Symposium on
   Object/Component/Service-Oriented Real-Time Distributed Computing (ISORC)},
   2013, pp. 1--8.
 
 \bibitem{par:microITRON}
-{H. Takada and K. Sakamura}, ``{$\mu$ITRON for Small-Scale Embedded Systems},''
+H.~Takada and K.~Sakamura, ``{$\mu$ITRON for Small-Scale Embedded Systems},''
   \emph{IEEE Micro}, vol.~15, no.~6, pp. 46--54, 1995.
 
 \bibitem{par:OSEK}
-{A. Ohno, T. Azumi, and N. Nishio}, ``{TECS Components Providing
-  Functionalities of OSEK Specifications for ITRON OS},'' \emph{Journal of
-  Information Processing}, vol.~22, no.~4, pp. 584--594, 2014.
+A.~Ohno, T.~Azumi, and N.~Nishio, ``{TECS Components Providing Functionalities
+  of OSEK Specifications for ITRON OS},'' \emph{Journal of Information
+  Processing}, vol.~22, no.~4, pp. 584--594, 2014.
 
 \bibitem{url:ASP}
 TOPPERS, ``{TOPPERS/ASP kernel},''
@@ -98,24 +98,24 @@ C.~Forsberg, ``{The ZMODEM Inter Application File Transfer Protocol},''
 \bibitem{url:co-routine}
 ``{class Fiber},'' \url{http://docs.ruby-lang.org/en/2.3.0/Fiber.html}.
 
-\bibitem{url:eLua}
-``{eLua},'' \url{http://www.eluaproject.net}.
-
 \bibitem{url:python-on-a-chip}
 ``{python-on-a-chip},''
   \url{http://code.google.com/archive/p/python-on-a-chip/}.
 
 \bibitem{par:owl}
-{Thomas W. Barr, Rebecca Smith, and Scott Rixner}, ``{Design and Implementation
-  of an Embedded Python Run-Time System},'' in \emph{Proceedings of the USENIX
-  Annual Technical Conference (USENIX ATC 12)}, 2012, pp. 297--308.
+T.~W. Barr, R.~Smith, and S.~Rixner, ``{Design and Implementation of an
+  Embedded Python Run-Time System},'' in \emph{Proceedings of the USENIX Annual
+  Technical Conference (USENIX ATC 12)}, 2012, pp. 297--308.
+
+\bibitem{url:eLua}
+``{eLua},'' \url{http://www.eluaproject.net}.
 
 \bibitem{url:Lua}
 ``{Lua},'' \url{http://www.lua.org/}.
 
 \bibitem{par:Lua}
-{Roberto Ierusalimschy, Luiz Henrique de Figueiredo, and Waldemar Celes},
-  ``{The Evolution of Lua},'' in \emph{Proceedings of the Third ACM SIGPLAN
-  Conference on History of Programming Languages}, 2007, pp. 2--1--2--26.
+R.~Ierusalimschy, L.~H. de~Figueiredo, and W.~Celes, ``{The Evolution of
+  Lua},'' in \emph{Proceedings of the Third ACM SIGPLAN Conference on History
+  of Programming Languages}, 2007, pp. 2--1--2--26.
 
 \end{thebibliography}
