@@ -637,6 +637,8 @@ These evaluations are performed in order to indicate that an mruby bytecode load
 This paper demonstrates the proposed system on a LEGO MINDSTORMS EV3 (300MHz ARM9-based Sitara AM1808 system-on-a-chip) compiled with gcc 4.9.3 -O2 and mruby version 1.2.0.
 
 The size, load process time, and compilation time for mruby application and mruby application including library is shown in Table \ref{tab:size_and_time}.
+The overhead of load processing is 50.933 msec, which it takes to load a zero bytes bytecode.
+Similarly, the overhead of compilation is 46.9 msec, which it takes to compile a zero bytes program.
 The bytecode of mruby application is smaler and faster than that of including mruby libraries in all terms.
 In the proposed framework, developers send only mruby application and prepare mruby library in advance.
 Therefore, the design can send the bytecode faster.
@@ -647,10 +649,10 @@ These advantages lead improvement of the software development efficiency.
     \centering
     \caption{Comparison of the size and load process time between an mruby application including mruby libraries and not}
     \begin{tabular}{c||c|c|c}
-                            & App\&Lib   & App        &   App\&Lib / App \\ \hline
-          Bytecode Size     & 14,044 bytes & 199 bytes  &                    \\ %\hline
-          Load Process Time & 305.081 msec & 7.774 msec &                    \\
-          Compilation Time  &              &            &                    \\
+                            & App\&Lib     & App        &   App\&Lib/App  \\ \hline
+          Bytecode Size     & 14,044 bytes & 199 bytes  &   $\times$70.6          \\ %\hline
+          Load Process Time & 305.081 msec & 7.774 msec &   $\times$39.2          \\
+          Compilation Time  & 8.7 msec     & 0.3 msec   &   $\times$29.0          \\
     \end{tabular}
     \label{tab:size_and_time}
 \end{table}
