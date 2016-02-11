@@ -37,6 +37,10 @@ K.~Tanaka, Y.~Matsumoto, and H.~Arimori: ``{Embedded System Development by
 ``{mruby},''.
 \newblock \url{https://github.com/mruby/mruby}.
 
+\bibitem{url:TOPPERS}
+``{TOPPERS Project},''.
+\newblock \url{http://www.toppers.jp/en/index.html}.
+
 \bibitem{par:EV3}
 Y.~Li, T.~Ishikawa, Y.~Matsubara, and H.~Takada: ``{A Platform for LEGO
   Mindstorms EV3 Based on an RTOS with MMU Support},'' {\em OSPERT 2014},
@@ -58,6 +62,10 @@ T.~Ishikawa, T.~Azumi, H.~Oyama, and H.~Takada: ``{HR-TECS: Component
   Object/Component/Service-Oriented Real-Time Distributed Computing (ISORC)},
   pp. 1--8, (2013).
 
+\bibitem{par:microITRON}
+H.~Takada and K.~Sakamura: ``{$\mu$ITRON for Small-Scale Embedded Systems},''
+  {\em IEEE Micro}, \underline{15}, 6, pp. 46--54, (1995).
+
 \bibitem{par:OSEK}
 A.~Ohno, T.~Azumi, and N.~Nishio: ``{TECS Components Providing Functionalities
   of OSEK Specifications for ITRON OS},'' {\em Journal of Information
@@ -77,19 +85,6 @@ C.~Forsberg.
 ``{class Fiber},''.
 \newblock \url{http://docs.ruby-lang.org/en/2.3.0/Fiber.html}.
 
-\bibitem{par:microITRON}
-H.~Takada and K.~Sakamura: ``{$\mu$ITRON for Small-Scale Embedded Systems},''
-  {\em IEEE Micro}, \underline{15}, 6, pp. 46--54, (1995).
-
-\bibitem{url:Lua}
-``{Lua},''.
-\newblock \url{http://www.lua.org/}.
-
-\bibitem{par:Lua}
-R.~Ierusalimschy, L.~H. d.~Figueiredo, and W.~Celes: ``{The Evolution of
-  Lua},'' {\em In Proceedings of the Third ACM SIGPLAN Conference on History of
-  Programming Languages}, pp. 2--1--2--26, (2007).
-
 \bibitem{url:python-on-a-chip}
 ``{python-on-a-chip},''.
 \newblock \url{http://code.google.com/archive/p/python-on-a-chip/}.
@@ -102,5 +97,14 @@ T.~W. Barr, R.~Smith, and S.~Rixner: ``{Design and Implementation of an
 \bibitem{url:eLua}
 ``{eLua},''.
 \newblock \url{http://www.eluaproject.net}.
+
+\bibitem{url:Lua}
+``{Lua},''.
+\newblock \url{http://www.lua.org/}.
+
+\bibitem{par:Lua}
+R.~Ierusalimschy, L.~H. d.~Figueiredo, and W.~Celes: ``{The Evolution of
+  Lua},'' {\em In Proceedings of the Third ACM SIGPLAN Conference on History of
+  Programming Languages}, pp. 2--1--2--26, (2007).
 
 \end{thebibliography}

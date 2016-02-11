@@ -3,45 +3,45 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
 The style file: utf8/myjunsrt.bst
 Database file #1: ref.bib
-You've used 21 entries,
+You've used 22 entries,
             2474 wiz_defined-function locations,
-            679 strings with 7385 characters,
-and the built_in function-call counts, 7191 in all, are:
-= -- 390
-> -- 153
+            683 strings with 7465 characters,
+and the built_in function-call counts, 7377 in all, are:
+= -- 398
+> -- 154
 < -- 11
-+ -- 65
++ -- 66
 - -- 44
-* -- 309
-:= -- 1979
-add.period$ -- 34
-call.type$ -- 21
+* -- 311
+:= -- 2032
+add.period$ -- 36
+call.type$ -- 22
 change.case$ -- 0
 chr.to.int$ -- 0
-cite$ -- 21
-duplicate$ -- 392
-empty$ -- 675
+cite$ -- 22
+duplicate$ -- 403
+empty$ -- 699
 format.name$ -- 88
-if$ -- 1473
+if$ -- 1511
 int.to.chr$ -- 0
-int.to.str$ -- 21
+int.to.str$ -- 22
 missing$ -- 11
-newline$ -- 79
+newline$ -- 83
 num.names$ -- 14
-pop$ -- 186
+pop$ -- 197
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 352
+skip$ -- 364
 stack$ -- 0
 substring$ -- 267
-swap$ -- 147
+swap$ -- 149
 text.length$ -- 11
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
 while$ -- 39
-width$ -- 23
-write$ -- 178
-is.kanji.str$ -- 207
+width$ -- 24
+write$ -- 185
+is.kanji.str$ -- 213
