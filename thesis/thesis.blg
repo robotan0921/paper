@@ -2,10 +2,10 @@ This is pBibTeX, Version 0.99d-j0.33 (utf8.euc) (TeX Live 2015/Cygwin)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
 The style file: utf8/myjunsrt.bst
-Database file #1: ref.bib
+Database file #1: ../EMSOFT2016/ref.bib
 You've used 22 entries,
             2474 wiz_defined-function locations,
-            683 strings with 7465 characters,
+            683 strings with 7479 characters,
 and the built_in function-call counts, 7377 in all, are:
 = -- 398
 > -- 154

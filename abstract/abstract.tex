@@ -22,7 +22,7 @@
 組込みソフトウェア開発の生産性の向上を目的として，組込みシステム向けのスクリプト言語であるmruby（軽量Ruby）を適用させたコンポーネントベース開発が可能なフレームワークであるmruby on TECSが提案されている \cite{mrubyontecs}．
 
 現状のmruby on TECSでは，プラットフォームにmrubyバイトコードを組み込んでいるため，mrubyプログラムを修正する度にコンパイル・リンクし直す必要がある．
-さらに，マルチVMを提供しているが，複数のmrubyアプリケーションを効率よく並行動作させるには開発者がリアルタイムOSの機能を熟知している必要がある．
+さらに，マルチVMを提供しているが，複数のmrubyアプリケーションを効率良く並行動作させるには開発者がリアルタイムOSの機能を熟知している必要がある．
 
 本研究では，mruby on TECSの拡張として，mrubyアプリケーションのバイトコードをBluetoothで転送することで開発効率を向上させる．
 さらに，複数のmrubyアプリケーションを協調動作できるフレームワークを提案する.
@@ -42,7 +42,7 @@ mruby on TECSでは，mrubyプログラムを修正する度にターゲット�
 \begin{figure}[h]
     \centering
     \includegraphics[width=7cm,clip]{Abst_SystemModel.pdf}
-    \caption{System Model}
+    \caption{システムモデル}
     \label{fig:system_model}
 \end{figure}
 
@@ -72,8 +72,9 @@ Bluetoothを用いたmrubyバイトコードローダによって，mruby on TEC
 
 \begin{table}[t]
     \centering
-    \caption{Comparion of the proposed and previous work}
+    \caption{関連研究}
     \scriptsize
+    {\tabcolsep=0.1cm
     \begin{tabular}{c||c|c|c|c}
         & \shortstack{Bluetooth\\Loader} & \shortstack{VM\\Managenment} & \shortstack{VM\\Scheduler} & \shortstack{Synchronization\\of Application} \\ \hline
         eLua                &            &            & &           \\
@@ -81,6 +82,7 @@ Bluetoothを用いたmrubyバイトコードローダによって，mruby on TEC
         mruby on TECS       &            & \checkmark & &           \\
         Proposed framework  & \checkmark & \checkmark & \checkmark &\checkmark \\
     \end{tabular}
+    }
     \label{tab:comparison}
 \end{table}
 

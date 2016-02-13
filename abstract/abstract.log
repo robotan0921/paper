@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  11 FEB 2016 03:06
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  13 FEB 2016 08:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -289,36 +289,20 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-
-LaTeX Warning: Reference `tab:comparison' on page 1 undefined on input line 64.
-
-
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
 (Font)              scaled to size 6.72699pt on input line 76.
-
-Overfull \hbox (17.82529pt too wide) in paragraph at lines 77--85
- [][] 
- []
-
-[1
+ [1
 
 
-] (./abstract.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+]
+(./abstract.aux) ) 
 Here is how much of TeX's memory you used:
- 1590 strings out of 493777
- 18525 string characters out of 6153182
+ 1589 strings out of 493777
+ 18510 string characters out of 6153182
  75293 words of memory out of 5000000
- 5073 multiletter control sequences out of 15000+600000
+ 5072 multiletter control sequences out of 15000+600000
  26692 words of font info for 96 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
  29i,11n,26p,252b,294s stack positions out of 5000i,500n,10000p,500000b,80000s
 
-Output written on abstract.dvi (1 page, 9684 bytes).
+Output written on abstract.dvi (1 page, 9616 bytes).

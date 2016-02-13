@@ -1,13 +1,13 @@
-% 
+%
 % File: thesis.tex
 % Created: 月 11 30 08:00 午後 2015 東京 (標準時)
 % Last Change: 月 11 30 08:00 午後 2015 東京 (標準時)
 %
 \input{dummy/dummy.tex}
 \documentclass[conference,compsoc]{IEEEtran}
-\usepackage{url}
 \usepackage[dvipdfmx]{graphicx}
 \usepackage{amssymb}
+\usepackage{enumerate,cite,url}
 \usepackage{listings,jlisting}
 \lstset{%
     language={c},%
@@ -81,7 +81,7 @@ mruby on TECS also makes execution time 100 times faster than that of mruby.
 %This paper proposes two additional features of mruby on TECS, mruby bytecode loader using Bluetooth and RiteVM sceduler.
 mruby on TECS has several problems at present.
 One of the problems is low software development efficiency.
-mruby on TECS only supports a strage device in the platform for LEGO MINDSTORMS EV3 \cite{par:EV3} to load mruby programs.
+mruby on TECS only supports a storage/ROM device in the platform for LEGO MINDSTORMS EV3 \cite{par:EV3} to load mruby programs.
 For example, an SD card should be inserted and pulled out repeatedly, or a ROM should be rewritten if mruby programs are modified.
 Developers should also restart an OS on a target device.
 %Moreover, in the current system if developers attempt to run multiple tasks with the same priority, a task with first execution only runs and all other tasks do not run unless developers call the OS's function.
@@ -97,7 +97,7 @@ The RiteVM scheuler enables developers to run multitasking programs more easily 
 
 {\bf Contribution}: The proposed framework gives the contribution in the following points.
 \begin{enumerate}
-    \item {\bf To improve the software development efficiency:} Developers do not need to rewrite a storage device and also to restart an OS.
+    \item {\bf To improve the software development efficiency:} Developers do not need to rewrite a storage/ROM device and also to restart an OS.
 The loader supports the countinuous loading, which saves the Bluetooth set-up time.
 Therefore, the mruby bytecode loader using Bluetooth helps developers develop software.
 \item {\bf To effectively execute multiple mruby programs in concurrent or/and parallel:} Developers can execute multiple tasks without the knowledge of an RTOS because the RiteVM sceduler switches tasks cyclically.
@@ -317,7 +317,7 @@ A code of an mruby-TECS bridge is generated.
 The generation code supports registration of classes and methods for mruby.
 The methods in an mruby class are defined by generation codes for an mruby-TECS bridge, such as setPower and stop.
 Thus, when a method is called in an mruby program, an mruby-TECS bridge calls the function defined in the TECS component such as a Motor {\it cell}.
- 
+
 \section{Design and Implementation}
 \label{sec:Design and Implementation}
 Figure \ref{fig:system_model} shows the detailed system model of the proposed framework.
@@ -336,25 +336,25 @@ The RiteVM scheuler switches tasks as multiple tasks can run in concurrent.
 \subsection{mruby Bytecode Loader Using Bluetooth}
 \label{sec:mruby bytecode loader using Bluetooth}
 This section describes an additional functionality of mruby on TECS, mruby bytecode loader using Bluetooth.
-In the current system, the platform including mruby bytecodes are saved in a storage device.
-Developers must rewrite the storage device every time the application programs are modified.
+In the current system, the platform including mruby bytecodes are saved in a storage/ROM device.
+Developers must rewrite the storage/ROM device every time the application programs are modified.
 The OS on the target device should be also restarted.
 It causes a low development efficiency to repeat that.
 An mruby bytecode loader using Bluetooth makes the developers' burden decrease.
 %The work that an SD card is in and out needs to be done just once in the beginning.
-Developers should just once carry out the work to connect the storage device and start the OS. 
+Developers should just once carry out the work to connect the storage/ROM device and start the OS. 
 
 mruby programs are consisted of mruby application and libraries.
 mruby application is the main code, which developers should program.
 mruby libraries are the codes defining the functions for application such as Ruby classes. 
 The mruby bytecodes including mruby application and libraries can be sent and run.
 However, it is also wasteful in terms of the size and time to send because libraries are not frequently modified. 
-The proposed framework provides the design that only mruby applications are sent and mruby libraries are preserved with the platform in the storage device beforehand.
+The proposed framework provides the design that only mruby applications are sent and mruby libraries are preserved with the platform in the storage/ROM device beforehand.
 Due to this design, RiteVMs can share the mruby libraries.
 In additon, a RiteVM can use the own library that other RiteVMs should not use.
 
 %The development flow in an mruby bytecode loader using Bluetooth is shown in Figure \ref{fig:bluetooth_loader}.
-In the proposed framework, the platform including RiteVMs and mruby library is compiled and copied in the storage device at the first.
+In the proposed framework, the platform including RiteVMs and mruby library is compiled and copied in the storage/ROM device at the first.
 %These are assumed not to be modified.
 %The binary data transferred with Bluetooth is the bytecode of the main source.
 In the host, the mruby application programs (.rb) are edited and compiled into the bytecodes (.mrb) by an mruby compiler.
@@ -374,7 +374,7 @@ Moreover, developers can save the time of Bluetooth pairing since the loader can
 The proposed framework provides a RiteVM with mruby bytecode loader using Bluetooth as TECS component.
 The component is an extension of the RiteVM component, which is described in \cite{par:mrubyonTECS}.
 The component plays a role in receiving bytecodes via Bluetooth, and also manages a RiteVM configuration such as automatically generates the bytecode in the build description.
-This generated bytecode is prepared beforehand in the storage device such as mruby libraries, and different from a bytecode transferred with Bluetooth.
+This generated bytecode is prepared beforehand in the storage/ROM device such as mruby libraries, and different from a bytecode transferred with Bluetooth.
 
 Figure \ref{fig:component_bluetooth} shows a component diagram of MrubyTask1 and MrubyBluetooth1 {\it cell}s.
 The MrubyTask1 {\it cell} is a componentized task of the RTOS (TOPPERS/HRP2).
@@ -399,7 +399,7 @@ First, a pointer of {\it mrb\_state} and {\it mrbc\_context} are initialized.
 Second, the RiteVM reads the bytecode of mruby libraries.
 mruby libraries are a set of Ruby classes such as motor class and sensor class.
 For example, motor class defines methods to rotate and stop a motor.
-The tMrubyBluetooth {\it cell} has two attributes as shown in Figure \ref{celltype_mrubybluetooth}: {\it mrubyFile} and {\it irep}.
+The tMrubyBluetooth {\it cell} has attributes as shown in Figure \ref{celltype_mrubybluetooth}.
 The {\it mrubyFile} indicates the program files of mruby libraries.
 {\it [omit]} is only used for the TECS generator, thus the attribute, {\it mrubyFile}, does not consume memory.
 The {\it irep} is the pointer of the array stored the bytecode of mruby libraries.
@@ -427,9 +427,10 @@ celltype tMrubyBluetooth{
     attr{
       [omit]char_t *mrubyFile;
       char_t *irep = C_EXP("&$cell_global$_irep");
+      uint32_t irepAppSize = C_EXP( BUFFER_SIZE );
     };
     var{
-        uint8_t *irepApp;
+        [size_is(irepAppSize)] uint8_t *irepApp;
     };
 };
 \end{lstlisting}
@@ -499,6 +500,7 @@ The application programs can also utilize the existing programs since the struct
 
 A RiteVM scheduler is a cyclic handler, and calls {\it rotateReadyQueue}, a service call of $\mu$ITRON to switch tasks with the same priority.
 In other words, the RiteVM scheduler calls {\it rotateReadyQueue} cyclically.
+The design of the RiteVM scheduler is shown in Figure \ref{fig:rotateReadyQueue}. 
 {\it rotateReadyQueue} is described as follows.
 
 The case is assumed that there are two tasks with the same priority, and both tasks are in an infinite loop.
@@ -515,7 +517,7 @@ In this case, the order is rotated, task 2, 3 and, 1, when the {\it rotateReadyQ
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{figure/rotateReadyQueue.pdf}
-    \caption{rotateReadyQueue}
+    \caption{The design of RiteVM sceduler}
     \label{fig:rotateReadyQueue}
 \end{figure} 
  
@@ -596,10 +598,14 @@ Each task sets the flag pattern such as 0x01 (01) and 0x02 (10), and then waits 
 This process can also apply to the case of the more tasks.
 For example, in the case of the four RiteVM tasks, each task sets the flag pattern such as 0x01 (0001), 0x02 (0010), 0x04 (0100)  and 0x08 (1000), and then waits 0x0f (1111) with AND as shown in Figure \ref{fig:Eventflag} (A).
 
+In addtion, the end of mruby applications is synchronized to accept the continuous loading.
+The ending synchronization prevents a RiteVM whose application immediately finishes from waiting the next loading.
+All of mruby applications finish at the same time, and all RiteVMs wait for receiving the next mruby application bytecodes. 
+
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{figure/Eventflag.pdf}
-    \caption{The design for Eventflag using TECS}
+    \caption{The design for Eventflag using TECS {\scriptsize *only differences}}
     \label{fig:Eventflag}
 \end{figure}
  
@@ -643,7 +649,7 @@ The mruby application bytecode is smaler and faster than that of including mruby
 The difference becomes larger as the number of RiteVMs increases because it takes the 50 msec overhead per one RiteVM. 
 %In the proposed framework, developers send only mruby application and prepare mruby library in advance.
 %Therefore, the design can send the bytecode faster.
-In addition, the design can save the time to connect a storage device to restart an OS.
+In addition, the design can save the time to connect a storage/ROM device to restart an OS.
 These advantages lead improvement of the software development efficiency.
 
 \begin{table}[t]
@@ -691,16 +697,20 @@ The smaller cyclic time is better in multitasking due to concurrent and/or paral
 
 To indicate the superior of component-based development, the comparison of code lines between two .c files is shown in Table \ref{tab:codesize}.
 (A) and (B) mean the source files in the upper and lower of Figure \ref{fig:Eventflag}, respectively. 
-(B)'s lines do not increase even if the number of RiteVMs increases, while (A)'s lines increase in proportion to the number.
+In terms of .c, (B)'s lines do not increase even if the number of RiteVMs increases, while (A)'s lines increase in proportion to the number.
 (B) is not modified, and can be utilized regardless of the number of RiteVMs.
+Moreover, lines of two .cdl files are equal.
 The skillfull component-based development brings this advantage such as the decrease of code lines, which leads high productivity and high maintainability.
+
 \begin{table}[t]
     \centering
-    \caption{Lines of .c file for the number of RiteVM}
-    \begin{tabular}{c||cccc}
-             & RiteVM: 1  & RiteVM: 2 & RiteVM: 3 & RiteVM: 4 \\ \hline
-        (A)  & 27         & 45         & 53       & 61        \\
-        (B)  & 27 (33)    & 33         & 33       & 33        \\
+    \caption{Lines of .c and .cdl file for the number of RiteVM}
+    \begin{tabular}{c||cc|c}
+                & (A)       & (B)     & Diff  \\ \hline
+        .c      & 134$+$8$\times$$\alpha $  & 130     & 4$+$8$\times$$\alpha$ \\
+        .cdl    & 25$+$18$\times$$\alpha$   & 25$+$18$\times$$\alpha$ & 0     \\
+        \multicolumn{3}{l}{  }\\
+        \multicolumn{3}{l}{{\small $\alpha$} : {\scriptsize the number of RiteVM}}
     \end{tabular}
     \label{tab:codesize}
 \end{table}
@@ -717,7 +727,7 @@ The skillfull component-based development brings this advantage such as the decr
         Owl system \cite{par:owl}                    &            & \checkmark & Partially  &            &             &            & \checkmark \\
         eLua \cite{url:eLua}                         &            & \checkmark & Partially  &            &             &            & \checkmark \\
         mruby \cite{par:mruby}                       &            & \checkmark &            &            &             &            & \checkmark \\
-        mruby on TECS \cite{par:mrubyonTECS}         &            & \checkmark & \checkmark & \checkmark & $\triangle$&            & \checkmark \\
+        mruby on TECS \cite{par:mrubyonTECS}         &            & \checkmark & \checkmark & \checkmark &             &            & \checkmark \\
         Proposed framework                           & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark  & \checkmark & \checkmark \\
     \end{tabular}
     \label{tab:comparison}
@@ -757,7 +767,7 @@ The proposed framework supports the loader, the VM scheuler, and synchronization
 \section{Conclusion}
 \label{sec:Conclusion}
 This paper has presented an extended framework of mruby on TECS: mruby bytecode loader using Bluetooth and RiteVM scheuler.
-The loader provides developers with the software development efficiency without rewriting a storage device and restarting an OS.
+The loader provides developers with the software development efficiency without rewriting a storage/ROM device and restarting an OS.
 The proposed framework can be applied to many kinds of embedded systems  because the loader can use not only Bluetooth also wired serial connection.
 %Thus, the proposed framework can be utilized on the deveces without Bluetooth.
 The RiteVM scheuler makes multitasking more easily than the current mruby on TECS.

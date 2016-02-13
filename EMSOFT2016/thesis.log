@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  12 FEB 2016 19:15
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  13 FEB 2016 17:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -159,10 +159,6 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24.09> not available
 \c@IEEEbiography=\count95
 \@IEEEtranrubishbin=\box42
 )
-(c:/w32tex/share/texmf-dist/tex/latex/url/url.sty
-\Urlmuskip=\muskip10
-Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-)
 (c:/w32tex/share/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
@@ -199,10 +195,23 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
+(c:/w32tex/share/texmf-dist/tex/latex/tools/enumerate.sty
+Package: enumerate 2014/10/28 v3.00 enumerate extensions (DPC)
+\@enLab=\toks18
+)
+(c:/w32tex/share/texmf-dist/tex/latex/cite/cite.sty
+LaTeX Info: Redefining \cite on input line 302.
+LaTeX Info: Redefining \nocite on input line 332.
+Package: cite 2015/02/27  v 5.5
+)
+(c:/w32tex/share/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
 (c:/w32tex/share/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count96
 \lst@gtempboxa=\box43
-\lst@token=\toks18
+\lst@token=\toks19
 \lst@length=\count97
 \lst@currlwidth=\dimen144
 \lst@column=\count98
@@ -276,13 +285,13 @@ File: figure/proposed.pdf Graphic file (type pdf)
 
 <figure/proposed.pdf>
 File: figure/mruby.pdf Graphic file (type pdf)
- <figure/mruby.pdf> [2]
+ <figure/mruby.pdf>
 File: figure/component_diagram.pdf Graphic file (type pdf)
  <figure/component_diagram.pdf>
+[2]
 LaTeX Font Info:    Try loading font information for OMS+ptm on input line 203.
 
-
-(c:/w32tex/share/texmf-dist/tex/latex/psnfss/omsptm.fd
+ (c:/w32tex/share/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9.03374> not available
@@ -315,28 +324,30 @@ File: figure/control_flow.pdf Graphic file (type pdf)
 
 <figure/control_flow.pdf>
 LaTeX Font Info:    Font shape `OMS/ptm/m/it' in size <9.03374> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 445.
-LaTeX Font Info:    Calculating math sizes for size <9.03374> on input line 453
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 446.
+LaTeX Font Info:    Calculating math sizes for size <9.03374> on input line 454
 .
-LaTeX Font Info:    Try loading font information for OML+ptm on input line 460.
+LaTeX Font Info:    Try loading font information for OML+ptm on input line 461.
 
 
 (c:/w32tex/share/texmf-dist/tex/latex/psnfss/omlptm.fd
 File: omlptm.fd 
 )
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <9.03374> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 460.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 461.
  [5]
 File: figure/rotateReadyQueue.pdf Graphic file (type pdf)
 
 <figure/rotateReadyQueue.pdf>
 File: figure/cyclic_handler.pdf Graphic file (type pdf)
- <figure/cyclic_handler.pdf> [6]
+ <figure/cyclic_handler.pdf>
+Underfull \vbox (badness 1742) has occurred while \output is active []
+
+ [6]
 File: figure/Eventflag.pdf Graphic file (type pdf)
 
-<figure/Eventflag.pdf>
-LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 652.
- [7]
+<figure/Eventflag.pdf> [7]
+LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 658.
 File: figure/comparison_s_c_m.pdf Graphic file (type pdf)
  <figure/comparison_s_c_m.pdf>
 File: figure/comparison_msec.pdf Graphic file (type pdf)
@@ -353,7 +364,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 91--93
 ers . jp / en /
  []
 
-
+[9]
 Underfull \hbox (badness 10000) in paragraph at lines 102--104
 []\OT1/ptm/m/n/8.03 ``python-on-a-chip,'' $http : / / code . google . com / arc
 hive / p /
@@ -371,14 +382,16 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[9] (./thesis.aux) ) 
+[10
+
+] (./thesis.aux) ) 
 Here is how much of TeX's memory you used:
- 3635 strings out of 493777
- 56102 string characters out of 6153182
- 267887 words of memory out of 5000000
- 7082 multiletter control sequences out of 15000+600000
+ 3748 strings out of 493777
+ 57623 string characters out of 6153182
+ 268088 words of memory out of 5000000
+ 7189 multiletter control sequences out of 15000+600000
  49614 words of font info for 154 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  27i,11n,49p,294b,1453s stack positions out of 5000i,500n,10000p,500000b,80000s
 
-Output written on thesis.dvi (9 pages, 62068 bytes).
+Output written on thesis.dvi (10 pages, 62940 bytes).

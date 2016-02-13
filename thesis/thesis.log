@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  11 FEB 2016 05:41
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  13 FEB 2016 18:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -6,7 +6,8 @@ entering extended mode
 (./thesis.tex
 pLaTeX2e <2006/11/10> (based on LaTeX2e <2015/01/01> patch level 0)
 Babel <3.9l> and hyphenation patterns for 79 languages loaded.
-(./dummy/dummy.tex) (c:/w32tex/share/texmf-dist/tex/platex/jsclasses/jsbook.cls
+(../EMSOFT2016/dummy/dummy.tex)
+(c:/w32tex/share/texmf-dist/tex/platex/jsclasses/jsbook.cls
 Document Class: jsbook 2014/02/07 okumura
 LaTeX Info: Redefining \rmfamily on input line 359.
 LaTeX Info: Redefining \sffamily on input line 362.
@@ -41,11 +42,7 @@ LaTeX Info: Redefining \TeX on input line 1815.
 LaTeX Info: Redefining \LaTeX on input line 1841.
 LaTeX Info: Redefining \LaTeXe on input line 1866.
 \heisei=\count90
-) (c:/w32tex/share/texmf-dist/tex/latex/url/url.sty
-\Urlmuskip=\muskip10
-Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-)
-(c:/w32tex/share/texmf-dist/tex/latex/graphics/graphicx.sty
+) (c:/w32tex/share/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
 (c:/w32tex/share/texmf-dist/tex/latex/graphics/keyval.sty
@@ -90,13 +87,26 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 \c@example=\count96
 \c@proof=\count97
 )
+(c:/w32tex/share/texmf-dist/tex/latex/tools/enumerate.sty
+Package: enumerate 2014/10/28 v3.00 enumerate extensions (DPC)
+\@enLab=\toks17
+)
+(c:/w32tex/share/texmf-dist/tex/latex/cite/cite.sty
+LaTeX Info: Redefining \cite on input line 302.
+LaTeX Info: Redefining \nocite on input line 332.
+Package: cite 2015/02/27  v 5.5
+)
+(c:/w32tex/share/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
 (c:/w32tex/share/texmf-dist/tex/latex/graphics/lscape.sty
 Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 (c:/w32tex/share/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count98
 \lst@gtempboxa=\box41
-\lst@token=\toks17
+\lst@token=\toks18
 \lst@length=\count99
 \lst@currlwidth=\dimen124
 \lst@column=\count100
@@ -122,6 +132,12 @@ Package: listings 2014/09/06 1.5e (Carsten Heinz)
 Package: jlisting 2006/02/20 0.2 (Thor)
 \lst@nextchar=\count106
 \lst@inputfile=\read1
+)
+(c:/w32tex/share/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2014/09/06 1.5e listings language file
+)
+(c:/w32tex/share/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
 ) (./thesis.aux)
 \openout1 = `thesis.aux'.
 
@@ -231,82 +247,104 @@ LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 File: ../EMSOFT2016/figure/proposed.pdf Graphic file (type pdf)
 <../EMSOFT2016/figure/proposed.pdf>
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 13.83836pt on input line 176.
+(Font)              scaled to size 13.83836pt on input line 169.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 13.83836pt on input line 176.
+(Font)              scaled to size 13.83836pt on input line 169.
 File: ../EMSOFT2016/figure/mruby.pdf Graphic file (type pdf)
  <../EMSOFT2016/figure/mruby.pdf> [3
 
 ]
 [4]
 LaTeX Font Info:    Font shape `JT1/mc/m/it' in size <10> not available
-(Font)              Font shape `JT1/mc/m/n' tried instead on input line 211.
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 204.
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 211.
+(Font)              scaled to size 9.60999pt on input line 204.
 LaTeX Font Info:    Font shape `JY1/mc/m/it' in size <10> not available
-(Font)              Font shape `JY1/mc/m/n' tried instead on input line 211.
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 204.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 211.
+(Font)              scaled to size 9.60999pt on input line 204.
 File: ../EMSOFT2016/figure/component_diagram.pdf Graphic file (type pdf)
  <../EMSOFT2016/figure/component_diagram.pdf>
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 6.72699pt on input line 246.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 246.
+(Font)              scaled to size 6.72699pt on input line 239.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 239.
 
 
 (c:/w32tex/share/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 246.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 239.
  [5] [6]
 File: ../EMSOFT2016/figure/mrubyontecs.pdf Graphic file (type pdf)
 
-<../EMSOFT2016/figure/mrubyontecs.pdf> [7]
+<../EMSOFT2016/figure/mrubyontecs.pdf>
 File: ../EMSOFT2016/figure/mruby_TECS_bridge.pdf Graphic file (type pdf)
 
-<../EMSOFT2016/figure/mruby_TECS_bridge.pdf> [8]
+<../EMSOFT2016/figure/mruby_TECS_bridge.pdf> [7] [8]
 3
 File: ../EMSOFT2016/figure/system_model.pdf Graphic file (type pdf)
-<../EMSOFT2016/figure/system_model.pdf>
-File: ../EMSOFT2016/figure/bluetooth_loader.pdf Graphic file (type pdf)
+<../EMSOFT2016/figure/system_model.pdf> [9
 
-<../EMSOFT2016/figure/bluetooth_loader.pdf> [9
-
-] [10]
+]
 File: ../EMSOFT2016/figure/component_bluetooth.pdf Graphic file (type pdf)
 
-<../EMSOFT2016/figure/component_bluetooth.pdf>
+<../EMSOFT2016/figure/component_bluetooth.pdf> [10]
 File: ../EMSOFT2016/figure/control_flow.pdf Graphic file (type pdf)
 
 <../EMSOFT2016/figure/control_flow.pdf>
+LaTeX Font Info:    Font shape `JT1/mc/m/it' in size <9> not available
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 465.
+LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
+(Font)              scaled to size 8.64899pt on input line 465.
+LaTeX Font Info:    Font shape `JY1/mc/m/it' in size <9> not available
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 465.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 5.76599pt on input line 493.
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 500.
+(Font)              scaled to size 8.64899pt on input line 465.
+LaTeX Font Info:    Font shape `JT1/mc/m/sl' in size <9> not available
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 465.
+LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
+(Font)              scaled to size 8.64899pt on input line 465.
+LaTeX Font Info:    Font shape `JY1/mc/m/sl' in size <9> not available
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 465.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 8.64899pt on input line 465.
+LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <9> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 482.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 5.76599pt on input line 490.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 497.
 
 
 (c:/w32tex/share/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <9> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 500.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 497.
  [11] [12]
 File: ../EMSOFT2016/figure/rotateReadyQueue.pdf Graphic file (type pdf)
 
 <../EMSOFT2016/figure/rotateReadyQueue.pdf> [13]
 File: ../EMSOFT2016/figure/cyclic_handler.pdf Graphic file (type pdf)
 
-<../EMSOFT2016/figure/cyclic_handler.pdf> [14]
+<../EMSOFT2016/figure/cyclic_handler.pdf> [14] [15]
 File: ../EMSOFT2016/figure/Eventflag.pdf Graphic file (type pdf)
 
-<../EMSOFT2016/figure/Eventflag.pdf> [15] [16]
+<../EMSOFT2016/figure/Eventflag.pdf>
+Underfull \hbox (badness 1286) in paragraph at lines 652--656
+\OT1/cmr/m/n/10 the .cdl files shown as Fig-ures 3.8 and 3.9 should be com-ment
+ed out such as
+ []
+
+[16]
 4
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 663.
-File: ../EMSOFT2016/figure/comparison_s_c_m.pdf Graphic file (type pdf)
-<../EMSOFT2016/figure/comparison_s_c_m.pdf> [17
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 672.
+[17
 
 ]
+File: ../EMSOFT2016/figure/comparison_s_c_m.pdf Graphic file (type pdf)
+ <../EMSOFT2016/figure/comparison_s_c_m.pdf>
 File: ../EMSOFT2016/figure/comparison_msec.pdf Graphic file (type pdf)
 
 <../EMSOFT2016/figure/comparison_msec.pdf> [18] [19]
@@ -314,7 +352,7 @@ File: ../EMSOFT2016/figure/comparison_msec.pdf Graphic file (type pdf)
 [20
 
 ]
-Overfull \hbox (57.84032pt too wide) in paragraph at lines 762--772
+Overfull \hbox (57.84032pt too wide) in paragraph at lines 793--803
  [][] 
  []
 
@@ -349,14 +387,16 @@ s : / / www . toppers . jp / en /
 
 [24
 
-]) [25] (./thesis.aux) ) 
-Here is how much of TeX's memory you used:
- 2644 strings out of 493777
- 35373 string characters out of 6153182
- 168061 words of memory out of 5000000
- 6092 multiletter control sequences out of 15000+600000
- 22433 words of font info for 102 fonts, out of 8000000 for 9000
- 934 hyphenation exceptions out of 8191
- 27i,11n,32p,275b,1374s stack positions out of 5000i,500n,10000p,500000b,80000s
+]) [25] [26
 
-Output written on thesis.dvi (28 pages, 68552 bytes).
+] (./thesis.aux) ) 
+Here is how much of TeX's memory you used:
+ 3042 strings out of 493777
+ 40665 string characters out of 6153182
+ 209818 words of memory out of 5000000
+ 6477 multiletter control sequences out of 15000+600000
+ 23130 words of font info for 104 fonts, out of 8000000 for 9000
+ 934 hyphenation exceptions out of 8191
+ 27i,11n,49p,294b,1451s stack positions out of 5000i,500n,10000p,500000b,80000s
+
+Output written on thesis.dvi (29 pages, 72224 bytes).
