@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  13 FEB 2016 18:04
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  14 FEB 2016 22:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -331,7 +331,7 @@ File: ../EMSOFT2016/figure/cyclic_handler.pdf Graphic file (type pdf)
 File: ../EMSOFT2016/figure/Eventflag.pdf Graphic file (type pdf)
 
 <../EMSOFT2016/figure/Eventflag.pdf>
-Underfull \hbox (badness 1286) in paragraph at lines 652--656
+Underfull \hbox (badness 1286) in paragraph at lines 651--655
 \OT1/cmr/m/n/10 the .cdl files shown as Fig-ures 3.8 and 3.9 should be com-ment
 ed out such as
  []
@@ -339,7 +339,7 @@ ed out such as
 [16]
 4
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 672.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 671.
 [17
 
 ]
@@ -352,7 +352,7 @@ File: ../EMSOFT2016/figure/comparison_msec.pdf Graphic file (type pdf)
 [20
 
 ]
-Overfull \hbox (57.84032pt too wide) in paragraph at lines 793--803
+Overfull \hbox (57.84032pt too wide) in paragraph at lines 796--806
  [][] 
  []
 
@@ -399,4 +399,4 @@ Here is how much of TeX's memory you used:
  934 hyphenation exceptions out of 8191
  27i,11n,49p,294b,1451s stack positions out of 5000i,500n,10000p,500000b,80000s
 
-Output written on thesis.dvi (29 pages, 72224 bytes).
+Output written on thesis.dvi (29 pages, 72340 bytes).

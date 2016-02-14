@@ -668,11 +668,14 @@ The comparison of the application execution time with singletasking, co-routine,
 The 100,000 times loop program is used as mruby application for evaluation of execution time.
 In detail, the singletask program loops 100,000 times, and the multitask and co-routine programs loop 50,000 times in each task.
 In Figure \ref{fig:comparison_s_c_m}, the cyclic time of the cyclic handler for multitasking is one msec.
-Multitasking's execution time is about the same as singletasking's while co-routine takes more time than them to execute an mruby application.
+While multitask's execution time is slower than singletask's, co-routine takes more time than multitask to execute an mruby application.
 This result shows the proposed design is superior to co-routine in terms of execution time.
+The overhead of multitask is about 5 \% ($(multitask-singletask)/multitask$).
 Switching tasks' overhead is also evaluated, that is about three $\mu$sec on average.
-The number of switching tasks is from 500 to 600 because singletasking process in Figure \ref{fig:comparison_s_c_m} takes about 540 msec.
-Therefore, the overhead of multitasking is 0.5 \% or less, and multitasking can be used without the overhead.
+%The number of switching tasks is from 500 to 600 because singletasking process in Figure \ref{fig:comparison_s_c_m} takes about 540 msec.
+%Therefore, the overhead of multitasking is 0.5 \% or less, and multitasking can be used without the overhead.
+The scheuler interrupts and switches tasks, which causes this overhead.
+
 
 \begin{figure}[t]
     \centering
@@ -686,6 +689,7 @@ A lower limit of the cyclic time is one msec due to the specification of TOPPERS
 More than 10 msec do not be evaluated in this paper because it is thought the larger cyclic time influences applications.
 Each execution time of cyclic period is the same as the others.
 That is because the overhead of switching tasks (about 3 $\mu$sec) is small in comparison with the execution time.
+This results also shows the overhead becomes smaller as the cyclic time is larger, because the overhead depends on the number of switching tasks.
 The smaller cyclic time is better in multitasking due to concurrent and/or parallel processing.
 
 \begin{figure}[t]
@@ -773,7 +777,8 @@ The proposed framework can be applied to many kinds of embedded systems  because
 The RiteVM scheuler makes multitasking more easily than the current mruby on TECS.
 In the evaluation, experimental results of the loader and the RiteVM scheduler show their advantages.
 The loader can improve the software development efficiency on mruby on TECS.
-The RiteVM sceduler has the effectiveness in terms of execution time and ease of use compared with singletasking and co-routine because of the low overhead.
+The RiteVM sceduler has the effectiveness in terms of execution time and ease of use compared with singletasking and co-routine.
+%because of the low overhead.
 
 The proposed framework is developed in component-base by TECS.
 The facilities such as RiteVMs, the RiteVM scheuler, and Eventflag are implemented as components.
