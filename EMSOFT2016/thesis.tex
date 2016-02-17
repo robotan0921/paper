@@ -43,7 +43,7 @@ Moreover, while the framework supports multi-VM, developers need to be familiar 
 To improve the development efficiency, this paper proposes an mruby bytecode loader using Bluetooth as an extension of mruby on TECS.
 The loader executes two mruby bytecodes, mruby application bytecode and mruby library bytecode.
 mruby application bytecode modified frequently is sent from a host to a target device by developers.
-mruby library bytecode modified infrequently is preserved beforehand with the platform in a strage device at the time of the first compilation.
+mruby library bytecode modified infrequently is preserved beforehand with the platform in a storage/ROM device at the time of the first compilation.
 In addition, multiple mruby programs cooperatively run in the proposed framework.
 A RiteVM sceduler makes multitasking processing more easy-to-use than that of mruby on TECS.
 Synchronization of starting multiple tasks is also implemented with Eventflag. 
@@ -101,7 +101,7 @@ The RiteVM scheuler enables developers to run multitasking programs more easily 
 The loader supports the countinuous loading, which saves the Bluetooth set-up time.
 Therefore, the mruby bytecode loader using Bluetooth helps developers develop software.
 \item {\bf To effectively execute multiple mruby programs in concurrent or/and parallel:} Developers can execute multiple tasks without the knowledge of an RTOS because the RiteVM sceduler switches tasks cyclically.
-In additon, synchronization of multipel tasks is also implemented.
+In additon, synchronization of multiple tasks is also implemented.
 \item {\bf To focus on the benefits of component-based developments:} This paper shows the specific examples for the benefits of component-based development. 
 \end{enumerate}
 
