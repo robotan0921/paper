@@ -1,0 +1,90 @@
+\begin{thebibliography}{10}
+
+\bibitem{par:Crnkovic}
+Crnkovic, I.: {Component-based Software Engineering for Embedded Systems}, {\em
+  Proceedings of the 27th International Conference on Software Engineering},
+  pp.\ 712--713 (2005).
+
+\bibitem{par:TECS}
+Azumi, T., Yamamoto, M., Kominami, Y., Takagi, N., Oyama, H. and Takada, H.: {A
+  New Specification of Software Components for Embedded Systems}, {\em
+  Proceedings of the 10th IEEE International Symposium on
+  Object/Component/Service-Oriented Real-Time Distributed Computing (ISORC)},
+  pp.\ 46--50 (2007).
+
+\bibitem{url:AUTOSAR}
+: {AUTOSAR}, \url{http://www.autosar.org/}.
+
+\bibitem{par:SAVEapproach}
+kerholm, M., Carlson, J., Fredriksson, J., Hansson, H., H{\aa}kansson, J.,
+  M\"{o}ller, A., Pettersson, P. and Tivoli, M.: {The SAVE Approach to
+  Component-based Development of Vehicular Systems}, {\em Journal of Systems
+  and Software},  Vol.~80, No.~5, pp.\ 655--667 (2007).
+
+\bibitem{par:mrubyonTECS}
+Azumi, T., Nagahara, Y., Oyama, H. and Nishio, N.: {mruby on TECS:
+  Component-Based Framework for Running Script Program}, {\em Proceedings of
+  the 18th IEEE International Symposium on Real-Time Distributed Computing
+  (ISORC)}, pp.\ 252--259 (2015).
+
+\bibitem{par:EV3}
+Li, Y., Ishikawa, T., Matsubara, Y. and Takada, H.: {A Platform for LEGO
+  Mindstorms EV3 Based on an RTOS with MMU Support}, {\em OSPERT 2014}, p.~51
+  (2014).
+
+\bibitem{url:Ruby}
+: {Ruby}, \url{https://www.ruby-lang.org/en/}.
+
+\bibitem{url:HRP2}
+TOPPERS: {TOPPERS/HRP2 kernel},
+  \url{http://www.toppers.jp/en/hrp2-kernel.html}.
+
+\bibitem{par:hr-tecs}
+Ishikawa, T., Azumi, T., Oyama, H. and Takada, H.: {HR-TECS: Component
+  technology for embedded systems with memory protection}, {\em Proceedings of
+  the 16th IEEE International Symposium on Object/Component/Service-Oriented
+  Real-Time Distributed Computing (ISORC)}, pp.\ 1--8 (2013).
+
+\bibitem{par:microITRON}
+Takada, H. and Sakamura, K.: {$\mu$ITRON for Small-Scale Embedded Systems},
+  {\em IEEE Micro},  Vol.~15, No.~6, pp.\ 46--54 (1995).
+
+\bibitem{par:OSEK}
+Ohno, A., Azumi, T. and Nishio, N.: {TECS Components Providing Functionalities
+  of OSEK Specifications for ITRON OS}, {\em Journal of Information
+  Processing},  Vol.~22, No.~4, pp.\ 584--594 (2014).
+
+\bibitem{url:ASP}
+TOPPERS: {TOPPERS/ASP kernel}, \url{https://www.toppers.jp/en/asp-kernel.html}.
+
+\bibitem{url:co-routine}
+: {class Fiber}, \url{http://docs.ruby-lang.org/en/2.3.0/Fiber.html}.
+
+\bibitem{url:python-on-a-chip}
+: {python-on-a-chip}, \url{http://code.google.com/archive/p/python-on-a-chip/}.
+
+\bibitem{par:owl}
+Barr, T.~W., Smith, R. and Rixner, S.: {Design and Implementation of an
+  Embedded Python Run-Time System}, {\em Proceedings of the USENIX Annual
+  Technical Conference (USENIX ATC 12)}, pp.\ 297--308 (2012).
+
+\bibitem{url:eLua}
+: {eLua}, \url{http://www.eluaproject.net}.
+
+\bibitem{par:mruby}
+Tanaka, K., Matsumoto, Y. and Arimori, H.: {Embedded System Development by
+  Lightweight Ruby}, {\em Proceedings of the International Conference on
+  Computational Science and Its Applications (ICCSA)}, pp.\ 282--285 (2011).
+
+\bibitem{url:mruby}
+: {mruby}, \url{https://github.com/mruby/mruby}.
+
+\bibitem{url:Lua}
+: {Lua}, \url{http://www.lua.org/}.
+
+\bibitem{par:Lua}
+Ierusalimschy, R., de Figueiredo, L.~H. and Celes, W.: {The Evolution of Lua},
+  {\em Proceedings of the Third ACM SIGPLAN Conference on History of
+  Programming Languages}, pp.\ 2--1--2--26 (2007).
+
+\end{thebibliography}

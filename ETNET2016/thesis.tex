@@ -2,7 +2,7 @@
 %     Created: Tue Feb 16 06:00 PM 2016 J
 % Last Change: Tue Feb 16 06:00 PM 2016 J
 %
-\input{../dummy/dummy.tex}
+\input{../EMSOFT2016/dummy/dummy.tex}
 \documentclass[submit]{ipsj_v2/UTF8/ipsj}
 %\documentclass{ipsj}
 
@@ -50,21 +50,23 @@
 
 \begin{document}
 
-
 \title{Bluetoothを用いたマルチVM対応\\mrubyバイトコードローダ}
 
-\etitle{mruby Bytecode Loader Using Bluetooth in Multi-VM Environment}
-
-\affiliate{IPSJ}{情報処理学会\\
-IPSJ, Chiyoda, Tokyo 101--0062, Japan}
+%\etitle{mruby Bytecode Loader Using Bluetooth in Multi-VM Environment}
 
 
-\paffiliate{JU}{情報処理大学\\
-Johoshori University}
+\affiliate{OU}{大阪大学基礎工学部\\
+School of Engineering Science, Osaka University}
 
-\author{山本 拓朗}{Takuro Yamamoto}{IPSJ}[joho.taro@ipsj.or.jp]
-\author{大山 博司}{Hiroshi Oyama}{IPSJ}
-\author{安積 卓也}{Takuya Azumi}{IPSJ,JU}[gakkai.jiro@ipsj.or.jp]
+\affiliate{OKUMA}{オークマ株式会社\\
+OKUMA Corporation}
+
+\affiliate{GOU}{大阪大学基礎工学研究科\\
+Graduate School of Engineering Science, Osaka University}
+
+\author{山本 拓朗}{Takuro Yamamoto}{OU}%[joho.taro@ipsj.or.jp]
+\author{大山 博司}{Hiroshi Oyama}{OKUMA}%
+\author{安積 卓也}{Takuya Azumi}{GOU}%[gakkai.jiro@ipsj.or.jp]
 
 \begin{abstract}
 近年，組込みシステムは複雑化・大規模化しているため，組込みソフトウェアの生産性が問題になっている．
@@ -79,22 +81,21 @@ Johoshori University}
 
 \end{abstract}
 
+% \begin{jkeyword}
+% 情報処理学会論文誌ジャーナル，\LaTeX，スタイルファイル，べからず集
+% \end{jkeyword}
 
-\begin{jkeyword}
-情報処理学会論文誌ジャーナル，\LaTeX，スタイルファイル，べからず集
-\end{jkeyword}
-
-\begin{eabstract}
-This document is a guide to prepare a draft for submitting to IPSJ
-Journal, and the final camera-ready manuscript of a paper to appear in
-IPSJ Journal, using {\LaTeX} and special style files.  Since this
-document itself is produced with the style files, it will help you to
-refer its source file which is distributed with the style files.
-\end{eabstract}
-
-\begin{ekeyword}
-IPSJ Journal, \LaTeX, style files, ``Dos and Don'ts'' list
-\end{ekeyword}
+% \begin{eabstract}
+% This document is a guide to prepare a draft for submitting to IPSJ
+% Journal, and the final camera-ready manuscript of a paper to appear in
+% IPSJ Journal, using {\LaTeX} and special style files.  Since this
+% document itself is produced with the style files, it will help you to
+% refer its source file which is distributed with the style files.
+% \end{eabstract}
+%
+% \begin{ekeyword}
+% IPSJ Journal, \LaTeX, style files, ``Dos and Don'ts'' list
+% \end{ekeyword}
 
 \maketitle
 
@@ -138,6 +139,12 @@ mrubyプログラムを修正する度に，SDカードの抜き差しやROMへ�
 これによって，繰り返しSDカードの抜き差しやROMへの書き込みをする手間やOSを再起動する時間が省けるため，作業効率を上げることができる.
 さらに，各VM の処理を平等に実行するRiteVM スケジューラを提供することで，マルチタスク処理を効率的に利用できる.
 
+本論文における貢献は次のとおりである．
+\begin{itemize}
+        \item　mrubyバイトコードローダの実装により，mruby on TECSを使ったソフトウェア開発における作業効率を向上させる．
+        \item　RiteVMスケジューラの実装により，複数のmrubyプログラムを効率的に並行・並列動作させる．
+        \item　コンポーネントベース開発の利点を明らかにする．
+\end{itemize}
 % Contribution: The proposed framework gives the contribution in the following points.
 % 1) To improve the software development efficiency:
 % Developers do not need to rewrite a storage/ROM device and also to restart an OS. 
@@ -149,13 +156,20 @@ mrubyプログラムを修正する度に，SDカードの抜き差しやROMへ�
 % 3) To focus on the benefits of component-based developments:
 % This paper shows the specific examples for the benefits of component-based development.
 
+本論文の構成を次に述べる．
+まず\ref{sec:Background}章で，提案フレームワークのベースであるmruby on TECSについて述べる．
+\ref{sec:Design and Implementation}章では，提案フレームワークの設計と実装について述べる．
+\ref{sec:Evaluation}章では，ローダを使用した場合の作業効率の比較，RiteVMを使用した場合の実行時間のオーバヘッドを評価する．
+\ref{sec:Related Work}章では，関連研究について述べる．
+最後に，\ref{sec:Conclusion}章で本論文をまとめる．
+
 % Organization: The paper is organized as follows. 
 % Section 2 introduces the basic technologies i.e. mruby, TECS and mruby on TECS. 
 % Section 3 describes the design and implementation of the proposed framework in detail. 
 % Section 4 evaluates the proposed framework, Section 5 discusses related work, and then Section 6 concludes this paper.
 
 \section{既存フレームワーク}
-\label{fig:background}
+\label{sec:Background}
 図\ref{fig:proposed}に提案フレームワークのシステムモデルを示す．
 RiteVMとmrubyライブラリを含むプラットフォーム部分は，はじめにターゲットデバイス上で起動されている．
 mrubyアプリケーションのバイトコードは，ホストからターゲットデバイスへと転送される．
@@ -198,19 +212,17 @@ TECSによるコンポーネントベース開発は，システム全体の構�
 TECSでのコンポーネントの生成と結合は静的に行われるため，最適化され，実行時間や消費メモリのオーバヘッドは少ない．
 他の特徴として，C言語での実装，ソースレベルでの移植性，コンポーネントの粒度が小さいことなどがある．
 
-\subsubsection{Component Model}
+\subsubsection{コンポーネントモデル}
 図\ref{fig:component}にコンポーネント図の例を示す．
-{\it cell} which is an instance of a component in TECS consists of {\it entry} ports, {\it call} ports, attributes and internal variables.
+TECSでは，インスタンス化されたコンポーネントはセル({\it cell})と呼ばれ，受け口({\it entry})，呼び口({\it call})，属性，内部変数を持つ．
+受け口は自身の機能を提供するインタフェースで，呼び口は他のセルの機能を利用するためのインタフェースである．
+セルは複数の受け口や呼び口を持つことができる．
+セルの提供する関数は，C言語で実装される．
 
-A {\it entry} port is an interface to provide functions with other {\it cell}s, and a {\it call} port is an interface to use functions of other {\it cell}s.
-A {\it cell} has one or more {\it entry} ports and {\it call} ports.
-Functions of a {\it cell} are implemented in the C language.
+受け口と呼び口の型は，セルの機能を使うためのインタフェースであるシグニチャによって定義される．
+セルの呼び口は，同じシグニチャを持つ他のセルの受け口と結合できる．
 
-A type of a {\it entry}/{\it call} port is defined by a {\it signature} which is a set of functions.
-A {\it signature} is the interface definition of a {\it cell}.
-The {\it call} port of a {\it cell} can be connected to the {\it entry} port of another {\it cell} with the same {\it signature}.
-A {\it celltype} is the definition of a {\it cell}.
-{\it Celltype} defines one or more {\it call}/{\it entry} ports, attributes and internal variables.
+セルの型は，セルタイプと呼ばれ，受け口，呼び口，属性，内部変数の組を定義している．
 
 \begin{figure}[t]
     \centering
@@ -219,19 +231,16 @@ A {\it celltype} is the definition of a {\it cell}.
     \label{fig:component}
 \end{figure}
 
-\subsubsection{Component Description}
-The description of a component in TECS is divided into three parts, {\it signature}, {\it celltype}, and build description.
-TECS code is written in .cdl (component description language) file.
-The component description is mentioned with an example shown in Figure \ref{fig:component} as follow.
-
+\subsubsection{コンポーネント記述}
+TECSのコンポーネント記述は，シグニチャ記述，セルタイプ記述，組上げ記述の3つに分類され，.cdlファイルに記述する．
+図\ref{fig:component}に示されるコンポーネント記述について次に述べる．
 \begin{description}
-    \item[{\bf Signature Description}]\mbox{}\\
-        The {\it signature} description defines an interface of a {\it cell}.
-        A {\it signature} name is described following the keyword {\it signature}.
-        It also has the prefix ``s".
-        In this way, a {\it signature} is defined such as sMotor shown in Figure \ref{signature}.
-        To make the definition of an interface clear, specifiers such as in and out are used in TECS.
-        [in] and [out] represent input and output, respectively.\\
+    \item[{\bf シグニチャ記述}]\mbox{}\\
+        シグニチャ記述は，セルのインタフェースを定義する．
+        {\it signature}キーワードに続けて，シグニチャ名(接頭辞``s")を記述する．
+        図\ref{signature}のようにシグニチャsMotorを定義することができる.
+        TECSでは，インタフェースの定義を明確にするために，入力と出力にはそれぞれ，[in]と[out]という指定子がつけられる．
+        
 \begin{figure}[t]
 \centering
 \begin{lstlisting}
@@ -249,13 +258,13 @@ signature sMotor{
 \label{signature}
 \end{figure}
 
-    \item[{\bf Celltype Description}]\mbox{}\\
-        The {\it celltype} description defines {\it entry} ports, {\it call} ports, attributes, and valuables of a {\it celltype}.
-        An example of a {\it celltype} description is shown in Figure \ref{celltype}.
-        A {\it celltype} name following the keyword {\it celltype} with the prefix ``t" and elements of a {\it celltype} is described.
-        To define {\it entry} ports, a {\it signature} such as sMotor, and an {\it entry} port name such as eMotor follow the keyword {\it entry}.
-        In the same way, {\it call} ports can be declared.
-        Attributes and valuables follow the keyword {\it attr} and {\it var} respectively.\\
+    \item[{\bf セルタイプ記述}]\mbox{}\\
+        セルタイプ記述は，受け口，呼び口，属性，内部変数を用いてセルタイプを定義する．
+        {\it celltype}キーワードに続けて，セルタイプ名(接頭辞``t")を記述する．
+        図\ref{celltype}に示すように，受け口は，{\it entry}キーワードに続けて，シグニチャ名, 受け口名を記述する．
+        同様にして，呼び口も定義できる．
+        属性と変数は，それぞれ{\it attr}，{\it var}キーワードを用いて列挙する．
+
 \begin{figure}[t]
 \centering
 \begin{lstlisting}
@@ -276,12 +285,12 @@ celltype tMotor{
 \label{celltype}
 \end{figure}
 
-    \item[{\bf Build Description}]\mbox{}\\
-        The build description is used to instantiate {\it cell}s and connect {\it cell}s.
-        Figure \ref{build} shows an example of a build description.
-        A {\it celltype} name such as tMotor, and a {\it cell} name such as Motor follow the keyword {\it cell}.
-        To compose {\it cell}s, a {\it call} port, a {\it signature}, a {\it entry} port in order are described.
-        In this example, a {\it entry} port eMotor in a {\it cell} Motor is connected to a {\it call} port cMotor in a {\it cell} Caller.\\
+    \item[{\bf 組上げ記述}]\mbox{}\\
+        組上げ記述は，セルをインスタンス化し，セル同士を結合する．
+        {\it cell}キーワードに続けて，セルタイプ名，セル名を記述する．
+        呼び口名，``="，結合先の受け口名の順に記述し，セル同士を結合する．
+        図\ref{build}の例では，セルCallerの呼び口cMotorと，セルMotorの受け口eMotorが接続されている．
+        
 \begin{figure}[t]
 \centering
 \begin{lstlisting}
@@ -299,23 +308,19 @@ cell tCaller Caller{
 
 \subsection{mruby on TECS}
 \label{sec:mruby on TECS}
-mruby on TECS is a component-based framework for running script language.
-This framework uses two technologies, mruby and TECS.
+mruby on TECSは，mruby(軽量Ruby)を用いた組込みソフトウェアのコンポーネントベース開発が可能なフレームワークである．
 
-\subsubsection{System Model}\mbox{}\\
+\subsubsection{システムモデル}
+図\ref{fig:mrubyontecs}にmruby on TECSのシステムモデルを示す．
+mrubyバイトコードはそれぞれ，コンポーネント化されたRTOSのタスクとして，RiteVM上で実行される．
+TECSのコンポーネントは，モータドライバやセンサドライバのような組込みドライバをサポートしている．
 
-The system model of mruby on TECS is shown in Figure \ref{fig:mrubyontecs}.
-Each mruby program, which is bytecode, runs on its own RiteVM as a componentized task of an RTOS.
-TECS components support various embedded drivers such as motor and sensor drivers.
+mruby-TECSブリッジによって，mrubyプログラムからC言語の関数を呼び出すことができる．
+mruby-TECSブリッジについては，以下で詳しく説明する．
 
-An mruby-TECS bridge plays a role to call a native program (e.g. C legacy code) from an mruby program.
-The mruby-TECS bridge provides native libraries for mruby.
-It also gives TECS components to receive the invocation from an mruby program.
-The mruby-TECS bridge is described in more detail bellow.
-
-As the target RTOS, TOPPERS/HRP2 \cite{url:HRP2}, \cite{par:hr-tecs} is used in this paper.
-TOPPERS/HRP2 is an RTOS based on $\mu$ITRON \cite{par:microITRON} with memory protection.
-However, mruby on TECS does not depend on the RTOS because TECS supports not only TOPPERS/HRP2 but also the other RTOSs such as OSEK \cite{par:OSEK} and TOPPERS/ASP \cite{url:ASP}.
+本研究では，RTOSとして，TOPPERS/HRP2 \cite{url:HRP2}, \cite{par:hr-tecs}を使用した．
+TOPPERS/HRP2は，μITRON\cite{par:microITRON}をベースにしたメモリ保護機能を持つRTOSである．
+しかし，TECSは，TOPPERS/HRP2だけでなく，OSEK \cite{par:OSEK}やTOPPERS/ASP \cite{url:ASP}といったRTOSにも対応しているので，mruby on TECSはRTOSに依存しない．
 
 \begin{figure}[t]
     \centering
@@ -324,19 +329,14 @@ However, mruby on TECS does not depend on the RTOS because TECS supports not onl
     \label{fig:mrubyontecs}
 \end{figure}
 
-\subsubsection{mruby-TECS Bridge}\mbox{}\\
+\subsubsection{mruby-TECSブリッジ}
+mrubyとC言語には，実行時間に大きな差がある．
+\cite{par:mrubyonTECS}によると, mrubyプログラムは，C言語より実行時間が数百倍遅い．
+これによって，mrubyプログラムをすべてアプリケーションに使用することは難しい．
+mrubyを使用することにより，生産性やメンテナンス性を向上させることができる一方で，アクチュエータやセンサを制御するようなアプリケーションの重要な部分をC言語で実装することも必要である．
 
-There is a great difference between the execution time of mruby and C language.
-According to  \cite{par:mrubyonTECS}, mruby programs are several hundreds times slower than C programs.
-The execution of mruby bytecode on a RiteVM is not as efficient as that of C language.
-Thus it is difficult to use mruby for all of code.
-
-The use of Ruby on embedded devices provides the benefit of productivity and maintainability due to the ease to use and read.
-On the other hands, it is necessary to implement parts of applications in C language in order to manipulate actuators and sensors, and also make a critical section of code run quickly.
-
-Figure \ref{fig:mruby_TECS_bridge} shows an example of use of an mruby-TECS bridge for controlling a motor.
-The left side of BridgeMotor belongs to the mruby program.
-The right side of BridgeMotor belongs to TECS component.
+図\ref{fig:mruby_TECS_bridge}に，モータ制御に対するmruby-TECSブリッジの例を示す．
+BridgeMotorの左部分は，mrubyプログラムであり，右部分は，TECSのコンポーネントである．
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/mruby_TECS_bridge.pdf}
@@ -344,27 +344,16 @@ The right side of BridgeMotor belongs to TECS component.
     \label{fig:mruby_TECS_bridge}
 \end{figure}
 
-The mruby-TECS bridge generates two things.
-One is a {\it celltype} to receive invocation from the mruby program.
-The other thing is an mruby class that corresponds to the TECS component specified by the developers to invoke a C function from the mruby program.
+mruby-TECSブリッジは，mrubyプログラムからの呼び出しを受け取るためのセルタイプと，C関数を呼び出すためのmrubyクラスを生成する．
+生成されたmruby-TECSブリッジのコードがmrubyのクラスとメソッドを登録する．
+これによって，mrubyプログラムからあるメソッドが呼ばれると，mruby-TECSブリッジがTECSコンポーネントで定義されたC関数を呼び出す．
 
-A code of an mruby-TECS bridge is generated.
-The generation code supports registration of classes and methods for mruby.
-The methods in an mruby class are defined by generation codes for an mruby-TECS bridge, such as setPower and stop.
-Thus, when a method is called in an mruby program, an mruby-TECS bridge calls the function defined in the TECS component such as a Motor {\it cell}.
-
-\section{Design and Implementation}
+\section{設計と実装}
 \label{sec:Design and Implementation}
 図\ref{fig:system_model}に提案フレームワークの詳細なシステムモデルを示す．
 ホストから転送されたmrubyアプリケーションのバイトコードは，それぞれのRiteVMに実装されたローダで受信され，同期処理により同時に実行される．
 RiteVMスケジューラがタスクを周期的に切り替えるため，mrubyアプリケーションは並行動作することができる．
 　
-Figure \ref{fig:system_model} shows the detailed system model of the proposed framework.
-Each mruby application bytecode transferred from the host is received by the loader in the RiteVM.
-The RiteVM reads the own bytecode and executes it.
-The mruby applications run at the same time because of synchronization processing.
-The RiteVM scheuler switches tasks as multiple tasks can run in concurrent.
-
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/system_model.pdf}
@@ -372,7 +361,7 @@ The RiteVM scheuler switches tasks as multiple tasks can run in concurrent.
     \label{fig:system_model}
 \end{figure}
 
-\subsection{mruby Bytecode Loader Using Bluetooth}
+\subsection{Bluetoothを用いたmrubyバイトコードローダ}
 \label{sec:mruby bytecode loader using Bluetooth}
 この章では，Bluetoothを用いたmrubyバイトコードローダについて述べる．
 現状のmruby on TECSでは，mrubyバイトコードをプラットフォームに組み込んでいるため，mrubyプログラムを修正する度にプラットフォーム部分をもう一度コンパイル・リンクし，SDカードやROMといったデバイスに再度書き込み，OSを再起動する必要がある．
@@ -387,7 +376,7 @@ mrubyアプリケーションは，開発者が主にプログラムするメイ
 
 提案フレームワークでは，mrubyバイトコードの連続ローディングにも対応している．
 
-\subsubsection{Component of RiteVM with mruby bytecode loader using Bluetooth}
+\subsubsection{ローダを実装したRiteVMのコンポーネント}
 提案フレームワークでは，mrubyバイトコードローダはTECSのコンポーネントとして提供されている．
 このコンポーネントは，RiteVMのコンポーネントの拡張として実装されている．(詳細については\cite{par:mrubyonTECS}を参照)
 このコンポーネントでは，転送されたバイトコードの受信に加え，RiteVMのコンフィグレーションが行われる．
@@ -482,7 +471,7 @@ eMrubyBody_main( CELLIDX idx )
 \caption{Main code for RiteVM with mruby bytecode loader using Bluetooth}
 \label{maincode_mrubybluetooth}
 \end{figure}
-\subsection{Multitask}
+\subsection{マルチタスク処理}
 \label{sec:Multitask}
 この章では，提案フレームワークでのマルチタスク処理の設計にちて述べる．
 mruby on TECSは，マルチタスクに対応しているが，開発者がRTOSの知識を熟知している必要がある．
@@ -500,7 +489,7 @@ mruby on TECSは，マルチタスクに対応しているが，開発者がRTOS
 このスケジューラはアプリケーションタスクが同じ優先度を持つ場合に利用でき，開発者がOSの関数を呼び出すことなく，マルチタスク処理が可能になる．
 その上，既存のアプリケーションプログラムの構造を変えること使うことができる． 
 
-\subsubsection{RiteVM Scheduler}
+\subsubsection{RiteVMスケジューラ}
 RiteVMスケジューラは，周期ハンドラであり，μITRONのサービスコールである{\it rotateReadyQueue}を呼び出す．
 {\it rotateReadyQueue}は，同優先度のタスクの実行を切り替える関数である．
 RiteVMスケジューラの設計を図\ref{fig:rotateReadyQueue}に示す．
@@ -521,7 +510,7 @@ RiteVMスケジューラの設計を図\ref{fig:rotateReadyQueue}に示す．
     \label{fig:rotateReadyQueue}
 \end{figure} 
  
-\subsubsection{Component of RiteVM Scheduler}
+\subsubsection{RiteVMスケジューラのコンポーネント}
 図\ref{fig:cyclic_handler}にRiteVMスケジューラのコンポーネント図を示す．
 RiteVMスケジューラのコンポーネントは，CyclicHandlerとCyclicMainから構成される．
 CyclicHandlerセルは，μITRONの周期ハンドラの設定を行う．
@@ -534,7 +523,7 @@ CyclicMainセルは，周期ハンドラの処理を行うコンポーネント�
 {\it call}ポートは，カーネルの機能を使用するためにカーネルセルの{\it entry}ポート({\it tkernel.eiKernel})に接続されている．
 属性は，{\it rotateReadyQueue}の引数として使われる．
 
-図\ref{build_cyclic_handler}に，図\ref{fig:cyclic_handler}に示されるコンポーネントの組み上げ記述を示す．
+図\ref{build_cyclic_handler}に，図\ref{fig:cyclic_handler}に示されるコンポーネントの組上げ記述を示す．
 
 CyclicHandlerセル部分では，cyclicTimeやcyclicPhaseといった属性で与えられる周期ハンドラの設定を行う．
 attributeは{\it TA\_STA}であるので，OSが起動すると周期ハンドラが実行状態となる．
@@ -590,7 +579,7 @@ cell tCyclicMain CyclicMain{
     \label{build_cyclic_handler}
 \end{figure}
  
-\subsubsection{Synchronization of Multiple RiteVM Tasks}
+\subsubsection{mrubyアプリケーションの同期機構}
 複数のmrubyアプリケーションの起動を同期させるために，提案フレームワークでは，同期処理の手法としてイベントフラグを適用した．
 タスクはそれぞれ0x01(01)，0x02(10)のパターンをセットし，待ちパターン0x3(11)でAND待ちする．
 この機構は，2つ以上のタスクの場合でも適用できる．
@@ -607,7 +596,7 @@ cell tCyclicMain CyclicMain{
     \label{fig:Eventflag}
 \end{figure}
  
-\subsection{Benefits of Component-Based Development}
+\subsection{コンポーネントベース開発の利点}
 この章では，コンポーネントベース開発の利点を使った設計について述べる．
 
 提案フレームワークでは，RiteVMやRiteVMスケジューラ，イベントフラグはコンポーネントとして提供されているため，開発者はそれらのコンポーネントを容易に付け外し，再利用することができる．
@@ -620,31 +609,39 @@ cell tCyclicMain CyclicMain{
 {\it cEventflag\_set(ATTR\_setPattern)}に見られるこの設計によって，if文なしでプログラムを記述でき，RiteVMの数に関わらず同じCファイルを使用できる．
 さらに，TECSのオプションである{\it [optional]}によって，呼び口が結合した場合のみ処理を行うため，イベントフラグの結合を切った場合にでも同じCファイルを利用することができる．
 
-\section{Experimental Evaluation}
+\section{評価実験}
 \label{sec:Evaluation}
-This section mentions experimental results and their consideration.
-To analyze the advantages of the proposed framework, the evaluations are performed as follows.
+この章では，評価実験の結果と考察について述べる．
+提案フレームワークの利点を分析するため，以下の評価を行った．
 \begin{itemize}
-%    \item Execution time of the platform
-    \item Size and time for transferred mruby bytecodes
-    \item Execution time with singletasking, co-routine, and multitasking
-    \item Overhead for cyclic time
-%    \item Synchronization of mruby applications
-    \item Code size using the benefit of CBD 
+%    \item プラットフォームの起動時間
+    \item 転送されるmrubyバイトコードのサイズと処理時間およびコンパイル時間
+    \item シングルタスク，コルーチン，マルチタスクの実行時間
+    \item 周期時間によるオーバヘッド
+%   \item mrubyアプリケーションの同期
+    \item コンポーネントベース開発を利用したコードサイズ 
 \end{itemize}
 
-These evaluations are performed in order to indicate that an mruby bytecode loader improves the software development efficiency, and that the proposed multitask processing effectively executes compared with singletasking or co-routine, and also the overhead of the cyclic period.
-This paper demonstrates the proposed system on a LEGO MINDSTORMS EV3 (300MHz ARM9-based Sitara AM1808 system-on-a-chip) compiled with gcc 4.9.3 -O2 and mruby version 1.2.0.
+% These evaluations are performed in order to indicate that an mruby bytecode loader improves the software development efficiency, and that the proposed multitask processing effectively executes compared with singletasking or co-routine, and also the overhead of the cyclic period.
+本評価実験は，ターゲットデバイスとして，LEGO MINDSTORMS EV3 (300MHz ARM9-based Sitara AM1808 system-on-a-chip)を使用し，コンパイラは，gcc 4.9.3 -O2 および mruby version 1.2.0である．
 
-The size, load process time, and compilation time for mruby application and mruby application including library is shown in Table \ref{tab:size_and_time}.
-The overhead of load processing is 50.933 msec, which it takes to load a zero bytes bytecode.
-Similarly, the overhead of compilation is 46.9 msec, which it takes to compile a zero bytes program.
-The mruby application bytecode is smaler and faster than that of including mruby libraries in all terms.
-The difference becomes larger as the number of RiteVMs increases because it takes the 50 msec overhead per one RiteVM. 
-%In the proposed framework, developers send only mruby application and prepare mruby library in advance.
-%Therefore, the design can send the bytecode faster.
-In addition, the design can save the time to connect a storage/ROM device to restart an OS.
-These advantages lead improvement of the software development efficiency.
+表\ref{tab:size_and_time}に，mrubyアプリケーションのバイトコードと，mrubyライブラリとアプリケーションのバイトコードのサイズ，ロードにかかる処理時間，コンパイル時間の比較を示す．
+0バイトのバイトコードを処理した場合にかかるロード処理時間のオーバヘッドは，50.933 msecである．
+同様に0バイトのバイトコードをコンパイルした場合にかかるコンパイルのオーバヘッドは，46.9 msecである．
+mrubyアプリケーションのみのバイトコードの方が，ライブラリを含めた場合よりも，すべての点で優れている．
+これは，RiteVMひとつの評価であるため，RiteVMの数が増えるにつれ，この差は広がっていく．
+さらに，この設計では，SDカードやROMを接続したり，OSを再起動する手間も省くことができる．
+以上より，提案フレームワークは，既存フレームワークより作業効率を向上させることができる．
+
+% The size, load process time, and compilation time for mruby application and mruby application including library is shown in Table \ref{tab:size_and_time}.
+% The overhead of load processing is 50.933 msec, which it takes to load a zero bytes bytecode.
+% Similarly, the overhead of compilation is 46.9 msec, which it takes to compile a zero bytes program.
+% The mruby application bytecode is smaler and faster than that of including mruby libraries in all terms.
+% The difference becomes larger as the number of RiteVMs increases because it takes the 50 msec overhead per one RiteVM. 
+% %In the proposed framework, developers send only mruby application and prepare mruby library in advance.
+% %Therefore, the design can send the bytecode faster.
+% In addition, the design can save the time to connect a storage/ROM device to restart an OS.
+% These advantages lead improvement of the software development efficiency.
 
 \begin{table}[t]
     \centering
@@ -658,17 +655,26 @@ These advantages lead improvement of the software development efficiency.
     \label{tab:size_and_time}
 \end{table}
 
-The comparison of the application execution time with singletasking, co-routine, and multitasking is shown in Figure \ref{fig:comparison_s_c_m}.
-The 100,000 times loop program is used as mruby application for evaluation of execution time.
-In detail, the singletask program loops 100,000 times, and the multitask and co-routine programs loop 50,000 times in each task.
-In Figure \ref{fig:comparison_s_c_m}, the cyclic time of the cyclic handler for multitasking is one msec.
-While multitask's execution time is slower than singletask's, co-routine takes more time than multitask to execute an mruby application.
-This result shows the proposed design is superior to co-routine in terms of execution time.
-The overhead of multitask is about 5 \% ($(multitask-singletask)/multitask$).
-Switching tasks' overhead is also evaluated, that is about three $\mu$sec on average.
-%The number of switching tasks is from 500 to 600 because singletasking process in Figure \ref{fig:comparison_s_c_m} takes about 540 msec.
-%Therefore, the overhead of multitasking is 0.5 \% or less, and multitasking can be used without the overhead.
-The scheuler interrupts and switches tasks, which causes this overhead.
+次に，図\ref{fig:comparison_s_c_m}に，シングルタスク，コルーチン，マルチタスクの実行時間を示す．
+評価用のアプリケーションとして，100,000回ループするプログラムを適用した．
+マルチタスクおよびコルーチンは，2つのタスクでそれぞれ50,000回ループするプログラムを用いた．
+マルチタスクの実行時間は，シングルタスクよりも遅いが，コルーチンより速い．
+この結果から，提案フレームワークのマルチタスク処理は，コルーチンより有効である．
+RiteVMスケジューラのオーバヘッドは，約5\%である．
+タスクの切り替えそのものにかかる時間は，約3μsecである．
+RiteVMスケジューラは，周期的に割り込み，タスクの切り替えの処理を行うため，これがオーバヘッドとなっている．
+
+% The comparison of the application execution time with singletasking, co-routine, and multitasking is shown in Figure \ref{fig:comparison_s_c_m}.
+% The 100,000 times loop program is used as mruby application for evaluation of execution time.
+% In detail, the singletask program loops 100,000 times, and the multitask and co-routine programs loop 50,000 times in each task.
+% In Figure \ref{fig:comparison_s_c_m}, the cyclic time of the cyclic handler for multitasking is one msec.
+% While multitask's execution time is slower than singletask's, co-routine takes more time than multitask to execute an mruby application.
+% This result shows the proposed design is superior to co-routine in terms of execution time.
+% The overhead of multitask is about 5 \% ($(multitask-singletask)/multitask$).
+% Switching tasks' overhead is also evaluated, that is about three $\mu$sec on average.
+% %The number of switching tasks is from 500 to 600 because singletasking process in Figure \ref{fig:comparison_s_c_m} takes about 540 msec.
+% %Therefore, the overhead of multitasking is 0.5 \% or less, and multitasking can be used without the overhead.
+% The scheuler interrupts and switches tasks, which causes this overhead.
 
 
 \begin{figure}[t]
@@ -678,13 +684,22 @@ The scheuler interrupts and switches tasks, which causes this overhead.
     \label{fig:comparison_s_c_m}
 \end{figure}
 
-Figure \ref{fig:comparison_msec} shows the execution time of multitasking with the cyclic handler.
-A lower limit of the cyclic time is one msec due to the specification of TOPPERS/HRP2, the used RTOS.
-More than 10 msec do not be evaluated in this paper because it is thought the larger cyclic time influences applications.
-Each execution time of cyclic period is the same as the others.
-That is because the overhead of switching tasks (about 3 $\mu$sec) is small in comparison with the execution time.
-This results also shows the overhead becomes smaller as the cyclic time is larger, because the overhead depends on the number of switching tasks.
-The smaller cyclic time is better in multitasking due to concurrent and/or parallel processing.
+図\ref{fig:comparison_msec}は，RiteVMスケジューラの周期時間ごとの実行時間を示している．
+この評価では，TOPPERS/HRP2の仕様により周期時間の下限を1msecとした．
+また，周期時間が大きいとアプリケーションに影響を与える可能性があるため，上限を10msecとした．
+周期時間が大きいほど，タスクの切り替え回数は減少するため，実行時間は小さくなることが分かる．
+1msecと10msecでは，約3\%減少している．
+1msecと8msecでは，約1\%減少している．
+タスクを並行動作させるには，より小さい周期時間の方が好まれるが，オーバヘッドは大きくなる．
+しかし，周期時間によるオーバヘッドは，誤差に埋もれるほど小さい．
+
+% Figure \ref{fig:comparison_msec} shows the execution time of multitasking with the cyclic handler.
+% A lower limit of the cyclic time is one msec due to the specification of TOPPERS/HRP2, the used RTOS.
+% More than 10 msec do not be evaluated in this paper because it is thought the larger cyclic time influences applications.
+% Each execution time of cyclic period is the same as the others.
+% That is because the overhead of switching tasks (about 3 $\mu$sec) is small in comparison with the execution time.
+% This results also shows the overhead becomes smaller as the cyclic time is larger, because the overhead depends on the number of switching tasks.
+% The smaller cyclic time is better in multitasking due to concurrent and/or parallel processing.
 
 \begin{figure}[t]
     \centering
@@ -693,12 +708,20 @@ The smaller cyclic time is better in multitasking due to concurrent and/or paral
     \label{fig:comparison_msec}
 \end{figure}
 
-To indicate the superior of component-based development, the comparison of code lines between two .c files is shown in Table \ref{tab:codesize}.
-(A) and (B) mean the source files in the upper and lower of Figure \ref{fig:Eventflag}, respectively. 
-In terms of .c, (B)'s lines do not increase even if the number of RiteVMs increases, while (A)'s lines increase in proportion to the number.
-(B) is not modified, and can be utilized regardless of the number of RiteVMs.
-Moreover, lines of two .cdl files are equal.
-The skillfull component-based development brings this advantage such as the decrease of code lines, which leads high productivity and high maintainability.
+表\ref{tab:codesize}に，2つの.cファイルと.cdlファイルのコード行数の比較を示す．
+(A)と(B)はそれぞれ，図\ref{fig:Eventflag}の上部と下部を指している．
+(A)の.cファイルは，RiteVMの数に比例して増えているのに対して，(B)の.cファイルは同じである．
+つまり，(B)はRiteVMの数にかかわらず，修正することなく同一のファイルを使用できる．
+さらに，.cdlファイルは両者違いはない．
+コンポーネントベース開発を上手く活用することで，コードの行数を減らすことができ，高い生産性やメンテナンス性につながる．
+その上，同じ.cファイルを利用できるため，開発者が違うファイルをリンクする手間を省くことも可能になる．
+
+% To indicate the superior of component-based development, the comparison of code lines between two .c files is shown in Table \ref{tab:codesize}.
+% (A) and (B) mean the source files in the upper and lower of Figure \ref{fig:Eventflag}, respectively. 
+% In terms of .c, (B)'s lines do not increase even if the number of RiteVMs increases, while (A)'s lines increase in proportion to the number.
+% (B) is not modified, and can be utilized regardless of the number of RiteVMs.
+% Moreover, lines of two .cdl files are equal.
+% The skillfull component-based development brings this advantage such as the decrease of code lines, which leads high productivity and high maintainability.
 
 \begin{table}[t]
     \centering
@@ -713,8 +736,8 @@ The skillfull component-based development brings this advantage such as the decr
     \label{tab:codesize}
 \end{table}
 
-\section{Related Work}
-\label{sec:Related work}
+\section{関連研究}
+\label{sec:Related Work}
 
 \begin{table*}[t]
     \centering
@@ -730,59 +753,45 @@ The skillfull component-based development brings this advantage such as the decr
     \end{tabular}
     \label{tab:comparison}
 \end{table*}
-The open-source run-time systems for scripting languages have been proposed such as follow:
-python-on-a-chip \cite{url:python-on-a-chip}, the Owl system \cite{par:owl}, eLua \cite{url:eLua}, mruby \cite{par:mruby}, \cite{url:mruby}, and mruby on TECS \cite{par:mrubyonTECS}.
+現在，オープンソースのスクリプト言語のランタイムシステムとして，次のものが開発されている.
+python-on-a-chip \cite{url:python-on-a-chip}, the Owl system \cite{par:owl}, eLua \cite{url:eLua}, mruby \cite{par:mruby}, \cite{url:mruby}, mruby on TECS \cite{par:mrubyonTECS}.
 
-python-on-a-chip (p14p) is a Python run-time system that uses a reduced Python VM called PyMite.
-The VM runs a significant subset of Python language with few resources on a microcontroller.
-p14p can run multiple stackless green threads.
+python-on-a-chip(p14p)は，PyMyteと呼ばれるPythonVMを使用する，Pythonランタイムシステムである．
+PyMyteは，マイクロコントローラー上で低リソースでPythonプログラムを実行する．
+p14pは，スタックレスなグリーンスレッドを複数動作させることができる．
 
-The Owl system is an embedded Python run-time system.
-The Owl is a complete system for ARM Cortex-M3 microcontrollers.
-The Owl toolchain produces relocatable memory images, that are directly runnable on the microcontroller, from Python code objects.
-The interpreter of the Owl system is the same as that of python-on-a-chip.
+Owl systemは，組込みシステム向けのPythonランタイムシステムであり，ARM Cortex-M3 マイクロコントローラー上で動く．
+Owlツールチェーンは，Pythonコードから，マイコン上で直接起動するメモリイメージを生成する．
+Owl systemは，p14pのインタプリタを使用している．
 
-eLua offers the full implementation of Lua programming language to the embedded systems.
-Lua is one of the most popular script languages for embedded systems \cite{url:Lua}, \cite{par:Lua}.
-Lua supports co-routine, referred to collaborative multitasking.
-A co-routine in Lua is used as an independently executed thread.
-A co-routine can just suspend and resume multiple routines.
-Thus, a Lua co-routine is not like multitasks in multitask systems.
+eLuaは，Luaを組込みシステム向けの完全な実装である．
+Luaは，最も人気のある組込み向けスクリプト言語のひとつである\cite{url:Lua}, \cite{par:Lua}.
+Luaは，協調的マルチタスク処理が可能なコルーチンをサポートしているが，コルーチンは，ノンプリエンプティブであるため，マルチタスク処理のようなプログラムを行うのは難しい．
 
-mruby, the lightweight implementation of the Ruby language, has been proposed for embedded systems.
-mruby programs can run on a RiteVM, which is the VM for mruby and reads the mruby bytecode.
-mruby has supported co-routine, but not supported multitasking for RTOSs.
+mruby(軽量Ruby)は，組込みシステムに適したスクリプト言語である．
+mrubyプログラムは，RiteVM上で実行される．
+mrubyは，コルーチンをサポートしているが，RTOSのマルチタスクには対応していない．
 
-mruby on TECS is a component-based framework for running mruby programs.
-The programs on mruby on TECS can execute about 100 times faster than the mruby programs.
-Software can be also developed with component base by mruby on TECS.
-Although multitasking has been supported in the current mruby on TECS, developers need to be familiar with functions of an RTOS to use multitasking.
-The co-routine is supported as same as mruby.
+mruby on TECSは，mrubyを使ったコンポーネントベース開発が可能なフレームワークである．
+mruby on TECSは，mrubyより実行速度が100倍速い．
+mruby on TECSは，マルチタスクをサポートしているが，マルチタスク処理を行うには，開発者がRTOSの機能を呼び出す必要がある．
 
-Table \ref{tab:comparison} shows a comparison between the proposed framework and previous work.
-The proposed framework supports the loader, the VM scheuler, and synchronization of application.
- 
+表\ref{tab:comparison}に，提案フレームワークと既存研究の比較を示す．
+提案フレームワークでは，ローダに加えて，VMスケジューラとアプリケーションの同期機構を提供する．
+
 \section{Conclusion}
 \label{sec:Conclusion}
-This paper has presented an extended framework of mruby on TECS: mruby bytecode loader using Bluetooth and RiteVM scheuler.
-The loader provides developers with the software development efficiency without rewriting a storage/ROM device and restarting an OS.
-The proposed framework can be applied to many kinds of embedded systems  because the loader can use not only Bluetooth also wired serial connection.
-%Thus, the proposed framework can be utilized on the deveces without Bluetooth.
-The RiteVM scheuler makes multitasking more easily than the current mruby on TECS.
-In the evaluation, experimental results of the loader and the RiteVM scheduler show their advantages.
-The loader can improve the software development efficiency on mruby on TECS.
-The RiteVM sceduler has the effectiveness in terms of execution time and ease of use compared with singletasking and co-routine.
-%because of the low overhead.
+本研究では，mruby on TECSの拡張として，Bluetoothを用いたmrubyバイトコードローダとRiteVMスケジューラを提案した．
+mrubyバイトコードローダによって，開発者はSDカードやROMを再接続したり，OSを再起動する手間が省けるため，mruby on TECSでのソフトウェア開発の作業効率を向上させる．
+ローダは，Bluetoothだけでなく，有線のシリアル通信にも対応しているため，様々な組込みシステムに適用できる．
+RiteVMスケジューラは複数のmrubyアプリケーションを効率良く並行実行する.
+実験評価では，ローダによる作業効率の向上やオーバヘッドの少ないマルチタスク設計の有用性，コンポーネントベース開発の利点を示した.
 
-The proposed framework is developed in component-base by TECS.
-The facilities such as RiteVMs, the RiteVM scheuler, and Eventflag are implemented as components.
-Therefore, developers can easily add or remove the functionalities as necessary, and also reuse them.
-Developers can choose fair scheduling or fixed-priority scheduling since the RiteVM scheuler can be easily removed.
-Component-based development can increase productivity and decrease complexity.
+さらに，提案フレームワークで提供される機能はコンポーネントであるため，機能の取り外しや再利用が容易になる.
+RiteVMスケジューラも容易に付け外しできるため，開発者は，フェアスケジューリングか固定優先度スケジューリングかを選択することもできる．
+コンポーネントベース開発は，生産性を向上させ，システムの複雑さを減らすことができる．
 
-In the future, the mruby bytecode loader using Bluetooth will be supported to handle multiple bytecodes and run the application in multi-VM.
-Moreover, the .cdl files for RiteVM and mruby-TECS bridge are generated automatically using a plugin, and developers can send a bytecode with ZMODEM protocol on the command line.
-
+ソフトウェア開発をさらに効率よく行うために，プラグインを使用したRiteVMやmruby-TECSブリッジの.cdlファイルの自動生成や，コマンドライン上でのバイトコードの転送などを提供することが，今後の課題である．
 
 %%%%%%%%%%%% Reference %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{ipsj_v2/UTF8/ipsjunsrt-e}

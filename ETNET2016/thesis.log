@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  17 FEB 2016 00:13
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  17 FEB 2016 17:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -6,7 +6,7 @@ entering extended mode
 (./thesis.tex
 pLaTeX2e <2006/11/10> (based on LaTeX2e <2015/01/01> patch level 0)
 Babel <3.9l> and hyphenation patterns for 79 languages loaded.
-(../dummy/dummy.tex) (./ipsj_v2/UTF8/ipsj.cls
+(../EMSOFT2016/dummy/dummy.tex) (./ipsj_v2/UTF8/ipsj.cls
 
 LaTeX Warning: You have requested document class `ipsj_v2/UTF8/ipsj',
                but the document class provides `ipsj'.
@@ -4061,91 +4061,58 @@ LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 51.
 LaTeX Font Info:    ... okay on input line 51.
 \c@lstlisting=\count111
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <8.8711> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 69.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 71.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <8.8711> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 69.
-LaTeX Font Info:    Calculating math sizes for size <8.8711> on input line 84.
-LaTeX Font Info:    Font shape `JT1/mc/m/it' in size <8.5373> not available
-(Font)              Font shape `JT1/mc/m/n' tried instead on input line 87.
-LaTeX Font Info:    Font shape `JY1/mc/m/it' in size <8.5373> not available
-(Font)              Font shape `JY1/mc/m/n' tried instead on input line 87.
-LaTeX Font Info:    Font shape `JT1/mc/bx/it' in size <8.5373> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 87.
-LaTeX Font Info:    Font shape `JY1/mc/bx/it' in size <8.5373> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 87.
-LaTeX Font Info:    Calculating math sizes for size <8.5373> on input line 90.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 71.
 LaTeX Font Info:    Font shape `JT1/gt/bx/n' in size <19.2207> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 99.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 100.
 LaTeX Font Info:    Font shape `JY1/gt/bx/n' in size <19.2207> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 99.
-LaTeX Font Info:    Calculating math sizes for size <9.61035> on input line 99.
-
-LaTeX Font Info:    Calculating math sizes for size <11.82813> on input line 99
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 100.
+LaTeX Font Info:    Calculating math sizes for size <9.61035> on input line 100
 .
-LaTeX Font Info:    Calculating math sizes for size <8.27965> on input line 99.
-
-LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.22882> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 99.
-LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.22882> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 99.
-LaTeX Font Info:    Font shape `JT1/mc/m/sc' in size <10.34961> not available
-(Font)              Font shape `JT1/mc/m/n' tried instead on input line 99.
-LaTeX Font Info:    Font shape `JY1/mc/m/sc' in size <10.34961> not available
-(Font)              Font shape `JY1/mc/m/n' tried instead on input line 99.
-LaTeX Font Info:    Calculating math sizes for size <10.34961> on input line 99
-.
-LaTeX Font Info:    Font shape `JT1/mc/m/sc' in size <7.24469> not available
-(Font)              Font shape `JT1/mc/m/n' tried instead on input line 99.
-LaTeX Font Info:    Font shape `JY1/mc/m/sc' in size <7.24469> not available
-(Font)              Font shape `JY1/mc/m/n' tried instead on input line 99.
-LaTeX Font Info:    Calculating math sizes for size <7.24469> on input line 99.
-
-LaTeX Font Info:    Calculating math sizes for size <8.13184> on input line 99.
-
-LaTeX Font Info:    Calculating math sizes for size <5.69225> on input line 99.
-
-LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <11.82813> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 101.
-LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <11.82813> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 101.
-LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <9.61035> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 107.
-LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9.61035> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 107.
-
-
-LaTeX Warning: Citation `par:Crnkovic' on page 1 undefined on input line 107.
-
-
-LaTeX Warning: Citation `par:TECS' on page 1 undefined on input line 110.
-
-
-LaTeX Warning: Citation `url:AUTOSAR' on page 1 undefined on input line 110.
-
-
-LaTeX Warning: Citation `par:SAVEapproach' on page 1 undefined on input line 11
+LaTeX Font Info:    Calculating math sizes for size <11.82813> on input line 10
 0.
-
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.22882> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 100.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.22882> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 100.
+LaTeX Font Info:    Font shape `JT1/mc/m/sc' in size <10.34961> not available
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 100.
+LaTeX Font Info:    Font shape `JY1/mc/m/sc' in size <10.34961> not available
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 100.
+LaTeX Font Info:    Calculating math sizes for size <10.34961> on input line 10
+0.
+LaTeX Font Info:    Font shape `JT1/mc/m/sc' in size <7.24469> not available
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 100.
+LaTeX Font Info:    Font shape `JY1/mc/m/sc' in size <7.24469> not available
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 100.
+LaTeX Font Info:    Calculating math sizes for size <8.13184> on input line 100
+.
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <11.82813> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 102.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <11.82813> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 102.
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <9.24873> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 116.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 120.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9.24873> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 116.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 120.
+
 (I search kanjifont definition file: . . ) (I search font definition file: . .
 . . . . . )
-LaTeX Font Info:    Try loading font information for OMS+txsy on input line 116
+LaTeX Font Info:    Try loading font information for OMS+txsy on input line 120
 .
  (c:/w32tex/share/texmf-dist/tex/latex/txr/omstxsy.fd
 File: omstxsy.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    Try loading font information for OT1+txsy on input line 116
+LaTeX Font Info:    Try loading font information for OT1+txsy on input line 120
 .
-LaTeX Font Info:    No file OT1txsy.fd. on input line 116.
+LaTeX Font Info:    No file OT1txsy.fd. on input line 120.
 
 
 LaTeX Font Warning: Font shape `OT1/txsy/m/n' undefined
-(Font)              using `OT1/cmr/m/n' instead on input line 116.
+(Font)              using `OT1/cmr/m/n' instead on input line 120.
 
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 116.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 120.
 
 (c:/w32tex/share/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
@@ -4153,77 +4120,49 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 
 
 ]
-
-LaTeX Warning: Citation `par:mrubyonTECS' on page 2 undefined on input line 121
-.
-
-
-LaTeX Warning: Citation `par:EV3' on page 2 undefined on input line 126.
-
 File: ../EMSOFT2016/figure/proposed.pdf Graphic file (type pdf)
+
 <../EMSOFT2016/figure/proposed.pdf>
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <8.13184> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 170.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 184.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <8.13184> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 170.
-
-
-LaTeX Warning: Citation `url:Ruby' on page 2 undefined on input line 176.
-
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 184.
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <9.61035> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 188.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9.61035> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 188.
 File: ../EMSOFT2016/figure/mruby.pdf Graphic file (type pdf)
-<../EMSOFT2016/figure/mruby.pdf> [2]
+ <../EMSOFT2016/figure/mruby.pdf> [2]
 LaTeX Font Info:    Font shape `JT1/mc/m/it' in size <9.61035> not available
-(Font)              Font shape `JT1/mc/m/n' tried instead on input line 203.
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 217.
 LaTeX Font Info:    Font shape `JY1/mc/m/it' in size <9.61035> not available
-(Font)              Font shape `JY1/mc/m/n' tried instead on input line 203.
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 217.
 File: ../EMSOFT2016/figure/component_diagram.pdf Graphic file (type pdf)
 
 <../EMSOFT2016/figure/component_diagram.pdf>
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 238.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 247.
 
 
 (c:/w32tex/share/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8.8711> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 238.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 247.
  [3]
-
-LaTeX Warning: Citation `url:HRP2' on page 4 undefined on input line 316.
-
-
-LaTeX Warning: Citation `par:hr-tecs' on page 4 undefined on input line 316.
-
-
-LaTeX Warning: Citation `par:microITRON' on page 4 undefined on input line 317.
-
-
-
-LaTeX Warning: Citation `par:OSEK' on page 4 undefined on input line 318.
-
-
-LaTeX Warning: Citation `url:ASP' on page 4 undefined on input line 318.
-
 File: ../EMSOFT2016/figure/mrubyontecs.pdf Graphic file (type pdf)
+
 <../EMSOFT2016/figure/mrubyontecs.pdf>
-
-LaTeX Warning: Citation `par:mrubyonTECS' on page 4 undefined on input line 330
-.
-
 File: ../EMSOFT2016/figure/mruby_TECS_bridge.pdf Graphic file (type pdf)
-<../EMSOFT2016/figure/mruby_TECS_bridge.pdf> [4]
+
+<../EMSOFT2016/figure/mruby_TECS_bridge.pdf>
 File: ../EMSOFT2016/figure/system_model.pdf Graphic file (type pdf)
 
-<../EMSOFT2016/figure/system_model.pdf>
+<../EMSOFT2016/figure/system_model.pdf> [4]
 
-LaTeX Warning: Citation `par:mrubyonTECS' on page 5 undefined on input line 392
-.
-
-
-LaTeX Warning: Reference `url:HRP2' on page 5 undefined on input line 396.
+LaTeX Warning: Reference `url:HRP2' on page 5 undefined on input line 385.
 
 
-LaTeX Warning: Reference `par:HRP2' on page 5 undefined on input line 396.
+LaTeX Warning: Reference `par:HRP2' on page 5 undefined on input line 385.
 
 File: ../EMSOFT2016/figure/component_bluetooth.pdf Graphic file (type pdf)
 <../EMSOFT2016/figure/component_bluetooth.pdf>
@@ -4231,118 +4170,84 @@ File: ../EMSOFT2016/figure/control_flow.pdf Graphic file (type pdf)
 
 <../EMSOFT2016/figure/control_flow.pdf>
 LaTeX Font Info:    Font shape `JT1/mc/m/it' in size <8.8711> not available
-(Font)              Font shape `JT1/mc/m/n' tried instead on input line 438.
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 427.
 LaTeX Font Info:    Font shape `JY1/mc/m/it' in size <8.8711> not available
-(Font)              Font shape `JY1/mc/m/n' tried instead on input line 438.
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 427.
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <8.8711> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 455.
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 470.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 444.
+LaTeX Font Info:    Calculating math sizes for size <8.8711> on input line 452.
+
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 459.
 
 
 (c:/w32tex/share/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <8.8711> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 470.
-
-
-LaTeX Warning: Citation `url:co-routine' on page 5 undefined on input line 492.
-
-
-[5]
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 459.
+ [5]
 File: ../EMSOFT2016/figure/rotateReadyQueue.pdf Graphic file (type pdf)
- <../EMSOFT2016/figure/rotateReadyQueue.pdf>
 
-LaTeX Warning: Citation `par:microITRON' on page 6 undefined on input line 528.
-
-
-[6]
+<../EMSOFT2016/figure/rotateReadyQueue.pdf> [6]
 File: ../EMSOFT2016/figure/cyclic_handler.pdf Graphic file (type pdf)
- <../EMSOFT2016/figure/cyclic_handler.pdf>
-File: ../EMSOFT2016/figure/Eventflag.pdf Graphic file (type pdf)
 
-<../EMSOFT2016/figure/Eventflag.pdf> [7]
-Overfull \hbox (27.57553pt too wide) in paragraph at lines 652--659
+<../EMSOFT2016/figure/cyclic_handler.pdf>
+File: ../EMSOFT2016/figure/Eventflag.pdf Graphic file (type pdf)
+ <../EMSOFT2016/figure/Eventflag.pdf>
+[7]
+Overfull \hbox (27.57553pt too wide) in paragraph at lines 649--656
  [][] 
  []
 
 File: ../EMSOFT2016/figure/comparison_s_c_m.pdf Graphic file (type pdf)
-<../EMSOFT2016/figure/comparison_s_c_m.pdf> [8]
+<../EMSOFT2016/figure/comparison_s_c_m.pdf>
 File: ../EMSOFT2016/figure/comparison_msec.pdf Graphic file (type pdf)
 
 <../EMSOFT2016/figure/comparison_msec.pdf>
-
-LaTeX Warning: Citation `url:python-on-a-chip' on page 9 undefined on input lin
-e 724.
-
-
-LaTeX Warning: Citation `par:owl' on page 9 undefined on input line 725.
-
-
-LaTeX Warning: Citation `url:eLua' on page 9 undefined on input line 726.
-
-
-LaTeX Warning: Citation `par:mruby' on page 9 undefined on input line 727.
-
-
-LaTeX Warning: Citation `par:mrubyonTECS' on page 9 undefined on input line 728
-.
-
-
-Overfull \hbox (50.48607pt too wide) in paragraph at lines 722--732
+Overfull \hbox (53.4212pt too wide) in paragraph at lines 745--755
  [][] 
  []
 
+[8]
+Underfull \hbox (badness 8189) in paragraph at lines 759--762
+[]\OT1/cmr/m/n/9.61035 python-on-a-chip(p14p) \JY1/mc/m/n/9.61035 ÇÕ ÅC \OT1/cm
+r/m/n/9.61035 PyMyte \JY1/mc/m/n/9.61035 Ç∆åƒÇŒÇÍÇÈ
+ []
 
-LaTeX Warning: Citation `url:python-on-a-chip' on page 9 undefined on input lin
-e 734.
+(./thesis.bbl
+LaTeX Font Info:    Font shape `JT1/gt/m/it' in size <8.8711> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 4.
 
-
-LaTeX Warning: Citation `par:owl' on page 9 undefined on input line 734.
-
-
-LaTeX Warning: Citation `url:eLua' on page 9 undefined on input line 734.
-
-
-LaTeX Warning: Citation `par:mruby' on page 9 undefined on input line 734.
-
-
-LaTeX Warning: Citation `url:mruby' on page 9 undefined on input line 734.
-
-
-LaTeX Warning: Citation `par:mrubyonTECS' on page 9 undefined on input line 734
-.
-
-
-LaTeX Warning: Citation `url:Lua' on page 9 undefined on input line 746.
-
-
-LaTeX Warning: Citation `par:Lua' on page 9 undefined on input line 746.
+Underfull \hbox (badness 5924) in paragraph at lines 43--47
+\OT1/cmr/m/it/8.8711 of the 16th IEEE In-ter-na-tional Sym-po-sium on
+ []
 
 [9]
-No file thesis.bbl.
+Underfull \hbox (badness 10000) in paragraph at lines 64--65
+[]\OT1/cmr/m/n/8.8711 : python-on-a-chip, $\OT1/cmtt/m/n/8.8711 http : / / code
+ . google . com /
+ []
+
+)
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <11.08887> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 794.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 803.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <11.08887> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 794.
-[10] (./thesis.aux)
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 803.
+ [10] (./thesis.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 3918 strings out of 493777
- 55043 string characters out of 6153182
- 236053 words of memory out of 5000000
- 7326 multiletter control sequences out of 15000+600000
- 63320 words of font info for 280 fonts, out of 8000000 for 9000
+ 3841 strings out of 493777
+ 53670 string characters out of 6153182
+ 260064 words of memory out of 5000000
+ 7248 multiletter control sequences out of 15000+600000
+ 47106 words of font info for 209 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 36i,12n,49p,294b,1483s stack positions out of 5000i,500n,10000p,500000b,80000s
+ 32i,12n,49p,296b,1481s stack positions out of 5000i,500n,10000p,500000b,80000s
 
-Output written on thesis.dvi (10 pages, 74540 bytes).
+Output written on thesis.dvi (10 pages, 80588 bytes).
