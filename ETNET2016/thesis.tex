@@ -3,8 +3,10 @@
 % Last Change: Tue Feb 16 06:00 PM 2016 J
 %
 \input{../EMSOFT2016/dummy/dummy.tex}
-\documentclass[submit]{ipsj_v2/UTF8/ipsj}
+%\documentclass[submit]{ipsj_v2/UTF8/ipsj}
 %\documentclass{ipsj}
+%\documentclass[submit,techrep]{ipsj_v2/UTF8/ipsj}
+\documentclass[submit,techrep]{ipsj}
 
 \usepackage{latexsym}
 \usepackage[dvipdfmx]{graphicx}
@@ -15,7 +17,7 @@
     language={c},%
     basicstyle={\small},%
     identifierstyle={\small},%
-    commentstyle={\small\itshape},%
+    commentstyle={\scriptsize\itshape},%
     keywordstyle={\small},%\bfseries},%
     ndkeywordstyle={\small},%
     stringstyle={\small\it},
@@ -28,32 +30,22 @@
     numberstyle={\scriptsize},%
     stepnumber=1,
     numbersep=1zw,%
-    %lineskip=-0.5ex%
+    lineskip=-1.5ex%
 }
 
 \def\Underline{\setbox0\hbox\bgroup\let\\\endUnderline}
 \def\endUnderline{\vphantom{y}\egroup\smash{\underline{\box0}}\\}
 \def\|{\verb|}
 
-\setcounter{巻数}{57}
-\setcounter{号数}{1}
+\setcounter{巻数}{53}%vol53=2012
+\setcounter{号数}{10}
 \setcounter{page}{1}
-
-
-\受付{2015}{3}{4}
-%\再受付{2015}{7}{16}   %省略可能
-%\再再受付{2015}{7}{20} %省略可能
-\採録{2015}{8}{1}
-
-
-
 
 \begin{document}
 
 \title{Bluetoothを用いたマルチVM対応\\mrubyバイトコードローダ}
 
-%\etitle{mruby Bytecode Loader Using Bluetooth in Multi-VM Environment}
-
+\etitle{mruby Bytecode Loader Using Bluetooth in Multi-VM Environment}
 
 \affiliate{OU}{大阪大学基礎工学部\\
 School of Engineering Science, Osaka University}
@@ -70,12 +62,9 @@ Graduate School of Engineering Science, Osaka University}
 
 \begin{abstract}
 近年，組込みシステムは複雑化・大規模化しているため，組込みソフトウェアの生産性が問題になっている．
-
 組込みソフトウェア開発の生産性の向上を目的として，mruby（軽量Ruby）を適用させたコンポーネントベース開発が可能なフレームワークであるmruby on TECSを提案してきた．
-
 現状のmruby on TECSでは，プラットフォームにmrubyバイトコードを組み込んでいるため，mrubyプログラムを修正する度にコンパイル・リンクし直す必要がある．
 さらに，マルチVMを提供しているが，複数のmrubyプログラムを効率よく並行動作させるには開発者がリアルタイムOSの機能を熟知している必要がある．
-
 本研究では，mruby on TECSの拡張として，mrubyアプリケーションのバイトコードをBluetoothで転送することで開発効率を向上させる．
 さらに，複数のmrubyプログラムを協調動作できるフレームワークを提案する.
 
@@ -85,14 +74,16 @@ Graduate School of Engineering Science, Osaka University}
 % 情報処理学会論文誌ジャーナル，\LaTeX，スタイルファイル，べからず集
 % \end{jkeyword}
 
-% \begin{eabstract}
-% This document is a guide to prepare a draft for submitting to IPSJ
-% Journal, and the final camera-ready manuscript of a paper to appear in
-% IPSJ Journal, using {\LaTeX} and special style files.  Since this
-% document itself is produced with the style files, it will help you to
-% refer its source file which is distributed with the style files.
-% \end{eabstract}
-%
+\begin{eabstract}
+In recent years, the productivity of embedded systems has become a problem due to their complexity and large-scale.
+For the purpose of improving the productivity for embedded software development, the mruby on TECS framework has been proposed that is applied mruby (Lightweight Ruby) and supports component-based development.
+In the current mruby on TECS, the mruby programs have to be compiled and linked every time the programs are modified because the mruby bytecodes are incorporated in the platform.
+Moreover, while the framework supports multi-VM, developers need to be familiar with the functions of RTOSs to effectively execute multiple mruby programs in concurrent or/and parallel.
+To improve the development efficiency, this paper proposes an mruby bytecode loader using Bluetooth as an extension of mruby on TECS.
+In addition, multiple mruby programs cooperatively run in the proposed framework.
+A RiteVM sceduler makes multitasking processing more easy-to-use than that of mruby on TECS.
+\end{eabstract}
+
 % \begin{ekeyword}
 % IPSJ Journal, \LaTeX, style files, ``Dos and Don'ts'' list
 % \end{ekeyword}
@@ -100,26 +91,24 @@ Graduate School of Engineering Science, Osaka University}
 \maketitle
 
 \section{はじめに}
-近年，組込みシステムは高品質・高性能化に伴い，複雑化・大規模化している．
-例えば，IoTアプリケーションがある．
-その上，製品の低コスト化や短期間での開発も要求されている．
+近年，組込みシステムは高品質・高性能化に伴い，複雑化・大規模化している上に，製品の低コスト化や短期間での開発も要求されている．
 
 ソフトウェアを効率的に開発するアプローチのひとつに，コンポーネントベース開発がある．
-コンポーネントベース開発は，再利用可能なコンポーネントを構成するための設計手法である\cite{par:Crnkovic}．
+%コンポーネントベース開発は，再利用可能なコンポーネントを構成するための設計手法である．
 コンポーネント化されたソフトウェアは，再利用性が高く，検証が容易になるため，コンポーネントベース開発を適用することで，複雑かつ大規模なソフトウェアを効率的に開発することができる．
 システムの拡張や仕様変更にも柔軟に対応できる．
-組込みシステムのコンポーネント技術として，TECS\cite{par:TECS}やAUTOSAR\cite{url:AUTOSAR}，SaveCCM\cite{par:SAVEapproach}がある．
+組込みシステムのコンポーネント技術として，TECS\cite{par:TECS}やAUTOSAR\cite{url:AUTOSAR}などがある．
 
 効率的なソフトウェア開発のもう一つのアプローチとして，スクリプト言語がある．
 現在のソフトウェアのほとんどはC言語で開発されているが，C言語による開発はコストが高く，開発期間も長くなる．
 スクリプト言語は，その使いやすさから高い生産性をもっているため，効率的かつ短期間での開発ができる．
-有名なスクリプト言語として，Java script，Perl，Python，Lua，Rubyなどがある．
+有名なスクリプト言語として，Ruby, Perl，Python，Luaなどがある．
 
 しかし，スクリプト言語は可読性や使いやすさが高い反面，C言語よりも実行時間が遅い．
 組込みシステムにとって，最悪実行時間や応答時間といったリアルタイム性は非常に重要であるため，スクリプト言語を組込みシステムに利用することは難しい．
 
 %mruby on TECSは，スクリプト言語であるmruby使用したコンポーネントベース開発が可能なフレームワークである\cite{par:mrubyonTECS}．
-mruby on TECS は，mruby(軽量Ruby) と，組込みシステムに適したコンポーネントシステムであるTECS (TOPPERS Embedded Component System) を組み合わせたフレームワークである\cite{par:mrubyonTECS}.
+mruby on TECS は，mruby(軽量Ruby)\cite{par:mruby}と，組込みシステムに適したコンポーネントシステムであるTECS (TOPPERS Embedded Component System) を組み合わせたフレームワークである\cite{par:mrubyonTECS}.
 mruby on TECS では，mruby プログラムからC 言語の関数を呼ぶ機能を提供しており，mruby に比べて，アプリケーションを約100 倍速く実行できる.
 
 現状のmruby on TECSでは，いくつかの問題がある．
@@ -181,28 +170,28 @@ mruby on TECSで利用されているmrubyとTECSについても述べる．
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/proposed.pdf}
-    \caption{System Model}
+    \caption{システムモデル}
     \label{fig:proposed}
 \end{figure}
 
 \subsection{mruby}
-mrubyは，ISO規格の一部に準拠したRubyの軽量実装である．
-Ruby\cite{url:Ruby}は，オブジェクト指向型のスクリプト言語である．
-特徴としてシンプルな文法なため読みやすくかつ使いやすい上に，C言語よりも少ないコード量で記述できる．
-他にも，クラスやメソッドといったオブジェクト指向関数，例外，ガベージコレクションなどの機能により，生産性を向上させることができる．
+% mrubyは，ISO規格の一部に準拠したRubyの軽量実装である．
+% Ruby\cite{url:Ruby}は，オブジェクト指向型のスクリプト言語である．
+% 特徴としてシンプルな文法なため読みやすくかつ使いやすい上に，C言語よりも少ないコード量で記述できる．
+% 他にも，クラスやメソッドといったオブジェクト指向関数，例外，ガベージコレクションなどの機能により，生産性を向上させることができる．
 
 mrubyは，Rubyの可読性や使いやすさはそのままに，リソースが少なく起動が速いため，組込みシステムに適している．
 mrubyには，RiteVMと呼ばれるVMが実装されているため，どのOS上でもアプリケーションを起動させることができる．
-図\ref{fig:mruby}にRiteVMのメカニズムを示す．
+%図\ref{fig:mruby}にRiteVMのメカニズムを示す．
 mrubyコンパイラは，mrubyプログラム(.rb)を，中間言語であるバイトコード(.mrb)にコンパイルする．
-RiteVMが実装されいれば，どのターゲットデバイス上でも同じmrubyプログラムを実行できる．
+RiteVMが実装されていれば，どのターゲットデバイス上でも同じmrubyプログラムを実行できる．
 
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/mruby.pdf}
-    \caption{Mechanism of mruby/RiteVM}
-    \label{fig:mruby}
-\end{figure}
+% \begin{figure}[t]
+%     \centering
+%     \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/mruby.pdf}
+%     \caption{Mechanism of mruby/RiteVM}
+%     \label{fig:mruby}
+% \end{figure}
 
 \subsection{TECS}
 TECS (TOPPERS Embedded Component System)は，組込みシステム向けのコンポーネントシステムである．
@@ -227,15 +216,15 @@ TECSでは，インスタンス化されたコンポーネントはセル({\it c
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/component_diagram.pdf}
-    \caption{Component Diagram}
+    \caption{TECSコンポーネント図の例}
     \label{fig:component}
 \end{figure}
 
 \subsubsection{コンポーネント記述}
 TECSのコンポーネント記述は，シグニチャ記述，セルタイプ記述，組上げ記述の3つに分類され，.cdlファイルに記述する．
 図\ref{fig:component}に示されるコンポーネント記述について次に述べる．
-\begin{description}
-    \item[{\bf シグニチャ記述}]\mbox{}\\
+% \begin{description}
+%     \item[{\bf シグニチャ記述}]\mbox{}\\
         シグニチャ記述は，セルのインタフェースを定義する．
         {\it signature}キーワードに続けて，シグニチャ名(接頭辞``s")を記述する．
         図\ref{signature}のようにシグニチャsMotorを定義することができる.
@@ -254,11 +243,11 @@ signature sMotor{
     void initializePort( [in]int32_t type );
 };
 \end{lstlisting}
-\caption{Signature Description}
+\caption{シグニチャ記述}
 \label{signature}
 \end{figure}
 
-    \item[{\bf セルタイプ記述}]\mbox{}\\
+    % \item[{\bf セルタイプ記述}]\mbox{}\\
         セルタイプ記述は，受け口，呼び口，属性，内部変数を用いてセルタイプを定義する．
         {\it celltype}キーワードに続けて，セルタイプ名(接頭辞``t")を記述する．
         図\ref{celltype}に示すように，受け口は，{\it entry}キーワードに続けて，シグニチャ名, 受け口名を記述する．
@@ -273,19 +262,15 @@ celltype tCaller{
 };
 celltype tMotor{
     entry sMotor eMotor;
-    attr{
-        int32_t attr = 100;
-    };
-    var{
-        int32_t var;
-    };
+    attr{ int32_t attr = 100; };
+    var{ int32_t var; };
 };
 \end{lstlisting}
-\caption{Celltype Description}
+\caption{セルタイプ記述}
 \label{celltype}
 \end{figure}
 
-    \item[{\bf 組上げ記述}]\mbox{}\\
+    % \item[{\bf 組上げ記述}]\mbox{}\\
         組上げ記述は，セルをインスタンス化し，セル同士を結合する．
         {\it cell}キーワードに続けて，セルタイプ名，セル名を記述する．
         呼び口名，``="，結合先の受け口名の順に記述し，セル同士を結合する．
@@ -300,54 +285,54 @@ cell tCaller Caller{
     cMotor = Motor.eMotor;
 };
 \end{lstlisting}
-\caption{Build Description}
+\caption{組上げ記述}
 \label{build}
 \end{figure}
 
-\end{description}
+% \end{description}
 
 \subsection{mruby on TECS}
 \label{sec:mruby on TECS}
 mruby on TECSは，mruby(軽量Ruby)を用いた組込みソフトウェアのコンポーネントベース開発が可能なフレームワークである．
 
 \subsubsection{システムモデル}
-図\ref{fig:mrubyontecs}にmruby on TECSのシステムモデルを示す．
+%図\ref{fig:mrubyontecs}にmruby on TECSのシステムモデルを示す．
 mrubyバイトコードはそれぞれ，コンポーネント化されたRTOSのタスクとして，RiteVM上で実行される．
 TECSのコンポーネントは，モータドライバやセンサドライバのような組込みドライバをサポートしている．
 
 mruby-TECSブリッジによって，mrubyプログラムからC言語の関数を呼び出すことができる．
 mruby-TECSブリッジについては，以下で詳しく説明する．
 
-本研究では，RTOSとして，TOPPERS/HRP2 \cite{url:HRP2}, \cite{par:hr-tecs}を使用した．
+本研究では，RTOSとして，TOPPERS/HRP2\cite{par:hr-tecs}を使用した．
 TOPPERS/HRP2は，μITRON\cite{par:microITRON}をベースにしたメモリ保護機能を持つRTOSである．
-しかし，TECSは，TOPPERS/HRP2だけでなく，OSEK \cite{par:OSEK}やTOPPERS/ASP \cite{url:ASP}といったRTOSにも対応しているので，mruby on TECSはRTOSに依存しない．
+しかし，TECSは，TOPPERS/HRP2だけでなく，OSEK\cite{par:OSEK}やTOPPERS/ASP\cite{url:ASP}といったRTOSにも対応しているので，mruby on TECSはRTOSに依存しない．
 
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/mrubyontecs.pdf}
-    \caption{System Model of existing mruby on TECS}
-    \label{fig:mrubyontecs}
-\end{figure}
+% \begin{figure}[t]
+%     \centering
+%     \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/mrubyontecs.pdf}
+%     \caption{System Model of existing mruby on TECS}
+%     \label{fig:mrubyontecs}
+% \end{figure}
 
-\subsubsection{mruby-TECSブリッジ}
-mrubyとC言語には，実行時間に大きな差がある．
-\cite{par:mrubyonTECS}によると, mrubyプログラムは，C言語より実行時間が数百倍遅い．
-これによって，mrubyプログラムをすべてアプリケーションに使用することは難しい．
-mrubyを使用することにより，生産性やメンテナンス性を向上させることができる一方で，アクチュエータやセンサを制御するようなアプリケーションの重要な部分をC言語で実装することも必要である．
-
-図\ref{fig:mruby_TECS_bridge}に，モータ制御に対するmruby-TECSブリッジの例を示す．
-BridgeMotorの左部分は，mrubyプログラムであり，右部分は，TECSのコンポーネントである．
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/mruby_TECS_bridge.pdf}
-    \caption{mruby-TECS Bridge}
-    \label{fig:mruby_TECS_bridge}
-\end{figure}
-
-mruby-TECSブリッジは，mrubyプログラムからの呼び出しを受け取るためのセルタイプと，C関数を呼び出すためのmrubyクラスを生成する．
-生成されたmruby-TECSブリッジのコードがmrubyのクラスとメソッドを登録する．
-これによって，mrubyプログラムからあるメソッドが呼ばれると，mruby-TECSブリッジがTECSコンポーネントで定義されたC関数を呼び出す．
-
+% \subsubsection{mruby-TECSブリッジ}
+% mrubyとC言語には，実行時間に大きな差がある．
+% \cite{par:mrubyonTECS}によると, mrubyプログラムは，C言語より実行時間が数百倍遅い．
+% これによって，mrubyプログラムをすべてアプリケーションに使用することは難しい．
+% mrubyを使用することにより，生産性やメンテナンス性を向上させることができる一方で，アクチュエータやセンサを制御するようなアプリケーションの重要な部分をC言語で実装することも必要である．
+%
+% 図\ref{fig:mruby_TECS_bridge}に，モータ制御に対するmruby-TECSブリッジの例を示す．
+% BridgeMotorの左部分は，mrubyプログラムであり，右部分は，TECSのコンポーネントである．
+% \begin{figure}[t]
+%     \centering
+%     \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/mruby_TECS_bridge.pdf}
+%     \caption{mruby-TECS Bridge}
+%     \label{fig:mruby_TECS_bridge}
+% \end{figure}
+%
+% mruby-TECSブリッジは，mrubyプログラムからの呼び出しを受け取るためのセルタイプと，C関数を呼び出すためのmrubyクラスを生成する．
+% 生成されたmruby-TECSブリッジのコードがmrubyのクラスとメソッドを登録する．
+% これによって，mrubyプログラムからあるメソッドが呼ばれると，mruby-TECSブリッジがTECSコンポーネントで定義されたC関数を呼び出す．
+%
 \section{設計と実装}
 \label{sec:Design and Implementation}
 図\ref{fig:system_model}に提案フレームワークの詳細なシステムモデルを示す．
@@ -357,7 +342,7 @@ RiteVMスケジューラがタスクを周期的に切り替えるため，mruby
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/system_model.pdf}
-    \caption{Detailed System Model of the proposed framework}
+    \caption{提案フレームワークの詳細なシステムモデル}
     \label{fig:system_model}
 \end{figure}
 
@@ -370,8 +355,8 @@ RiteVMスケジューラがタスクを周期的に切り替えるため，mruby
 
 mrubyプログラムは，アプリケーション部分とライブラリ部分に分けられる．
 mrubyアプリケーションは，開発者が主にプログラムするメインのコードであり，mrubyライブラリには，motorクラスやsensorクラスといったRubyクラスのようにアプリケーションで利用される関数群が定義されている．
-アプリケーションとライブラリを含んだmrubyバイトコードを転送し，実行することもできるが，提案フレームワークでは，ライブラリ部分はプラットフォームに組込み，アプリケーション部分のみを転送する設計にした．
-このような設計にすることで，ライブラリは頻繁に変更されないため，毎回コンパイルする無駄を省くことができる．
+アプリケーションとライブラリを含んだmrubyバイトコードを転送し，実行することもできるが，提案フレームワークでは，ライブラリ部分はプラットフォームに組み込み，アプリケーション部分のみを転送する設計にした．
+この設計にすることで，転送するバイトコードのサイズや処理時間の無駄を省くことができる．
 さらに，各RiteVMでライブラリを共有することや，RiteVM固有のライブラリを持つことも可能になる．
 
 提案フレームワークでは，mrubyバイトコードの連続ローディングにも対応している．
@@ -382,14 +367,14 @@ mrubyアプリケーションは，開発者が主にプログラムするメイ
 このコンポーネントでは，転送されたバイトコードの受信に加え，RiteVMのコンフィグレーションが行われる．
 
 図\ref{fig:component_bluetooth}に，MrubyTask1とMrubyBluetooth1のコンポーネントの例を示す．
-MrubyTask1は，コンポーネント化されたRTOS (TOPPERS/HRP2 \ref{url:HRP2}\ref{par:HRP2})のタスクである．
+MrubyTask1は，コンポーネント化されたRTOS (TOPPERS/HRP2\cite{par:HRP2})のタスクである．
 MrubyBluetooth1は，mrubyバイトコードを実装したRiteVMのコンポーネントであり，このコンポーネントのはじめで転送されてきたバイトコードを受信する．
 提案フレームワークでは，バイナリ転送プロトコルとして，ZMODEを適用した．
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/component_bluetooth.pdf}
-    \caption{Component Diagram of mruby bytecode loader using Bluetooth}
+    \caption{ローダを実装したRiteVMのコンポーネント図}
     \label{fig:component_bluetooth}
 \end{figure}
 
@@ -414,71 +399,56 @@ mrubyアプリケーションのプログラムが修正された場合は，そ
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/control_flow.pdf}
-    \caption{Control Flow of mruby bytecode loader using Bluetooth}
+    \caption{ローダの処理フローチャート}
     \label{fig:control_flow}
 \end{figure}
 \begin{figure}[t]
 \centering
 \begin{lstlisting}
 celltype tMrubyBluetooth{
-    entry sTaskBody eMrubyBody;
-    attr{
-      [omit]char_t *mrubyFile;
-      char_t *irep = C_EXP("&$cell_global$_irep");
-      uint32_t irepAppSize = C_EXP( BUFFER_SIZE );
-    };
-    var{
-        [size_is(irepAppSize)] uint8_t *irepApp;
-    };
+  entry sTaskBody eMrubyBody;
+  attr{
+    [omit]char_t *mrubyFile;
+    char_t *irep = C_EXP("&$cell_global$_irep");
+    uint32_t irepAppSize = C_EXP( BUFFER_SIZE );
+  };
+  var{ [size_is(irepAppSize)] uint8_t *irepApp; };
 };
 \end{lstlisting}
-\caption{Celltype Description for RiteVM with mruby bytecode loader using Bluetooth}
+\caption{ローダを実装したRiteVMのセルタイプ記述}
 \label{celltype_mrubybluetooth}
 \end{figure}
 \begin{figure}[t]
 \centering
 \begin{lstlisting}
-void
-eMrubyBody_main( CELLIDX idx )
-{
-  /* Declaration variables */
-  mrb_state *mrb;
-  mrbc_context *c;
-  /* New interpreter instance */
-  mrb = mrb_open();
-  // Omit: error check for mrb_state
-  /* New mruby context */
-  c = mrbc_context_new( mrb );
-  // Omit: initialization of mruby-TECS bridge
-  /* Receive the bytecode via Bluetooth */
+void eMrubyBody_main( CELLIDX idx ){
+  /*Omit: Declaration variables*/
+  mrb=mrb_open(); /*New interpreter instance*/
+  /*Omit: error check for mrb_state*/
+  c=mrbc_context_new( mrb ); /*New mruby context*/
+  /*Omit: initialization of mruby-TECS bridge*/
+  /*Receive the bytecode via Bluetooth*/
   bluetooth_loader( VAR_irepApp );
-  /* Load mruby library bytecode and run */
+  /*Load mruby library bytecode and run*/
   mrb_load_irep_cxt( mrb, ATTR_irep, c );
-  /* Load mruby application bytecode and run */
+  /*Load mruby application bytecode and run*/
   mrb_load_irep_cxt( mrb, VAR_irepApp, c );
-  if ( mrb->exc ) {
-    /* Failure to execute */
-    mrb_p( mrb, mrb_obj_value( mrb->exc ) );
-    exit( 0 );
-  }
-  /* Free mruby context */
-  mrbc_context_free( mrb, c );
-  /* Free interpreter instance */
-  mrb_close( mrb );
+  mrbc_context_free( mrb, c ); /*Free mruby context*/
+  mrb_close( mrb ); /*Free interpreter instance*/
 }
 
 \end{lstlisting}
-\caption{Main code for RiteVM with mruby bytecode loader using Bluetooth}
+\caption{ローダを実装したRiteVMのメインコード}
 \label{maincode_mrubybluetooth}
 \end{figure}
 \subsection{マルチタスク処理}
 \label{sec:Multitask}
-この章では，提案フレームワークでのマルチタスク処理の設計にちて述べる．
-mruby on TECSは，マルチタスクに対応しているが，開発者がRTOSの知識を熟知している必要がある．
+この章では，提案フレームワークでのマルチタスク処理の設計について述べる．
+%mruby on TECSは，マルチタスクに対応しているが，開発者がRTOSの知識を熟知している必要がある．
 
 マルチタスク処理のアプローチのひとつにコルーチンがある．
 コルーチンは，協調的スレッドであり，開発者が{\it resume}や{\it yield}といった関数を呼び出すことで並列動作を行うことができる．
-(Rubyのコルーチンは，Fiberクラスに定義されている．\cite{url:co-routine})
+(Rubyのコルーチンは，Fiberクラス\cite{url:co-routine}に定義されている．)
 コルーチンは，ノンプリエンプティブな処理で，開発者自身がタスクの切り替えを行う必要があるので，OSのサポートやマルチコアの恩恵を受けることができない．
 
 その他のアプローチとして，μITRONのサービスコールである{\it delay()}使った手法がある．
@@ -506,12 +476,12 @@ RiteVMスケジューラの設計を図\ref{fig:rotateReadyQueue}に示す．
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/rotateReadyQueue.pdf}
-    \caption{The design of RiteVM sceduler}
+    \caption{RiteVMスケジューラの設計}
     \label{fig:rotateReadyQueue}
 \end{figure} 
  
 \subsubsection{RiteVMスケジューラのコンポーネント}
-図\ref{fig:cyclic_handler}にRiteVMスケジューラのコンポーネント図を示す．
+%図\ref{fig:cyclic_handler}にRiteVMスケジューラのコンポーネント図を示す．
 RiteVMスケジューラのコンポーネントは，CyclicHandlerとCyclicMainから構成される．
 CyclicHandlerセルは，μITRONの周期ハンドラの設定を行う．
 μITRONの周期ハンドラは，\cite{par:microITRON}に詳しく書かれている．
@@ -519,11 +489,12 @@ CyclicHandlerセルは，μITRONの周期ハンドラの設定を行う．
 周期ハンドラは，5つの引数を持っている．(ID, attribute, cyclic time, cyclic phase, access pattern)
 CyclicHandlerセルは，3つの引数をセルの属性として持っている．
 CyclicMainセルは，周期ハンドラの処理を行うコンポーネントであり，{\it rotateReadyQueue}が実装されている．
-図\ref{celltype_cyclic_handler}に，セルタイプtCyclicMainのセルタイプ記述を示す．
-{\it call}ポートは，カーネルの機能を使用するためにカーネルセルの{\it entry}ポート({\it tkernel.eiKernel})に接続されている．
+%図\ref{celltype_cyclic_handler}に，セルタイプtCyclicMainのセルタイプ記述を示す．
+{\it call}ポートは，カーネルの機能である{\it rotateReadyQueue}を使用するためにカーネルセルの{\it entry}ポート({\it tkernel.eiKernel})に接続されている．
 属性は，{\it rotateReadyQueue}の引数として使われる．
 
-図\ref{build_cyclic_handler}に，図\ref{fig:cyclic_handler}に示されるコンポーネントの組上げ記述を示す．
+%図\ref{build_cyclic_handler}に，図\ref{fig:cyclic_handler}に示されるコンポーネントの組上げ記述を示す．
+図\ref{build_cyclic_handler}に，RiteVMスケジューラのコンポーネント組上げ記述を示す．
 
 CyclicHandlerセル部分では，cyclicTimeやcyclicPhaseといった属性で与えられる周期ハンドラの設定を行う．
 attributeは{\it TA\_STA}であるので，OSが起動すると周期ハンドラが実行状態となる．
@@ -532,35 +503,35 @@ CyclicMainセル部分には，属性としてpriorityが記述されている�
 RITEVM\_PRIORITYはmrubyタスクの優先度として定義されている．
 この属性は，{\it rotateReadyQueue}の引数として与えられる．
 
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/cyclic_handler.pdf}
-    \caption{Component Diagram of Cyclic Handler}
-    \label{fig:cyclic_handler}
-\end{figure}
-\begin{figure}[t]
-    \centering
-    \begin{lstlisting}
-celltype tCyclicHandler {
-    [inline] entry sCyclic eCyclic;
-    call  siHandlerBody  ciBody;
-    attr {
-    	[omit] ATR    attribute = C_EXP("TA_NULL");
-    	[omit] RELTIM cyclicTime;
-    	[omit] RELTIM cyclicPhase = 0;
-    };
-};
-celltype tCyclicMain{
-    require tKernel.eiKernel;
-    entry siHandlerBody eiBody;
-    attr {
-        PRI priority;
-    };
-};
-    \end{lstlisting}
-    \caption{Celltype Description of Cyclic Handler}
-    \label{celltype_cyclic_handler}
-\end{figure}
+% \begin{figure}[t]
+%     \centering
+%     \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/cyclic_handler.pdf}
+%     \caption{Component Diagram of Cyclic Handler}
+%     \label{fig:cyclic_handler}
+% \end{figure}
+% \begin{figure}[t]
+%     \centering
+%     \begin{lstlisting}
+% celltype tCyclicHandler {
+%     [inline] entry sCyclic eCyclic;
+%     call  siHandlerBody  ciBody;
+%     attr {
+%     	[omit] ATR    attribute = C_EXP("TA_NULL");
+%     	[omit] RELTIM cyclicTime;
+%     	[omit] RELTIM cyclicPhase = 0;
+%     };
+% };
+% celltype tCyclicMain{
+%     require tKernel.eiKernel;
+%     entry siHandlerBody eiBody;
+%     attr {
+%         PRI priority;
+%     };
+% };
+%     \end{lstlisting}
+%     \caption{Celltype Description of Cyclic Handler}
+%     \label{celltype_cyclic_handler}
+% \end{figure}
 \begin{figure}[t]
     \centering
     \begin{lstlisting}
@@ -571,11 +542,10 @@ cell tCyclicHandler CyclicHandler{
     cyclicPhase = 1;
 };
 cell tCyclicMain CyclicMain{
-    priority =
-        C_EXP("RITEVM_PRIORITY");
+    priority = C_EXP("RITEVM_PRIORITY");
 };
    \end{lstlisting}
-    \caption{Build Description of Cyclic Handler}
+    \caption{RiteVMスケジューラの組上げ記述}
     \label{build_cyclic_handler}
 \end{figure}
  
@@ -592,7 +562,7 @@ cell tCyclicMain CyclicMain{
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/Eventflag.pdf}
-    \caption{The design for Eventflag using TECS {\scriptsize *only differences}}
+    \caption{TECSを用いたイベントフラグの設計 {\scriptsize *差分のみ示す}}
     \label{fig:Eventflag}
 \end{figure}
  
@@ -600,7 +570,7 @@ cell tCyclicMain CyclicMain{
 この章では，コンポーネントベース開発の利点を使った設計について述べる．
 
 提案フレームワークでは，RiteVMやRiteVMスケジューラ，イベントフラグはコンポーネントとして提供されているため，開発者はそれらのコンポーネントを容易に付け外し，再利用することができる．
-例えば，RiteVMスケジューラの機能を外したい場合，図\ref{celltype_cyclic_handler}，\ref{build_cyclic_handler}に示されるcdlファイルを{\it //import($<$tRiteVMScheduler.cdl$>$);}のようにコメントアウトすることで容易に実現できる．
+例えば，RiteVMスケジューラの機能を外したい場合，図\ref{build_cyclic_handler}に示されるcdlファイルを{\it //import($<$tRiteVMScheduler.cdl$>$);}のようにコメントアウトすることで容易に実現できる．
 開発者は，カーネルのコンフィグレーションファイルを修正する手間を省くことができる．
 
 それに加えて，コンポーネントベース開発ではコード量を減らすことができる．
@@ -619,11 +589,12 @@ cell tCyclicMain CyclicMain{
     \item シングルタスク，コルーチン，マルチタスクの実行時間
     \item 周期時間によるオーバヘッド
 %   \item mrubyアプリケーションの同期
-    \item コンポーネントベース開発を利用したコードサイズ 
+    \item コンポーネントベース開発を利用したコード行数
 \end{itemize}
 
 % These evaluations are performed in order to indicate that an mruby bytecode loader improves the software development efficiency, and that the proposed multitask processing effectively executes compared with singletasking or co-routine, and also the overhead of the cyclic period.
-本評価実験は，ターゲットデバイスとして，LEGO MINDSTORMS EV3 (300MHz ARM9-based Sitara AM1808 system-on-a-chip)を使用し，コンパイラは，gcc 4.9.3 -O2 および mruby version 1.2.0である．
+本評価実験は，ターゲットデバイスとして，LEGO MINDSTORMS EV3 (300MHz ARM9-based Sitara AM1808 system-on-a-chip)を使用した．
+コンパイラは，gcc 4.9.3 -O2 および mrubyのバージョンは，1.2.0である．
 
 表\ref{tab:size_and_time}に，mrubyアプリケーションのバイトコードと，mrubyライブラリとアプリケーションのバイトコードのサイズ，ロードにかかる処理時間，コンパイル時間の比較を示す．
 0バイトのバイトコードを処理した場合にかかるロード処理時間のオーバヘッドは，50.933 msecである．
@@ -645,12 +616,12 @@ mrubyアプリケーションのみのバイトコードの方が，ライブラ
 
 \begin{table}[t]
     \centering
-    \caption{Comparison of the size and load process time between an mruby application including mruby libraries and not}
+    \caption{転送されるmrubyバイトコードのサイズと処理時間およびコンパイル時間}
     \begin{tabular}{c||c|c|c}
                             & App\&Lib     & App        &   App\&Lib/App  \\ \hline
           Bytecode Size     & 14,044 bytes & 199 bytes  &   $\times$70.6          \\ %\hline
           Load Process Time & 305.081 msec & 7.774 msec &   $\times$39.2          \\
-          Compilation Time  & 8.7 msec     & 0.3 msec   &   $\times$29.0          \\
+          Compile Time      & 8.7 msec     & 0.3 msec   &   $\times$29.0          \\
     \end{tabular}
     \label{tab:size_and_time}
 \end{table}
@@ -680,7 +651,7 @@ RiteVMスケジューラは，周期的に割り込み，タスクの切り替�
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/comparison_s_c_m.pdf}
-    \caption{Comparison of the application execution time with singletask, co-routine, and multitask}
+    \caption{シングルタスク，コルーチン，マルチタスクの実行時間}
     \label{fig:comparison_s_c_m}
 \end{figure}
 
@@ -704,17 +675,16 @@ RiteVMスケジューラは，周期的に割り込み，タスクの切り替�
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/comparison_msec.pdf}
-    \caption{Comparison of the overhead for each cyclic period of calling rotateReadyQueue}
+    \caption{周期時間によるオーバヘッド}
     \label{fig:comparison_msec}
 \end{figure}
 
-表\ref{tab:codesize}に，2つの.cファイルと.cdlファイルのコード行数の比較を示す．
+表\ref{tab:codesize}に，2つの.cファイルと.cdlファイルのコード行数と変更行数の比較を示す．
 (A)と(B)はそれぞれ，図\ref{fig:Eventflag}の上部と下部を指している．
-(A)の.cファイルは，RiteVMの数に比例して増えているのに対して，(B)の.cファイルは同じである．
-つまり，(B)はRiteVMの数にかかわらず，修正することなく同一のファイルを使用できる．
+(A)の.cファイルは，RiteVMの数に比例して増えているのに対して，(B)の.cファイルは同じである上に，RiteVMの数にかかわらず，修正することなく同一のファイルを使用できる．
 さらに，.cdlファイルは両者違いはない．
 コンポーネントベース開発を上手く活用することで，コードの行数を減らすことができ，高い生産性やメンテナンス性につながる．
-その上，同じ.cファイルを利用できるため，開発者が違うファイルをリンクする手間を省くことも可能になる．
+その上，同じ.cファイルを利用できるため，開発者がファイルを修正する手間を省くことも可能になる．
 
 % To indicate the superior of component-based development, the comparison of code lines between two .c files is shown in Table \ref{tab:codesize}.
 % (A) and (B) mean the source files in the upper and lower of Figure \ref{fig:Eventflag}, respectively. 
@@ -725,12 +695,13 @@ RiteVMスケジューラは，周期的に割り込み，タスクの切り替�
 
 \begin{table}[t]
     \centering
-    \caption{Lines of .c and .cdl file for the number of RiteVM}
+    \caption{コンポーネントベース開発を利用したコード行数} 
     \begin{tabular}{c||cc|c}
                 & (A)       & (B)     & Diff  \\ \hline
-        .c      & 134$+$8$\times$$\alpha $  & 130     & 4$+$8$\times$$\alpha$ \\
-        .cdl    & 25$+$18$\times$$\alpha$   & 25$+$18$\times$$\alpha$ & 0     \\
-        \multicolumn{3}{l}{  }\\
+        .c (Total)      & 8$\times$$\alpha$$+$134  & 130     & 8$\times$$\alpha+$4\\
+        .c (Modified)   & 10$\times\alpha$$-$2 & 0   &  10$\times\alpha$$-$2 \\
+        .cdl    & 18$\times$$\alpha$$+$25   & 18$\times$$\alpha$$+$25 & 0     \\
+        %\multicolumn{3}{l}{  }\\
         \multicolumn{3}{l}{{\small $\alpha$} : {\scriptsize the number of RiteVM}}
     \end{tabular}
     \label{tab:codesize}
@@ -741,20 +712,22 @@ RiteVMスケジューラは，周期的に割り込み，タスクの切り替�
 
 \begin{table*}[t]
     \centering
-    \caption{Comparion of the proposed and previous work}
+    \caption{関連研究}
+    {\tabcolsep=0.1cm
     \begin{tabular}{c||c|ccccccc}
         & Bluetooth Loader & \shortstack{Call\\C Function} & \shortstack{Legacy Code of\\Embedded System} & \shortstack{VM\\Managenment} & \shortstack{VM\\Scheduler} & \shortstack{Synchronization of\\Application} & Co-routine \\ \hline
-        python-on-a-chip \cite{url:python-on-a-chip} &            &            &            &            &             &            & \checkmark \\
-        Owl system \cite{par:owl}                    &            & \checkmark & Partially  &            &             &            & \checkmark \\
-        eLua \cite{url:eLua}                         &            & \checkmark & Partially  &            &             &            & \checkmark \\
-        mruby \cite{par:mruby}                       &            & \checkmark &            &            &             &            & \checkmark \\
-        mruby on TECS \cite{par:mrubyonTECS}         &            & \checkmark & \checkmark & \checkmark &             &            & \checkmark \\
+        python-on-a-chip\cite{url:python-on-a-chip} &            &            &            &            &             &            & \checkmark \\
+        Owl system\cite{par:owl}                    &            & \checkmark & Partially  &            &             &            & \checkmark \\
+        eLua\cite{url:eLua}                         &            & \checkmark & Partially  &            &             &            & \checkmark \\
+        mruby\cite{par:mruby}                       &            & \checkmark &            &            &             &            & \checkmark \\
+        mruby on TECS\cite{par:mrubyonTECS}         &            & \checkmark & \checkmark & \checkmark &             &            & \checkmark \\
         Proposed framework                           & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark  & \checkmark & \checkmark \\
     \end{tabular}
+}
     \label{tab:comparison}
 \end{table*}
 現在，オープンソースのスクリプト言語のランタイムシステムとして，次のものが開発されている.
-python-on-a-chip \cite{url:python-on-a-chip}, the Owl system \cite{par:owl}, eLua \cite{url:eLua}, mruby \cite{par:mruby}, \cite{url:mruby}, mruby on TECS \cite{par:mrubyonTECS}.
+python-on-a-chip\cite{url:python-on-a-chip}, the Owl system\cite{par:owl}, eLua\cite{url:eLua}, mruby\cite{par:mruby},\cite{url:mruby}, mruby on TECS\cite{par:mrubyonTECS}.
 
 python-on-a-chip(p14p)は，PyMyteと呼ばれるPythonVMを使用する，Pythonランタイムシステムである．
 PyMyteは，マイクロコントローラー上で低リソースでPythonプログラムを実行する．
@@ -765,24 +738,24 @@ Owlツールチェーンは，Pythonコードから，マイコン上で直接�
 Owl systemは，p14pのインタプリタを使用している．
 
 eLuaは，Luaを組込みシステム向けの完全な実装である．
-Luaは，最も人気のある組込み向けスクリプト言語のひとつである\cite{url:Lua}, \cite{par:Lua}.
+%Luaは，最も人気のある組込み向けスクリプト言語のひとつである\cite{url:Lua}, \cite{par:Lua}.
 Luaは，協調的マルチタスク処理が可能なコルーチンをサポートしているが，コルーチンは，ノンプリエンプティブであるため，マルチタスク処理のようなプログラムを行うのは難しい．
 
-mruby(軽量Ruby)は，組込みシステムに適したスクリプト言語である．
-mrubyプログラムは，RiteVM上で実行される．
+%mruby(軽量Ruby)は，組込みシステムに適したスクリプト言語である．
+%mrubyプログラムは，RiteVM上で実行される．
 mrubyは，コルーチンをサポートしているが，RTOSのマルチタスクには対応していない．
 
-mruby on TECSは，mrubyを使ったコンポーネントベース開発が可能なフレームワークである．
-mruby on TECSは，mrubyより実行速度が100倍速い．
+%mruby on TECSは，mrubyを使ったコンポーネントベース開発が可能なフレームワークである．
+%mruby on TECSは，mrubyより実行速度が100倍速い．
 mruby on TECSは，マルチタスクをサポートしているが，マルチタスク処理を行うには，開発者がRTOSの機能を呼び出す必要がある．
 
 表\ref{tab:comparison}に，提案フレームワークと既存研究の比較を示す．
 提案フレームワークでは，ローダに加えて，VMスケジューラとアプリケーションの同期機構を提供する．
 
-\section{Conclusion}
+\section{おわりに}
 \label{sec:Conclusion}
 本研究では，mruby on TECSの拡張として，Bluetoothを用いたmrubyバイトコードローダとRiteVMスケジューラを提案した．
-mrubyバイトコードローダによって，開発者はSDカードやROMを再接続したり，OSを再起動する手間が省けるため，mruby on TECSでのソフトウェア開発の作業効率を向上させる．
+mrubyバイトコードローダによって，開発者はSDカードやROMを上書きしたり，OSを再起動する手間が省けるため，mruby on TECSでのソフトウェア開発の作業効率を向上させる．
 ローダは，Bluetoothだけでなく，有線のシリアル通信にも対応しているため，様々な組込みシステムに適用できる．
 RiteVMスケジューラは複数のmrubyアプリケーションを効率良く並行実行する.
 実験評価では，ローダによる作業効率の向上やオーバヘッドの少ないマルチタスク設計の有用性，コンポーネントベース開発の利点を示した.
@@ -795,24 +768,24 @@ RiteVMスケジューラも容易に付け外しできるため，開発者は�
 
 %%%%%%%%%%%% Reference %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{ipsj_v2/UTF8/ipsjunsrt-e}
-\bibliography{../EMSOFT2016/ref}
+\bibliography{ETNET}
 
-\begin{biography}
-\profile{m,E}{情報 太郎}{1970年生．1992年情報処理大学理学部情報科学科卒業．
-1994年同大学大学院修士課程修了．同年情報処理学会入社．オンライン出版の研究
-に従事．電子情報通信学会，IEEE，ACM 各会員．}
-%
-\profile{n}{処理 花子}{1960年生．1982年情報処理大学理学部情報科学科卒業．
-1984年同大学大学院修士課程修了．1987年同博士課程修了．理学博士．1987年情報処
-理大学助手．1992年架空大学助教授．1997年同大教授．オンライン出版の研究
-に従事．2010年情報処理記念賞受賞．電子情報通信学会，IEEE，IEEE-CS，ACM
-各会員．}
-%
-\profile{h,L}{学会 次郎}{1950年生．1974年架空大学大学院修士課程修了．
-1987年同博士課程修了．工学博士．1977年架空大学助手．1992年情報処理大学助
-教授．1987年同大教授．2000年から情報処理学会顧問．オンライン出版の研究
-に従事．2010年情報処理記念賞受賞．情報処理学会理事．電子情報通信学会，
-IEEE，IEEE-CS，ACM 各会員．}
-\end{biography}
+% \begin{biography}
+% \profile{m,E}{情報 太郎}{1970年生．1992年情報処理大学理学部情報科学科卒業．
+% 1994年同大学大学院修士課程修了．同年情報処理学会入社．オンライン出版の研究
+% に従事．電子情報通信学会，IEEE，ACM 各会員．}
+% %
+% \profile{n}{処理 花子}{1960年生．1982年情報処理大学理学部情報科学科卒業．
+% 1984年同大学大学院修士課程修了．1987年同博士課程修了．理学博士．1987年情報処
+% 理大学助手．1992年架空大学助教授．1997年同大教授．オンライン出版の研究
+% に従事．2010年情報処理記念賞受賞．電子情報通信学会，IEEE，IEEE-CS，ACM
+% 各会員．}
+% %
+% \profile{h,L}{学会 次郎}{1950年生．1974年架空大学大学院修士課程修了．
+% 1987年同博士課程修了．工学博士．1977年架空大学助手．1992年情報処理大学助
+% 教授．1987年同大教授．2000年から情報処理学会顧問．オンライン出版の研究
+% に従事．2010年情報処理記念賞受賞．情報処理学会理事．電子情報通信学会，
+% IEEE，IEEE-CS，ACM 各会員．}
+% \end{biography}
 
 \end{document}

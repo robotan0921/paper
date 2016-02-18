@@ -2,55 +2,53 @@ This is pBibTeX, Version 0.99d-j0.33 (utf8.euc) (TeX Live 2015/Cygwin)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
 The style file: ipsj_v2/UTF8/ipsjunsrt-e.bst
-Database file #1: ../EMSOFT2016/ref.bib
+Database file #1: ETNET.bib
 Warning--Missing required argument author in url:AUTOSAR
 Warning--there's no number and/or volumepar:EV3
-Warning--Missing required argument author in url:Ruby
 Warning--Missing required argument author in url:co-routine
 Warning--Missing required argument author in url:python-on-a-chip
 Warning--Missing required argument author in url:eLua
 Warning--Missing required argument author in url:mruby
-Warning--Missing required argument author in url:Lua
-You've used 20 entries,
+You've used 14 entries,
             1978 wiz_defined-function locations,
-            594 strings with 7061 characters,
-and the built_in function-call counts, 4547 in all, are:
-= -- 360
-> -- 149
-< -- 11
-+ -- 63
-- -- 43
-* -- 300
-:= -- 592
-add.period$ -- 20
-call.type$ -- 20
+            559 strings with 5700 characters,
+and the built_in function-call counts, 3176 in all, are:
+= -- 247
+> -- 104
+< -- 8
++ -- 44
+- -- 30
+* -- 209
+:= -- 416
+add.period$ -- 14
+call.type$ -- 14
 change.case$ -- 0
 chr.to.int$ -- 0
-cite$ -- 28
-duplicate$ -- 210
-empty$ -- 535
-format.name$ -- 43
-if$ -- 1124
+cite$ -- 20
+duplicate$ -- 150
+empty$ -- 375
+format.name$ -- 30
+if$ -- 789
 int.to.chr$ -- 0
-int.to.str$ -- 20
-missing$ -- 11
-newline$ -- 63
-num.names$ -- 13
-pop$ -- 85
+int.to.str$ -- 14
+missing$ -- 8
+newline$ -- 45
+num.names$ -- 9
+pop$ -- 59
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 272
+skip$ -- 193
 stack$ -- 0
-substring$ -- 267
-swap$ -- 94
-text.length$ -- 11
+substring$ -- 172
+swap$ -- 68
+text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 8
-while$ -- 38
-width$ -- 22
-write$ -- 144
+warning$ -- 6
+while$ -- 25
+width$ -- 16
+write$ -- 102
 is.kanji.str$ -- 0
-(There were 8 warnings)
+(There were 6 warnings)

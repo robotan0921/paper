@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  17 FEB 2016 17:10
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  18 FEB 2016 15:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -6,11 +6,7 @@ entering extended mode
 (./thesis.tex
 pLaTeX2e <2006/11/10> (based on LaTeX2e <2015/01/01> patch level 0)
 Babel <3.9l> and hyphenation patterns for 79 languages loaded.
-(../EMSOFT2016/dummy/dummy.tex) (./ipsj_v2/UTF8/ipsj.cls
-
-LaTeX Warning: You have requested document class `ipsj_v2/UTF8/ipsj',
-               but the document class provides `ipsj'.
-
+(../EMSOFT2016/dummy/dummy.tex) (./ipsj.cls
 Document Class: ipsj 2015/10/30 v2.00 IPSJ class
 (c:/w32tex/share/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2014/10/28 v1.1a Standard LaTeX Color (DPC)
@@ -38,7 +34,7 @@ e .\@currext }}\@ifstar \@xprocess@ptions \@process@ptions
 firstoftwo \else \expandafter \@secondoftwo \fi 
 #1<-opt@\@currname .\@currext 
 
-\@currname ->ipsj_v2/UTF8/ipsj
+\@currname ->ipsj
 
 \@currext ->cls
 
@@ -46,11 +42,11 @@ firstoftwo \else \expandafter \@secondoftwo \fi
 #1<-\@empty 
 #2<-\csname opt@\@currname .\@currext \endcsname 
 
-\@currname ->ipsj_v2/UTF8/ipsj
+\@currname ->ipsj
 
 \@currext ->cls
 
-\opt@ipsj_v2/UTF8/ipsj.cls ->submit
+\opt@ipsj.cls ->submit,techrep
 
 \@ifstar #1->\@ifnextchar *{\@firstoftwo {#1}}
 #1<-\@xprocess@ptions 
@@ -126,18 +122,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->Proof
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,Proof,}{,submit,}
+\reserved@a ->\in@ {,Proof,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,Proof,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,Proof,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -166,18 +162,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->LAYOUT
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,LAYOUT,}{,submit,}
+\reserved@a ->\in@ {,LAYOUT,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,LAYOUT,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,LAYOUT,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -205,15 +201,15 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->submit
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,submit,}{,submit,}
+\reserved@a ->\in@ {,submit,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,submit,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,submit,->
 #1<-
@@ -284,18 +280,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->DAM
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,DAM,}{,submit,}
+\reserved@a ->\in@ {,DAM,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,DAM,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,DAM,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -323,18 +319,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->english
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,english,}{,submit,}
+\reserved@a ->\in@ {,english,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,english,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,english,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -362,18 +358,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->technote
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,technote,}{,submit,}
+\reserved@a ->\in@ {,technote,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,technote,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,technote,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -401,18 +397,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->sigrecommended
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,sigrecommended,}{,submit,}
+\reserved@a ->\in@ {,sigrecommended,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,sigrecommended,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,sigrecommended,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -440,18 +436,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->invited
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,invited,}{,submit,}
+\reserved@a ->\in@ {,invited,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,invited,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,invited,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -479,18 +475,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->PRO
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,PRO,}{,submit,}
+\reserved@a ->\in@ {,PRO,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,PRO,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,PRO,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -518,18 +514,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->ACS
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,ACS,}{,submit,}
+\reserved@a ->\in@ {,ACS,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,ACS,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,ACS,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -557,18 +553,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->TOD
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,TOD,}{,submit,}
+\reserved@a ->\in@ {,TOD,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,TOD,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,TOD,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -596,18 +592,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->TOM
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,TOM,}{,submit,}
+\reserved@a ->\in@ {,TOM,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,TOM,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,TOM,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -635,18 +631,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->CDS
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,CDS,}{,submit,}
+\reserved@a ->\in@ {,CDS,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,CDS,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,CDS,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -674,18 +670,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->DC
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,DC,}{,submit,}
+\reserved@a ->\in@ {,DC,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,DC,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,DC,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -713,18 +709,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->DCON
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,DCON,}{,submit,}
+\reserved@a ->\in@ {,DCON,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,DCON,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,DCON,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -752,18 +748,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->CVA
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,CVA,}{,submit,}
+\reserved@a ->\in@ {,CVA,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,CVA,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,CVA,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -790,18 +786,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->TBIO
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,TBIO,}{,submit,}
+\reserved@a ->\in@ {,TBIO,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,TBIO,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,TBIO,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -828,18 +824,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->SLDM
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,SLDM,}{,submit,}
+\reserved@a ->\in@ {,SLDM,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,SLDM,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,SLDM,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -866,18 +862,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->JIP
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,JIP,}{,submit,}
+\reserved@a ->\in@ {,JIP,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,JIP,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,JIP,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -904,18 +900,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->Data
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,Data,}{,submit,}
+\reserved@a ->\in@ {,Data,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,Data,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,Data,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -942,18 +938,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->Survey
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,Survey,}{,submit,}
+\reserved@a ->\in@ {,Survey,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,Survey,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,Survey,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -980,18 +976,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->Research
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,Research,}{,submit,}
+\reserved@a ->\in@ {,Research,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,Research,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,Research,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1018,18 +1014,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->Short
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,Short,}{,submit,}
+\reserved@a ->\in@ {,Short,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,Short,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,Short,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1056,18 +1052,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->abstract
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,abstract,}{,submit,}
+\reserved@a ->\in@ {,abstract,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,abstract,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,abstract,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1094,18 +1090,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->systems
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,systems,}{,submit,}
+\reserved@a ->\in@ {,systems,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,systems,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,systems,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1132,18 +1128,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->services
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,services,}{,submit,}
+\reserved@a ->\in@ {,services,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,services,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,services,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1170,18 +1166,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->devices
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,devices,}{,submit,}
+\reserved@a ->\in@ {,devices,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,devices,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,devices,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1207,18 +1203,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->preface
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,preface,}{,submit,}
+\reserved@a ->\in@ {,preface,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,preface,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,preface,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1244,18 +1240,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->draft
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,draft,}{,submit,}
+\reserved@a ->\in@ {,draft,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,draft,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,draft,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1281,18 +1277,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->OT
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,OT,}{,submit,}
+\reserved@a ->\in@ {,OT,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,OT,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,OT,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1318,20 +1314,60 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->techrep
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,techrep,}{,submit,}
+\reserved@a ->\in@ {,techrep,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,techrep,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,techrep,->
-#1<-,submit,{}{}
+#1<-,submit
 
-\in@false ->\let \ifin@ \iffalse 
+\in@true ->\let \ifin@ \iftrue 
+
+\@use@ption ->\@expandtwoargs \@removeelement \CurrentOption \@unusedoptionlist
+ \@unusedoptionlist \csname ds@\CurrentOption \endcsname 
+
+\@expandtwoargs #1#2#3->\edef \reserved@a {\noexpand #1{#2}{#3}}\reserved@a 
+#1<-\@removeelement 
+#2<-\CurrentOption 
+#3<-\@unusedoptionlist 
+
+\CurrentOption ->techrep
+
+\@unusedoptionlist ->
+
+\reserved@a ->\@removeelement {techrep}{}
+
+\@removeelement #1#2#3->\def \reserved@a ##1,#1,##2\reserved@a {##1,##2\reserve
+d@b }\def \reserved@b ##1,\reserved@b ##2\reserved@b {\ifx ,##1\@empty \else ##
+1\fi }\edef #3{\expandafter \reserved@b \reserved@a ,#2,\reserved@b ,#1,\reserv
+ed@a }
+#1<-techrep
+#2<-
+#3<-\@unusedoptionlist 
+
+\reserved@a #1,techrep,#2\reserved@a ->#1,#2\reserved@b 
+#1<-,,\reserved@b 
+#2<-
+
+\reserved@b #1,\reserved@b #2\reserved@b ->\ifx ,#1\@empty \else #1\fi 
+#1<-,
+#2<-,
+
+\@empty ->
+
+\CurrentOption ->techrep
+
+\ds@techrep ->\DS@techreptrue 
+
+\DS@techreptrue ->\let \ifDS@techrep \iftrue 
+
+\CurrentOption ->techrep
 
 \@iforloop #1,#2\@@ #3#4->\def #3{#1}\ifx #3\@nnil \expandafter \@fornoop \else
  #4\relax \expandafter \@iforloop \fi #2\@@ #3{#4}
@@ -1355,18 +1391,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->noauthor
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,noauthor,}{,submit,}
+\reserved@a ->\in@ {,noauthor,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,noauthor,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,noauthor,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1392,18 +1428,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->system
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,system,}{,submit,}
+\reserved@a ->\in@ {,system,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,system,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,system,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1429,18 +1465,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->Express
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,Express,}{,submit,}
+\reserved@a ->\in@ {,Express,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,Express,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,Express,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1466,18 +1502,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->Practice
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,Practice,}{,submit,}
+\reserved@a ->\in@ {,Practice,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,Practice,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,Practice,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1503,18 +1539,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->Content
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,Content,}{,submit,}
+\reserved@a ->\in@ {,Content,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,Content,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,Content,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1540,18 +1576,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->TCE
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,TCE,}{,submit,}
+\reserved@a ->\in@ {,TCE,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,TCE,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,TCE,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1577,18 +1613,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->invitedshort
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,invitedshort,}{,submit,}
+\reserved@a ->\in@ {,invitedshort,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,invitedshort,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,invitedshort,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1613,18 +1649,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->recommendedshort
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,recommendedshort,}{,submit,}
+\reserved@a ->\in@ {,recommendedshort,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,recommendedshort,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,recommendedshort,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1649,18 +1685,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->recommendedresearch
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,recommendedresearch,}{,submit,}
+\reserved@a ->\in@ {,recommendedresearch,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,recommendedresearch,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,recommendedresearch,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1685,18 +1721,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->recommendedpractice
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,recommendedpractice,}{,submit,}
+\reserved@a ->\in@ {,recommendedpractice,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,recommendedpractice,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,recommendedpractice,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1721,18 +1757,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->recommendedcontent
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,recommendedcontent,}{,submit,}
+\reserved@a ->\in@ {,recommendedcontent,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,recommendedcontent,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,recommendedcontent,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1756,18 +1792,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->preprint
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,preprint,}{,submit,}
+\reserved@a ->\in@ {,preprint,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,preprint,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,preprint,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1791,18 +1827,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->a4paper
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,a4paper,}{,submit,}
+\reserved@a ->\in@ {,a4paper,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,a4paper,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,a4paper,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1826,18 +1862,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->a5paper
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,a5paper,}{,submit,}
+\reserved@a ->\in@ {,a5paper,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,a5paper,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,a5paper,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1861,18 +1897,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->b4paper
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,b4paper,}{,submit,}
+\reserved@a ->\in@ {,b4paper,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,b4paper,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,b4paper,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1896,18 +1932,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->b5paper
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,b5paper,}{,submit,}
+\reserved@a ->\in@ {,b5paper,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,b5paper,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,b5paper,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1931,18 +1967,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->a4j
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,a4j,}{,submit,}
+\reserved@a ->\in@ {,a4j,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,a4j,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,a4j,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -1966,18 +2002,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->a5j
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,a5j,}{,submit,}
+\reserved@a ->\in@ {,a5j,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,a5j,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,a5j,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2001,18 +2037,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->b4j
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,b4j,}{,submit,}
+\reserved@a ->\in@ {,b4j,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,b4j,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,b4j,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2036,18 +2072,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->b5j
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,b5j,}{,submit,}
+\reserved@a ->\in@ {,b5j,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,b5j,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,b5j,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2071,18 +2107,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->a4p
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,a4p,}{,submit,}
+\reserved@a ->\in@ {,a4p,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,a4p,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,a4p,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2106,18 +2142,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->a5p
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,a5p,}{,submit,}
+\reserved@a ->\in@ {,a5p,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,a5p,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,a5p,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2141,18 +2177,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->b4p
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,b4p,}{,submit,}
+\reserved@a ->\in@ {,b4p,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,b4p,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,b4p,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2176,18 +2212,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->b5p
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,b5p,}{,submit,}
+\reserved@a ->\in@ {,b5p,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,b5p,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,b5p,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2211,18 +2247,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->10pt
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,10pt,}{,submit,}
+\reserved@a ->\in@ {,10pt,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,10pt,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,10pt,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2246,18 +2282,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->11pt
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,11pt,}{,submit,}
+\reserved@a ->\in@ {,11pt,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,11pt,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,11pt,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2280,18 +2316,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->12pt
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,12pt,}{,submit,}
+\reserved@a ->\in@ {,12pt,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,12pt,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,12pt,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2314,18 +2350,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->landscape
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,landscape,}{,submit,}
+\reserved@a ->\in@ {,landscape,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,landscape,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,landscape,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2348,18 +2384,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->mentuke
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,mentuke,}{,submit,}
+\reserved@a ->\in@ {,mentuke,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,mentuke,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,mentuke,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2382,18 +2418,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->tate
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,tate,}{,submit,}
+\reserved@a ->\in@ {,tate,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,tate,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,tate,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2416,18 +2452,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->oneside
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,oneside,}{,submit,}
+\reserved@a ->\in@ {,oneside,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,oneside,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,oneside,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2450,18 +2486,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->twoside
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,twoside,}{,submit,}
+\reserved@a ->\in@ {,twoside,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,twoside,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,twoside,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2484,18 +2520,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->onecolumn
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,onecolumn,}{,submit,}
+\reserved@a ->\in@ {,onecolumn,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,onecolumn,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,onecolumn,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2518,18 +2554,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->twocolumn
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,twocolumn,}{,submit,}
+\reserved@a ->\in@ {,twocolumn,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,twocolumn,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,twocolumn,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2552,18 +2588,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->titlepage
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,titlepage,}{,submit,}
+\reserved@a ->\in@ {,titlepage,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,titlepage,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,titlepage,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2585,18 +2621,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->notitlepage
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,notitlepage,}{,submit,}
+\reserved@a ->\in@ {,notitlepage,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,notitlepage,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,notitlepage,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2618,18 +2654,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->openright
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,openright,}{,submit,}
+\reserved@a ->\in@ {,openright,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,openright,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,openright,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2651,18 +2687,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->openany
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,openany,}{,submit,}
+\reserved@a ->\in@ {,openany,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,openany,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,openany,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2684,18 +2720,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->leqno
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,leqno,}{,submit,}
+\reserved@a ->\in@ {,leqno,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,leqno,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,leqno,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2717,18 +2753,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->fleqn
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,fleqn,}{,submit,}
+\reserved@a ->\in@ {,fleqn,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,fleqn,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,fleqn,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2750,18 +2786,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->openbib
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,openbib,}{,submit,}
+\reserved@a ->\in@ {,openbib,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,openbib,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,openbib,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2783,18 +2819,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->disablejfam
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,disablejfam,}{,submit,}
+\reserved@a ->\in@ {,disablejfam,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,disablejfam,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,disablejfam,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2816,18 +2852,18 @@ fin@ \@use@ption \expandafter \let \csname ds@\CurrentOption \endcsname \@empty
 
 \CurrentOption ->final
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\reserved@a ->\in@ {,final,}{,submit,}
+\reserved@a ->\in@ {,final,}{,submit,techrep,}
 
 \in@ #1#2->\begingroup \def \in@@ ##1#1{}\toks@ \expandafter {\in@@ #2{}{}#1}\e
 def \in@@ {\the \toks@ }\expandafter \endgroup \ifx \in@@ \@empty \in@false \el
 se \in@true \fi 
 #1<-,final,
-#2<-,submit,
+#2<-,submit,techrep,
 
 \in@@ #1,final,->
-#1<-,submit,{}{}
+#1<-,submit,techrep,{}{}
 
 \in@false ->\let \ifin@ \iffalse 
 
@@ -2861,15 +2897,15 @@ fx \@fortmp \@empty \else \expandafter \@forloop #2,\@nil ,\@nil \@@ #1{#3}\fi
 #2<-\@curroptions 
 #3<-\@ifundefined {ds@\CurrentOption }{\@use@ption \default@ds }\@use@ption 
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
-\@curroptions ->submit
+\@curroptions ->submit,techrep
 
 \@forloop #1,#2,#3\@@ #4#5->\def #4{#1}\ifx #4\@nnil \else #5\def #4{#2}\ifx #4
 \@nnil \else #5\@iforloop #3\@@ #4{#5}\fi \fi 
 #1<-submit
-#2<-\@nil 
-#3<-\@nil 
+#2<-techrep
+#3<-\@nil ,\@nil 
 #4<-\CurrentOption 
 #5<-\@ifundefined {ds@\CurrentOption }{\@use@ption \default@ds }\@use@ption 
 
@@ -2918,6 +2954,64 @@ ed@a }
 \CurrentOption ->submit
 
 \ds@submit ->
+
+\@ifundefined #1->\expandafter \ifx \csname #1\endcsname \relax \expandafter \@
+firstoftwo \else \expandafter \@secondoftwo \fi 
+#1<-ds@\CurrentOption 
+
+\CurrentOption ->techrep
+
+\@secondoftwo #1#2->#2
+#1<-\@use@ption \default@ds 
+#2<-\@use@ption 
+
+\@use@ption ->\@expandtwoargs \@removeelement \CurrentOption \@unusedoptionlist
+ \@unusedoptionlist \csname ds@\CurrentOption \endcsname 
+
+\@expandtwoargs #1#2#3->\edef \reserved@a {\noexpand #1{#2}{#3}}\reserved@a 
+#1<-\@removeelement 
+#2<-\CurrentOption 
+#3<-\@unusedoptionlist 
+
+\CurrentOption ->techrep
+
+\@unusedoptionlist ->
+
+\reserved@a ->\@removeelement {techrep}{}
+
+\@removeelement #1#2#3->\def \reserved@a ##1,#1,##2\reserved@a {##1,##2\reserve
+d@b }\def \reserved@b ##1,\reserved@b ##2\reserved@b {\ifx ,##1\@empty \else ##
+1\fi }\edef #3{\expandafter \reserved@b \reserved@a ,#2,\reserved@b ,#1,\reserv
+ed@a }
+#1<-techrep
+#2<-
+#3<-\@unusedoptionlist 
+
+\reserved@a #1,techrep,#2\reserved@a ->#1,#2\reserved@b 
+#1<-,,\reserved@b 
+#2<-
+
+\reserved@b #1,\reserved@b #2\reserved@b ->\ifx ,#1\@empty \else #1\fi 
+#1<-,
+#2<-,
+
+\@empty ->
+
+\CurrentOption ->techrep
+
+\ds@techrep ->
+
+\@iforloop #1,#2\@@ #3#4->\def #3{#1}\ifx #3\@nnil \expandafter \@fornoop \else
+ #4\relax \expandafter \@iforloop \fi #2\@@ #3{#4}
+#1<-\@nil 
+#2<-\@nil 
+#3<-\CurrentOption 
+#4<-\@ifundefined {ds@\CurrentOption }{\@use@ption \default@ds }\@use@ption 
+
+\@fornoop #1\@@ #2#3->
+#1<-\@nil 
+#2<-\CurrentOption 
+#3<-\@ifundefined {ds@\CurrentOption }{\@use@ption \default@ds }\@use@ption 
 
 \@for #1:=#2\do #3->\expandafter \def \expandafter \@fortmp \expandafter {#2}\i
 fx \@fortmp \@empty \else \expandafter \@forloop #2,\@nil ,\@nil \@@ #1{#3}\fi 
@@ -3875,16 +3969,16 @@ al,\@nil ,\@nil
 \AtEndOfPackage ->\expandafter \g@addto@macro \csname \@currname .\@currext -h@
 @k\endcsname 
 
-\@currname ->ipsj_v2/UTF8/ipsj
+\@currname ->ipsj
 
 \@currext ->cls
 
 \g@addto@macro #1#2->\begingroup \toks@ \expandafter {#1#2}\xdef #1{\the \toks@
  }\endgroup 
-#1<-\ipsj_v2/UTF8/ipsj.cls-h@@k 
+#1<-\ipsj.cls-h@@k 
 #2<-\let \@unprocessedoptions \relax 
 
-\ipsj_v2/UTF8/ipsj.cls-h@@k ->
+\ipsj.cls-h@@k ->
 \h=\dimen118
 \JQ=\dimen119
 \Q=\dimen120
@@ -3949,8 +4043,9 @@ al,\@nil ,\@nil
 \twocolcapwidth=\dimen128
 \twocolecapwidth=\dimen129
 \@compare@result=\count101
-)
-(c:/w32tex/share/texmf-dist/tex/latex/base/latexsym.sty
+ (./ipsjtech.sty
+Document Class: ipsj 2012/06/01 v3.00 IPSJTECH.STY
+)) (c:/w32tex/share/texmf-dist/tex/latex/base/latexsym.sty
 Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
 \symlasy=\mathgroup4
 LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
@@ -4043,76 +4138,80 @@ File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
 ) (./thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
 \c@lstlisting=\count111
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <8.8711> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 71.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 63.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <8.8711> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 71.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 63.
+LaTeX Font Info:    Font shape `JT1/mc/m/it' in size <8.5373> not available
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 77.
+LaTeX Font Info:    Font shape `JY1/mc/m/it' in size <8.5373> not available
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 77.
+LaTeX Font Info:    Font shape `JT1/mc/bx/it' in size <8.5373> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 77.
+LaTeX Font Info:    Font shape `JY1/mc/bx/it' in size <8.5373> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 77.
 LaTeX Font Info:    Font shape `JT1/gt/bx/n' in size <19.2207> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 100.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 91.
 LaTeX Font Info:    Font shape `JY1/gt/bx/n' in size <19.2207> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 100.
-LaTeX Font Info:    Calculating math sizes for size <9.61035> on input line 100
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 91.
+LaTeX Font Info:    Calculating math sizes for size <9.61035> on input line 91.
+
+LaTeX Font Info:    Calculating math sizes for size <11.82813> on input line 91
 .
-LaTeX Font Info:    Calculating math sizes for size <11.82813> on input line 10
-0.
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.22882> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 100.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 91.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.22882> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 100.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 91.
 LaTeX Font Info:    Font shape `JT1/mc/m/sc' in size <10.34961> not available
-(Font)              Font shape `JT1/mc/m/n' tried instead on input line 100.
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 91.
 LaTeX Font Info:    Font shape `JY1/mc/m/sc' in size <10.34961> not available
-(Font)              Font shape `JY1/mc/m/n' tried instead on input line 100.
-LaTeX Font Info:    Calculating math sizes for size <10.34961> on input line 10
-0.
-LaTeX Font Info:    Font shape `JT1/mc/m/sc' in size <7.24469> not available
-(Font)              Font shape `JT1/mc/m/n' tried instead on input line 100.
-LaTeX Font Info:    Font shape `JY1/mc/m/sc' in size <7.24469> not available
-(Font)              Font shape `JY1/mc/m/n' tried instead on input line 100.
-LaTeX Font Info:    Calculating math sizes for size <8.13184> on input line 100
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 91.
+LaTeX Font Info:    Calculating math sizes for size <10.34961> on input line 91
 .
+LaTeX Font Info:    Font shape `JT1/mc/m/sc' in size <7.24469> not available
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 91.
+LaTeX Font Info:    Font shape `JY1/mc/m/sc' in size <7.24469> not available
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 91.
+LaTeX Font Info:    Calculating math sizes for size <8.13184> on input line 91.
+
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <11.82813> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 102.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 93.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <11.82813> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 102.
-LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <9.24873> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 120.
-LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9.24873> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 120.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 93.
 
 (I search kanjifont definition file: . . ) (I search font definition file: . .
 . . . . . )
-LaTeX Font Info:    Try loading font information for OMS+txsy on input line 120
+LaTeX Font Info:    Try loading font information for OMS+txsy on input line 107
 .
  (c:/w32tex/share/texmf-dist/tex/latex/txr/omstxsy.fd
 File: omstxsy.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    Try loading font information for OT1+txsy on input line 120
+LaTeX Font Info:    Try loading font information for OT1+txsy on input line 107
 .
-LaTeX Font Info:    No file OT1txsy.fd. on input line 120.
+LaTeX Font Info:    No file OT1txsy.fd. on input line 107.
 
 
 LaTeX Font Warning: Font shape `OT1/txsy/m/n' undefined
-(Font)              using `OT1/cmr/m/n' instead on input line 120.
+(Font)              using `OT1/cmr/m/n' instead on input line 107.
 
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 120.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 107.
 
 (c:/w32tex/share/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
@@ -4124,45 +4223,34 @@ File: ../EMSOFT2016/figure/proposed.pdf Graphic file (type pdf)
 
 <../EMSOFT2016/figure/proposed.pdf>
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <8.13184> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 184.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 173.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <8.13184> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 184.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 173.
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <9.61035> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 188.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 177.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9.61035> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 188.
-File: ../EMSOFT2016/figure/mruby.pdf Graphic file (type pdf)
- <../EMSOFT2016/figure/mruby.pdf> [2]
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 177.
+ [2]
 LaTeX Font Info:    Font shape `JT1/mc/m/it' in size <9.61035> not available
-(Font)              Font shape `JT1/mc/m/n' tried instead on input line 217.
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 206.
 LaTeX Font Info:    Font shape `JY1/mc/m/it' in size <9.61035> not available
-(Font)              Font shape `JY1/mc/m/n' tried instead on input line 217.
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 206.
 File: ../EMSOFT2016/figure/component_diagram.pdf Graphic file (type pdf)
 
 <../EMSOFT2016/figure/component_diagram.pdf>
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 247.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 236.
 
 
 (c:/w32tex/share/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8.8711> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 247.
- [3]
-File: ../EMSOFT2016/figure/mrubyontecs.pdf Graphic file (type pdf)
-
-<../EMSOFT2016/figure/mrubyontecs.pdf>
-File: ../EMSOFT2016/figure/mruby_TECS_bridge.pdf Graphic file (type pdf)
-
-<../EMSOFT2016/figure/mruby_TECS_bridge.pdf>
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 236.
 File: ../EMSOFT2016/figure/system_model.pdf Graphic file (type pdf)
 
-<../EMSOFT2016/figure/system_model.pdf> [4]
+<../EMSOFT2016/figure/system_model.pdf> [3]
 
-LaTeX Warning: Reference `url:HRP2' on page 5 undefined on input line 385.
-
-
-LaTeX Warning: Reference `par:HRP2' on page 5 undefined on input line 385.
+LaTeX Warning: Citation `par:HRP2' on page 4 undefined on input line 370.
 
 File: ../EMSOFT2016/figure/component_bluetooth.pdf Graphic file (type pdf)
 <../EMSOFT2016/figure/component_bluetooth.pdf>
@@ -4170,70 +4258,57 @@ File: ../EMSOFT2016/figure/control_flow.pdf Graphic file (type pdf)
 
 <../EMSOFT2016/figure/control_flow.pdf>
 LaTeX Font Info:    Font shape `JT1/mc/m/it' in size <8.8711> not available
-(Font)              Font shape `JT1/mc/m/n' tried instead on input line 427.
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 412.
 LaTeX Font Info:    Font shape `JY1/mc/m/it' in size <8.8711> not available
-(Font)              Font shape `JY1/mc/m/n' tried instead on input line 427.
-LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <8.8711> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 444.
-LaTeX Font Info:    Calculating math sizes for size <8.8711> on input line 452.
-
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 459.
-
-
-(c:/w32tex/share/texmf-dist/tex/latex/base/omlcmr.fd
-File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <8.8711> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 459.
- [5]
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 412.
+LaTeX Font Info:    Font shape `JT1/mc/m/it' in size <7.39258> not available
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 425.
+LaTeX Font Info:    Font shape `JY1/mc/m/it' in size <7.39258> not available
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 425.
+LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <7.39258> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 425.
+LaTeX Font Info:    Calculating math sizes for size <7.39258> on input line 429
+.
+ [4]
 File: ../EMSOFT2016/figure/rotateReadyQueue.pdf Graphic file (type pdf)
 
-<../EMSOFT2016/figure/rotateReadyQueue.pdf> [6]
-File: ../EMSOFT2016/figure/cyclic_handler.pdf Graphic file (type pdf)
-
-<../EMSOFT2016/figure/cyclic_handler.pdf>
+<../EMSOFT2016/figure/rotateReadyQueue.pdf> [5]
 File: ../EMSOFT2016/figure/Eventflag.pdf Graphic file (type pdf)
- <../EMSOFT2016/figure/Eventflag.pdf>
-[7]
-Overfull \hbox (27.57553pt too wide) in paragraph at lines 649--656
+
+<../EMSOFT2016/figure/Eventflag.pdf>
+Overfull \hbox (27.57553pt too wide) in paragraph at lines 620--627
  [][] 
  []
 
+[6]
 File: ../EMSOFT2016/figure/comparison_s_c_m.pdf Graphic file (type pdf)
-<../EMSOFT2016/figure/comparison_s_c_m.pdf>
+ <../EMSOFT2016/figure/comparison_s_c_m.pdf>
 File: ../EMSOFT2016/figure/comparison_msec.pdf Graphic file (type pdf)
 
 <../EMSOFT2016/figure/comparison_msec.pdf>
-Overfull \hbox (53.4212pt too wide) in paragraph at lines 745--755
+LaTeX Font Info:    Calculating math sizes for size <8.8711> on input line 705.
+
+
+Overfull \hbox (2.9483pt too wide) in paragraph at lines 717--728
  [][] 
  []
 
-[8]
-Underfull \hbox (badness 8189) in paragraph at lines 759--762
+
+Underfull \hbox (badness 8189) in paragraph at lines 732--735
 []\OT1/cmr/m/n/9.61035 python-on-a-chip(p14p) \JY1/mc/m/n/9.61035 ÇÕ ÅC \OT1/cm
 r/m/n/9.61035 PyMyte \JY1/mc/m/n/9.61035 Ç∆åƒÇŒÇÍÇÈ
  []
 
-(./thesis.bbl
+[7] (./thesis.bbl
 LaTeX Font Info:    Font shape `JT1/gt/m/it' in size <8.8711> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 4.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 5.
 
-Underfull \hbox (badness 5924) in paragraph at lines 43--47
-\OT1/cmr/m/it/8.8711 of the 16th IEEE In-ter-na-tional Sym-po-sium on
- []
-
-[9]
-Underfull \hbox (badness 10000) in paragraph at lines 64--65
+Underfull \hbox (badness 10000) in paragraph at lines 42--43
 []\OT1/cmr/m/n/8.8711 : python-on-a-chip, $\OT1/cmtt/m/n/8.8711 http : / / code
  . google . com /
  []
 
-)
-LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <11.08887> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 803.
-LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <11.08887> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 803.
- [10] (./thesis.aux)
+) [8] (./thesis.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -4242,12 +4317,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 3841 strings out of 493777
- 53670 string characters out of 6153182
- 260064 words of memory out of 5000000
- 7248 multiletter control sequences out of 15000+600000
- 47106 words of font info for 209 fonts, out of 8000000 for 9000
+ 3796 strings out of 493777
+ 52965 string characters out of 6153182
+ 257650 words of memory out of 5000000
+ 7213 multiletter control sequences out of 15000+600000
+ 51616 words of font info for 227 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 32i,12n,49p,296b,1481s stack positions out of 5000i,500n,10000p,500000b,80000s
+ 32i,12n,49p,296b,1423s stack positions out of 5000i,500n,10000p,500000b,80000s
 
-Output written on thesis.dvi (10 pages, 80588 bytes).
+Output written on thesis.dvi (8 pages, 69668 bytes).
