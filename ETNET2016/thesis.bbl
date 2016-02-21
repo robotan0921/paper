@@ -2,16 +2,20 @@
 
 \bibitem{par:TECS}
 Azumi, T., Yamamoto, M., Kominami, Y., Takagi, N., Oyama, H. and Takada, H.: {A
-  New Specification of Software Components for Embedded Systems}, {\em Proc.
+  New Specification of Software Components for Embedded Systems}, {\em in Proc.
   IEEE ISORC}, pp.\ 46--50 (2007).
 
 \bibitem{url:AUTOSAR}
-: {AUTOSAR}, \url{http://www.autosar.org/}.
+{AUTOSAR}: \url{http://www.autosar.org/}.
 
 \bibitem{par:mrubyonTECS}
 Azumi, T., Nagahara, Y., Oyama, H. and Nishio, N.: {mruby on TECS:
-  Component-Based Framework for Running Script Program}, {\em Proc. IEEE
+  Component-Based Framework for Running Script Program}, {\em in Proc. IEEE
   ISORC}, pp.\ 252--259 (2015).
+
+\bibitem{par:mruby}
+Tanaka, K., Matsumoto, Y. and Arimori, H.: {Embedded System Development by
+  Lightweight Ruby}, {\em in Proc. ICCSA}, pp.\ 282--285 (2011).
 
 \bibitem{par:EV3}
 Li, Y., Ishikawa, T., Matsubara, Y. and Takada, H.: {A Platform for LEGO
@@ -20,7 +24,7 @@ Li, Y., Ishikawa, T., Matsubara, Y. and Takada, H.: {A Platform for LEGO
 
 \bibitem{par:hr-tecs}
 Ishikawa, T., Azumi, T., Oyama, H. and Takada, H.: {HR-TECS: Component
-  technology for embedded systems with memory protection}, {\em Proc. IEEE
+  technology for embedded systems with memory protection}, {\em in Proc. IEEE
   ISORC}, pp.\ 1--8 (2013).
 
 \bibitem{par:microITRON}
@@ -36,24 +40,17 @@ Ohno, A., Azumi, T. and Nishio, N.: {TECS Components Providing Functionalities
 TOPPERS: {TOPPERS/ASP kernel}, \url{https://www.toppers.jp/en/asp-kernel.html}.
 
 \bibitem{url:co-routine}
-: {class Fiber}, \url{http://docs.ruby-lang.org/en/2.3.0/Fiber.html}.
+{class Fiber}: \url{http://docs.ruby-lang.org/en/2.3.0/Fiber.html}.
 
 \bibitem{url:python-on-a-chip}
-: {python-on-a-chip}, \url{http://code.google.com/archive/p/python-on-a-chip/}.
+{python-on-a-chip}: \url{http://code.google.com/archive/p/python-on-a-chip/}.
 
 \bibitem{par:owl}
 Barr, T.~W., Smith, R. and Rixner, S.: {Design and Implementation of an
-  Embedded Python Run-Time System}, {\em Proc. USENIX ATC 12}, pp.\ 297--308
+  Embedded Python Run-Time System}, {\em in Proc. USENIX ATC 12}, pp.\ 297--308
   (2012).
 
 \bibitem{url:eLua}
-: {eLua}, \url{http://www.eluaproject.net}.
-
-\bibitem{par:mruby}
-Tanaka, K., Matsumoto, Y. and Arimori, H.: {Embedded System Development by
-  Lightweight Ruby}, {\em Proc. ICCSA}, pp.\ 282--285 (2011).
-
-\bibitem{url:mruby}
-: {mruby}, \url{https://github.com/mruby/mruby}.
+{eLua}: \url{http://www.eluaproject.net}.
 
 \end{thebibliography}
