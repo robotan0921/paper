@@ -36,8 +36,10 @@ Ohno, A., Azumi, T. and Nishio, N.: {TECS Components Providing Functionalities
   of OSEK Specifications for ITRON OS}, {\em Journal of Information
   Processing},  Vol.~22, No.~4, pp.\ 584--594 (2014).
 
-\bibitem{url:ASP}
-TOPPERS: {TOPPERS/ASP kernel}, \url{https://www.toppers.jp/en/asp-kernel.html}.
+\bibitem{par:ASP}
+Azumi, T., Takada, H., Ukai, T. and Oyama, H.: {Wheeled Inverted Pendulum with
+  Embedded Component System: A Case Study}, {\em in Proc. IEEE ISORC}, pp.\
+  151--155 (2010).
 
 \bibitem{url:co-routine}
 {class Fiber}: \url{http://docs.ruby-lang.org/en/2.3.0/Fiber.html}.
