@@ -87,6 +87,12 @@ A.~Ohno, T.~Azumi, and N.~Nishio, ``{TECS Components Providing Functionalities
   of OSEK Specifications for ITRON OS},'' \emph{Journal of Information
   Processing}, vol.~22, no.~4, pp. 584--594, 2014.
 
+\bibitem{par:ASP}
+T.~Azumi, H.~Takada, T.~Ukai, and H.~Oyama, ``{Wheeled Inverted Pendulum with
+  Embedded Component System: A Case Study},'' in \emph{Proceedings of the 13th
+  IEEE International Symposium on Object/Component/Service-Oriented Real-Time
+  Distributed Computing (ISORC),}, 2010, pp. 151--155.
+
 \bibitem{url:ASP}
 TOPPERS, ``{TOPPERS/ASP kernel},''
   \url{https://www.toppers.jp/en/asp-kernel.html}.

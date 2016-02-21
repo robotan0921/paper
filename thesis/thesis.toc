@@ -11,11 +11,11 @@
 \contentsline {chapter}{\numberline {3}Design and Implementation}{9}
 \contentsline {section}{\numberline {3.1}mruby Bytecode Loader Using Bluetooth}{9}
 \contentsline {subsection}{\numberline {3.1.1}Component of RiteVM with mruby bytecode loader using Bluetooth}{10}
-\contentsline {section}{\numberline {3.2}Multitask}{12}
+\contentsline {section}{\numberline {3.2}Multitask}{11}
 \contentsline {subsection}{\numberline {3.2.1}RiteVM Scheduler}{12}
 \contentsline {subsection}{\numberline {3.2.2}Component of RiteVM Scheduler}{13}
-\contentsline {subsection}{\numberline {3.2.3}Synchronization of Multiple RiteVM Tasks}{15}
-\contentsline {section}{\numberline {3.3}Benefits of Component-Based Development}{16}
+\contentsline {subsection}{\numberline {3.2.3}Synchronization of Multiple RiteVM Tasks}{14}
+\contentsline {section}{\numberline {3.3}Benefits of Component-Based Development}{15}
 \contentsline {chapter}{\numberline {4}Experimental Evaluation}{17}
 \contentsline {chapter}{\numberline {5}Related Work}{20}
 \contentsline {chapter}{\numberline {6}Conclusion}{22}

@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  15 FEB 2016 03:00
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  21 FEB 2016 11:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -321,13 +321,13 @@ File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <9> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 497.
- [11] [12]
+ [11]
 File: ../EMSOFT2016/figure/rotateReadyQueue.pdf Graphic file (type pdf)
 
-<../EMSOFT2016/figure/rotateReadyQueue.pdf> [13]
+<../EMSOFT2016/figure/rotateReadyQueue.pdf> [12] [13]
 File: ../EMSOFT2016/figure/cyclic_handler.pdf Graphic file (type pdf)
 
-<../EMSOFT2016/figure/cyclic_handler.pdf> [14] [15]
+<../EMSOFT2016/figure/cyclic_handler.pdf> [14]
 File: ../EMSOFT2016/figure/Eventflag.pdf Graphic file (type pdf)
 
 <../EMSOFT2016/figure/Eventflag.pdf>
@@ -336,15 +336,14 @@ Underfull \hbox (badness 1286) in paragraph at lines 651--655
 ed out such as
  []
 
-[16]
+[15] [16]
 4
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 671.
-[17
+File: ../EMSOFT2016/figure/comparison_s_c_m.pdf Graphic file (type pdf)
+<../EMSOFT2016/figure/comparison_s_c_m.pdf> [17
 
 ]
-File: ../EMSOFT2016/figure/comparison_s_c_m.pdf Graphic file (type pdf)
- <../EMSOFT2016/figure/comparison_s_c_m.pdf>
 File: ../EMSOFT2016/figure/comparison_msec.pdf Graphic file (type pdf)
 
 <../EMSOFT2016/figure/comparison_msec.pdf> [18] [19]
@@ -352,7 +351,7 @@ File: ../EMSOFT2016/figure/comparison_msec.pdf Graphic file (type pdf)
 [20
 
 ]
-Overfull \hbox (57.84032pt too wide) in paragraph at lines 796--806
+Overfull \hbox (57.84032pt too wide) in paragraph at lines 799--809
  [][] 
  []
 
@@ -379,24 +378,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 54--57
 p : / / www . toppers . jp / en /
  []
 
+[24
 
-Underfull \hbox (badness 10000) in paragraph at lines 75--78
+]
+Underfull \hbox (badness 10000) in paragraph at lines 81--84
 []\OT1/cmr/m/n/10 TOPPERS.  ``TOP-PER-S/ASP ker-nel,''.  $\OT1/cmtt/m/n/10 http
 s : / / www . toppers . jp / en /
  []
 
-[24
-
-]) [25] [26
+) [25] [26
 
 ] (./thesis.aux) ) 
 Here is how much of TeX's memory you used:
- 3042 strings out of 493777
- 40665 string characters out of 6153182
+ 3043 strings out of 493777
+ 40674 string characters out of 6153182
  209818 words of memory out of 5000000
- 6477 multiletter control sequences out of 15000+600000
+ 6478 multiletter control sequences out of 15000+600000
  23130 words of font info for 104 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
  27i,11n,49p,294b,1451s stack positions out of 5000i,500n,10000p,500000b,80000s
 
-Output written on thesis.dvi (29 pages, 72336 bytes).
+Output written on thesis.dvi (29 pages, 72644 bytes).

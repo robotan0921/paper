@@ -68,7 +68,7 @@ Script languages make software engineering more efficient and shorten a developm
 Java script, Perl, Python, Lua and Ruby are well-known as representative script languages.
 
 Although script languages are easy to use and read, their execution time are slower than C language's.
-For embedded systems, the real-time properties such as worst-execution time and response time are very important factors.
+For embedded systems, the real-time properties such as estimation of worst-execution time are very important factors.
 Therefore, it is difficult to apply the script languages to embedded systems.
 
 mruby on TECS is a component-based framework for running script program \cite{par:mrubyonTECS}.
@@ -97,7 +97,7 @@ The RiteVM scheuler enables developers to run multitasking programs more easily 
 
 {\bf Contribution}: The proposed framework gives the contribution in the following points.
 \begin{enumerate}
-    \item {\bf To improve the software development efficiency:} Developers do not need to rewrite a storage/ROM device and also to restart an OS.
+\item {\bf To improve the software development efficiency:} Developers do not need to rewrite a storage/ROM device and also to restart an OS.
 The loader supports the countinuous loading, which saves the Bluetooth set-up time.
 Therefore, the mruby bytecode loader using Bluetooth helps developers develop software.
 \item {\bf To effectively execute multiple mruby programs in concurrent or/and parallel:} Developers can execute multiple tasks without the knowledge of an RTOS because the RiteVM sceduler switches tasks cyclically.
@@ -155,8 +155,8 @@ The bytecodes can run on a Rite VM, and thus mruby programs can be executed on a
 \subsection{TECS}
 \label{sec:TECS}
 TECS (TOPPERS Embedded Component System) is a component system suitable for embedded systems.
-TECS helps decrease complexity and difficulty because the generated component diagram can visualize the structure of whole software.
-It can also help increase productivity and reduce development duplication  because a common part of software is regarded as a component.
+TECS helps decrease difficulty because the generated component diagram can visualize the structure of whole software.
+It can also help increase productivity and reduce development duplication because a common part of software is regarded as a component.
 
 The component deployment and composition in TECS are statically performed, which gives optimization.
 As a result, the overhead of execution time and memory consumption can be reduced.
@@ -280,7 +280,7 @@ The mruby-TECS bridge is described in more detail bellow.
 
 As the target RTOS, TOPPERS/HRP2 \cite{url:HRP2}, \cite{par:hr-tecs} is used in this paper.
 TOPPERS/HRP2 is an RTOS based on $\mu$ITRON \cite{par:microITRON} with memory protection.
-However, mruby on TECS does not depend on the RTOS because TECS supports not only TOPPERS/HRP2 but also the other RTOSs such as OSEK \cite{par:OSEK} and TOPPERS/ASP \cite{url:ASP}.
+However, mruby on TECS does not depend on the RTOS because TECS supports not only TOPPERS/HRP2 but also the other RTOSs such as OSEK \cite{par:OSEK} and TOPPERS/ASP \cite{par:ASP}, \cite{url:ASP}.
 
 \begin{figure}[t]
     \centering
@@ -649,7 +649,7 @@ The mruby application bytecode is smaler and faster than that of including mruby
 The difference becomes larger as the number of RiteVMs increases because it takes the 50 msec overhead per one RiteVM. 
 %In the proposed framework, developers send only mruby application and prepare mruby library in advance.
 %Therefore, the design can send the bytecode faster.
-In addition, the design can save the time to connect a storage/ROM device to restart an OS.
+In addition, the design can save the time to rewrite a storage/ROM device, and to restart an OS.
 These advantages lead improvement of the software development efficiency.
 
 \begin{table}[t]
@@ -668,9 +668,9 @@ The comparison of the application execution time with singletasking, co-routine,
 The 100,000 times loop program is used as mruby application for evaluation of execution time.
 In detail, the singletask program loops 100,000 times, and the multitask and co-routine programs loop 50,000 times in each task.
 In Figure \ref{fig:comparison_s_c_m}, the cyclic time of the cyclic handler for multitasking is one msec.
-While multitask's execution time is slower than singletask's, co-routine takes more time than multitask to execute an mruby application.
+%While multitask's execution time is slower than singletask's, co-routine takes more time than multitask to execute an mruby application.
 This result shows the proposed design is superior to co-routine in terms of execution time.
-The overhead of multitask is about 5 \% ($(multitask-singletask)/multitask$).
+Moreover, developers can utilize the scheuler practically because the overhead of the RiteVM scheuler is about 5 \%.
 Switching tasks' overhead is also evaluated, that is about three $\mu$sec on average.
 %The number of switching tasks is from 500 to 600 because singletasking process in Figure \ref{fig:comparison_s_c_m} takes about 540 msec.
 %Therefore, the overhead of multitasking is 0.5 \% or less, and multitasking can be used without the overhead.
@@ -686,11 +686,14 @@ The scheuler interrupts and switches tasks, which causes this overhead.
 
 Figure \ref{fig:comparison_msec} shows the execution time of multitasking with the cyclic handler.
 A lower limit of the cyclic time is one msec due to the specification of TOPPERS/HRP2, the used RTOS.
-More than 10 msec do not be evaluated in this paper because it is thought the larger cyclic time influences applications.
-Each execution time of cyclic period is the same as the others.
-That is because the overhead of switching tasks (about 3 $\mu$sec) is small in comparison with the execution time.
-This results also shows the overhead becomes smaller as the cyclic time is larger, because the overhead depends on the number of switching tasks.
-The smaller cyclic time is better in multitasking due to concurrent and/or parallel processing.
+More than eight msec do not be evaluated in this paper because it is thought the larger cyclic time influences applications.
+%Each execution time of cyclic period is the same as the others.
+%That is because the overhead of switching tasks (about 3 $\mu$sec) is small in comparison with the execution time.
+The execution time decreases as the cyclic time become larger, because the number of switching tasks decreases.
+The execution time of one msec is only about 1 \% lager than that of eight msec.
+The RiteVM scheuler with small cyclic time can effectively execute multiple tasks because the cyclic time overhead is not large.
+%This results also shows the overhead becomes smaller as the cyclic time is larger, because the overhead depends on the number of switching tasks.
+%The smaller cyclic time is better in multitasking due to concurrent and/or parallel processing.
 
 \begin{figure}[t]
     \centering
@@ -701,19 +704,19 @@ The smaller cyclic time is better in multitasking due to concurrent and/or paral
 
 To indicate the superior of component-based development, the comparison of code lines between two .c files is shown in Table \ref{tab:codesize}.
 (A) and (B) mean the source files in the upper and lower of Figure \ref{fig:Eventflag}, respectively. 
-In terms of .c, (B)'s lines do not increase even if the number of RiteVMs increases, while (A)'s lines increase in proportion to the number.
-(B) is not modified, and can be utilized regardless of the number of RiteVMs.
+In terms of .c, (B)'s lines do not increase even if the number of RiteVMs increases, while (A)'s lines increase as the number increases.
+(B)'s .c file can be utilized without modification, regardless of the number of RiteVMs.
 Moreover, lines of two .cdl files are equal.
-The skillfull component-based development brings this advantage such as the decrease of code lines, which leads high productivity and high maintainability.
+The skillfull component-based development brings this advantages such as the decrease of code lines and non-modified code, which leads high productivity and high maintainability.
 
 \begin{table}[t]
     \centering
     \caption{Lines of .c and .cdl file for the number of RiteVM}
     \begin{tabular}{c||cc|c}
                 & (A)       & (B)     & Diff  \\ \hline
-        .c      & 134$+$8$\times$$\alpha $  & 130     & 4$+$8$\times$$\alpha$ \\
-        .cdl    & 25$+$18$\times$$\alpha$   & 25$+$18$\times$$\alpha$ & 0     \\
-        \multicolumn{3}{l}{  }\\
+        .c (Total)      & 8$\times$$\alpha$$+$134  & 130     & 8$\times$$\alpha+$4\\
+        .c (Modified)   & 10$\times\alpha$$-$2 & 0   &  10$\times\alpha$$-$2 \\
+        .cdl    & 18$\times$$\alpha$$+$25   & 18$\times$$\alpha$$+$25 & 0     \\
         \multicolumn{3}{l}{{\small $\alpha$} : {\scriptsize the number of RiteVM}}
     \end{tabular}
     \label{tab:codesize}
@@ -784,7 +787,7 @@ The proposed framework is developed in component-base by TECS.
 The facilities such as RiteVMs, the RiteVM scheuler, and Eventflag are implemented as components.
 Therefore, developers can easily add or remove the functionalities as necessary, and also reuse them.
 Developers can choose fair scheduling or fixed-priority scheduling since the RiteVM scheuler can be easily removed.
-Component-based development can increase productivity and decrease complexity.
+Component-based development can increase productivity.
 
 In the future, the mruby bytecode loader using Bluetooth will be supported to handle multiple bytecodes and run the application in multi-VM.
 Moreover, the .cdl files for RiteVM and mruby-TECS bridge are generated automatically using a plugin, and developers can send a bytecode with ZMODEM protocol on the command line.
