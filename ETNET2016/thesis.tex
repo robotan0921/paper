@@ -181,8 +181,8 @@ mruby on TECSで利用されているmrubyとTECSについても述べる．
 % 特徴としてシンプルな文法なため読みやすくかつ使いやすい上に，C言語よりも少ないコード量で記述できる．
 % 他にも，クラスやメソッドといったオブジェクト指向関数，例外，ガベージコレクションなどの機能により，生産性を向上させることができる．
 
-mrubyは，Rubyの高い生産性を持ち，少ないリソースで起動が速いため，組込みシステムに適している．
-mrubyには，RiteVMと呼ばれるVMが実装されており，どのOS上でも同じmrubyプログラムを起動できる．
+mrubyは，Rubyの高い生産性を持ち，少ないリソースで動くため，組込みシステムに適している．
+mrubyには，RiteVMと呼ばれるVMが実装されており，どのOS上でも同じmrubyプログラムを実行できる．
 %図\ref{fig:mruby}にRiteVMのメカニズムを示す．
 mrubyコンパイラは，mrubyプログラム(.rb)を，中間言語であるバイトコード(.mrb)にコンパイルする．
 %RiteVMが実装されていれば，どのターゲットデバイス上でも同じmrubyプログラムを実行できる．
@@ -303,10 +303,10 @@ cell tCaller Caller{
 \vspace{-5mm} 
 \subsection{mruby on TECS}
 \label{sec:mruby on TECS}
-mruby on TECSは，mrubyを用いた組込みソフトウェアのコンポーネントベース開発が可能なフレームワークである．
+mruby on TECSは，mrubyを用いたコンポーネントベース開発が可能なフレームワークである．
 %\subsubsection{システムモデル}
 %図\ref{fig:mrubyontecs}にmruby on TECSのシステムモデルを示す．
-mrubyバイトコードはそれぞれ，コンポーネント化されたRTOSのタスクとして，RiteVM上で実行される．
+mrubyバイトコードはそれぞれ，コンポーネント化されたRTOS (リアルタイムOS)のタスクとして，RiteVM上で実行される．
 %TECSのコンポーネントは，モータドライバやセンサドライバのような組込みドライバをサポートしている．
 
 mruby-TECSブリッジによって，mrubyプログラムからC言語の関数を呼び出すことができる．
@@ -349,7 +349,7 @@ TOPPERS/HRP2は，$\mu$ITRON\cite{par:microITRON}をベースにしたメモリ�
 図\ref{fig:system_model}に提案フレームワークのシステムモデルを示す．
 ホストから転送されたmrubyアプリケーションのバイトコードは，それぞれのRiteVMに実装されたローダで受信され，同期処理され実行される．
 RiteVMスケジューラはタスクを周期的に切り替えるため，mrubyアプリケーションは並行動作できる．
-また，mrubyアプリケーションの起動は同期機構により同期される．　
+mrubyアプリケーションの起動はイベントフラグを用いた同期機構により同期される．　
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/system_model.pdf}
@@ -377,12 +377,11 @@ mrubyプログラムは，アプリケーション部分とライブラリ部分
 \subsubsection{ローダを実装したRiteVMのコンポーネント}
 %ローダを実装したRiteVMはTECSのコンポーネントとして提供されている．
 ローダは，mruby on TECSで提供されているRiteVMコンポーネント\cite{par:mrubyonTECS}を拡張して実装した．
-
 このコンポーネントでは，転送されたバイトコードの受信に加え，RiteVMのコンフィグレーションが行われる．
 
 図\ref{fig:component_bluetooth}に，MrubyTask1とMrubyBluetooth1のコンポーネントの例を示す．
 MrubyTask1は，コンポーネント化されたRTOS (TOPPERS/HRP2)のタスクである．
-MrubyBluetooth1は，ローダを実装したRiteVMのコンポーネントであり，転送されるバイトコードを受信する．
+MrubyBluetooth1は，ローダを実装したRiteVMコンポーネントであり，転送されるバイトコードを受信する．
 バイナリ転送プロトコルは，ZMODEMを適用した．
 
 \begin{figure}[t]
@@ -394,24 +393,24 @@ MrubyBluetooth1は，ローダを実装したRiteVMのコンポーネントで�
     \label{fig:component_bluetooth}
 \end{figure}
 
-図\ref{fig:control_flow}に，ローダを実装したRiteVMがmrubyプログラムを実行するまでのフローチャートを示す．
-
-はじめに，mrubyで使われる状態と変数のセットである{\it mrb\_state}と{\it mrbc\_context}のポインタを初期化する．
+図\ref{fig:control_flow}にローダを実装したRiteVMがmrubyプログラムを実行するまでのフローチャート，図\ref{maincode_mrubybluetooth}に処理のソースコードを示す．
+．
+はじめに，mrubyで使われる状態と変数のセットである{\it mrb\_state}と{\it mrbc\_context}のポインタを初期化する(図\ref{fig:control_flow}:A，図\ref{maincode_mrubybluetooth}:2-5行目)．
 %{\it mrb\_state}は，mrubyで使われる状態と変数のセットである．
 
-次に，mrubyライブラリのバイトコードを読み込む．
+次に，mrubyライブラリのバイトコードを読み込む(図\ref{fig:control_flow}:B，図\ref{maincode_mrubybluetooth}:8行目)．
 図\ref{celltype_mrubybluetooth}に示す通り，tMrubyBluetoothのセルは属性を持っている．
 {\it mrubyFile}はmrubyライブラリのファイルを示しており，{\it [omit]}はTECSジェネレータによってのみ使われるため，この属性はメモリを消費しない．
 {\it irep}は，mrubyライブラリのバイトコードが格納されている配列へのポインタである．
 つまり，mrubyライブラリは始めのコンパイル時にコンポーネントの属性として，配列に保存される．
 
-次に，転送されてきたmrubyアプリケーションのバイトコードを読み込む．
+次に，転送されてきたmrubyアプリケーションのバイトコードを読み込む(図\ref{fig:control_flow}:C，図\ref{maincode_mrubybluetooth}:10,12行目)．
 mrubyアプリケーションのバイトコードは，変数uint8\_t型の配列{\it irepApp}に格納される．
 ２つのバイトコードは，それぞれ別の配列に保存されており，別々に読み込まれる．
 
-最後に，RiteVMはmrubyアプリケーションであるタスクを実行する．
+最後に，RiteVMはmrubyアプリケーションであるタスクを実行する(図\ref{fig:control_flow}:D，図\ref{maincode_mrubybluetooth}:12行目)．
 mrubyアプリケーションのプログラムが修正された場合は，そのバイトコードのみを再転送する．
-以上の処理のソースコードを図\ref{maincode_mrubybluetooth}に示す．
+%以上の処理のソースコードを図\ref{maincode_mrubybluetooth}に示す．
 
 \begin{figure}[t]
     \centering
@@ -448,10 +447,10 @@ void eMrubyBody_main( CELLIDX idx ){
   /*Omit: error check for mrb_state*/
   c=mrbc_context_new( mrb ); /*New mruby context*/
   /*Omit: initialization of mruby-TECS bridge*/
-  /*Receive the bytecode via Bluetooth*/
-  bluetooth_loader( VAR_irepApp );
   /*Load mruby library bytecode and run*/
   mrb_load_irep_cxt( mrb, ATTR_irep, c );
+  /*Receive the bytecode via Bluetooth*/
+  bluetooth_loader( VAR_irepApp );
   /*Load mruby application bytecode and run*/
   mrb_load_irep_cxt( mrb, VAR_irepApp, c );
   mrbc_context_free( mrb, c ); /*Free mruby context*/
@@ -471,26 +470,26 @@ void eMrubyBody_main( CELLIDX idx ){
 %mruby on TECSは，マルチタスクに対応しているが，開発者がRTOSの知識を熟知している必要がある．
 
 マルチタスク処理のアプローチのひとつにコルーチンがある．
-コルーチンは，協調的スレッドであり，開発者が{\it resume}や{\it yield}といった関数を呼び出すことで並列動作できるが，ノンプリエンプティブな処理で，開発者自身がタスクの切り替えを行う必要があるので，OSのサポートやマルチコアの恩恵を受けることができない．
+コルーチンは，協調的スレッドであり，開発者が{\it resume}や{\it yield}といった関数を呼び出すことで並行動作できるが，ノンプリエンプティブな処理で，開発者自身がタスクの切り替えを行う必要があるため，OSのサポートやマルチコアの恩恵を受けることができない．
 Rubyのコルーチンは，Fiberクラス\cite{url:co-routine}に定義されている．
 
 その他にも，$\mu$ITRONのサービスコールである{\it delay()}を使った手法がある．
 このサービスコールは，引数として与えられた時間だけ，そのタスクの起動を遅らせる．
 {\it delay()}は，固定優先度スケジューリングの場合に用いられるが，フェアスケジューリングの場合には使用することが難しい．
 
-提案フレームワークでは，フェアスケジューラであるRiteVMスケジューラを提供し，複数のタスクを平等に並行動作させる．
-このスケジューラはアプリケーションタスクが同じ優先度を持つ場合に利用でき，開発者がOSの関数を呼び出すことなく，マルチタスク処理が可能になる．
+提案フレームワークでは，フェアスケジューラであるRiteVMスケジューラを提供し，複数のVMを平等に並行動作させる．
+RiteVMスケジューラはRiteVMタスクが同じ優先度を持つ場合に利用でき，開発者がOSの関数を呼び出すことなく，マルチタスク処理が可能になる．
 その上，既存のアプリケーションプログラムの構造を変えることなく使うことができる． 
 
 \subsubsection{RiteVMスケジューラ}
-RiteVMスケジューラは，周期ハンドラであり，同優先度のタスクの実行を切り替える$\mu$ITRONのサービスコールである{\it rotateReadyQueue}を周期的に呼び出す．
+RiteVMスケジューラは，周期ハンドラを利用して実装し，同優先度のタスクの実行を切り替える$\mu$ITRONのサービスコールである{\it rotateReadyQueue}を周期的に呼び出す．
 %{\it rotateReadyQueue}は，同優先度のタスクの実行を切り替える関数である．
 RiteVMスケジューラの設計を図\ref{fig:rotateReadyQueue}に示す．
 
 % 無限ループを持った同優先度の2つのタスクの場合を考える．
 % 現状のシステムでは，始めにタスクが起動すると，そのタスクが無限ループに入るため，もう片方のタスクが起動することができない．
 
-{\it rotateReadyQueue}が呼ばれると，図\ref{fig:rotateReadyQueue}に示すように，タスクの起動が切り替わる．
+{\it rotateReadyQueue}が呼ばれると，図\ref{fig:rotateReadyQueue}に示す通り，タスクの起動が切り替わる．
 {\it rotateReadyQueue}の引数は，優先度である．
 
 {\it rotateReadyQueue}は，2つ以上のタスクの場合にでも利用できる．
@@ -520,7 +519,7 @@ CyclicMainセルは，周期ハンドラの処理を行うコンポーネント�
 %図\ref{build_cyclic_handler}に，図\ref{fig:cyclic_handler}に示されるコンポーネントの組上げ記述を示す．
 図\ref{build_cyclic_handler}に，RiteVMスケジューラの組上げ記述を示す．
 %CyclicHandlerセル部分では，cyclicTimeやcyclicPhaseといった属性で与えられる周期ハンドラの設定を行う．
-attributeには，OSが起動すると実行状態になる{\it TA\_STA}，周期時間には，1msecが与えられる．
+attributeには，OSが起動すると実行状態になる{\it TA\_STA}，周期時間には，1msが与えられる．
 CyclicMainセル部分は，属性priorityを持っており，mrubyタスクの優先度であるRITEVM\_PRIORITYが与えられる．
 
 % \begin{figure}[t]
@@ -572,13 +571,14 @@ cell tCyclicMain CyclicMain{
 \end{figure}
  
 \subsubsection{mrubyアプリケーションの同期機構}
-複数のmrubyアプリケーションの起動を同期させるために，イベントフラグを適用した．
+複数のmrubyアプリケーションの起動を同期させるために，イベントフラグを用いて同期処理を行った．
 %タスクはそれぞれ0x01(01)，0x02(10)のパターンをセットし，待ちパターン0x3(11)でAND待ちする．
 %この機構は，2つ以上のタスクの場合でも適用できる．
-タスクが4つの場合，タスクはそれぞれ，0x01(0001), 0x02(0010), 0x04(0100), 0x08(1000)のパターンをセットし，待ちパターン0x0f(1111) でAND待ちする．(図\ref{fig:Eventflag} (A))
+RiteVMが4つの場合，各VMはそれぞれ，イベントフラグに0x01(0001), 0x02(0010), 0x04(0100), 0x08(1000)のパターンをセットし，待ち状態へと遷移する(図\ref{fig:Eventflag} (A))．
+イベントフラグが待ちパターン0x0f(1111)になると，各VMは実行可能状態になり，アプリケーションを同時に実行する．
 
 さらに，バイトコードの連続ローディングに対応するため，アプリケーションの終了も同期する．
-これにより，すぐに終了するアプリケーションのRiteVMが次のロード待機状態に入るのを防げ，すべてのRiteVMは同時に次のロード待機状態になる．
+終了も同期することで，すぐに終了するアプリケーションのRiteVMが次のロード待機状態に入るのを防げ，すべてのRiteVMは同時に次のロード待機状態になる．
 
 \begin{figure}[t]
     \centering
@@ -597,7 +597,7 @@ cell tCyclicMain CyclicMain{
 それに加えて，コンポーネントベース開発ではコード量を減らすことができる．
 図\ref{fig:Eventflag} (B)に示す通り，イベントフラグのセットパターンと待ちパターンを属性として定義する．
 {\it cEventflag\_set(ATTR\_setPattern)}のように，if文なしでプログラムを記述でき，RiteVMの数に関わらず同じCファイルを使用できる．
-さらに，TECSのオプション{\it [optional]}によって，呼び口が結合した場合のみ処理を行うため，イベントフラグの結合を切った場合にでも同じCファイルを利用できる．
+さらに，TECSのオプション{\it [optional]}によって，呼び口が結合した場合のみ処理を行うため，イベントフラグを利用しない場合でも同じCファイルを利用できる．
 
 \vspace{-2mm}
 \section{評価実験}
@@ -623,12 +623,12 @@ cell tCyclicMain CyclicMain{
 
 % These evaluations are performed in order to indicate that an mruby bytecode loader improves the software development efficiency, and that the proposed multitask processing effectively executes compared with singletasking or co-routine, and also the overhead of the cyclic period.
 本評価実験は，ターゲットデバイスとして，LEGO MINDSTORMS EV3 (300MHz ARM9-based Sitara AM1808 system-on-a-chip)を使用した．
-コンパイラは，gcc 4.9.3 -O2 および mrubyのバージョンは，1.2.0である．
+コンパイラは，gcc 4.9.3 -O2 および mrubyのバージョンは1.2.0である．
 
-表\ref{tab:size_and_time}に，mrubyアプリケーションのバイトコードと，ライブラリとアプリケーションを合わせたバイトコードのサイズ，ロード処理時間，コンパイル時間の比較を示す\footnote{0バイトのバイトコードを処理した場合にかかるロード処理時間のオーバヘッドは，50.933 msecである．
-同様に0バイトのバイトコードをコンパイルした場合にかかるコンパイルのオーバヘッドは，46.9 msecである．}．
+表\ref{tab:size_and_time}に，mrubyアプリケーションのバイトコードと，ライブラリとアプリケーションを合わせたバイトコードのサイズ，ロード処理時間，コンパイル時間の比較を示す\footnote{0バイトのバイトコードを処理した場合にかかるロード処理時間のオーバヘッドは，50.933 msである．
+同様に0バイトのバイトコードをコンパイルした場合にかかるコンパイルのオーバヘッドは，46.9 msである．}．
 mrubyアプリケーションのみのバイトコードの方が，ライブラリを含めた場合よりも，すべての点で優れている．
-これはRiteVM一つの評価であるため，RiteVMの数が増えるにつれ，この差は広がっていく．
+上記の結果は，RiteVM一つの評価であるため，RiteVMの数が増えるにつれ，この差は広がっていく．
 さらに，この設計ではSDカードやROMを上書きしたり，OSを再起動する手間も省くことができる．
 以上より，提案フレームワークは，既存フレームワークより作業効率を向上できる．
 
@@ -661,7 +661,7 @@ mrubyアプリケーションのみのバイトコードの方が，ライブラ
 評価用アプリケーションとして，100,000回ループするプログラム(マルチタスクおよびコルーチンは，2つのタスクでそれぞれ50,000回ループ)を用いた．
 実行時間の観点では，提案手法のマルチタスクは，コルーチンより有効である．
 シングルタスクと比べても，RiteVMスケジューラのオーバヘッドは約5\%と実用的に問題ない．
-タスクの切り替えそのものにかかる時間は，約3$\mu$secである．
+タスクの切り替えそのものにかかる時間は，約3$\mu$sある．
 RiteVMスケジューラは，周期的に割り込み，タスクの切り替えの処理を行うため，これがオーバヘッドとなっている．
 
 % The comparison of the application execution time with singletasking, co-routine, and multitasking is shown in Figure \ref{fig:comparison_s_c_m}.
@@ -687,11 +687,11 @@ RiteVMスケジューラは，周期的に割り込み，タスクの切り替�
 \end{figure}
 
 図\ref{fig:comparison_msec}は，RiteVMスケジューラの周期時間ごとの実行時間を示している．
-この評価では，TOPPERS/HRP2の仕様により周期時間の下限を1msecとした．
-また，周期時間が大きいとアプリケーションに影響を与える可能性があるため，上限を8msecとした．
+この評価では，TOPPERS/HRP2の仕様により周期時間の下限を1msとした．
+一方で，周期時間が大きいとアプリケーションに影響を与える可能性があるため，上限を8msとした．
 周期時間が大きいほど，タスクの切り替え回数は減少するため，実行時間は小さくなることが分かる．
 %1msecと10msecでは，約3\%減少している．
-1msecと8msecでは，約1\%しか減少していない．
+1msと8msでは，約1\%しか減少していない．
 小さい周期時間でもオーバヘッドは大きくないため，効率的にタスクを並行動作できる．
 %しかし，周期時間によるオーバヘッドは，誤差に埋もれるほど小さい．
 
@@ -717,7 +717,7 @@ RiteVMスケジューラは，周期的に割り込み，タスクの切り替�
 (A)の.cファイルは，RiteVMの数に比例して増えているのに対して，(B)の.cファイルは同じである上に，RiteVMの数にかかわらず，修正することなく同一のファイルを使用できる．
 .cdlファイルは両者違いはない．
 コンポーネントベース開発を上手く活用することで，コードの行数が減ることを示した．%高い生産性やメンテナンス性につながる．
-その上，同じ.cファイルを利用できるため，開発者がファイルを修正する手間を省くこともできる．
+その上，RiteVMの数に限らず同じ.cファイルを利用できる．%ため，開発者がファイルを修正する手間を省くこともできる．
 
 % To indicate the superior of component-based development, the comparison of code lines between two .c files is shown in Table \ref{tab:codesize}.
 % (A) and (B) mean the source files in the upper and lower of Figure \ref{fig:Eventflag}, respectively. 
@@ -732,7 +732,7 @@ RiteVMスケジューラは，周期的に割り込み，タスクの切り替�
     \begin{tabular}{c||cc|c}
                 & (A)       & (B)     & Diff  \\ \hline
         .c (Total)      & 8$\times$$\alpha$$+$134  & 130     & 8$\times$$\alpha+$4\\
-        .c (Modified)   & 10$\times\alpha$$-$2 & 0   &  10$\times\alpha$$-$2 \\
+        .c (Modification)   & 10$\times\alpha$$-$2 & 0   &  10$\times\alpha$$-$2 \\
         .cdl    & 18$\times$$\alpha$$+$25   & 18$\times$$\alpha$$+$25 & 0     \\
         \multicolumn{3}{l}{{\small $\alpha$} : {\scriptsize the number of RiteVM}}
     \end{tabular}
@@ -760,12 +760,12 @@ RiteVMスケジューラは，周期的に割り込み，タスクの切り替�
 % }
 %     \label{tab:comparison}
 % \end{table*}
-現在，オープンソースのスクリプト言語を適用した組込みシステム向けのランタイムシステムとして，次のものが開発されている.
+現在，スクリプト言語を適用した組込みシステム向けのランタイムシステムとして，次のものが開発されている.
 python-on-a-chip\cite{url:python-on-a-chip}, Owl system\cite{par:owl}, eLua\cite{url:eLua}, mruby\cite{par:mruby}, mruby on TECS\cite{par:mrubyonTECS}.
 
 python-on-a-chip (p14p)は，PyMyteと呼ばれるPythonVMを使用するPythonランタイムシステムである．
 PyMyteは，低リソースでPythonプログラムを実行する．
-p14pでは，複数のグリーンスレッドを並列動作できる．
+p14pでは，複数のグリーンスレッドを並行動作できる．
 
 Owl systemは，組込みシステム向けのPythonランタイムシステムであり，ARM Cortex-M3 マイコン上で動く．
 Owlツールチェーンは，Pythonコードから，マイコン上で直接起動するメモリイメージを生成する．
@@ -773,7 +773,7 @@ Owl systemは，p14pのインタプリタを使用している．
 
 eLuaは，Luaの組込みシステム向け実装である．
 %Luaは，最も人気のある組込み向けスクリプト言語のひとつである\cite{url:Lua}, \cite{par:Lua}.
-Luaは，コルーチンをサポートしているが，ノンプリエンプティブであるため，マルチタスク処理のようなプログラムを行うのは難しい．
+Luaは，コルーチンをサポートしているが，ノンプリエンプティブであるため，マルチタスク処理を行うのは難しい．
 
 %mruby(軽量Ruby)は，組込みシステムに適したスクリプト言語である．
 %mrubyプログラムは，RiteVM上で実行される．
@@ -800,7 +800,8 @@ RiteVMスケジューラは複数のmrubyアプリケーションを効率良く
 %RiteVMスケジューラも容易に付け外しできるため，開発者は，フェアスケジューリングか固定優先度スケジューリングかを選択することもできる．
 %コンポーネントベース開発は，生産性を向上させ，システムの複雑さを減らすことができる．
 
-ソフトウェア開発をさらに効率よく行うために，プラグインを使用したRiteVMやmruby-TECSブリッジの.cdlファイルの自動生成や，コマンドライン上でのバイトコードの転送などを提供することが，今後の課題である．
+ソフトウェア開発をさらに効率よく行うために，%プラグインを使用したRiteVMやmruby-TECSブリッジの.cdlファイルの自動生成や，
+VM間の通信機能や，コマンドライン上でのバイトコード転送機能を提供することが，今後の課題である．
 
 %%%%%%%%%%%% Reference %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-3mm}
