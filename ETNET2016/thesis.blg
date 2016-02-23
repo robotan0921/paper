@@ -8,36 +8,36 @@ Warning--there's no number and/or volumepar:EV3
 Warning--Missing required argument title in url:co-routine
 Warning--Missing required argument title in url:python-on-a-chip
 Warning--Missing required argument title in url:eLua
-You've used 13 entries,
+You've used 14 entries,
             1978 wiz_defined-function locations,
-            557 strings with 5717 characters,
-and the built_in function-call counts, 3390 in all, are:
-= -- 264
-> -- 124
+            563 strings with 5866 characters,
+and the built_in function-call counts, 3505 in all, are:
+= -- 273
+> -- 128
 < -- 9
-+ -- 50
-- -- 37
-* -- 221
-:= -- 458
-add.period$ -- 13
-call.type$ -- 13
++ -- 52
+- -- 38
+* -- 226
+:= -- 477
+add.period$ -- 14
+call.type$ -- 14
 change.case$ -- 0
 chr.to.int$ -- 0
-cite$ -- 18
-duplicate$ -- 160
-empty$ -- 382
-format.name$ -- 37
-if$ -- 834
+cite$ -- 19
+duplicate$ -- 164
+empty$ -- 397
+format.name$ -- 38
+if$ -- 861
 int.to.chr$ -- 0
-int.to.str$ -- 13
+int.to.str$ -- 14
 missing$ -- 9
-newline$ -- 42
-num.names$ -- 13
-pop$ -- 57
+newline$ -- 45
+num.names$ -- 14
+pop$ -- 63
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 203
+skip$ -- 208
 stack$ -- 0
 substring$ -- 200
 swap$ -- 78
@@ -46,8 +46,8 @@ text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 5
-while$ -- 31
-width$ -- 15
-write$ -- 94
+while$ -- 32
+width$ -- 16
+write$ -- 101
 is.kanji.str$ -- 0
 (There were 5 warnings)

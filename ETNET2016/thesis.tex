@@ -64,10 +64,10 @@ Graduate School of Engineering Science, Osaka University}
 近年，組込みシステムは複雑化・大規模化しているため，ソフトウェアの生産性が問題になっている．
 組込みソフトウェア開発の生産性の向上を目的として，mruby（軽量Ruby）を適用させたコンポーネントベース開発が可能なフレームワークであるmruby on TECSを提案してきた．
 現状のmruby on TECSでは，プラットフォームにmrubyバイトコードを組み込んでいるため，mrubyプログラムを修正する度にコンパイル・リンクし直す必要がある．
-さらに，マルチVMを提供しているが，複数のmrubyプログラムを効率よく並行動作させるには開発者がリアルタイムOSの機能を熟知している必要がある．
+さらに，マルチVMを提供しているが，複数のmrubyプログラムを効率良く並行動作させるには開発者がリアルタイムOSの機能を熟知している必要がある．
 本研究では，mruby on TECSの拡張として，mrubyアプリケーションのバイトコードをBluetoothで転送することで開発効率を向上させる．
-さらに，複数のmrubyプログラムを協調動作できるフレームワークを提案する.
-\vspace{-5mm}
+さらに，複数のmrubyプログラムを協調動作できるフレームワークを提案する．
+\vspace{-4mm}
 \end{abstract}
 
 % \begin{jkeyword}
@@ -78,11 +78,11 @@ Graduate School of Engineering Science, Osaka University}
 In recent years, the productivity of embedded systems has become a problem due to their complexity and large-scale.
 For the purpose of improving the productivity for embedded software development, the mruby on TECS framework has been proposed that is applied mruby (Lightweight Ruby) and supports component-based development.
 In the current mruby on TECS, the mruby programs have to be compiled and linked every time the programs are modified because the mruby bytecodes are incorporated in the platform.
-Moreover, while the framework supports multi-VM, developers need to be familiar with the functions of RTOSs to effectively execute multiple mruby programs in concurrent or/and parallel.
+Moreover, while the framework supports multi-VM, developers need to be familiar with the functions of RTOSs to effectively execute multiple mruby programs in concurrent.
 To improve the development efficiency, this paper proposes an mruby bytecode loader using Bluetooth as an extension of mruby on TECS.
 In addition, multiple mruby programs cooperatively run in the proposed framework.
-A RiteVM sceduler makes multitasking processing more easy-to-use than that of mruby on TECS.
-\vspace{-5mm}
+%A RiteVM scheduler makes multitasking processing more easy-to-use than that of mruby on TECS.
+\vspace{-4mm}
 \end{eabstract}
 
 % \begin{ekeyword}
@@ -104,45 +104,45 @@ A RiteVM sceduler makes multitasking processing more easy-to-use than that of mr
 効率的なソフトウェア開発のもう一つのアプローチとして，スクリプト言語がある．
 現在の組込みソフトウェアのほとんどはC言語で開発されているが，C言語による開発はコストが高く，開発期間も長くなる．
 スクリプト言語は，その使いやすさから高い生産性を持っているため，効率的かつ短期間での開発ができる．
-有名なスクリプト言語として，Ruby, Perl，Python，Luaなどがある．
+有名なスクリプト言語として，Ruby，Perl，Python，Luaなどがある．
 
-しかし，スクリプト言語は生産性が高い反面，C言語よりも実行時間が遅い．
-組込みシステムにとって，デッドラインを守るといったリアルタイム性は重要であるため，スクリプト言語を組込みシステムに利用することは難しい．
+しかし，スクリプト言語は生産性が高い反面，C言語よりも実行時間が遅く，実行時間にばらつきがある．
+多くの組込みシステムは，リアルタイム性が重要であるため，スクリプト言語を組込みシステムに利用することは難しい．
 
 %mruby on TECSは，スクリプト言語であるmruby使用したコンポーネントベース開発が可能なフレームワークである\cite{par:mrubyonTECS}．
-mruby on TECS \cite{par:mrubyonTECS}は，mruby(軽量Ruby)\cite{par:mruby}と，組込みシステム向けのコンポーネントシステムであるTECSを利用したフレームワークである.
-mruby on TECSでは，mrubyプログラムからC言語の関数を呼ぶ機能を提供しており，mrubyに比べてアプリケーションを約100倍速く実行できる.
+mruby on TECS \cite{par:mrubyonTECS}は，mruby(軽量Ruby)\cite{par:mruby}と，組込みシステム向けのコンポーネントシステムであるTECSを利用したフレームワークである．
+mruby on TECSでは，mrubyプログラムからC言語の関数を呼ぶ機能を提供しており，mrubyに比べてアプリケーションを約100倍速く実行できる．
 
 現状のmruby on TECSでは，いくつかの問題がある．
 mruby on TECSは，mrubyプログラムをロードするための方法として，SDカードやROMへの書き込みにしか対応していないため，作業効率が悪い．
 例えば，LEGO MINDSTORMS EV3のプラットフォーム\cite{par:EV3}を利用した場合，mrubyプログラムを修正する度に，SDカードの抜き差しを行う必要がある．
-%mruby on TECS では，mruby プログラムを修正する度にターゲットデバイスでSD カードまたはROMに書き込みし，OS を再起動する必要がある.
-さらに，mruby on TECSはマルチVMに対応してるが，複数のmrubyアプリケーションを並行実行させる場合，開発者がタスクを待ち状態へ遷移させるOSの機能を呼び出さなければならない.
+%mruby on TECS では，mruby プログラムを修正する度にターゲットデバイスでSD カードまたはROMに書き込みし，OS を再起動する必要がある．
+さらに，mruby on TECSはマルチVMに対応しているが，複数のmrubyアプリケーションを並行実行させる場合，開発者がタスクを待ち状態へ遷移させるOSの機能を呼び出さなければならない．
 
 % mrubyバイトコードローダによって，開発者ははじめの一度だけ記憶装置にプラットフォーム部分を書き込み，mrubyアプリケーションのバイトコードをホストからターゲットデバイスへBluetoothを用いて転送し，実行することが可能になる．
 % 繰り返してSDカードの抜き差しやROMへの書き込みをする手間が省けるため，作業効率は向上する．
 % RiteVMスケジューラは複数のmrubyアプリケーションを
 本論文では，上記の問題を解決するため，mruby on TECSを拡張して，Bluetoothを用いたmrubyバイトコードローダおよびRiteVMスケジューラを提案する．
-% 提案フレームワークでは，プラットフォーム部分をコンパイル・リンクし，ターゲットデバイス上で起動する.
-% ホストPC 側では，mruby アプリケーション(.rb) をバイトコード(.mrb) にコンパイルし，Bluetooth を通してターゲットデバイスにバイトコードを転送する. 
-% ターゲットデバイス側では，RiteVM に実装されたローダが転送されたバイトコードを受信し，すでにプラットフォームに含まれているmruby ライブラリと合わせてアプリケーションを実行する.
-% これによって，繰り返しSDカードの抜き差しやROMへの書き込みをする手間やOSを再起動する時間が省けるため，作業効率を上げることができる.
+% 提案フレームワークでは，プラットフォーム部分をコンパイル・リンクし，ターゲットデバイス上で起動する．
+% ホストPC 側では，mruby アプリケーション(.rb) をバイトコード(.mrb) にコンパイルし，Bluetooth を通してターゲットデバイスにバイトコードを転送する． 
+% ターゲットデバイス側では，RiteVM に実装されたローダが転送されたバイトコードを受信し，すでにプラットフォームに含まれているmruby ライブラリと合わせてアプリケーションを実行する．
+% これによって，繰り返しSDカードの抜き差しやROMへの書き込みをする手間やOSを再起動する時間が省けるため，作業効率を上げることができる．
 % RiteVMに実装されたローダが，ホストから転送されたバイトコードを受信し，アプリケーションを実行する．
-% これによって，繰り返しSDカードの抜き差しやROMへの書き込みをする手間やOSを再起動する時間が省けるため，作業効率を上げることができる.
-% さらに，各VM の処理を平等に実行するRiteVM スケジューラを提供することで，マルチタスク処理を効率的に利用できる.
+% これによって，繰り返しSDカードの抜き差しやROMへの書き込みをする手間やOSを再起動する時間が省けるため，作業効率を上げることができる．
+% さらに，各VM の処理を平等に実行するRiteVM スケジューラを提供することで，マルチタスク処理を効率的に利用できる．
 
-本論文における貢献は次のとおりである．
+本論文における貢献は次の通りである．
 mrubyバイトコードローダにより，ソフトウェア開発における作業効率を向上させる．
-RiteVMスケジューラにより，複数のmrubyプログラムを効率的に並行・並列動作させる．
+RiteVMスケジューラにより，複数のmrubyプログラムを効率的に並行動作させる．
 コンポーネントベース開発の利点を明らかにする．
 % Contribution: The proposed framework gives the contribution in the following points.
 % 1) To improve the software development efficiency:
 % Developers do not need to rewrite a storage/ROM device and also to restart an OS. 
-% The loader supports the countinuous loading, which saves the Bluetooth setup time. 
+% The loader supports the continuous loading, which saves the Bluetooth setup time. 
 % Therefore, the mruby bytecode loader using Bluetooth helps developers develop software.
 % 2) To effectively execute multiple mruby programs in concurrent or/and parallel: 
-% Developers can execute multiple tasks without the knowledge of an RTOS because the RiteVM sceduler switches tasks cyclically.
-% In additon, synchronization of multiple tasks is also implemented.
+% Developers can execute multiple tasks without the knowledge of an RTOS because the RiteVM scheduler switches tasks cyclically.
+% In addition, synchronization of multiple tasks is also implemented.
 % 3) To focus on the benefits of component-based developments:
 % This paper shows the specific examples for the benefits of component-based development.
 
@@ -162,7 +162,7 @@ RiteVMスケジューラにより，複数のmrubyプログラムを効率的に
 \vspace{-2mm}
 \label{sec:Background}
 % 図\ref{fig:proposed}に提案フレームワークのシステムモデルを示す．
-% RiteVMとmrubyライブラリを含むプラットフォーム部分は，はじめにターゲットデバイス上で起動されている．
+% RiteVMとmrubyライブラリを含むプラットフォーム部分は，始めにターゲットデバイス上で起動されている．
 % mrubyアプリケーションのバイトコードは，ホストからターゲットデバイスへと転送される．
 % それぞれバイトコードは，RiteVMに割り当てられ，並行して起動される．
 %
@@ -181,7 +181,7 @@ mruby on TECSで利用されているmrubyとTECSについても述べる．
 % 特徴としてシンプルな文法なため読みやすくかつ使いやすい上に，C言語よりも少ないコード量で記述できる．
 % 他にも，クラスやメソッドといったオブジェクト指向関数，例外，ガベージコレクションなどの機能により，生産性を向上させることができる．
 
-mrubyは，Rubyの高い生産性を持ち，少ないリソースで動くため，組込みシステムに適している．
+mrubyは，Rubyの高い生産性を持ち，Rubyより少ないリソースで動作するため，組込みシステムに適している．
 mrubyには，RiteVMと呼ばれるVMが実装されており，どのOS上でも同じmrubyプログラムを実行できる．
 %図\ref{fig:mruby}にRiteVMのメカニズムを示す．
 mrubyコンパイラは，mrubyプログラム(.rb)を，中間言語であるバイトコード(.mrb)にコンパイルする．
@@ -224,7 +224,7 @@ TECSでは，インスタンス化されたコンポーネントはセル({\it c
 \end{figure}
 
 \subsubsection{コンポーネント記述}
-TECSのコンポーネント記述は，シグニチャ記述，セルタイプ記述，組上げ記述に分類され，.cdlファイルに記述する．
+TECSのコンポーネント記述は，シグニチャ記述，セルタイプ記述，組上げ記述に分類され，cdlファイルに記述する．
 図\ref{fig:component}のコンポーネント記述について次に述べる．
 
 % \begin{description}
@@ -232,7 +232,7 @@ TECSのコンポーネント記述は，シグニチャ記述，セルタイプ�
         シグニチャ記述は，セルのインタフェースを定義する．
         図\ref{signature}に示す通り，{\it signature}キーワードに続けて，シグニチャ名(sMotor)を記述する．
         %図\ref{signature}のようにシグニチャsMotorを定義できる.
-        TECSでは，インタフェースの定義を明確にするために，入力と出力にはそれぞれ，[in]と[out]という指定子がつけられる．
+        TECSでは，インタフェースの定義を明確にするために，入力と出力にはそれぞれ，[in]と[out]という指定子が付けられる．
         
 \begin{figure}[t]
 \centering
@@ -256,7 +256,7 @@ signature sMotor{
     % \item[{\bf セルタイプ記述}]\mbox{}\\
         セルタイプ記述は，受け口，呼び口，属性，変数を用いてセルタイプを定義する．
         {\it celltype}キーワードに続けて，セルタイプ名(tCaller)を記述する．
-        図\ref{celltype}に示す通り，受け口は，{\it entry}キーワードに続けて，シグニチャ名, 受け口名を記述する．
+        図\ref{celltype}に示す通り，受け口は，{\it entry}キーワードに続けて，シグニチャ名，受け口名を記述する．
         同様にして，呼び口も定義できる．
         属性と変数は，それぞれ{\it attr}，{\it var}キーワードを用いて列挙する．
 
@@ -308,8 +308,7 @@ mruby on TECSは，mrubyを用いたコンポーネントベース開発が可�
 %図\ref{fig:mrubyontecs}にmruby on TECSのシステムモデルを示す．
 mrubyバイトコードはそれぞれ，コンポーネント化されたRTOS (リアルタイムOS)のタスクとして，RiteVM上で実行される．
 %TECSのコンポーネントは，モータドライバやセンサドライバのような組込みドライバをサポートしている．
-
-mruby-TECSブリッジによって，mrubyプログラムからC言語の関数を呼び出すことができる．
+さらに，mruby-TECSブリッジによって，mrubyプログラムからC言語の関数を呼び出すことができる．
 %mruby-TECSブリッジについては，以下で詳しく説明する．
 
 本研究では，RTOSとして，TOPPERS/HRP2\cite{par:hr-tecs}を使用した．
@@ -372,7 +371,7 @@ mrubyプログラムは，アプリケーション部分とライブラリ部分
 この設計により，転送するバイトコードのサイズや処理時間の無駄を省ける．
 さらに，各RiteVMでライブラリを共有することや，固有のライブラリを持つことも可能になる．
 
-%提案フレームワークでは，mrubyバイトコードの連続ローディングにも対応している.
+%提案フレームワークでは，mrubyバイトコードの連続ローディングにも対応している．
 
 \subsubsection{ローダを実装したRiteVMのコンポーネント}
 %ローダを実装したRiteVMはTECSのコンポーネントとして提供されている．
@@ -382,7 +381,7 @@ mrubyプログラムは，アプリケーション部分とライブラリ部分
 図\ref{fig:component_bluetooth}に，MrubyTask1とMrubyBluetooth1のコンポーネントの例を示す．
 MrubyTask1は，コンポーネント化されたRTOS (TOPPERS/HRP2)のタスクである．
 MrubyBluetooth1は，ローダを実装したRiteVMコンポーネントであり，転送されるバイトコードを受信する．
-バイナリ転送プロトコルは，ZMODEMを適用した．
+バイナリ転送プロトコルは，汎用性が良く，パフォーマンスが高いため，ZMODEM\cite{par:ZMODEM}を適用した．
 
 \begin{figure}[t]
     \centering
@@ -394,21 +393,21 @@ MrubyBluetooth1は，ローダを実装したRiteVMコンポーネントであ�
 \end{figure}
 
 図\ref{fig:control_flow}にローダを実装したRiteVMがmrubyプログラムを実行するまでのフローチャート，図\ref{maincode_mrubybluetooth}に処理のソースコードを示す．
-．
-はじめに，mrubyで使われる状態と変数のセットである{\it mrb\_state}と{\it mrbc\_context}のポインタを初期化する(図\ref{fig:control_flow}:A，図\ref{maincode_mrubybluetooth}:2-5行目)．
+
+はじめに，mrubyで使われる状態と変数のセットである{\it mrb\_state}と{\it mrbc\_context}のポインタを初期化する(図\ref{fig:control_flow}：A，図\ref{maincode_mrubybluetooth}：2-5行目)．
 %{\it mrb\_state}は，mrubyで使われる状態と変数のセットである．
 
-次に，mrubyライブラリのバイトコードを読み込む(図\ref{fig:control_flow}:B，図\ref{maincode_mrubybluetooth}:8行目)．
+次に，mrubyライブラリのバイトコードを読み込む(図\ref{fig:control_flow}：B，図\ref{maincode_mrubybluetooth}：8行目)．
 図\ref{celltype_mrubybluetooth}に示す通り，tMrubyBluetoothのセルは属性を持っている．
 {\it mrubyFile}はmrubyライブラリのファイルを示しており，{\it [omit]}はTECSジェネレータによってのみ使われるため，この属性はメモリを消費しない．
 {\it irep}は，mrubyライブラリのバイトコードが格納されている配列へのポインタである．
 つまり，mrubyライブラリは始めのコンパイル時にコンポーネントの属性として，配列に保存される．
 
-次に，転送されてきたmrubyアプリケーションのバイトコードを読み込む(図\ref{fig:control_flow}:C，図\ref{maincode_mrubybluetooth}:10,12行目)．
+次に，転送されてきたmrubyアプリケーションのバイトコードを読み込む(図\ref{fig:control_flow}：C，図\ref{maincode_mrubybluetooth}：10，12行目)．
 mrubyアプリケーションのバイトコードは，変数uint8\_t型の配列{\it irepApp}に格納される．
 ２つのバイトコードは，それぞれ別の配列に保存されており，別々に読み込まれる．
 
-最後に，RiteVMはmrubyアプリケーションであるタスクを実行する(図\ref{fig:control_flow}:D，図\ref{maincode_mrubybluetooth}:12行目)．
+最後に，RiteVMはmrubyアプリケーションであるタスクを実行する(図\ref{fig:control_flow}：D，図\ref{maincode_mrubybluetooth}：12行目)．
 mrubyアプリケーションのプログラムが修正された場合は，そのバイトコードのみを再転送する．
 %以上の処理のソースコードを図\ref{maincode_mrubybluetooth}に示す．
 
@@ -443,9 +442,9 @@ celltype tMrubyBluetooth{
 \begin{lstlisting}
 void eMrubyBody_main( CELLIDX idx ){
   /*Omit: Declaration variables*/
-  mrb=mrb_open(); /*New interpreter instance*/
+  mrb=mrb_open(); /*New mrb_state*/
   /*Omit: error check for mrb_state*/
-  c=mrbc_context_new( mrb ); /*New mruby context*/
+  c=mrbc_context_new( mrb ); /*New mrbc_context*/
   /*Omit: initialization of mruby-TECS bridge*/
   /*Load mruby library bytecode and run*/
   mrb_load_irep_cxt( mrb, ATTR_irep, c );
@@ -469,7 +468,7 @@ void eMrubyBody_main( CELLIDX idx ){
 この章では，提案フレームワークでのマルチタスク処理の設計について述べる．
 %mruby on TECSは，マルチタスクに対応しているが，開発者がRTOSの知識を熟知している必要がある．
 
-マルチタスク処理のアプローチのひとつにコルーチンがある．
+マルチタスク処理のアプローチの一つにコルーチンがある．
 コルーチンは，協調的スレッドであり，開発者が{\it resume}や{\it yield}といった関数を呼び出すことで並行動作できるが，ノンプリエンプティブな処理で，開発者自身がタスクの切り替えを行う必要があるため，OSのサポートやマルチコアの恩恵を受けることができない．
 Rubyのコルーチンは，Fiberクラス\cite{url:co-routine}に定義されている．
 
@@ -489,11 +488,11 @@ RiteVMスケジューラの設計を図\ref{fig:rotateReadyQueue}に示す．
 % 無限ループを持った同優先度の2つのタスクの場合を考える．
 % 現状のシステムでは，始めにタスクが起動すると，そのタスクが無限ループに入るため，もう片方のタスクが起動することができない．
 
-{\it rotateReadyQueue}が呼ばれると，図\ref{fig:rotateReadyQueue}に示す通り，タスクの起動が切り替わる．
+{\it rotateReadyQueue}が呼ばれると，図\ref{fig:rotateReadyQueue}に示す通り，同優先度タスクの実行順序が切り替わる．
 {\it rotateReadyQueue}の引数は，優先度である．
 
 {\it rotateReadyQueue}は，2つ以上のタスクの場合にでも利用できる．
-例えば，３つのタスクA, B, Cが順に起動する場合，{\it rotateReadyQueue}が呼ばれると，B, C, Aの順にタスクの起動は切り替わる．
+例えば，３つのタスクA，B，Cが順に起動する場合，{\it rotateReadyQueue}が呼ばれると，B，C，Aの順にタスクの実行順序は切り替わる．
 
 \begin{figure}[t]
     \centering
@@ -507,7 +506,7 @@ RiteVMスケジューラの設計を図\ref{fig:rotateReadyQueue}に示す．
 \subsubsection{RiteVMスケジューラのコンポーネント}
 %図\ref{fig:cyclic_handler}にRiteVMスケジューラのコンポーネント図を示す．
 RiteVMスケジューラのコンポーネントは，CyclicHandlerとCyclicMainから構成される．
-CyclicHandlerセルは，3つの属性(attribute, cyclicTime, cyclicPhase)を持っており，$\mu$ITRONの周期ハンドラ\cite{par:microITRON}の設定を行う．
+CyclicHandlerセルは，3つの属性(attribute，cyclicTime，cyclicPhase)を持っており，$\mu$ITRONの周期ハンドラ\cite{par:microITRON}の設定を行う．
 %$\mu$ITRONの周期ハンドラは，\cite{par:microITRON}に詳しく書かれている．
 %周期ハンドラは，5つの引数(ID, attribute, cyclic time, cyclic phase, access pattern)を持っている．
 %CyclicHandlerセルは，3つの属性(attribute, cyclicTime, cyclicPhase)を持っている．
@@ -519,7 +518,7 @@ CyclicMainセルは，周期ハンドラの処理を行うコンポーネント�
 %図\ref{build_cyclic_handler}に，図\ref{fig:cyclic_handler}に示されるコンポーネントの組上げ記述を示す．
 図\ref{build_cyclic_handler}に，RiteVMスケジューラの組上げ記述を示す．
 %CyclicHandlerセル部分では，cyclicTimeやcyclicPhaseといった属性で与えられる周期ハンドラの設定を行う．
-attributeには，OSが起動すると実行状態になる{\it TA\_STA}，周期時間には，1msが与えられる．
+attributeには，OSが起動すると実行状態になる属性である{\it TA\_STA}，周期時間には，1msが与えられる．
 CyclicMainセル部分は，属性priorityを持っており，mrubyタスクの優先度であるRITEVM\_PRIORITYが与えられる．
 
 % \begin{figure}[t]
@@ -574,7 +573,7 @@ cell tCyclicMain CyclicMain{
 複数のmrubyアプリケーションの起動を同期させるために，イベントフラグを用いて同期処理を行った．
 %タスクはそれぞれ0x01(01)，0x02(10)のパターンをセットし，待ちパターン0x3(11)でAND待ちする．
 %この機構は，2つ以上のタスクの場合でも適用できる．
-RiteVMが4つの場合，各VMはそれぞれ，イベントフラグに0x01(0001), 0x02(0010), 0x04(0100), 0x08(1000)のパターンをセットし，待ち状態へと遷移する(図\ref{fig:Eventflag} (A))．
+RiteVMが4つの場合，各VMはそれぞれ，イベントフラグに0x01(0001)，0x02(0010)，0x04(0100)，0x08(1000)のパターンをセットし，待ち状態へと遷移する(図\ref{fig:Eventflag} (A))．
 イベントフラグが待ちパターン0x0f(1111)になると，各VMは実行可能状態になり，アプリケーションを同時に実行する．
 
 さらに，バイトコードの連続ローディングに対応するため，アプリケーションの終了も同期する．
@@ -591,12 +590,12 @@ RiteVMが4つの場合，各VMはそれぞれ，イベントフラグに0x01(000
 \vspace{-5mm}
 \subsection{コンポーネントベース開発の利点}
 この章では，コンポーネントベース開発の利点を使った設計について述べる．
-提案フレームワークは，RiteVMやRiteVMスケジューラ，イベントフラグをコンポーネントとして提供しているため，開発者はそれらのコンポーネントを容易に付け外したり，再利用できる．
+提案フレームワークは，RiteVMやRiteVMスケジューラ，イベントフラグをコンポーネントとして提供しているため，開発者はそれらのコンポーネントを容易に付け外し，再利用できる．
 例えば，RiteVMスケジューラの機能を外したい場合，図\ref{build_cyclic_handler}に示されるcdlファイルを{\it //import($<$tRiteVMScheduler.cdl$>$);}とコメントアウトするだけで良いため，開発者はカーネルの設定ファイルを修正する手間を省くことができる．
 
 それに加えて，コンポーネントベース開発ではコード量を減らすことができる．
 図\ref{fig:Eventflag} (B)に示す通り，イベントフラグのセットパターンと待ちパターンを属性として定義する．
-{\it cEventflag\_set(ATTR\_setPattern)}のように，if文なしでプログラムを記述でき，RiteVMの数に関わらず同じCファイルを使用できる．
+{\it cEventflag\_set(ATTR\_setPattern)}のように，if文なしでプログラムを記述でき，RiteVMの数に関わらず同じcファイルを使用できる．
 さらに，TECSのオプション{\it [optional]}によって，呼び口が結合した場合のみ処理を行うため，イベントフラグを利用しない場合でも同じCファイルを利用できる．
 
 \vspace{-2mm}
@@ -606,12 +605,7 @@ RiteVMが4つの場合，各VMはそれぞれ，イベントフラグに0x01(000
 この章では，評価実験の結果と考察について述べる．
 提案フレームワークの利点を分析するため，
 %プラットフォームの起動時間
-転送するバイトコードのサイズと処理時間およびコンパイル時間, 
-シングルタスク，コルーチン，マルチタスクの実行時間, 
-周期時間によるオーバヘッド,
-%mrubyアプリケーションの同期
-コンポーネントベース開発を利用したコード行数
-の評価を行った．
+転送するバイトコードのサイズと処理時間およびコンパイル時間，シングルタスク，コルーチン，マルチタスクの実行時間，周期時間によるオーバヘッド，コンポーネントベース開発を利用したコード行数の評価を行った．
 % \begin{itemize}
 % %    \item プラットフォームの起動時間
 %     \item 転送されるmrubyバイトコードのサイズと処理時間およびコンパイル時間
@@ -629,7 +623,7 @@ RiteVMが4つの場合，各VMはそれぞれ，イベントフラグに0x01(000
 同様に0バイトのバイトコードをコンパイルした場合にかかるコンパイルのオーバヘッドは，46.9 msである．}．
 mrubyアプリケーションのみのバイトコードの方が，ライブラリを含めた場合よりも，すべての点で優れている．
 上記の結果は，RiteVM一つの評価であるため，RiteVMの数が増えるにつれ，この差は広がっていく．
-さらに，この設計ではSDカードやROMを上書きしたり，OSを再起動する手間も省くことができる．
+さらに，この設計ではSDカードやROMを上書きする手間や，OSを再起動する手間も省くことができる．
 以上より，提案フレームワークは，既存フレームワークより作業効率を向上できる．
 
 % The size, load process time, and compilation time for mruby application and mruby application including library is shown in Table \ref{tab:size_and_time}.
@@ -649,7 +643,7 @@ mrubyアプリケーションのみのバイトコードの方が，ライブラ
     \begin{tabular}{c||c|c|c}
                             & App\&Lib     & App        &   App\&Lib/App  \\ \hline
           Bytecode Size     & 14,044 bytes & 199 bytes  &   $\times$70.6          \\ %\hline
-          Load Process Time & 305.081 msec & 7.774 msec &   $\times$39.2          \\
+          Loading Time & 305.081 msec & 7.774 msec &   $\times$39.2          \\
           Compile Time      & 8.7 msec     & 0.3 msec   &   $\times$29.0          \\
     \end{tabular}
     }
@@ -674,7 +668,7 @@ RiteVMスケジューラは，周期的に割り込み，タスクの切り替�
 % Switching tasks' overhead is also evaluated, that is about three $\mu$sec on average.
 % %The number of switching tasks is from 500 to 600 because singletasking process in Figure \ref{fig:comparison_s_c_m} takes about 540 msec.
 % %Therefore, the overhead of multitasking is 0.5 \% or less, and multitasking can be used without the overhead.
-% The scheuler interrupts and switches tasks, which causes this overhead.
+% The scheduler interrupts and switches tasks, which causes this overhead.
 
 
 \begin{figure}[t]
@@ -712,18 +706,18 @@ RiteVMスケジューラは，周期的に割り込み，タスクの切り替�
     \label{fig:comparison_msec}
 \end{figure}
 
-表\ref{tab:codesize}に，2つの.cファイルと.cdlファイルのコード行数と変更行数の比較を示す．
+表\ref{tab:codesize}に，2つのcファイルとcdlファイルのコード行数と変更行数の比較を示す．
 (A)と(B)はそれぞれ，図\ref{fig:Eventflag}の上部と下部を指している．
-(A)の.cファイルは，RiteVMの数に比例して増えているのに対して，(B)の.cファイルは同じである上に，RiteVMの数にかかわらず，修正することなく同一のファイルを使用できる．
-.cdlファイルは両者違いはない．
+(A)のcファイルは，RiteVMの数に比例して増えているのに対して，(B)のcファイルは同じである上に，RiteVMの数に関わらず，修正することなく同一のファイルを使用できる．
+cdlファイルに差はない．
 コンポーネントベース開発を上手く活用することで，コードの行数が減ることを示した．%高い生産性やメンテナンス性につながる．
-その上，RiteVMの数に限らず同じ.cファイルを利用できる．%ため，開発者がファイルを修正する手間を省くこともできる．
+その上，RiteVMの数に限らず同じcファイルを利用できる．%ため，開発者がファイルを修正する手間を省くこともできる．
 
-% To indicate the superior of component-based development, the comparison of code lines between two .c files is shown in Table \ref{tab:codesize}.
+% To indicate the superior of component-based development, the comparison of code lines between two c files is shown in Table \ref{tab:codesize}.
 % (A) and (B) mean the source files in the upper and lower of Figure \ref{fig:Eventflag}, respectively. 
-% In terms of .c, (B)'s lines do not increase even if the number of RiteVMs increases, while (A)'s lines increase in proportion to the number.
+% In terms of c, (B)'s lines do not increase even if the number of RiteVMs increases, while (A)'s lines increase in proportion to the number.
 % (B) is not modified, and can be utilized regardless of the number of RiteVMs.
-% Moreover, lines of two .cdl files are equal.
+% Moreover, lines of two cdl files are equal.
 % The skillfull component-based development brings this advantage such as the decrease of code lines, which leads high productivity and high maintainability.
 
 \begin{table}[t]
@@ -731,16 +725,16 @@ RiteVMスケジューラは，周期的に割り込み，タスクの切り替�
     \caption{コンポーネントベース開発を利用したコード行数} 
     \begin{tabular}{c||cc|c}
                 & (A)       & (B)     & Diff  \\ \hline
-        .c (Total)      & 8$\times$$\alpha$$+$134  & 130     & 8$\times$$\alpha+$4\\
-        .c (Modification)   & 10$\times\alpha$$-$2 & 0   &  10$\times\alpha$$-$2 \\
-        .cdl    & 18$\times$$\alpha$$+$25   & 18$\times$$\alpha$$+$25 & 0     \\
+        c (Total)      & 8$\times$$\alpha$$+$134  & 130     & 8$\times$$\alpha+$4\\
+        c (Modification)   & 10$\times\alpha$$-$2 & 0   &  10$\times\alpha$$-$2 \\
+        cdl    & 18$\times$$\alpha$$+$25   & 18$\times$$\alpha$$+$25 & 0     \\
         \multicolumn{3}{l}{{\small $\alpha$} : {\scriptsize the number of RiteVM}}
     \end{tabular}
-    \vspace{-3mm}
+    \vspace{-2mm}
     \label{tab:codesize}
 \end{table}
 
-\vspace{-2mm}
+\vspace{-1mm}
 \section{関連研究}
 \vspace{-2mm}
 \label{sec:Related Work}
@@ -760,8 +754,8 @@ RiteVMスケジューラは，周期的に割り込み，タスクの切り替�
 % }
 %     \label{tab:comparison}
 % \end{table*}
-現在，スクリプト言語を適用した組込みシステム向けのランタイムシステムとして，次のものが開発されている.
-python-on-a-chip\cite{url:python-on-a-chip}, Owl system\cite{par:owl}, eLua\cite{url:eLua}, mruby\cite{par:mruby}, mruby on TECS\cite{par:mrubyonTECS}.
+現在，スクリプト言語を適用した組込みシステム向けのランタイムシステムとして，次のものが開発されている．
+python-on-a-chip\cite{url:python-on-a-chip}，Owl system\cite{par:owl}，eLua\cite{url:eLua}，mruby\cite{par:mruby}，mruby on TECS\cite{par:mrubyonTECS}．
 
 python-on-a-chip (p14p)は，PyMyteと呼ばれるPythonVMを使用するPythonランタイムシステムである．
 PyMyteは，低リソースでPythonプログラムを実行する．
@@ -786,26 +780,25 @@ mruby on TECSは，マルチタスクに対応しているが，開発者がRTOS
 %表\ref{tab:comparison}に，提案フレームワークと既存研究の比較を示す．
 %提案フレームワークでは，ローダに加えて，VMスケジューラとアプリケーションの同期機構を提供する．
 
-\vspace{-2mm}
+\vspace{-1mm}
 \section{おわりに}
 \vspace{-2mm}
 \label{sec:Conclusion}
 本研究では，mruby on TECSの拡張として，Bluetoothを用いたmrubyバイトコードローダとRiteVMスケジューラを提案した．
-ローダによって，開発者はSDカードやROMを上書きしたり，OSを再起動する手間が省けるため，ソフトウェア開発の作業効率を向上できる．
+ローダによって，開発者はSDカードやROMを上書きする手間や，OSを再起動する手間が省けるため，ソフトウェア開発の作業効率を向上できる．
 ローダは，Bluetoothだけでなく，有線のシリアル通信にも対応しているため，様々な組込みシステムに適用できる．
-RiteVMスケジューラは複数のmrubyアプリケーションを効率良く並行実行し，同期機構によりタスク起動を同期する.
-実験評価では，ローダによる作業効率の向上やマルチタスク設計の有用性，コンポーネントベース開発の利点を示した.
+RiteVMスケジューラは複数のmrubyアプリケーションを効率良く並行実行し，同期機構によりタスク起動を同期する．
+実験評価では，ローダによる作業効率の向上やマルチタスク設計の有用性，コンポーネントベース開発の利点を示した．
 
-さらに，提案フレームワークで提供される機能はコンポーネントであるため，機能の取り外しや再利用が容易になる.
+さらに，提案フレームワークで提供される機能はコンポーネントであるため，機能の取り外しや再利用が容易になる．
 %RiteVMスケジューラも容易に付け外しできるため，開発者は，フェアスケジューリングか固定優先度スケジューリングかを選択することもできる．
 %コンポーネントベース開発は，生産性を向上させ，システムの複雑さを減らすことができる．
 
-ソフトウェア開発をさらに効率よく行うために，%プラグインを使用したRiteVMやmruby-TECSブリッジの.cdlファイルの自動生成や，
+ソフトウェア開発をさらに効率良く行うために，%プラグインを使用したRiteVMやmruby-TECSブリッジのcdlファイルの自動生成や，
 VM間の通信機能や，コマンドライン上でのバイトコード転送機能を提供することが，今後の課題である．
 
 %%%%%%%%%%%% Reference %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\vspace{-3mm}
-\footnotesize
+\vspace{-2mm}
 \bibliographystyle{ipsj_v2/UTF8/ipsjunsrt-e}
 \bibliography{ETNET}
 

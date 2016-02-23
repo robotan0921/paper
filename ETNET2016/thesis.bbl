@@ -41,6 +41,10 @@ Azumi, T., Takada, H., Ukai, T. and Oyama, H.: {Wheeled Inverted Pendulum with
   Embedded Component System: A Case Study}, {\em in Proc. IEEE ISORC}, pp.\
   151--155 (2010).
 
+\bibitem{par:ZMODEM}
+Forsberg, C.: {The ZMODEM Inter Application File Transfer Protocol},
+  \url{http://pauillac.inria.fr/~doligez/zmodem/zmodem.txt} (1988).
+
 \bibitem{url:co-routine}
 {class Fiber}: \url{http://docs.ruby-lang.org/en/2.3.0/Fiber.html}.
 

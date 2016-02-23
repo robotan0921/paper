@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  22 FEB 2016 11:49
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  23 FEB 2016 07:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -4253,16 +4253,16 @@ File: ../EMSOFT2016/figure/control_flow.pdf Graphic file (type pdf)
 
 <../EMSOFT2016/figure/control_flow.pdf>
 LaTeX Font Info:    Font shape `JT1/mc/m/it' in size <8.8711> not available
-(Font)              Font shape `JT1/mc/m/n' tried instead on input line 430.
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 429.
 LaTeX Font Info:    Font shape `JY1/mc/m/it' in size <8.8711> not available
-(Font)              Font shape `JY1/mc/m/n' tried instead on input line 430.
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 429.
 LaTeX Font Info:    Font shape `JT1/mc/m/it' in size <7.39258> not available
-(Font)              Font shape `JT1/mc/m/n' tried instead on input line 445.
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 444.
 LaTeX Font Info:    Font shape `JY1/mc/m/it' in size <7.39258> not available
-(Font)              Font shape `JY1/mc/m/n' tried instead on input line 445.
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 444.
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <7.39258> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 445.
-LaTeX Font Info:    Calculating math sizes for size <7.39258> on input line 449
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 444.
+LaTeX Font Info:    Calculating math sizes for size <7.39258> on input line 448
 .
  [3]
 File: ../EMSOFT2016/figure/rotateReadyQueue.pdf Graphic file (type pdf)
@@ -4271,32 +4271,34 @@ File: ../EMSOFT2016/figure/rotateReadyQueue.pdf Graphic file (type pdf)
 File: ../EMSOFT2016/figure/Eventflag.pdf Graphic file (type pdf)
 
 <../EMSOFT2016/figure/Eventflag.pdf>
-Overfull \hbox (2.33908pt too wide) in paragraph at lines 649--658
- [][] 
- []
-
 File: ../EMSOFT2016/figure/comparison_s_c_m.pdf Graphic file (type pdf)
+
 <../EMSOFT2016/figure/comparison_s_c_m.pdf>
 File: ../EMSOFT2016/figure/comparison_msec.pdf Graphic file (type pdf)
 
 <../EMSOFT2016/figure/comparison_msec.pdf> [5]
-LaTeX Font Info:    Calculating math sizes for size <8.8711> on input line 737.
+LaTeX Font Info:    Calculating math sizes for size <8.8711> on input line 731.
 
  (./thesis.bbl
 LaTeX Font Info:    Font shape `JT1/gt/m/it' in size <8.8711> not available
 (Font)              Font shape `JT1/gt/m/n' tried instead on input line 5.
+
+Underfull \hbox (badness 4752) in paragraph at lines 45--47
+[]\OT1/cmr/m/n/8.8711 Forsberg, C.: The ZMO-DEM In-ter Ap-pli-ca-tion
+ []
+
 ) [6] (./thesis.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 3791 strings out of 493777
- 52899 string characters out of 6153182
- 257650 words of memory out of 5000000
- 7209 multiletter control sequences out of 15000+600000
+ 3792 strings out of 493777
+ 52911 string characters out of 6153182
+ 256650 words of memory out of 5000000
+ 7210 multiletter control sequences out of 15000+600000
  51897 words of font info for 229 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  32i,10n,49p,307b,1423s stack positions out of 5000i,500n,10000p,500000b,80000s
 
-Output written on thesis.dvi (6 pages, 57668 bytes).
+Output written on thesis.dvi (6 pages, 58084 bytes).
