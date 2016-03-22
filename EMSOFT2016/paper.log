@@ -1,9 +1,9 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  22 MAR 2016 08:56
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  22 MAR 2016 15:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./thesis.tex
-(./thesis.tex
+**./paper.tex
+(./paper.tex
 pLaTeX2e <2006/11/10> (based on LaTeX2e <2015/01/01> patch level 0)
 Babel <3.9l> and hyphenation patterns for 79 languages loaded.
 (./dummy/dummy.tex) (./sig-alternate-05-2015.cls
@@ -274,8 +274,8 @@ File: lstlang1.sty 2014/09/06 1.5e listings language file
 )
 (c:/w32tex/share/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
-) (./thesis.aux)
-\openout1 = `thesis.aux'.
+) (./paper.aux)
+\openout1 = `paper.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 67.
 LaTeX Font Info:    ... okay on input line 67.
@@ -456,20 +456,20 @@ Overfull \hbox (8.12465pt too wide) in paragraph at lines 867--877
 \T1/aer/m/it/9 on TECS: mruby byte-code loader us-ing Blue-tooth and RiteVM
  []
 
-(./thesis.bbl [9]) [10
+(./paper.bbl [9]) [10
 
-] (./thesis.aux)
+] (./paper.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
  4031 strings out of 493777
- 51482 string characters out of 6153182
+ 51471 string characters out of 6153182
  300564 words of memory out of 5000000
  7406 multiletter control sequences out of 15000+600000
  47855 words of font info for 89 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 39i,11n,72p,294b,1390s stack positions out of 5000i,500n,10000p,500000b,80000s
+ 39i,11n,72p,293b,1390s stack positions out of 5000i,500n,10000p,500000b,80000s
 
-Output written on thesis.dvi (10 pages, 72076 bytes).
+Output written on paper.dvi (10 pages, 72076 bytes).

@@ -31,26 +31,33 @@
 
 % Copyright
 \setcopyright{acmcopyright}
+% DOI
+\doi{10.475/123_4}
+% ISBN
+\isbn{123-4567-24-567/08/06}
+%Conference
+\conferenceinfo{EMSOFT '16}{October 2--7, 2016, Pittsburgh, USA}
+\acmPrice{\$15.00}
 
 \title{mruby Bytecode Loader Using Bluetooth in Multi-VM Environment}
 \numberofauthors{3}
 \author{
 \alignauthor
 Takuro Yamamoto\\
-    \affaddr{Graduate School of Engineering Science, Osaka University}
-       % \affaddr{1932 Wallamaloo Lane}\\
+    \affaddr{Graduate School of Engineering Science, Osaka University}\\
+    \affaddr{Osaka, JAPAN}\\
        % \affaddr{Wallamaloo, New Zealand}\\
        % \email{trovato@corporation.com}
 \alignauthor
 Hiroshi Oyama\\
-    \affaddr{OKUMA Corporation}
-       % \affaddr{P.O. Box 1212}\\
+    \affaddr{OKUMA Corporation}\\
+    \affaddr{Aichi, JAPAN}
        % \affaddr{Dublin, Ohio 43017-6221}\\
        % \email{webmaster@marysville-ohio.com}
 \alignauthor
 Takuya Azumi\\
-    \affaddr{Graduate School of Engineering Science, Osaka University}
-       % \affaddr{1 Th{\o}rv{\"a}ld Circle}\\
+    \affaddr{Graduate School of Engineering Science, Osaka University}\\
+    \affaddr{Osaka, JAPAN}\\
        % \affaddr{Hekla, Iceland}\\
        % \email{larst@affiliation.org}
 }
@@ -73,6 +80,8 @@ A RiteVM scheduler makes multitasking processing more easy-to-use than that of m
 Synchronization of starting multiple tasks is also implemented with Eventflag. 
 Experimental results demonstrate the advantages of the proposed framework.
 \end{abstract}
+
+\keywords{embedded software; script language; component system;}
 \section{Introduction}
 In these days, embedded systems have been required the high-quality and the high-performance.
 Due to this trend, the complexity of embedded systems also increases and the scale is larger.
@@ -844,6 +853,15 @@ The co-routine is supported as same as mruby.
 Table \ref{tab:comparison} shows a comparison between the proposed framework and previous work.
 The proposed framework supports the loader, the VM scheduler, and synchronization of application.
  
+In addtion, there are component systems for embedded systems.
+AUTOSAR (AUTomotive Open System ARchitecture) \cite{} is a worldwide development partnership of vehicle manufactures.
+
+SaveCCM \cite{par:SAVEapproach} is a component model for embedded control application.
+SaveCCM is a simple model which is flexible to facilitate analysis of real-time and dependability.
+
+Koala \cite{par:Koala} is a component model that helps to manage the growing complexity and diversity of software in consumer electronics products.
+
+
 \section{Conclusion}
 \label{sec:Conclusion}
 This paper has presented an extended framework of mruby on TECS: mruby bytecode loader using Bluetooth and RiteVM scheduler.

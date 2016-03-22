@@ -1,6 +1,6 @@
 # Title: Makefile
 # Date:  2016/02/12
-# Name:  Yuya, Takuro
+# Name:  Takuro
 
 # Target name
 TARGET = thesis
