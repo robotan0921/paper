@@ -433,6 +433,8 @@
 \newfont{\confname}{ptmri8t at 8pt}
 \newfont{\crnotice}{ptmr8t at 8pt}
 \newfont{\ninept}{ptmr8t at 9pt}
+\newfont{\myit}{ptmri8t at 9pt}
+\newfont{\mybf}{ptmb8t at 9pt}
 \fi
 \ifnum\ACM@basesize=10\relax
 \newfont{\secfnt}{ptmb8t at 13pt}
