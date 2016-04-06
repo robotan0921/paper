@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  29 MAR 2016 07:45
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  6 APR 2016 16:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -323,7 +323,7 @@ File: omsptm.fd
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <7> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 68.
 
-Overfull \hbox (1.69083pt too wide) in paragraph at lines 115--125
+Overfull \hbox (1.69083pt too wide) in paragraph at lines 117--127
 \T1/aer/m/n/9 on TECS only sup-ports a stor-age/ROM de-vice to load mruby
  []
 
@@ -334,116 +334,111 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 ]
-Overfull \hbox (5.18489pt too wide) in paragraph at lines 139--140
+Overfull \hbox (5.18489pt too wide) in paragraph at lines 142--143
 []\mybf To fo-cus on the ben-e-fits of component-based de-vel-op-ments:
  []
 
 File: figure/proposed.eps Graphic file (type eps)
 <figure/proposed.eps>
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <9> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 158.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 162.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 158.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 162.
 
 
 LaTeX Font Warning: Font shape `T1/aer/bx/n' undefined
-(Font)              using `T1/aer/m/n' instead on input line 158.
+(Font)              using `T1/aer/m/n' instead on input line 162.
 
 File: figure/mruby.eps Graphic file (type eps)
 <figure/mruby.eps> [2]
 File: figure/component_diagram.eps Graphic file (type eps)
  <figure/component_diagram.eps>
+
+LaTeX Font Warning: Font shape `T1/aer/m/it' undefined
+(Font)              using `T1/aer/m/n' instead on input line 298.
+
 File: figure/mrubyontecs.eps Graphic file (type eps)
- <figure/mrubyontecs.eps>
-[3]
+<figure/mrubyontecs.eps> [3]
 File: figure/mruby_TECS_bridge.eps Graphic file (type eps)
  <figure/mruby_TECS_bridge.eps>
 File: figure/system_model.eps Graphic file (type eps)
- <figure/system_model.eps>
-Overfull \hbox (6.9286pt too wide) in paragraph at lines 365--377
-[][] \T1/aer/bx/n/9 This sec-tion de-scribes an ad-di-tional func-tion-al-ity o
-f mruby
- []
 
-
-Overfull \hbox (6.12038pt too wide) in paragraph at lines 388--393
+<figure/system_model.eps>
+Overfull \hbox (6.12038pt too wide) in paragraph at lines 413--418
 []\T1/aer/bx/n/9 In the pro-posed frame-work, the plat-form in-clud-ing RiteVMs
 
  []
 
 
-Overfull \hbox (5.6482pt too wide) in paragraph at lines 388--393
+Overfull \hbox (5.6482pt too wide) in paragraph at lines 413--418
 \T1/aer/bx/n/9 and mruby li-brary is com-piled and copied in the stor-age/ROM
  []
 
 
-Overfull \hbox (3.22025pt too wide) in paragraph at lines 388--393
+Overfull \hbox (3.22025pt too wide) in paragraph at lines 413--418
 \T1/aer/bx/n/9 grams (.rb) are edited and com-piled into the byte-codes (.mrb)
- []
-
-
-Overfull \hbox (16.04446pt too wide) in paragraph at lines 403--403
-[]\subsecfnt Component of RiteVM with mruby byte-code loader
  []
 
 File: figure/component_bluetooth.eps Graphic file (type eps)
 <figure/component_bluetooth.eps> [4]
 File: figure/control_flow.eps Graphic file (type eps)
  <figure/control_flow.eps>
+LaTeX Font Info:    Try loading font information for OMS+aer on input line 463.
 
-LaTeX Font Warning: Font shape `T1/aer/m/it' undefined
-(Font)              using `T1/aer/m/n' instead on input line 432.
+LaTeX Font Info:    No file OMSaer.fd. on input line 463.
 
-LaTeX Font Info:    Try loading font information for OMS+aer on input line 432.
-
-LaTeX Font Info:    No file OMSaer.fd. on input line 432.
 
 LaTeX Font Warning: Font shape `OMS/aer/m/it' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textasteriskcentered' on input line 432.
+(Font)              for symbol `textasteriskcentered' on input line 463.
 
 
 LaTeX Font Warning: Font shape `OMS/aer/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textasteriskcentered' on input line 438.
+(Font)              for symbol `textasteriskcentered' on input line 469.
 
 
-Underfull \vbox (badness 3343) has occurred while \output is active []
-
- [5]
-Overfull \hbox (3.94476pt too wide) in paragraph at lines 537--540
+Overfull \hbox (3.94476pt too wide) in paragraph at lines 574--577
 \T1/aer/bx/n/9 ported mul-ti-task-ing. How-ever, mul-ti-task pro-cess-ing in mr
 uby
  []
 
 
-Overfull \hbox (12.61133pt too wide) in paragraph at lines 547--552
+Overfull \hbox (12.61133pt too wide) in paragraph at lines 584--589
 []\T1/aer/bx/n/9 Besides, as an-other method, \myit de-lay()\T1/aer/bx/n/9 , a 
 ser-vice call of $\OML/cmm/m/it/9 ^^V$\T1/aer/bx/n/9 ITRON,
  []
 
+[5]
+Overfull \hbox (9.23193pt too wide) in paragraph at lines 595--597
+\T1/aer/bx/n/9 fore, when de-vel-op-ers cre-ate soft-ware in priority-based sch
+edul-
+ []
+
+
+Overfull \hbox (19.53705pt too wide) in paragraph at lines 599--603
+[]\T1/aer/bx/n/9 A RiteVM sched-uler is a pe-ri-odic han-dler and \myit ro-tate
+ReadyQueue\T1/aer/bx/n/9 ,
+ []
+
 File: figure/rotateReadyQueue.eps Graphic file (type eps)
 <figure/rotateReadyQueue.eps>
-Overfull \hbox (12.25426pt too wide) in paragraph at lines 583--593
+Overfull \hbox (12.25426pt too wide) in paragraph at lines 625--636
 \T1/aer/bx/n/9 uler. The com-po-nent of RiteVM sched-uler con-sist of CyclicHan
 -
  []
 
 File: figure/cyclic_handler.eps Graphic file (type eps)
 <figure/cyclic_handler.eps>
-Overfull \hbox (4.13707pt too wide) in paragraph at lines 664--664
+Overfull \hbox (4.13707pt too wide) in paragraph at lines 713--713
 []\secfnt Synchronization of Mul-ti-ple RiteVM Tasks 
  []
 
+[6]
 File: figure/Eventflag.eps Graphic file (type eps)
-<figure/Eventflag.eps>
-LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <7> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 678.
-LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <7> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 678.
- [6]
-Overfull \hbox (2.29617pt too wide) in paragraph at lines 706--707
-[]\T1/aer/bx/n/9 Execution time with sin-gle-task-ing, co-routine, and mul-
+ <figure/Eventflag.eps>
+Overfull \hbox (10.82991pt too wide) in paragraph at lines 762--764
+\T1/aer/bx/n/9 demon-strates the pro-posed sys-tem on a LEGO MIND-STORMS
  []
 
 [7]
@@ -451,18 +446,24 @@ File: figure/comparison_s_c_m.eps Graphic file (type eps)
  <figure/comparison_s_c_m.eps>
 File: figure/comparison_msec.eps Graphic file (type eps)
  <figure/comparison_msec.eps>
-Underfull \vbox (badness 1048) has occurred while \output is active []
+File: figure/eval_synchronization.eps Graphic file (type eps)
 
- [8]
-Overfull \hbox (8.12465pt too wide) in paragraph at lines 868--878
-\T1/aer/bx/n/9 on TECS: mruby byte-code loader us-ing Blue-tooth and RiteVM
+<figure/eval_synchronization.eps> [8]
+Overfull \hbox (5.61269pt too wide) in paragraph at lines 904--916
+ [][] 
  []
 
-(./paper.bbl
+
+Overfull \hbox (4.13123pt too wide) in paragraph at lines 941--945
+[]\mybf mruby: \T1/aer/bx/n/9 mruby, the lightweight im-ple-men-ta-tion of the 
+Ruby
+ []
+
+[9] (./paper.bbl
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [9])
-[10
+ [10])
+[11
 
 ] (./paper.aux)
 
@@ -471,11 +472,11 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
  ) 
 Here is how much of TeX's memory you used:
  4031 strings out of 493777
- 51453 string characters out of 6153182
- 283564 words of memory out of 5000000
+ 51516 string characters out of 6153182
+ 301564 words of memory out of 5000000
  7406 multiletter control sequences out of 15000+600000
- 51263 words of font info for 91 fonts, out of 8000000 for 9000
+ 50511 words of font info for 87 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 39i,11n,72p,293b,1390s stack positions out of 5000i,500n,10000p,500000b,80000s
+ 39i,11n,72p,287b,1387s stack positions out of 5000i,500n,10000p,500000b,80000s
 
-Output written on paper.dvi (10 pages, 72496 bytes).
+Output written on paper.dvi (11 pages, 78124 bytes).
