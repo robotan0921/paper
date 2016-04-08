@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  6 APR 2016 16:13
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  8 APR 2016 15:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -323,8 +323,8 @@ File: omsptm.fd
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <7> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 68.
 
-Overfull \hbox (1.69083pt too wide) in paragraph at lines 117--127
-\T1/aer/m/n/9 on TECS only sup-ports a stor-age/ROM de-vice to load mruby
+Overfull \hbox (1.85583pt too wide) in paragraph at lines 70--82
+\T1/aer/m/n/9 based de-vel-op-ment, has been pro-posed. In the cur-rent mruby
  []
 
 
@@ -334,149 +334,228 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 ]
-Overfull \hbox (5.18489pt too wide) in paragraph at lines 142--143
-[]\mybf To fo-cus on the ben-e-fits of component-based de-vel-op-ments:
+Overfull \hbox (7.23897pt too wide) in paragraph at lines 132--134
+\T1/aer/m/n/9 pro-posed frame-work syn-chro-nizes mul-ti-ple RiteVM tasks
  []
 
 File: figure/proposed.eps Graphic file (type eps)
 <figure/proposed.eps>
-LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <9> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 162.
-LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 162.
+Overfull \hbox (4.69386pt too wide) in paragraph at lines 148--150
+ [][] 
+ []
 
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <9> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 150.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 150.
 
 LaTeX Font Warning: Font shape `T1/aer/bx/n' undefined
-(Font)              using `T1/aer/m/n' instead on input line 162.
+(Font)              using `T1/aer/m/n' instead on input line 150.
 
 File: figure/mruby.eps Graphic file (type eps)
-<figure/mruby.eps> [2]
+<figure/mruby.eps>
+Overfull \hbox (4.69386pt too wide) in paragraph at lines 175--177
+ [][] 
+ []
+
 File: figure/component_diagram.eps Graphic file (type eps)
- <figure/component_diagram.eps>
+<figure/component_diagram.eps>
+Overfull \hbox (4.69386pt too wide) in paragraph at lines 194--196
+ [][] 
+ []
+
+[2]
 
 LaTeX Font Warning: Font shape `T1/aer/m/it' undefined
-(Font)              using `T1/aer/m/n' instead on input line 298.
+(Font)              using `T1/aer/m/n' instead on input line 281.
+
+
+Overfull \hbox (2.63614pt too wide) in paragraph at lines 305--308
+[]\T1/aer/bx/n/9 An mruby-TECS bridge pro-vides na-tive li-braries for mruby
+ []
+
+
+Overfull \hbox (5.08334pt too wide) in paragraph at lines 305--308
+\T1/aer/bx/n/9 TECS com-po-nents for re-ceiv-ing the in-vo-ca-tion from an mrub
+y
+ []
 
 File: figure/mrubyontecs.eps Graphic file (type eps)
-<figure/mrubyontecs.eps> [3]
+<figure/mrubyontecs.eps>
+Overfull \hbox (4.69386pt too wide) in paragraph at lines 314--316
+ [][] 
+ []
+
 File: figure/mruby_TECS_bridge.eps Graphic file (type eps)
- <figure/mruby_TECS_bridge.eps>
+<figure/mruby_TECS_bridge.eps>
+Overfull \hbox (4.69386pt too wide) in paragraph at lines 335--337
+ [][] 
+ []
+
+[3]
 File: figure/system_model.eps Graphic file (type eps)
-
-<figure/system_model.eps>
-Overfull \hbox (6.12038pt too wide) in paragraph at lines 413--418
-[]\T1/aer/bx/n/9 In the pro-posed frame-work, the plat-form in-clud-ing RiteVMs
-
+ <figure/system_model.eps>
+Overfull \hbox (4.69386pt too wide) in paragraph at lines 359--361
+ [][] 
  []
 
 
-Overfull \hbox (5.6482pt too wide) in paragraph at lines 413--418
-\T1/aer/bx/n/9 and mruby li-brary is com-piled and copied in the stor-age/ROM
+Overfull \hbox (5.8461pt too wide) in paragraph at lines 378--385
+[]\T1/aer/bx/n/9 mruby pro-grams con-sist of an mruby ap-pli-ca-tion and mruby
  []
 
 
-Overfull \hbox (3.22025pt too wide) in paragraph at lines 413--418
-\T1/aer/bx/n/9 grams (.rb) are edited and com-piled into the byte-codes (.mrb)
+Overfull \hbox (12.33688pt too wide) in paragraph at lines 386--390
+[]\T1/aer/bx/n/9 In the pro-posed frame-work, a plat-form that in-cludes RiteVM
+s
  []
 
 File: figure/component_bluetooth.eps Graphic file (type eps)
-<figure/component_bluetooth.eps> [4]
+<figure/component_bluetooth.eps>
+Overfull \hbox (4.69386pt too wide) in paragraph at lines 394--396
+ [][] 
+ []
+
+
+Overfull \hbox (3.57332pt too wide) in paragraph at lines 400--404
+\T1/aer/bx/n/9 man-ages the RiteVM con-fig-u-ra-tion, such as gen-er-at-ing mru
+by
+ []
+
+[4]
 File: figure/control_flow.eps Graphic file (type eps)
  <figure/control_flow.eps>
-LaTeX Font Info:    Try loading font information for OMS+aer on input line 463.
+Overfull \hbox (4.69386pt too wide) in paragraph at lines 413--415
+ [][] 
+ []
 
-LaTeX Font Info:    No file OMSaer.fd. on input line 463.
+LaTeX Font Info:    Try loading font information for OMS+aer on input line 423.
 
+LaTeX Font Info:    No file OMSaer.fd. on input line 423.
 
 LaTeX Font Warning: Font shape `OMS/aer/m/it' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textasteriskcentered' on input line 463.
+(Font)              for symbol `textasteriskcentered' on input line 423.
 
 
 LaTeX Font Warning: Font shape `OMS/aer/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textasteriskcentered' on input line 469.
+(Font)              for symbol `textasteriskcentered' on input line 429.
 
 
-Overfull \hbox (3.94476pt too wide) in paragraph at lines 574--577
-\T1/aer/bx/n/9 ported mul-ti-task-ing. How-ever, mul-ti-task pro-cess-ing in mr
-uby
- []
-
-
-Overfull \hbox (12.61133pt too wide) in paragraph at lines 584--589
-[]\T1/aer/bx/n/9 Besides, as an-other method, \myit de-lay()\T1/aer/bx/n/9 , a 
-ser-vice call of $\OML/cmm/m/it/9 ^^V$\T1/aer/bx/n/9 ITRON,
+Overfull \hbox (4.62933pt too wide) in paragraph at lines 495--497
+\T1/aer/bx/n/9 pro-gram on the RiteVM com-po-nent with the Blue-tooth loader
  []
 
 [5]
-Overfull \hbox (9.23193pt too wide) in paragraph at lines 595--597
-\T1/aer/bx/n/9 fore, when de-vel-op-ers cre-ate soft-ware in priority-based sch
-edul-
- []
-
-
-Overfull \hbox (19.53705pt too wide) in paragraph at lines 599--603
-[]\T1/aer/bx/n/9 A RiteVM sched-uler is a pe-ri-odic han-dler and \myit ro-tate
-ReadyQueue\T1/aer/bx/n/9 ,
- []
-
 File: figure/rotateReadyQueue.eps Graphic file (type eps)
-<figure/rotateReadyQueue.eps>
-Overfull \hbox (12.25426pt too wide) in paragraph at lines 625--636
-\T1/aer/bx/n/9 uler. The com-po-nent of RiteVM sched-uler con-sist of CyclicHan
--
+ <figure/rotateReadyQueue.eps>
+Overfull \hbox (4.69386pt too wide) in paragraph at lines 532--534
+ [][] 
  []
 
 File: figure/cyclic_handler.eps Graphic file (type eps)
 <figure/cyclic_handler.eps>
-Overfull \hbox (4.13707pt too wide) in paragraph at lines 713--713
-[]\secfnt Synchronization of Mul-ti-ple RiteVM Tasks 
+Overfull \hbox (4.69386pt too wide) in paragraph at lines 541--543
+ [][] 
+ []
+
+
+Overfull \hbox (22.31137pt too wide) in paragraph at lines 572--576
+[]\T1/aer/bx/n/9 A RiteVM sched-uler is a pe-ri-odic han-dler, and \myit ro-tat
+eReadyQueue\T1/aer/bx/n/9 ,
  []
 
 [6]
 File: figure/Eventflag.eps Graphic file (type eps)
  <figure/Eventflag.eps>
-Overfull \hbox (10.82991pt too wide) in paragraph at lines 762--764
-\T1/aer/bx/n/9 demon-strates the pro-posed sys-tem on a LEGO MIND-STORMS
- []
-
-[7]
-File: figure/comparison_s_c_m.eps Graphic file (type eps)
- <figure/comparison_s_c_m.eps>
-File: figure/comparison_msec.eps Graphic file (type eps)
- <figure/comparison_msec.eps>
-File: figure/eval_synchronization.eps Graphic file (type eps)
-
-<figure/eval_synchronization.eps> [8]
-Overfull \hbox (5.61269pt too wide) in paragraph at lines 904--916
+Overfull \hbox (4.69386pt too wide) in paragraph at lines 671--673
  [][] 
  []
 
 
-Overfull \hbox (4.13123pt too wide) in paragraph at lines 941--945
-[]\mybf mruby: \T1/aer/bx/n/9 mruby, the lightweight im-ple-men-ta-tion of the 
-Ruby
+Overfull \hbox (4.13707pt too wide) in paragraph at lines 678--678
+[]\secfnt Synchronization of Mul-ti-ple RiteVM Tasks 
  []
 
-[9] (./paper.bbl
+
+Overfull \hbox (8.46136pt too wide) in paragraph at lines 685--688
+\T1/aer/bx/n/9 all mruby ap-pli-ca-tions fin-ish at the same time, and all Rite
+VMs
+ []
+
+File: figure/comparison_s_c_m.eps Graphic file (type eps)
+<figure/comparison_s_c_m.eps>
+Overfull \hbox (4.69386pt too wide) in paragraph at lines 743--745
+ [][] 
+ []
+
+File: figure/comparison_msec.eps Graphic file (type eps)
+<figure/comparison_msec.eps>
+Overfull \hbox (4.69386pt too wide) in paragraph at lines 751--753
+ [][] 
+ []
+
+
+Overfull \hbox (11.62624pt too wide) in paragraph at lines 758--758
+[]\secfnt Improving Soft-ware De-vel-op-ment Ef-fi-ciency
+ []
+
+[7]
+File: figure/eval_synchronization.eps Graphic file (type eps)
+ <figure/eval_synchronization.eps>
+Overfull \hbox (4.69386pt too wide) in paragraph at lines 798--800
+ [][] 
+ []
+
+
+Overfull \hbox (5.61269pt too wide) in paragraph at lines 830--842
+ [][] 
+ []
+
+
+Overfull \hbox (4.13707pt too wide) in paragraph at lines 844--844
+[]\secfnt Synchronization of Mul-ti-ple RiteVM Tasks 
+ []
+
+[8]
+Overfull \hbox (6.19012pt too wide) in paragraph at lines 857--857
+[]\secfnt Benefits of Component-Based De-vel-op-ment 
+ []
+
+
+Overfull \hbox (7.89867pt too wide) in paragraph at lines 876--879
+\T1/aer/bx/n/9 run-time sys-tem that uses a re-duced Python VM called PyMite.
+ []
+
+[9]
+Overfull \hbox (4.54196pt too wide) in paragraph at lines 921--927
+\T1/aer/bx/n/9 re-move, or reuse their func-tion-al-i-ties eas-ily as re-quired
+. More-
+ []
+
+
+Overfull \hbox (4.85425pt too wide) in paragraph at lines 921--927
+\T1/aer/bx/n/9 schedul-ing, de-vel-op-ers only have to re-move the RiteVM sched
+-
+ []
+
+(./paper.bbl)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [10])
-[11
-
-] (./paper.aux)
+ [10]
+(./paper.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 4031 strings out of 493777
- 51516 string characters out of 6153182
- 301564 words of memory out of 5000000
- 7406 multiletter control sequences out of 15000+600000
+ 4032 strings out of 493777
+ 51525 string characters out of 6153182
+ 284564 words of memory out of 5000000
+ 7407 multiletter control sequences out of 15000+600000
  50511 words of font info for 87 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 39i,11n,72p,287b,1387s stack positions out of 5000i,500n,10000p,500000b,80000s
+ 39i,11n,72p,336b,1387s stack positions out of 5000i,500n,10000p,500000b,80000s
 
-Output written on paper.dvi (11 pages, 78124 bytes).
+Output written on paper.dvi (10 pages, 76052 bytes).

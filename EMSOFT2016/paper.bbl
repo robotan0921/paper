@@ -74,6 +74,13 @@ B.~Bonakdarpour and S.~S. Kulkarni.
 \newblock In {\em Proceedings of the Seventh ACM International Conference on
   Embedded Software}, EMSOFT '09, pages 29--38, 2009.
 
+\bibitem{par:CBD}
+X.~Cai, M.~R. Lyu, K.-F. Wong, and R.~Ko.
+\newblock {Component-based software engineering: technologies, development
+  frameworks, and quality assurance schemes}.
+\newblock In {\em Processings of Seventh Asia-Pacific Software Engineering
+  Conference (APSEC 2000)}, pages 372--379, 2000.
+
 \bibitem{par:Crnkovic}
 I.~Crnkovic.
 \newblock {Component-based Software Engineering for Embedded Systems}.
