@@ -1,9 +1,9 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  13 APR 2016 12:15
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  12 APR 2016 09:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./paper.tex
-(./paper.tex
+**./blind.tex
+(./blind.tex
 pLaTeX2e <2006/11/10> (based on LaTeX2e <2015/01/01> patch level 0)
 Babel <3.9l> and hyphenation patterns for 79 languages loaded.
 (./dummy/dummy.tex) (./sig-alternate-05-2015.cls
@@ -274,8 +274,8 @@ File: lstlang1.sty 2014/09/06 1.5e listings language file
 )
 (c:/w32tex/share/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
-) (./paper.aux)
-\openout1 = `paper.aux'.
+) (./blind.aux)
+\openout1 = `blind.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 67.
 LaTeX Font Info:    ... okay on input line 67.
@@ -546,7 +546,7 @@ Overfull \hbox (4.85425pt too wide) in paragraph at lines 921--927
 -
  []
 
-(./paper.bbl) [10] (./paper.aux)
+(./blind.bbl) [10] (./blind.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -560,4 +560,4 @@ Here is how much of TeX's memory you used:
  929 hyphenation exceptions out of 8191
  39i,11n,72p,336b,1387s stack positions out of 5000i,500n,10000p,500000b,80000s
 
-Output written on paper.dvi (10 pages, 75508 bytes).
+Output written on blind.dvi (10 pages, 74372 bytes).

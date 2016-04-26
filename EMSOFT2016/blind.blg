@@ -1,0 +1,58 @@
+This is pBibTeX, Version 0.99d-j0.33 (utf8.euc) (TeX Live 2015/Cygwin)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: blind.aux
+The style file: abbrv.bst
+Database file #1: blind.bib
+Warning--to sort, need author or key in url:AUTOSAR
+Warning--to sort, need author or key in url:mruby
+Warning--to sort, need author or key in url:TOPPERS
+Warning--to sort, need author or key in url:Ruby
+Warning--to sort, need author or key in url:co-routine
+Warning--to sort, need author or key in url:python-on-a-chip
+Warning--to sort, need author or key in url:eLua
+Warning--to sort, need author or key in url:Squirrel
+Warning--to sort, need author or key in url:Lua
+Warning--to sort, need author or key in url:download
+You've used 28 entries,
+            2118 wiz_defined-function locations,
+            636 strings with 7217 characters,
+and the built_in function-call counts, 7540 in all, are:
+= -- 748
+> -- 136
+< -- 11
++ -- 64
+- -- 36
+* -- 342
+:= -- 1047
+add.period$ -- 74
+call.type$ -- 28
+change.case$ -- 102
+chr.to.int$ -- 0
+cite$ -- 38
+duplicate$ -- 372
+empty$ -- 827
+format.name$ -- 36
+if$ -- 1784
+int.to.chr$ -- 0
+int.to.str$ -- 28
+missing$ -- 15
+newline$ -- 133
+num.names$ -- 36
+pop$ -- 188
+preamble$ -- 1
+purify$ -- 74
+quote$ -- 0
+skip$ -- 327
+stack$ -- 0
+substring$ -- 476
+swap$ -- 122
+text.length$ -- 11
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 112
+warning$ -- 10
+while$ -- 66
+width$ -- 30
+write$ -- 266
+is.kanji.str$ -- 0
+(There were 10 warnings)
