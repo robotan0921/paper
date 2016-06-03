@@ -3,7 +3,7 @@
 # Name:  Takuro
 
 # Target name
-TARGET = thesis
+TARGET = paper
 # BIB file
 REF = ref.bib
 # REFDIR = ../
