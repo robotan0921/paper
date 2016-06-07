@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  6 JUN 2016 10:49
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  7 JUN 2016 18:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -195,9 +195,17 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
+(c:/w32tex/share/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count96
+\float@exts=\toks18
+\float@box=\box43
+\@float@everytoks=\toks19
+\@floatcapt=\box44
+)
 (c:/w32tex/share/texmf-dist/tex/latex/tools/enumerate.sty
 Package: enumerate 2014/10/28 v3.00 enumerate extensions (DPC)
-\@enLab=\toks18
+\@enLab=\toks20
 )
 (c:/w32tex/share/texmf-dist/tex/latex/cite/cite.sty
 LaTeX Info: Redefining \cite on input line 302.
@@ -209,24 +217,24 @@ Package: cite 2015/02/27  v 5.5
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 (c:/w32tex/share/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count96
-\lst@gtempboxa=\box43
-\lst@token=\toks19
-\lst@length=\count97
+\lst@mode=\count97
+\lst@gtempboxa=\box45
+\lst@token=\toks21
+\lst@length=\count98
 \lst@currlwidth=\dimen144
-\lst@column=\count98
-\lst@pos=\count99
+\lst@column=\count99
+\lst@pos=\count100
 \lst@lostspace=\dimen145
 \lst@width=\dimen146
-\lst@newlines=\count100
-\lst@lineno=\count101
+\lst@newlines=\count101
+\lst@lineno=\count102
 \lst@maxwidth=\dimen147
 
 (c:/w32tex/share/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
-\c@lstnumber=\count102
-\lst@skipnumbers=\count103
-\lst@framebox=\box44
+\c@lstnumber=\count103
+\lst@skipnumbers=\count104
+\lst@framebox=\box46
 )
 (c:/w32tex/share/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2014/09/06 1.5e listings configuration
@@ -235,7 +243,7 @@ Package: listings 2014/09/06 1.5e (Carsten Heinz)
 
 (c:/w32tex/share/texmf-dist/tex/latex/jlisting/jlisting.sty
 Package: jlisting 2006/02/20 0.2 (Thor)
-\lst@nextchar=\count104
+\lst@nextchar=\count105
 \lst@inputfile=\read1
 )
 (c:/w32tex/share/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -246,27 +254,27 @@ File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
 ) (./paper.aux)
 \openout1 = `paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
 
 -- Lines per column: 56 (exact).
-\c@lstlisting=\count105
+\c@lstlisting=\count106
 
-Underfull \hbox (badness 10000) in paragraph at lines 58--60
+Underfull \hbox (badness 10000) in paragraph at lines 59--61
 []\OT1/ptm/b/it/9 Index Terms\OT1/ptm/b/n/9 ---embedded soft-ware; script-ing l
 an-guage;
  []
@@ -275,11 +283,11 @@ an-guage;
 
 
 ]
-LaTeX Font Info:    Try loading font information for U+msa on input line 319.
+LaTeX Font Info:    Try loading font information for U+msa on input line 321.
  (c:/w32tex/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 319.
+LaTeX Font Info:    Try loading font information for U+msb on input line 321.
 
 (c:/w32tex/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -289,22 +297,22 @@ File: figure/system_model.eps Graphic file (type eps)
 <figure/system_model.eps>
 File: figure/component_bluetooth.eps Graphic file (type eps)
  <figure/component_bluetooth.eps>
-Underfull \hbox (badness 1708) in paragraph at lines 363--367
+Underfull \hbox (badness 1708) in paragraph at lines 365--369
 []\OT1/ptm/m/n/10 In the pro-posed frame-work, a plat-form that in-cludes
  []
 
 File: figure/control_flow.eps Graphic file (type eps)
 <figure/control_flow.eps>
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 393.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 395.
 
 
 (c:/w32tex/share/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 393.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 395.
 LaTeX Font Info:    Font shape `OMS/ptm/m/it' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 420.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 396.
  [2]
 File: figure/rotateReadyQueue.eps Graphic file (type eps)
 
@@ -320,7 +328,11 @@ File: figure/comparison_msec.eps Graphic file (type eps)
 
 <figure/comparison_msec.eps>
 File: figure/eval_synchronization.eps Graphic file (type eps)
- <figure/eval_synchronization.eps> [5] (./paper.bbl) [6]
+ <figure/eval_synchronization.eps>
+Underfull \vbox (badness 1642) has occurred while \output is active []
+
+ [5]
+(./paper.bbl) [6]
 File: figure/mruby.eps Graphic file (type eps)
  <figure/mruby.eps>
 File: figure/component_diagram.eps Graphic file (type eps)
@@ -341,18 +353,14 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[8] (./paper.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+[8] (./paper.aux) ) 
 Here is how much of TeX's memory you used:
- 3598 strings out of 493777
- 54542 string characters out of 6153182
- 255870 words of memory out of 5000000
- 7046 multiletter control sequences out of 15000+600000
+ 3635 strings out of 493777
+ 54994 string characters out of 6153182
+ 324292 words of memory out of 5000000
+ 7079 multiletter control sequences out of 15000+600000
  43272 words of font info for 127 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 27i,8n,49p,303b,1375s stack positions out of 5000i,500n,10000p,500000b,80000s
+ 27i,8n,49p,303b,1377s stack positions out of 5000i,500n,10000p,500000b,80000s
 
-Output written on paper.dvi (8 pages, 58716 bytes).
+Output written on paper.dvi (8 pages, 58704 bytes).

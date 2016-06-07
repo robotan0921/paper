@@ -7,6 +7,7 @@
 \documentclass[conference]{IEEEtran/IEEEtran/IEEEtran}
 \usepackage[dvipdfmx]{graphicx}
 \usepackage{amssymb}
+\usepackage{float}
 \usepackage{enumerate,cite,url}
 \usepackage{listings,jlisting}
 \lstset{%
@@ -30,7 +31,7 @@
 }
 
 % \title{Efficient Devlopment Framework applied Scripting Language for Embedded Systems}
-\title{Efficient Development Framework with mruby \\for Embedded Systems}
+\title{Efficient Development Framework with mruby\\for Embedded Systems}
 \author{\IEEEauthorblockN{Takuro Yamamoto}\IEEEauthorblockA{Graduate School of Engineering Science,\\Osaka University}
 \and\IEEEauthorblockN{Hiroshi Oyama}\IEEEauthorblockA{OKUMA Corporation}
 \and\IEEEauthorblockN{Takuya Azumi}\IEEEauthorblockA{Graduate School of Engineering Science,\\Osaka University}
@@ -39,10 +40,10 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-Recently, the productivity of embedded systems has become problematic due to their increasing complexity and scale such by cyber physical systems.
+Recently, the productivity of embedded systems applied to Cyber Physical Systems has become problematic due to their increasing complexity and scale.
 To improve the productivity, the mruby on TOPPERS embedded component system (TECS) framework, which employs scripting language (i.e., mruby) and supports component-based development, has been proposed.
 This paper proposes an extended framework of mruby on TECS that improve development efficiency more than the current version.
-In the proposed framework, a Bluetooth loader which receives a transferred mruby bytecode from a host, and a RiteVM scheduler which simplifies multitasking are implemented.
+In the proposed framework, a Bluetooth loader which receives an mruby bytecode, and a RiteVM scheduler which simplifies multitasking are implemented.
 % In the current mruby on TECS framework, mruby programs must be compiled and linked every time they are modified, because mruby bytecode are incorporated in the platform.
 % Moreover, while the framework supports multiple virtual machines, developers must be familiar with the functions of real-time operating systems to effectively execute multiple mruby programs concurrently or in parallel.
 % To improve development efficiency, we propose a Bluetooth loader for mruby bytecode as an extension of mruby on TECS.
@@ -60,7 +61,8 @@ embedded software; scripting language; component-based development
 \end{IEEEkeywords}
 
 \section{Introduction}
-Currently, embedded systems such as Cyber Physical Systems must demonstrate high quality and high performance.
+Cyber Physical Systems (CPS) is the important keyword for enriching our lives.
+Embedded systems e.g., Internet of Things applications, are applied to the CPS and expected to demonstrate high quality and high performance.
 This requirement has led to an increase in their complexity and scale; moreover, these systems need to have low production costs and short development cycles.
 
 Complex and large-scale software systems can be developed efficiently by using component-based techniques \cite{par:Crnkovic}.
@@ -75,7 +77,7 @@ TECS \cite{par:TECS}, AUTOSAR \cite{url:AUTOSAR}, and SaveCCM \cite{par:SAVEappr
 
 In addition, scripting languages, such as Ruby, JavaScript, Perl, Python, and Lua, offer efficient approaches to software development.
 Currently, most software are programmed in C language.
-However, development in C language results in large code size, incurs high costs, and requires significant development time.
+However, development in C language results in the large source code, incurs high costs, and requires significant development time.
 In contrast, the use of scripting languages improves the efficiency of software engineering and can shorten the development period because of their usability. 
 % script languages have high-productivity from their usability.
 % Ruby, JavaScript, Perl, Python, and Lua are well-known as representative script languages.
@@ -357,8 +359,8 @@ An mruby application is the main program code, mruby libraries define the functi
 The mruby bytecodes including both an mruby application and mruby libraries can be transferred and executed on the target device.
 However, this is also wasteful in terms of bytecode size and the time required to transfer the bytecodes, because the libraries are not modified frequently.
 With the proposed framework, only mruby applications are transferred, and the mruby libraries are preserved on the storage/ROM device beforehand.
-As a result, RiteVMs can share mruby libraries.
-In addition, a RiteVM can use its own library, which other RiteVMs should not use.
+% As a result, RiteVMs can share mruby libraries.
+% In addition, a RiteVM can use its own library, which other RiteVMs should not use.
 
 In the proposed framework, a platform that includes RiteVMs and an mruby library is first compiled and copied to the storage/ROM device.
 On the host, the mruby application programs (.rb files) are edited and compiled to bytecodes (.mrb files) by an mruby compiler.
@@ -374,9 +376,9 @@ This generated bytecode is prepared beforehand on the storage/ROM device and dif
 Figure \ref{fig:component_bluetooth} shows a component diagram of MrubyTask1 and RiteVMBluetooth1 {\it cell}s.
 The MrubyTask1 {\it cell} is a componentized task of the RTOS (TOPPERS/HRP2 \cite{par:hr-tecs}).
 The RiteVMBluetooth1 {\it cell} is the RiteVM component with the Bluetooth loader.
-Figure \ref{fig:control_flow} shows the process flow for executing an mruby program on the RiteVM component with the Bluetooth loader for mruby bytecode, such as RiteVMBluetooth1.
+Figure \ref{fig:control_flow} shows the process flow for executing an mruby program on the RiteVM component with the Bluetooth loader, such as RiteVMBluetooth1.
 In this framework, ZMODEM \cite{par:zmodem} is used as the binary transfer protocol.
-The main tRiteVMBluetooth code is shown in Figure \ref{maincode_mrubybluetooth}.
+The main process of tRiteVMBluetooth is shown in Figure \ref{maincode_mrubybluetooth}.
 
 \begin{figure}[t]
     \centering
@@ -385,32 +387,6 @@ The main tRiteVMBluetooth code is shown in Figure \ref{maincode_mrubybluetooth}.
 \caption{Process flow of RiteVM with Bluetooth loader}
     \vspace{-3mm}
 \label{fig:control_flow}
-\end{figure}
-
-\begin{figure}[t]
-\centering
-\begin{lstlisting}
-celltype tRiteVMBluetooth1 {
-    entry sTaskBody eMrubyBody;
-    [optional] call sEventflag cEventflag[];
-    [optional] call sSemaphore cSemaphore;
-    attr {
-      FLGPTN setPattern;
-      [omit]char_t *mrubyLib;
-      char_t *irepLib = C_EXP("&$cell_global$_irep");
-      uint32_t irepAppSize = C_EXP( BUFFER_SIZE );
-    };
-    var {
-        mrb_state *mrb;
-        mrbc_context *context;
-        [size_is(irepAppSize)] char_t *irepApp;
-    };
-};
-\end{lstlisting}
-    \vspace{-3mm}
-\caption{Celltype description for RiteVM with Bluetooth loader}
-    \vspace{-3mm}
-\label{celltype_mrubybluetooth}
 \end{figure}
 
 \begin{figure}[t]
@@ -445,15 +421,41 @@ void eMrubyBody_main( CELLIDX idx ) {
 \end{figure}
 
 
+\begin{figure}[t]
+\centering
+\begin{lstlisting}
+celltype tRiteVMBluetooth1 {
+    /* An entry port for tTask */
+    entry sTaskBody eMrubyBody;
+    /* A call port for Eventflag components */
+    [optional] call sEventflag cEventflag[];
+    /* A call port for a Semaphore component */
+    [optional] call sSemaphore cSemaphore;
+    attr {
+      [omit]char_t *mrubyLib;
+      char_t *irepLib = C_EXP("&$cell_global$_irep");
+    };
+    var {
+      mrb_state *mrb;
+      mrbc_context *context;
+      [size_is(irepAppSize)] char_t *irepApp;
+    };
+};
+\end{lstlisting}
+    \vspace{-3mm}
+\caption{Celltype description for RiteVM with Bluetooth loader}
+    \vspace{-3mm}
+\label{celltype_mrubybluetooth}
+\end{figure}
+
 First, the Bluetooth loader receives the mruby application bytecode from the host (Figure \ref{fig:control_flow}(A); line 4 in Figure \ref{maincode_mrubybluetooth}).
 The bytecode is stored in a component variable, such as {\it VAR\_irepApp}, as shown in Figure \ref{celltype_mrubybluetooth}.
 This process is exclusively carried out by the semaphore to prevent the other loading from interrupting.
 
-Second, {\it mrb\_state} and {\it mrbc\_context} pointers (Figure \ref{fig:control_flow}(B); lines 7, 9 in Figure \ref{maincode_mrubybluetooth}).
-{\it VAR\_mrb} and {\it VAR\_context} show the variables of the {\it cell}.
-{\it mrb\_state} is a set of states and global variables used in mruby.
-The synchronization of multiple tasks is performed in this processing phase.
-The RiteVM that finishes execution at this point waits for the another RiteVM to finish loading and initialization.
+Second, {\it mrb\_state} and {\it mrbc\_context} pointers are initialized (Figure \ref{fig:control_flow}(B); lines 7, 9 in Figure \ref{maincode_mrubybluetooth}).
+{\it VAR\_mrb} and {\it VAR\_context} show the variables of the {\it cell}, and which are a set of states and global variables used in mruby.
+Note that the synchronization of multiple tasks is performed in this processing phase (Section \ref{sec:Synchronization of Multiple RiteVM Tasks}).
+% The RiteVM that finishes execution at this point waits for the another RiteVM to finish loading and initialization.
 
 Third, the RiteVM reads the bytecode of mruby libraries (Figure \ref{fig:control_flow}(C); line 12 in Figure \ref{maincode_mrubybluetooth}).
 The mruby libraries are a set of Ruby classes, such as the motor and sensor classes.
@@ -463,18 +465,20 @@ The tRiteVMBluetooth {\it cell} has the attributes shown in Figure \ref{celltype
 The {\it mrubyLib} indicates the program files of the mruby libraries, and is an attribute because mruby libraries are not modified in the proposed development process.
 Here, {\it [omit]} is only used for the TECS generator; thus, the attribute {\it mrubyLib} does not consume memory.
 {\it irepLib} is the pointer of the array in which the bytecode of mruby libraries is stored.
-To summarize, the bytecode of mruby libraries is stored as an attribute of the component during the first compilation.
+To summarize, the bytecode of mruby libraries is stored as an attribute of the component (i.e., {\it irepLib}) during the first compilation.
 
 Fourth, the RiteVM reads the bytecode of the mruby application transferred via Bluetooth (Figure \ref{fig:control_flow}(D); line 14 in Figure \ref{maincode_mrubybluetooth}).
 The mruby application bytecode is stored in an array of {\it irepApp}.
-Note that two bytecodes, irepLib and irepApp, are read separately in the RiteVM.
+Here, {\it [size\_is()]} is the specifier for an array.
+Note that two bytecodes, {\it irepLib} and {\it irepApp}, are read separately in the RiteVM.
 
-Finally, the mruby task runs (Figure \ref{fig:control_flow}(E); line 14 in Figure \ref{maincode_mrubybluetooth}).
-When an mruby application is modified, only the bytecode of the modified application should be transferred; the mruby libraries do not need to be touched because they typically do not change.
+Finally, the RiteVM runs (Figure \ref{fig:control_flow}(E); line 14 in Figure \ref{maincode_mrubybluetooth}).
+When an mruby application is modified, only the bytecode of the application should be transferred; the mruby libraries do not need to be touched because they typically do not change.
 % The process shown in Figure \ref{maincode_mrubybluetooth} (lines 23-28) is carried out when an exception occurs.
 % When all mruby applications are completed, mrb\_state and mrbc\_context are freed (lines of 31-34 in Figure \ref{maincode_mrubybluetooth}).
 The proposed framework supports continuous loading; thus, this process loops.
 After the variables are freed (lines 17, 19 in Figure \ref{maincode_mrubybluetooth}), the RiteVM waits for the next mruby application bytecode.
+In addition, the proposed framework supports the reset component which force applications stop and free, thus developers can transfer new bytecodes and run tasks.
 
 \begin{figure}[t]
     \centering
@@ -664,7 +668,7 @@ We evaluated to demonstrate that a Bluetooth loader can improve the efficiency o
 In addition, we focused on benefits of CBD.
 We implemented the proposed system on a LEGO MINDSTORMS EV3 \cite{par:EV3} (300MHz ARM9-based Sitara AM1808 system-on-a-chip) compiled with gcc 4.9.3 -O2 and mruby version 1.2.0.
 
-\subsection{Improving Development Efficiency by Bluetooth Loader}
+{\bf Improving Development Efficiency by Bluetooth Loader}:
 The Bluetooth loader can reduce the development time.
 With the proposed framework, developers do not need to rewrite a storage/ROM device because only the bytecode should be transferred.
 For example, with the existing system, when mruby programs are modified, developers must remove an SD card from the target device, connect the host PC, compile/link the platform, and reinsert the SD card in the target device in an experimental environment such as LEGO MINDSTORMS EV3.
@@ -672,9 +676,9 @@ In addition, the proposed framework eliminates the need to restart the target RT
 
 %\subsubsection{Size and time for transferred mruby bytecodes}
 In the proposed framework, to further improve software development efficiency, developers transfer only the mruby application bytecode; mruby libraries are incorporated in the platform.
-The size, load process time, and compilation time for an mruby application with and without mruby library are shown in Table \ref{tab:size_and_time}.
-The overhead of load processing to load a zero byte bytecode is 50.933 msec.
-Similarly, compilation overhead to compile a zero byte program is 46.9 msec.
+To confirm the advantage of the proposed design, we evaluated the size, loading time, and compile time between an mruby application with and without mruby library are shown in Table \ref{tab:size_and_time}.
+Loading Time indicates how long it takes to process a transferred bytecode in the loader, and the overhead of loading a zero byte bytecode is 50.933 msec.
+Similarly, the overhead to compile a zero byte program is 46.9 msec.
 The mruby application bytecode is smaller and faster than including the mruby libraries for all terms.
 The difference increases as the number of RiteVMs increases because 50 msec of overhead is incurred per RiteVM. 
 These advantages improve the efficiency of software development.
@@ -682,7 +686,7 @@ These advantages improve the efficiency of software development.
 \begin{table}[t]
     \centering
     \vspace{-2mm}
-\caption{Comparison of size and load process time between an mruby application with and without mruby libraries}
+\caption{Comparison between an application with and without libraries}
     \vspace{-2mm}
     %\scriptsize
     {\tabcolsep=0.3cm
@@ -697,9 +701,9 @@ These advantages improve the efficiency of software development.
     \label{tab:size_and_time}
 \end{table}
 
-\subsection{RiteVM Scheduler}
+{\bf RiteVM Scheduler}:
 A comparison of the application execution time with singletasking, co-routine, and multitasking is shown in Figure \ref{fig:comparison_s_c_m}.
-A program with 100,000 loops was used as an mruby application for the evaluation of execution time.
+We decided a program with 100,000 loops as an mruby application for the evaluation of execution time.
 Here, the singletask program looped 100,000 times and the multitask and co-routine programs looped 50,000 times for each task.
 
 \begin{figure}[t]
@@ -718,11 +722,13 @@ Here, the singletask program looped 100,000 times and the multitask and co-routi
     \vspace{-3mm}
 \label{fig:comparison_msec}
 \end{figure}
-\subsubsection{Execution Time with Singletasking, Co-routine, and Proposed Multitasking}
-In Figure \ref{fig:comparison_s_c_m}, the periodic time of the periodic handler for multitasking is 1 msec.
-This shows that the proposed design is superior to co-routine in terms of execution time.
+\subsubsection{Execution Time of Singletasking, Co-routine, and Proposed Multitasking}
+Figure \ref{fig:comparison_s_c_m} shows that the proposed design is superior to co-routine in terms of execution time.
 Moreover, developers can utilize the scheduler practically because the RiteVM scheduler overhead is approximately 5\%.
 The scheduler interrupts and switches tasks, which causes this overhead.
+Although the overhead is larger as the number of RiteVMs increases, it also spread the difference between multitasking and co-routine.
+Therefore, the scheduler enables developers multitasking as the more efficient approach than co-routine.
+Here, the periodic time of the scheduler is 1 msec.
 % It takes approximately 3 $\mu$sec on average to switch tasks once.
 
 \subsubsection{Periodic Time Overhead}
@@ -762,7 +768,7 @@ Note that a smaller periodic time is better for multitasking due to concurrent o
 %     \label{tab:comparison}
 % \end{table*}
 
-\subsection{Synchronization of Multiple RiteVM Tasks}
+{\bf Synchronization of Multiple RiteVM Tasks}:
 To execute multiple mruby applications, a synchronization mechanism for RiteVM tasks is implemented in the proposed framework.
 We measured the time from the execution of the first RiteVM task to the execution of the last RiteVM task.
 It was confirmed that the time was within (periodic time)$\times$(number of RiteVM tasks $-$ 1).
@@ -772,17 +778,16 @@ Figure \ref{fig:eval_synchronization} shows the results for two, three, and four
 The periodic time is 1 msec, and the number of RiteVMs is two, three, and four.
 As shown in Figure \ref{fig:eval_synchronization}, the time is within 1 msec, 2 msec, and 3 msec respectively, which indicates successful synchronization of multiple RiteVM tasks.
 
-\subsection{Benefits of Component-Based Development}
+{\bf Benefits of Component-Based Development}:
 In the proposed framework, RiteVMs, the RiteVM scheduler, and Eventflags are implemented as TECS components.
 Developers can add or remove the functionalities easily by modifying the CDL file.
 Moreover, CBD decreases code size and improves productivity and maintainability.
 
 %\subsubsection{Code size utilizing component-based development}
-To demonstrate the superiority of CBD, a comparison of the number of lines of codes between two C and CDL files is shown in Table \ref{tab:codesize}.
+To demonstrate the superiority of CBD, a comparison of the number of lines of C and CDL codes between two situations is shown in Table \ref{tab:codesize}.
 In Table \ref{tab:codesize}, (A) and (B) represent the source files in the upper and lower parts of Figure \ref{fig:Eventflag}, respectively. 
 For C, (B)'s code lines do not increase even if the number of RiteVMs increases, while (A)'s code lines increase as the number of RiteVMs increases.
-Note that (B)'s C file can be utilized without modification regardless of the number of RiteVMs.
-Moreover, the number of code lines of two CDL files are equal.
+Moreover, (B)'s C file can be utilized without modification regardless of the number of RiteVMs, while the number of code lines of two CDL files are equal.
 Skillful CBD yields advantages such as the decreased number of lines of codes and non-modified codes, which facilitates high productivity and maintainability.
 
 \begin{table}[t]
@@ -887,7 +892,7 @@ The mruby/RiteVM mechanism is shown in Figure \ref{fig:mruby}.
 The mruby compiler translates an mruby code into a bytecode, which can be interpreted by a RiteVM; thus, mruby programs can be executed on any target device with a RiteVM.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=8.6cm,clip]{figure/mruby.eps}
+    \includegraphics[height=5.0cm,width=8.6cm,clip]{figure/mruby.eps}
     \vspace{-2mm}
     \caption{mruby/RiteVM mechanism}
     \vspace{-2mm}
@@ -908,7 +913,7 @@ TECS can be implemented in C, and demonstrates various feature such as source le
     \includegraphics[width=8.6cm,clip]{figure/component_diagram.eps}
     \vspace{-2mm}
     \caption{Component Diagram}
-    \vspace{-2mm}
+    \vspace{-5mm}
     \label{fig:component}
 \end{figure}
 
@@ -919,46 +924,22 @@ An {\it entry} port is an interface that provides functions to other {\it cell}s
 A {\it cell} has one or more {\it entry} ports and {\it call} ports.
 {\it Cell} functions are implemented in C.
 
-The type of {\it entry}/{\it call} port is defined by a {\it signature}, which is a set of functions.
-A {\it signature} is the interface definition of a {\it cell}.
-The {\it cell}'s  {\it call} port can be connected to the {\it entry} port of another {\it cell} by the same {\it signature}.
-Here, {\it celltype} defines one or more {\it call}/{\it entry} ports, attributes, and variables of a {\it cell}.
-
-
-\subsubsection{Component Description}
-In TECS, components are described by {\it signature}, {\it celltype}, and build written in component description language (CDL).
-% TECS code is written in CDL (component description language) file.
-These components are described as follows.
-
-\begin{description}
-    \item[{\bf Signature Description}]\mbox{}\\
-        The {\it signature} defines a {\it cell} interface.
-        The {\it signature} name follows the keyword {\it signature} and takes the prefix ``s'' e.g., sMotor (Figure \ref{signature}).
-        In TECS, to clarify the function of an interface, specifiers such as [in] and [out] are used, which represent input and output, respectively.
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
 \begin{lstlisting}
 signature sMotor {
-    int32_t getCounts( void );
-    ER resetCounts( void );
     ER setPower( [in]int power );
     ER stop( [in] bool_t brake );
-    ER rotate( [in] int degrees, [in] uint32_t speed_abs,\\ [in] bool_t blocking );
     void initializePort( [in]int32_t type );
 };
 \end{lstlisting}
     \vspace{-2mm}
 \caption{Signature Description}
-    \vspace{-2mm}
+    \vspace{-5mm}
 \label{signature}
 \end{figure}
-    \item[{\bf Celltype Description}]\mbox{}\\
-        The {\it celltype} defines {\it entry} ports, {\it call} ports, attributes, and variables.
-        A {\it celltype} name with the prefix ``t'' follows the keyword {\it celltype}, e.g., tCaller (Figure \ref{celltype}).
-        To define {\it entry} ports, a {\it signature}, e.g., sMotor, and an {\it entry} port name, e.g., eMotor, follow the keyword {\it entry}.
-        {\it Call} ports are defined similarly.
-        Attributes and variables follow the keywords {\it attr} and {\it var}, respectively.
-\begin{figure}[ht]
+
+\begin{figure}[H]
 \centering
 \begin{lstlisting}
 celltype tCaller {
@@ -972,18 +953,11 @@ celltype tMotor {
 \end{lstlisting}
     \vspace{-2mm}
 \caption{Celltype Description}
-    \vspace{-2mm}
+    \vspace{-5mm}
 \label{celltype}
 \end{figure}
-    \item[{\bf Build Description}]\mbox{}\\
-        The build description is used to instantiate and connect {\it cell}s.
-        Figure \ref{build} shows an example of a build description.
-        A {\it celltype} name and {\it cell} name, e.g., tMotor and Motor, respectively, follow the keyword {\it cell}.
-        To compose {\it cell}s, a {\it call} port, {\it cell}'s name, and an {\it entry} port are described in that order.
-        In Figure \ref{build}, {\it entry} port eMotor in {\it cell} Motor is connected to {\it call} port cMotor in {\it cell} Caller.
-        {\it C\_EXP} calls macros defined in C files.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
 \begin{lstlisting}
 cell tMotor Motor {
@@ -999,7 +973,42 @@ cell tCaller Caller {
 \label{build}
 \end{figure}
 
-\end{description}
+The type of {\it entry}/{\it call} port is defined by a {\it signature}, which is a set of functions.
+A {\it signature} is the interface definition of a {\it cell}.
+The {\it cell}'s  {\it call} port can be connected to the {\it entry} port of another {\it cell} by the same {\it signature}.
+Here, {\it celltype} defines one or more {\it call}/{\it entry} ports, attributes, and variables of a {\it cell}.
+
+
+\subsubsection{Component Description}
+In TECS, components are described by {\it signature}, {\it celltype}, and build written in component description language (CDL).
+% TECS code is written in CDL (component description language) file.
+These components are described as follows.
+
+% \begin{description}
+    %\item[
+    {\bf Signature Description:\ }%]\mbox{}\\
+        {\it Signature} defines a {\it cell} interface.
+        The {\it signature} name follows the keyword {\it signature} and takes the prefix ``s'' e.g., sMotor (Figure \ref{signature}).
+        In TECS, to clarify the function of an interface, specifiers such as [in] and [out] are used, which represent input and output, respectively.
+
+    %\item[
+    {\bf Celltype Description:\ }%]\mbox{}\\
+        The {\it celltype} defines {\it entry} ports, {\it call} ports, attributes, and variables.
+        A {\it celltype} name with the prefix ``t'' follows the keyword {\it celltype}, e.g., tCaller (Figure \ref{celltype}).
+        To define {\it entry} ports, a {\it signature}, e.g., sMotor, and an {\it entry} port name, e.g., eMotor, follow the keyword {\it entry}.
+        {\it Call} ports are defined similarly.
+        Attributes and variables follow the keywords {\it attr} and {\it var}, respectively.
+    
+    %\item[
+    {\bf Build Description:\ }%]\mbox{}\\
+        The build description is used to instantiate and connect {\it cell}s.
+        Figure \ref{build} shows an example of a build description.
+        A {\it celltype} name and {\it cell} name, e.g., tMotor and Motor, respectively, follow the keyword {\it cell}.
+        To compose {\it cell}s, a {\it call} port, {\it cell}'s name, and an {\it entry} port are described in that order.
+        In Figure \ref{build}, {\it entry} port eMotor in {\it cell} Motor is connected to {\it call} port cMotor in {\it cell} Caller.
+        {\it C\_EXP} calls macros defined in C files.
+        
+% \end{description} 
 
 \section{mruby on TECS}
 \subsection{System Model}
@@ -1012,7 +1021,7 @@ The mruby-TECS bridge also provides TECS components for receiving the invocation
 % In this paper, TOPPERS/HRP2 \cite{url:HRP2}, \cite{par:hr-tecs} is the target RTOS and is based on $\mu$ITRON \cite{par:microITRON} with memory protection.
 mruby on TECS does not depend on the RTOS because TECS supports not only TOPPERS/HRP2 but also the other RTOSs.
 
-\begin{figure}[ht]
+\begin{figure}[t]
     \centering
     \includegraphics[width=8.6cm,clip]{figure/mrubyontecs.eps}
     \vspace{-2mm}
@@ -1033,7 +1042,7 @@ However, some C language codes are required to manipulate actuators and sensors 
 Figure \ref{fig:mruby_TECS_bridge} illustrates an mruby-TECS bridge used to control a motor.
 The left side of BridgeMotor belongs to the mruby program.
 The right side of BridgeMotor belongs to TECS component.
-\begin{figure}[ht]
+\begin{figure}[t]
     \centering
     \includegraphics[width=8.6cm,clip]{figure/mruby_TECS_bridge.eps}
     \vspace{-2mm}
