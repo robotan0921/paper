@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  7 JUN 2016 18:58
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  9 JUN 2016 21:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -254,40 +254,34 @@ File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
 ) (./paper.aux)
 \openout1 = `paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
 
 -- Lines per column: 56 (exact).
 \c@lstlisting=\count106
-
-Underfull \hbox (badness 10000) in paragraph at lines 59--61
-[]\OT1/ptm/b/it/9 Index Terms\OT1/ptm/b/n/9 ---embedded soft-ware; script-ing l
-an-guage;
- []
-
 [1
 
 
 ]
-LaTeX Font Info:    Try loading font information for U+msa on input line 321.
+LaTeX Font Info:    Try loading font information for U+msa on input line 324.
  (c:/w32tex/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 321.
+LaTeX Font Info:    Try loading font information for U+msb on input line 324.
 
 (c:/w32tex/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -297,22 +291,22 @@ File: figure/system_model.eps Graphic file (type eps)
 <figure/system_model.eps>
 File: figure/component_bluetooth.eps Graphic file (type eps)
  <figure/component_bluetooth.eps>
-Underfull \hbox (badness 1708) in paragraph at lines 365--369
+Underfull \hbox (badness 1708) in paragraph at lines 370--374
 []\OT1/ptm/m/n/10 In the pro-posed frame-work, a plat-form that in-cludes
  []
 
 File: figure/control_flow.eps Graphic file (type eps)
 <figure/control_flow.eps>
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 395.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 400.
 
 
 (c:/w32tex/share/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 395.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 400.
 LaTeX Font Info:    Font shape `OMS/ptm/m/it' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 396.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 401.
  [2]
 File: figure/rotateReadyQueue.eps Graphic file (type eps)
 
@@ -328,15 +322,13 @@ File: figure/comparison_msec.eps Graphic file (type eps)
 
 <figure/comparison_msec.eps>
 File: figure/eval_synchronization.eps Graphic file (type eps)
- <figure/eval_synchronization.eps>
-Underfull \vbox (badness 1642) has occurred while \output is active []
-
- [5]
-(./paper.bbl) [6]
+ <figure/eval_synchronization.eps> [5] (./paper.bbl) [6]
 File: figure/mruby.eps Graphic file (type eps)
  <figure/mruby.eps>
 File: figure/component_diagram.eps Graphic file (type eps)
- <figure/component_diagram.eps> [7]
+ <figure/component_diagram.eps> [7
+
+]
 File: figure/mrubyontecs.eps Graphic file (type eps)
 
 <figure/mrubyontecs.eps>
@@ -353,7 +345,11 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[8] (./paper.aux) ) 
+[8] (./paper.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
  3635 strings out of 493777
  54994 string characters out of 6153182
@@ -363,4 +359,4 @@ Here is how much of TeX's memory you used:
  929 hyphenation exceptions out of 8191
  27i,8n,49p,303b,1377s stack positions out of 5000i,500n,10000p,500000b,80000s
 
-Output written on paper.dvi (8 pages, 58704 bytes).
+Output written on paper.dvi (8 pages, 59356 bytes).
