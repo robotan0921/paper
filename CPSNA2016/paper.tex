@@ -496,7 +496,7 @@ In addition, the proposed framework supports the reset component which force app
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=8.6cm,clip]{figure/cyclic_handler.eps}
+    \includegraphics[height=1.8cm,width=8.6cm,clip]{figure/cyclic_handler.eps}
     \vspace{-3mm}
 \caption{Component diagram of RiteVM scheduler}
     \vspace{-3mm}
@@ -729,10 +729,12 @@ Here, in the multitask and co-routine, we prepared two tasks and the programs lo
 \end{figure}
 \subsubsection{Execution Time of Singletask, Proposed Multitask, Existing Multitask, and Co-routine}
 Figure \ref{fig:comparison_s_c_m} shows that the proposed design is superior to multitask using delay method and co-routine in terms of execution time.
+The {\it delay} function and co-routine method run on a RiteVM, which causes the slow-down compared to the proposed multitasking.
+The scheduler runs as the periodic handler of RTOS.
 Moreover, developers can utilize the scheduler practically because the RiteVM scheduler overhead is approximately 5\%.
 The scheduler interrupts and switches tasks, which causes this overhead.
 Although the overhead is larger as the number of RiteVMs increases, it also spread the difference between multitask and co-routine.
-Therefore, the scheduler enables developers multitask as the more efficient approach than the existing multitasking and co-routine.
+% Therefore, the scheduler enables developers multitask as the more efficient approach than the existing multitasking and co-routine.
 Here, the periodic time of the scheduler is 1 msec.
 % It takes approximately 3 $\mu$sec on average to switch tasks once.
 
