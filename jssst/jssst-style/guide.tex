@@ -1,0 +1,587 @@
+% Sample file for the use of compsoft style file.
+% Version 2011.10.07
+%
+%\documentclass[T]{compsoft}
+\documentclass[K,L]{compsoft}
+%
+% その他の optional argument については，compsoft.sty の旧版を
+% 参照のこと．
+
+% Preamble
+%
+% 「コンピュータソフトウェア」誌に掲載される論文の場合，次で
+% 巻数，号数，開始ページ，終了ページを指定する．
+\volNoPp{29}{1}{1}{6}
+
+% ワークショップによる推薦論文の場合，ワークショップ名を指定する．
+% \suisen{ワークショップ名}
+
+% 特集の場合，特集のタイトルを与える．
+% \tokushu{特集のタイトル}
+
+% 大会論文の場合，\taikai で開催年を指定する．ここで指定した年から
+% 大会の回数は計算される．
+% \taikai{2009}
+
+% ここに，使用するパッケージを列挙する．
+\usepackage[dvips]{graphics}
+
+% ユーザが定義したマクロなどはここに置く．ただし学会誌のスタイルの
+% 再定義は原則として避けること．
+
+\begin{document}
+
+% 論文のタイトル
+\title{新しいスタイルファイルによる論文作成ガイド}
+
+% 著者
+% 和文論文の場合，姓と名の間には半角スペースを入れ，
+% 複数の著者の間は全角スペースで区切る
+%
+\author{岩崎 英哉　上田 和紀
+%
+% ここにタイトル英訳 (英文の場合は和訳) を書く．
+%
+\ejtitle{The new compsoft Document Style Users Guide.}
+%
+% ここに著者英文表記 (英文の場合は和文表記) および
+% 所属 (和文および英文) を書く．
+% 複数著者の所属はまとめてよい．
+%
+\shozoku{Hideya Iwasaki}{電気通信大学大学院情報理工学研究科}%
+{The University of Electro-Communications}
+\shozoku{Kazunori Ueda}{早稲田大学理工学術院情報理工学科}%
+{Waseda University}
+%
+% 出典情報は \shutten とすれば出力される．
+\shutten
+%
+% 受付年月日，記事カテゴリなどは自動的に生成される．
+\uketsuke{2011}{12}{14}
+%
+% その他，脚注に入れるものがあれば，\note に記述する．
+\note{本ガイドは，旧スタイルファイルとともに配布されていた
+\texttt{sample.tex}をもとに発展させたものである．}
+}
+
+%
+% 和文アブストラクト
+\Jabstract{%
+本ガイドは，日本ソフトウェア科学会の新しいスタイルファイル
+\texttt{compsoft.sty} (2011年12月14日版)
+の利用方法を解説したものである．
+この新しいスタイルファイルは，「コンピュータソフトウェア」の
+論文，および，毎年秋に開催される日本ソフトウェア科学会大会論文の
+両方に共通のスタイルファイルとして利用する．
+}
+%
+% 英文アブストラクト (大会和文論文の場合には必要なし) 
+\Eabstract{%
+This documentation describes the new version of the
+\texttt{compsoft.sty} document style file.
+This style file can be used to typeset papers in the
+publications of Japan Society of Software Science and Technology.
+}
+%
+\maketitle
+
+\section{はじめに}
+
+日本ソフトウェア科学会では，2009年6月より「コンピュータソフトウェア」誌
+の論文の査読種別として「レター論文」を新設した．
+この機会に，「コンピュータソフトウェア」編集委員会は，
+\LaTeX \cite{Lamport:LaTeX} 用スタイルファイル \verb|compsoft.sty| を
+「コンピュータソフトウェア」誌向けの各種論文 (以下「雑誌論文」と呼ぶ)，
+および，毎年秋に開催される日本ソフトウェア科学会大会の論文
+(以下「大会論文」と呼ぶ) の両方で共通して利用できるように，
+バージョンアップを行った．
+これに伴い，大会論文のフォーマットは，従来の大会独自のものから，
+雑誌論文に準ずるものに変更した．
+本ガイドは，この新しいスタイルファイルの利用方法を解説したものである．
+
+\section{論文の分類}
+
+学会誌「コンピュータソフトウェア」に掲載される雑誌論文の種別には，
+次のものがある．
+
+\begin{description}
+  \item[研究論文:]
+著者によってなされた学術研究の報告であり，独創性，新規性，有用性
+などの点で優れたもの．
+  \item[ソフトウェア論文:]
+著者によって実現されたソフトウェアの報告であり，発想，構成法，実装法
+などの点で優れ，ソフトウェアの発展に寄与するもの．
+  \item[解説論文:]
+特定の領域を調査し考察を加えて，専門外の会員にも十分に理解でき，
+かつ当該領域に対する新しい視点を与える優れた技術的論説・解説を行うもの．
+なお解説論文には，通常の「解説」と「チュートリアル」の2種類があり，
+両者では1ページ目上部の論文タイトルの上の部分が異なる．
+\end{description}
+
+上の論文種別それぞれに対し，次の査読種別がある．
+
+\begin{description}
+  \item[通常論文:]
+ページ数の制限のない，通常の査読を行う論文．
+投稿時の刷り上がりページ数は6ページ以内であっても，著者が希望すれば
+通常論文として投稿することもできる．
+  \item[レター論文:]
+速報性を重んじた査読を行う論文．
+投稿時の刷り上がりページ数は6ページ以内でなければならない．
+\end{description}
+
+一方，大会の CD-ROM に掲載される大会論文は，本スタイルファイルでは，
+便宜的に論文種別の一種として扱うこととしている．
+
+以上をまとめると，本スタイルファイルでは
+
+\begin{itemize}
+  \item 「コンピュータソフトウェア」誌に掲載される雑誌論文に対する
+論文種別と査読種別の $3\times2=6$ 通りの組み合わせ．
+  \item 大会論文
+\end{itemize}
+
+\noindent
+の，都合7通りの論文を区別して扱う．
+また，7通りのそれぞれに対して，記述言語として和文と英文の2通りが
+考えられる．\footnote{ただし，「コンピュータソフトウェア」は国内向け
+雑誌であるため，英文の解説論文はあまり想定していない．}
+
+本スタイルファイルは，旧版のスタイルファイルの上位互換に
+なるように作られている．
+「コンピュータソフトウェア」に掲載される，論文以外の記事
+(たとえば「フォーラム」など) に関しては，従前通り
+の書き方をすれば良いので，本ガイドでは扱わない．
+以下では，上の7通りの場合に絞って説明する．
+
+\section{プリアンブル}
+
+\verb|\documentclass| コマンドで指定するオプションには，
+次のものをカンマで区切って指定する．
+
+\begin{description}
+  \item[論文種別:]
+\verb|P| (研究論文でデフォルト値)，
+\verb|S| (ソフトウェア論文)，
+\verb|K| (普通の解説論文)，
+\verb|U| (チュートリアル)，
+\verb|T| (大会論文)
+のいずれか 1 つ．
+  \item[査読種別:]
+\verb|R| (通常論文でデフォルト値)，
+\verb|L| (レター論文)
+のいずれか．
+ただし，大会論文の時には指定しない．
+  \item[言語:]
+\verb|J| (和文でデフォルト値)，
+\verb|E| (英文)
+のいずれか．
+\end{description}
+
+下にいくつか例を示す．
+
+\begin{verbatim}
+  \documentclass{compsoft}
+      研究論文，通常論文，和文
+  \documentclass[P,L]{compsoft}
+      研究論文，レター論文，和文
+  \documentclass[S,E]{compsoft}
+      ソフトウェア論文，通常論文，英文
+  \documentclass[T]{compsoft}
+      大会論文，和文
+\end{verbatim}
+
+大会論文で，「コンピュータソフトウェア」誌に同時投稿する場合
+であっても，CD-ROM に掲載される大会の予稿論文は \verb|T| を指定して作成し，
+査読プロセスの中での改訂稿は，その論文の論文種別，査読種別に基づいた
+オプションを指定し作成すること．
+
+\verb|\documentclass| コマンドに続いて，雑誌論文の場合は，
+\verb|\volNoPp| コマンドに，巻，号，開始ページ，終了ページを指定する．
+これらの正しい数値は印刷所で記入するので，論文投稿時には，
+適当な数値を与えておけば良い．
+ただし，巻数に数値以外の値を指定すると，西暦の計算において
+エラーとなるので注意する必要がある．
+下は，第26巻第0号，開始ページ番号1，終了ページ番号5を
+指定した例である．
+
+\begin{verbatim}
+   \volNoPp{26}{0}{1}{5}
+\end{verbatim}
+
+ワークショップによる推薦論文の場合には，次のようにして
+ワークショップ名を与える．
+
+\begin{verbatim}
+   \suisen{ワークショップ名}
+\end{verbatim}
+
+特集の場合，次のようにして特集のタイトルを与える．
+
+\begin{verbatim}
+   \tokushu{特集のタイトル}
+\end{verbatim}
+
+大会論文の場合，次のように \verb|\taikai| コマンドで開催年を指定する．
+ここで指定した年から，大会の回数は自動的に計算される．
+
+\begin{verbatim}
+   \taikai{2009}
+\end{verbatim}
+
+
+これ以降，\verb|\begin{document}| までの間に，パッケージを使用する
+\verb|\usepackage| コマンド，および，ユーザが定義したマクロなどを置く．
+ただしスタイルの再定義は避けること．
+
+\section{タイトルと著者}
+
+\begin{figure*}[tb]
+\begin{center}
+\begin{verbatim}
+\author{岩崎 英哉　上田 和紀　電通 大郎
+\ejtitle{The new compsoft Document Style Users Guide.}
+\shozoku{Hideya Iwasaki, Taro Dentsu}{電気通信大学情報工学科}%
+{Dept.\ of Computer Science, The University of Electro-Communications}
+\shozoku{Kazunori Ueda}{早稲田大学理工学部情報学科}%
+{Dept.\ of Information and Computer Science, Waseda University}
+\shutten
+\uketsuke{2009}{6}{10}
+}
+\end{verbatim}
+(a) 雑誌論文の場合
+\begin{verbatim}
+\author{岩崎 英哉　上田 和紀　電通 大郎
+\ejtitle{The new compsoft Document Style Users Guide.}
+\shozoku{Hideya Iwasaki, Taro Dentsu}{電気通信大学情報工学科}%
+{Dept.\ of Computer Science, The University of Electro-Communications}
+\shozoku{Kazunori Ueda}{早稲田大学理工学部情報学科}%
+{Dept.\ of Information and Computer Science, Waseda University}
+}
+\end{verbatim}
+(b) 大会論文の場合
+\end{center}
+\caption{著者等の情報の記述例}
+\label{fig:author}
+\end{figure*}
+
+論文タイトルは，次のように \verb|\title| コマンドで指定する．
+
+\begin{verbatim}
+  \title{論文のタイトル}
+\end{verbatim}
+
+次に著者情報等を \verb|\author| コマンドで指定する．
+和文論文の場合，姓と名の間には半角スペースを入れ，
+複数の著者の間は全角スペースで区切る．
+さらに \verb|\author| コマンドの中で，次のものを空行を入れずに
+続けて指定する．
+空行が入っているとエラーになるので注意されたい．
+これらは，1ページ目の脚注に出力される．
+
+\begin{itemize}
+  \item \verb|\ejtitle| コマンドに，タイトルの英訳
+ (英文の場合は和訳) を書く．
+  \item \verb|\shozoku| コマンドに，著者の英文表記 (英文の場合は和文表記)，
+所属(和文および英文) を与える．
+著者が複数いる場合には，著者ごとに \verb|\shozoku| コマンドを書く．
+ただし，複数の著者の所属が同じ場合には，ひとつの \verb|\shozoku|
+コマンドにまとめてよい．
+  \item 雑誌論文の場合，出典情報を出力する \verb|\shutten| コマンドを書く．
+大会論文の場合には，このコマンドは不要である．
+  \item 雑誌論文の場合，\verb|\uketsuke| コマンドに受付年，月，日を与える．
+このコマンドにより，受付年月日に加え，論文種別，査読種別も
+自動的に生成される．
+正しい年月日は印刷所が入れるので，著者はここには適当な年月日を与えて
+おいてもよい．
+大会論文の場合には，このコマンドは不要である．
+  \item 雑誌論文の場合，「本論文は XX ワークショップの発表論文をもとに
+発展させたものである．」というような注釈を入れることもある．
+このような注釈は \verb|\note| コマンドを使って記述する．
+\end{itemize}
+
+図 \ref{fig:author} に，雑誌論文の場合，および
+大会論文の場合の典型的な例をあげる．
+
+アブストラクトは，雑誌論文で和文の場合は和文 (\verb|\Jabstract|) と
+英文 (\verb|\Eabstract|) の双方をつける．
+雑誌論文で英文の場合は英文 (\verb|\Eabstract|) だけでよい．
+また，大会論文の場合は，本文を記述する言語に従って，和文あるいは英文の
+一方だけでよい．
+
+表 \ref{tab:commands} は，雑誌論文/大会論文，和文/英文によって，
+必須なコマンド (○)，場合によってはあってもよいコマンド (△)，
+不要なコマンド (×) を表にまとめたものである．
+
+\def\hbbb#1{\hbox to 2cm{\hfil #1\hfil}}
+\begin{table*}[t]
+\caption{論文の種類による各種コマンドの要/不要
+(○:必要，△:オプション，×:不要)}
+\label{tab:commands}
+\begin{center}
+\doublerulesep=0.3pt % to avoid unnecessary gap between two \hline's
+\begin{tabular}{l|c|c|c|c|c|c} \hline\hline\hline
+                & \verb|\volNoPp|
+                & \verb|\suisen|
+                & \verb|\tokushu|
+                & \verb|\taikai|
+                & \verb|\Jabstract|
+                & \verb|\Eabstract|\\ \hline
+雑誌論文 (和文) & ○ & △ & △ & × & ○ & ○ \\
+雑誌論文 (英文) & ○ & △ & △ & × & × & ○ \\
+大会論文 (和文) & × & × & × & ○ & ○ & × \\
+大会論文 (英文) & × & × & × & ○ & × & ○ \\ \hline
+\end{tabular}
+\end{center}
+\end{table*}
+
+\section{句読点}
+
+句点には全角の「\null．\null」，読点には全角の「\null，\null」を用いる．
+ただし英文中や数式中で「\,.\,」や「\,,\,」を使う場合には
+半角文字を使う．\null
+「\null 。\null」や「\null 、\null」は一切使わない．
+
+\section{全角と半角}
+
+全角文字と半角文字の両方にある文字は次のように使い分ける．
+
+\begin{itemize}
+  \item 英数字，空白，記号類は半角文字を用いる．
+ただし，句読点に関しては前項で述べたような例外がある．
+  \item カタカナは全角文字を用いる．
+  \item 引用符は開きと閉じを区別する. 
+開きには \verb|``| を用い，閉じには \verb|''| を用いる．
+  \item 省略のピリオドのあとは次のように処理する．
+特に参考文献の中の省略のピリオドに注意する．
+%
+\begin{itemize}
+  \item そこが文の終りにもなっている場合には，ピリオドのあとに単に半角空白
+を置くだけでよい．
+  \item 文の終りではないが，そこで改行してもかまわない場合は，
+\verb|Tech.\ Rep.\ 125.| のように，ピリオドの直後に \verb*|\ | をつける．
+  \item その場所で改行してほしくない場合は，\verb|pp.~26--35.| や 
+\verb|Vol.~7| のように，ピリオドの直後に \verb|~| をつける．
+\end{itemize}
+%
+\end{itemize}
+
+\section{数式}
+
+本文中では分数はなるべく \verb|\(a/b\)| (\(a/b\) と印刷される)の形を
+使用し， \verb|\(\frac{a}{b}\)|
+(\(\frac{a}{b}\))の形は極力避ける．
+また，本文中で無理矢理文字を大きくして，
+ \verb|\(\displaystyle\frac{a}{b}\)|
+(\(\displaystyle\frac{a}{b}\))のようにすることも避ける．
+
+\verb|\begin{equation}|と \verb|\end{equation}| で囲ったり，
+\verb|\[| と \verb|\]| で囲ったりした別組の数式の場合には，
+本文中の数式の場合とは逆に，
+\verb|\[ a/b \]| (\(a/b\)) よりも \verb|\[ \frac{a}{b} \]|
+(\(\displaystyle\frac{a}{b}\))の形を使う方がよい．
+
+ただし，繁分数は極力避ける．たとえば 
+\begin{adjustvboxheight}
+\[\displaystyle\frac{a+\frac{1}{2}}{b+\frac{1}{2}} \]
+\end{adjustvboxheight}
+よりも
+\begin{adjustvboxheight}
+\[ \displaystyle\frac{a+1/2}{b+1/2}\]
+\end{adjustvboxheight}
+の形の方がよい．
+
+互いに関連する別組の数式が2行以上連続して現れる場合には，
+単に \verb|\begin{equation}| と \verb|\end{equation}|，
+あるいは \verb|\[| と \verb|\]| で囲った数式を書き並べるのではなく，
+\verb|\begin{eqnarray}| と \verb|\end{eqnarray}|
+を使って，等号や不等号の位置で縦揃えを行なった方が読みやすい．
+
+\section{図と表}
+
+1段の幅におさまる図は次の形式で指定する. 位置の指定に \verb|h| は使わない.
+図は, それを参照している節の中に配置することを原則とする. 
+自由度がある場合には, 1段目 (左側の段) に置くようにする.
+
+\begin{verse}
+\qquad \verb|\begin{figure}[tb]| \\
+\qquad\quad \dots 図本体の指定 \dots \\
+\qquad \verb|\caption{| $\ldots$ \verb|}| \\
+\qquad \verb|\label{| $\ldots$ \verb|}| \\
+\qquad \verb|\end{figure}| \\
+\end{verse}
+
+2段の幅にまたがる図は次の形式で指定する. 位置の指定は \verb|t| しか使え
+ない. 2段幅の図も可能な限り, それを参照している節の中に配置する．
+
+\begin{verse}
+\qquad \verb|\begin{figure*}[t]| \\
+\qquad\quad \dots 図本体の指定 \dots \\
+\qquad \verb|\caption{| $\ldots$ \verb|}| \\
+\qquad \verb|\label{| $\ldots$ \verb|}| \\
+\qquad \verb|\end{figure*}| \\
+\end{verse}
+
+図は \LaTeX の \verb|picture| 環境を使って \LaTeX ソースファイルに含めるか，
+\verb|.eps| (Encapsulated PostScript) 形式で用意したものを
+\verb|graphicx| または \verb|graphics| パッケージで取り込む．
+それ以外の形式の図については，本文中で \verb|figure| 環境を使って
+図の大きさだけを空けておき，最終稿提出時はそれぞれの図に対応する
+ファイルを \LaTeX ソースファイルと一緒に送付する．
+
+表に関しても，幅と位置の指定は図と同様である．
+表の罫線はなるべく少なくするのが，仕上がりをすっきりさせるコツである．
+罫線をつける場合には，一番上の罫線には太線を使う．
+また，左右の端には縦の罫線をつけない (表\ref{tab:jp-domains})．
+
+% Sample for a table.
+% 一番上の罫線が太くなっていること，両はしには縦の罫線が入らないことに
+% 注意．これが標準の表のスタイルなので，これを守って作表すること．
+\begin{table}[t]
+\caption{日本のドメイン}
+\label{tab:jp-domains}
+\begin{center}
+\doublerulesep=0.3pt % to avoid unnecessary gap between two \hline's
+\begin{tabular}{c|c|l} \hline\hline\hline
+レベル & 名前 & 範囲 \\ \hline
+ 1	& \texttt{jp} & 日本 \\ \hline
+ 2	& \texttt{ac} & 大学などの研究教育組織 \\
+	& \texttt{ad} & ネットワークの管理母体 \\
+	& \texttt{co} & 企業 \\
+	& \texttt{go} & 政府関連機関 \\
+	& \texttt{or} & 非営利団体 \\ \hline
+ 3	& \emph{org}  & 各組織を表す組織名 \\ \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\section{脚注}
+
+脚注は \verb|\footnote| を使って書く．脚注
+をつけた位置と脚注本体との位置関係を調整する必要のある場合は，
+ \verb|\footnotemark| や \verb|\footnotetext| を
+使って対処する．詳しくは {\LaTeX} ブック \cite{Lamport:LaTeX} 
+の付録Cを参照してほしい．
+
+\section{見出し}
+
+節や小節の見出しには \verb|\section|，\verb|\subsection| といったコ
+マンドを使用する．
+自分で「\textbf{定義}」「\textbf{例}」「\textbf{記法}」などを
+見出しとしてつける場合には，ゴシック体を使い，新たな段落として書き出す．
+新しい段落の先頭は，自動的に1字分字下げされる．
+
+\section{左右の段の行揃え}
+
+学会誌では左右の段で各行の位置をそろえる必要がある．
+ユーザが特別な高さのボックスや数式を使ったために行の位置が乱れて
+しまうような場合には，その部分を \verb|\begin{adjustvboxheight}| と
+\verb|\end{adjustvboxheight}|で囲む．
+特に，参考文献の後に付録がある場合には，参考文献の
+\verb|thebibliography| 環境を，この環境で囲む必要がある．
+
+この環境は中途半端な行送りを吸収するためのものである．
+
+\section{参考文献の参照}
+
+主語や目的語など，文の不可欠な構成要素として文献番号を用いるときは，
+\verb|\Cite| コマンドを用いる．
+文や語句に対する付加情報として文献を参照するときは \verb|\cite| を用いる．
+\verb|\cite|は \verb|\Cite|よりもやや小さな文字で文献番号を表示する．
+
+\section{参考文献リスト}
+
+参考文献リストには，原則として本文中で引用した文献のみを列挙する．
+順序は第一著者の苗字のアルファベット順とする．
+著者名の欧文表記は苗字を最初に書き，カンマで区切ったあとイニシャルを並べる．
+具体的な記述例は，本ガイドとともに配布している \verb|sample.tex| を
+参考にすること．
+
+参考文献は，学会誌の校正作業においてもっとも手間のかかっている部分である．
+出典の表記には細心の注意を払ってほしい．
+
+\section{謝辞}
+
+謝辞は，参考文献の前に，次のように書く．
+
+\begin{verbatim}
+   {\bf 謝辞}\ 本論文の初期の版について議論して
+   いただいた A 氏に感謝する．
+\end{verbatim}
+
+\section{著者紹介 (採択論文のみ)}
+
+2012年より，従来は巻末にまとめて掲載されていた著者紹介を，
+各論文の最後に掲載することになった．
+この著者紹介は採択済み論文の最終稿においてだけ必要であり，
+投稿時の論文 (査読プロセス中のものを含む)，大会論文では不要である．
+
+著者紹介は，参考文献，付録を含む論文本体の後に
+\verb|choshashoukai|環境を用いて次のように記述する．
+
+\begin{verbatim}
+  \begin{choshashoukai}
+  \chosha{第1著者の氏名}{紹介文}
+  \chosha{第2著者の氏名}{紹介文}
+  ...
+  \end{choshashoukai}
+\end{verbatim}
+
+ただし，\verb|\documentclass| において \verb|T| (大会論文) と指定した
+時は，このような著者紹介の記述はすべて無視される．
+各著者紹介においては，縦25mm，横20mmの写真がおさまる枠が出力される．
+実際に著者の写真を入れる作業は印刷所が行うので，最終原稿提出時には
+枠のままでかまわない．
+
+写真掲載を希望しない著者のために，\verb|\choshanopic| という
+マクロも用意されている．
+使い方は，\verb|\chosha| のかわりに \verb|\choshanopic| とするだけである．
+著者が複数いる場合に，以下の例のように一部の著者だけが
+\verb|\choshanopic| としても良い．
+
+\begin{verbatim}
+  \begin{choshashoukai}
+  \chosha{第1著者の氏名}{紹介文}
+  \choshanopic{第2著者の氏名}{紹介文}
+  ...
+  \end{choshashoukai}
+\end{verbatim}
+
+% \begin{adjustvboxheight} % needed only when Appendix follows
+\begin{thebibliography}{9}
+\bibitem{Lamport:LaTeX}
+Lamport, L. : \textit{A Document Preparation System 
+{\LaTeX} User's Guide \& Reference Manual},
+Addison-Wesley, Reading, Massachusetts，1986.
+\end{thebibliography}
+%\end{adjustvboxheight} % needed only when Appendix follows
+
+\begin{choshashoukai}
+
+\chosha{岩崎英哉}
+{1983年東京大学工学部計数工学科卒業．
+1988年東京大学大学院工学系研究科情報工学専攻博士課程修了．
+同年同大学計数工学科助手．
+1993年同大学教育用計算機センター助教授．
+その後，東京農工大学工学部電子情報工学科助教授，
+東京大学大学院工学系研究科情報工学専攻助教授，
+電気通信大学情報工学科助教授を経て，
+2004年より電気通信大学教授．
+工学博士．
+プログラミング言語，システムソフトウェアなどの研究に従事．}
+
+\chosha{上田和紀}
+{1978年東京大学工学部計数工学科卒．
+1986年同大学大学院情報工学博士課程修了．
+工学博士．1983年NEC入社．
+1985年〜1992年 (財) 新世代コンピュータ技術開発機構出向．
+1993年より早稲田大学理工学部情報学科．
+現在，同理工学術院情報理工学科教授．
+プログラミング言語，並行・並列計算，高性能検証などの研究および
+システム開発に従事．
+第7回日本IBM科学賞，日本ソフトウェア科学会第4，5回論文賞など受賞．
+2004〜2007年度本誌編集委員長．}
+
+\end{choshashoukai}
+
+\end{document}

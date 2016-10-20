@@ -4,7 +4,8 @@
 % Last Change: 月 11 30 08:00 午後 2015 東京 (標準時)
 %
 \input{dummy/dummy.tex}
-\documentclass[conference]{IEEEtran/IEEEtran/IEEEtran}
+%\documentclass[10pt, conference, compsocconf]{IEEEtran/IEEEtran}
+\documentclass[10pt, conference]{IEEEtran/IEEEtran}
 \usepackage[dvipdfmx]{graphicx}
 \usepackage{amssymb}
 \usepackage{float}
@@ -116,7 +117,7 @@ Developers can implement multiple tasks without RTOS knowledge because the RiteV
 \item {\bf Synchronized execution of multiple RiteVM tasks.}
 The proposed framework synchronizes multiple RiteVM tasks (i.e., mruby applications).
 \item {\bf Benefits of CBD:}
-The paper focuses on the benefits of CBD and provides specific examples (a Bluetooth loader, a sheduler, and Eventflags).
+The paper focuses on the benefits of CBD and provides specific examples (a Bluetooth loader, a scheduler, and Eventflags).
     % \vspace{-2mm}
 \end{enumerate}
 
@@ -312,7 +313,7 @@ Conclusions and suggestions for future work are presented in Section \ref{sec:Co
 
 \section{System Model}
 \label{sec:System Model}
-The proposed framework is an extension of mruby on TECS \cite{par:mrubyonTECS}, and utilizes mruby and TECS, which are also described in \cite{par:mrubyonTECS}.
+The proposed framework is an extension of mruby on TECS \cite{par:mrubyonTECS}, and utilizes mruby and TECS\footnote{mruby, TECS, and mruby on TECS are described in detail in \cite{par:mrubyonTECS}}.
 
 Figure \ref{fig:system_model} shows the system model of the proposed framework.
 Each mruby application bytecode transferred from the host to the target device is received by the loader in the RiteVM.
@@ -820,16 +821,16 @@ Skillful CBD yields advantages such as the decreased number of lines of codes an
 
 \section{Related Work}
 \label{sec:Related work}
-Open-source runtime systems for scripting languages have been proposed such python-on-a-chip \cite{url:python-on-a-chip}, Owl system \cite{par:owl}, eLua \cite{url:eLua}, Squirrel \cite{url:Squirrel}, mruby \cite{par:mruby}, and mruby on TECS \cite{par:mrubyonTECS}.
+Open-source runtime systems for scripting languages have been proposed such p14p \cite{url:python-on-a-chip}, Owl system \cite{par:owl}, eLua \cite{url:eLua}, Squirrel \cite{url:Squirrel}, mruby \cite{par:mruby}, and mruby on TECS \cite{par:mrubyonTECS}.
 
-{\bf python-on-a-chip:} python-on-a-chip (p14p) is a Python runtime system that uses a reduced Python VM called PyMite.
+{\bf p14p:} p14p is a Python runtime system that uses a reduced Python VM called PyMite.
 The VM runs a significant subset of the Python language with few resources on a microcontroller.
 p14p can also run multiple stackless green threads.
 
 {\bf Owl system:} The Owl system is an embedded Python runtime system.
 It is a complete system for ARM Cortex-M3 microcontrollers.
 The Owl toolchain produces relocatable memory images that are directly runnable on the microcontroller from Python code objects.
-Note that the Owl system interpreter is the same as that of python-on-a-chip.
+Note that the Owl system interpreter is the same as that of p14p.
 
 {\bf eLua:} eLua (embedded Lua) offers a full implementation of the Lua programming language for embedded systems.
 Lua is one of the most popular scripting languages for embedded systems \cite{par:Lua}.
@@ -865,7 +866,8 @@ The proposed framework can be applied to various embedded systems because the lo
 The RiteVM scheduler simplifies multitasking compared to the current mruby on TECS.
 Our experimental results for the Bluetooth loader and RiteVM scheduler show their advantages.
 The Bluetooth loader can improve software development efficiency on mruby on TECS, and the RiteVM scheduler is more effective than the existing technique and co-routines for multitasking.
-Moreover, synchronization of multiple RiteVM tasks is implemented in the proposed framework.
+% Moreover, synchronization of multiple RiteVM tasks is implemented in the proposed framework.
+Moreover, multiple RiteVM tasks are synchronized.
 
 The proposed framework is developed using CBD.
 The RiteVMs, the scheduler, and Eventflags are implemented as components; therefore, developers can add, remove, or reuse them easily as required.
@@ -879,11 +881,12 @@ In the future, CDL files for the RiteVM and mruby-TECS bridge will be generated 
 Moreover, we will support mruby libraries as mrbgems, which is an mruby distribution packaging system.
 
 %%%%%%%%%%%% Acknowledgement %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \section*{Acknowledgement}
-% This work was supported by JSPS KAKENHI Grant Number 15H05305.
+\section*{Acknowledgement}
+This work was supported by JSPS KAKENHI Grant Number 15H05305.
 % We thank Takuya Ishikawa, Hiroshi Mimaki, and Kazuaki Tanaka for supporting this research.
+\vspace{-3mm}
 %%%%%%%%%%%% Reference %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\bibliographystyle{IEEEtranBST2/IEEEtran}
+\bibliographystyle{IEEEtran/IEEEtranBST/IEEEtran}
 \bibliography{ref}
 
 

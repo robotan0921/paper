@@ -1,0 +1,310 @@
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  20 OCT 2016 04:53
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**./paper.tex
+(./paper.tex
+pLaTeX2e <2006/11/10> (based on LaTeX2e <2015/01/01> patch level 0)
+Babel <3.9l> and hyphenation patterns for 79 languages loaded.
+(./article/compsoft.cls
+
+LaTeX Warning: You have requested document class `article/compsoft',
+               but the document class provides `compsoft'.
+
+Document Class: compsoft 2000/11/02 ver 0.10
+(./compsoft.sty
+Document Style `compsoft' ascii version <23 Mar 92>.
+\@maxsep=\dimen118
+\@dblmaxsep=\dimen119
+\JQ=\dimen120
+\Q=\dimen121
+\@Baseline=\dimen122
+\jspaceskip=\dimen123
+\jmathkanjiskip=\dimen124
+\@mojihaba=\dimen125
+\c@part=\count81
+\c@section=\count82
+\c@subsection=\count83
+\c@subsubsection=\count84
+\c@paragraph=\count85
+\c@subparagraph=\count86
+\@currentmojihaba=\skip41
+\twodigits=\skip42
+\bibbox=\box41
+\@beforecaptionskip=\skip43
+\@aftercaptionskip=\skip44
+\@tempboxb=\box42
+\c@figure=\count87
+\c@table=\count88
+\@floatheight=\dimen126
+\@floatlinecount=\count89
+\@temptitlebox=\box43
+\strokeinterval=\dimen127
+\strokewidth=\dimen128
+\rightstrokewidth=\dimen129
+\boxinterval=\dimen130
+\boxwidth=\dimen131
+\leftboxwidth=\dimen132
+\choshaspacebox=\box44
+\tempsplitbox=\box45
+\nobreakcount=\count90
+\c@volpageoffset=\count91
+\c@Šª”=\count92
+\c@†”=\count93
+\c@”N”=\count94
+\c@firstpage=\count95
+\c@lastpage=\count96
+\dimen@@=\dimen133
+\@interlinegap=\skip45
+\@leftcolumnfootnote=\box46
+\@rightcolumnfootnote=\box47
+\adjustbox=\box48
+\adjustheight=\dimen134
+\adjustlinecount=\count97
+)) (c:/w32tex/share/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(c:/w32tex/share/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+(c:/w32tex/share/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+
+(c:/w32tex/share/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(c:/w32tex/share/texmf-dist/tex/latex/config/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: dvipdfmx.def on input line 94.
+
+(c:/w32tex/share/texmf-dist/tex/latex/dvipdfmx-def/dvipdfmx.def
+File: dvipdfmx.def 2015/03/26 v4.04 LaTeX color/graphics driver for dvipdfmx (T
+eX Live/ChoF)
+))
+\Gin@req@height=\dimen135
+\Gin@req@width=\dimen136
+)
+(c:/w32tex/share/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(c:/w32tex/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks16
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(c:/w32tex/share/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count98
+\float@exts=\toks17
+\float@box=\box49
+\@float@everytoks=\toks18
+\@floatcapt=\box50
+)
+(c:/w32tex/share/texmf-dist/tex/latex/tools/enumerate.sty
+Package: enumerate 2014/10/28 v3.00 enumerate extensions (DPC)
+\@enLab=\toks19
+)
+(c:/w32tex/share/texmf-dist/tex/latex/cite/cite.sty
+LaTeX Info: Redefining \cite on input line 302.
+LaTeX Info: Redefining \nocite on input line 332.
+Package: cite 2015/02/27  v 5.5
+)
+(c:/w32tex/share/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(c:/w32tex/share/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count99
+\lst@gtempboxa=\box51
+\lst@token=\toks20
+\lst@length=\count100
+\lst@currlwidth=\dimen137
+\lst@column=\count101
+\lst@pos=\count102
+\lst@lostspace=\dimen138
+\lst@width=\dimen139
+\lst@newlines=\count103
+\lst@lineno=\count104
+\abovecaptionskip=\skip46
+\belowcaptionskip=\skip47
+\lst@maxwidth=\dimen140
+
+(c:/w32tex/share/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
+\c@lstnumber=\count105
+\lst@skipnumbers=\count106
+\lst@framebox=\box52
+)
+(c:/w32tex/share/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2014/09/06 1.5e listings configuration
+))
+Package: listings 2014/09/06 1.5e (Carsten Heinz)
+
+(c:/w32tex/share/texmf-dist/tex/latex/jlisting/jlisting.sty
+Package: jlisting 2006/02/20 0.2 (Thor)
+\lst@nextchar=\count107
+\lst@inputfile=\read1
+)
+(c:/w32tex/share/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2014/09/06 1.5e listings language file
+)
+(c:/w32tex/share/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
+) (./paper.aux)
+\openout1 = `paper.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+\c@lstlisting=\count108
+LaTeX Font Info:    Try loading font information for U+msa on input line 65.
+
+(c:/w32tex/share/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 65.
+
+(c:/w32tex/share/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 65.
+
+(c:/w32tex/share/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 65.
+ [78
+
+
+]
+LaTeX Font Info:    Font shape `JT1/gt/bx/n' in size <17.28> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 110.
+LaTeX Font Info:    Font shape `JY1/gt/bx/n' in size <17.28> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 110.
+LaTeX Font Info:    Font shape `JT1/gt/bx/n' in size <10> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 114.
+LaTeX Font Info:    Font shape `JY1/gt/bx/n' in size <10> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 114.
+ [79
+
+]
+LaTeX Font Info:    Font shape `JT1/gt/bx/n' in size <9> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 155.
+LaTeX Font Info:    Font shape `JY1/gt/bx/n' in size <9> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 155.
+
+Overfull \hbox (13.59735pt too wide) in paragraph at lines 162--164
+[]\OT1/cmr/bx/n/9 Synchronized ex-e-cu-tion of mul-ti-ple RiteVM
+ []
+
+File: figure/proposed.eps Graphic file (type eps)
+<figure/proposed.eps>
+LaTeX Font Info:    Font shape `JT1/gt/bx/n' in size <8> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 179.
+LaTeX Font Info:    Font shape `JY1/gt/bx/n' in size <8> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 179.
+File: figure/mruby.eps Graphic file (type eps)
+ <figure/mruby.eps> [80]
+File: figure/component_diagram.eps Graphic file (type eps)
+ <figure/component_diagram.eps>
+LaTeX Font Info:    Font shape `JT1/mc/m/it' in size <9> not available
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 227.
+LaTeX Font Info:    Font shape `JY1/mc/m/it' in size <9> not available
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 227.
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 251.
+
+[81]
+LaTeX Font Info:    Font shape `JT1/mc/m/it' in size <8> not available
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 301.
+LaTeX Font Info:    Font shape `JY1/mc/m/it' in size <8> not available
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 301.
+File: figure/mrubyontecs.eps Graphic file (type eps)
+ <figure/mrubyontecs.eps> [82]
+File: figure/mruby_TECS_bridge.eps Graphic file (type eps)
+ <figure/mruby_TECS_bridge.eps>
+File: figure/system_model.eps Graphic file (type eps)
+
+<figure/system_model.eps> [83]
+File: figure/component_bluetooth.eps Graphic file (type eps)
+ <figure/component_bluetooth.eps>
+File: figure/control_flow.eps Graphic file (type eps)
+
+<figure/control_flow.eps>
+LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <8> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 431.
+LaTeX Font Info:    Font shape `JT1/mc/m/sl' in size <8> not available
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 439.
+LaTeX Font Info:    Font shape `JY1/mc/m/sl' in size <8> not available
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 439.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 480.
+
+ (c:/w32tex/share/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <8> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 480.
+[84]
+File: figure/rotateReadyQueue.eps Graphic file (type eps)
+ <figure/rotateReadyQueue.eps>
+File: figure/cyclic_handler.eps Graphic file (type eps)
+ <figure/cyclic_handler.eps> [85] [86]
+File: figure/Eventflag.eps Graphic file (type eps)
+
+<figure/Eventflag.eps>
+Overfull \hbox (34.2775pt too wide) in paragraph at lines 706--714
+ [][] 
+ []
+
+[87]
+File: figure/comparison_s_c_m.eps Graphic file (type eps)
+ <figure/comparison_s_c_m.eps>
+File: figure/comparison_msec.eps Graphic file (type eps)
+ <figure/comparison_msec.eps> [88]
+File: figure/eval_synchronization.eps Graphic file (type eps)
+
+<figure/eval_synchronization.eps>
+Overfull \hbox (22.69728pt too wide) in paragraph at lines 796--805
+ [][] 
+ []
+
+
+Overfull \hbox (157.77544pt too wide) in paragraph at lines 841--851
+ [] 
+ []
+
+[89] [90] (./paper.bbl
+LaTeX Font Info:    Font shape `JT1/gt/m/it' in size <8> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 47.
+LaTeX Font Info:    Font shape `JY1/gt/m/it' in size <8> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 47.
+ [91]) [92] (./paper.aux) ) 
+Here is how much of TeX's memory you used:
+ 3053 strings out of 493777
+ 40654 string characters out of 6153182
+ 314531 words of memory out of 5000000
+ 6495 multiletter control sequences out of 15000+600000
+ 25140 words of font info for 100 fonts, out of 8000000 for 9000
+ 929 hyphenation exceptions out of 8191
+ 26i,11n,49p,336b,1317s stack positions out of 5000i,500n,10000p,500000b,80000s
+
+Output written on paper.dvi (15 pages, 81376 bytes).

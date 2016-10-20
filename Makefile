@@ -11,7 +11,8 @@ REF = ref.bib
 # platex
 PLATEX = platex
 # dvipdfmx
-DVIPDFMX = dvipdfmx
+#DVIPDFMX = dvipdfmx
+DVIPDFMX = dvipdfmx.exe
 # pbibtex
 PBIBTEX = pbibtex
 
