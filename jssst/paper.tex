@@ -5,7 +5,7 @@
 %
 % 「コンピュータソフトウェア」誌に掲載される論文の場合，次で
 % 巻数，号数，開始ページ，終了ページを指定する．
-\volNoPp{29}{1}{78}{84}
+\volNoPp{0}{0}{0}{0}
 
 % ワークショップによる推薦論文の場合，ワークショップ名を指定する．
 % \suisen{ワークショップ名}
@@ -50,7 +50,7 @@
 \begin{document}
 
 % 論文のタイトル
-\title{Lightweight Ruby Framework\\ for Improving Embedded Software Efficiency}
+\title{Component-Based Framework of Lightweight Ruby for Efficient Embedded Software Development}
 
 % 著者
 % 和文論文の場合，姓と名の間には半角スペースを入れ，
@@ -60,7 +60,7 @@
 %
 % ここにタイトル英訳 (英文の場合は和訳) を書く．
 %
-\ejtitle{軽量Rubyを用いた効率的な組込みソフトウェア開発フレームワーク}
+\ejtitle{軽量Rubyを用いた効率的な組込みソフトウェア開発コンポーネントベースフレームワーク}
 %
 % ここに著者英文表記 (英文の場合は和文表記) および
 % 所属 (和文および英文) を書く．
@@ -76,7 +76,7 @@
 \shutten
 %
 % 受付年月日，記事カテゴリなどは自動的に生成される．
-\uketsuke{2011}{12}{15}
+\uketsuke{0000}{00}{00}
 %
 % その他，脚注に入れるものがあれば，¥note に記述する．
 %\note{脚注に入れる内容}
@@ -171,12 +171,12 @@ Related work is discussed in Section \ref{sec:Related work}.
 Conclusions and suggestions for future work are presented in Section \ref{sec:Conclusion}.
 
 
-\begin{figure*}[t]
+\begin{figure}[t]
     \centering
-    \includegraphics[width=14cm,clip]{figure/proposed.eps}
+    \includegraphics[width=6.5cm,clip]{figure/proposed.eps}
     \caption{System model of the proposed framework}
     \label{fig:proposed}
-\end{figure*}
+\end{figure}
 
 \section{Background}
 \label{sec:Background}
@@ -251,8 +251,9 @@ signature sMotor {
     ER resetCounts( void );
     ER setPower( [in]int power );
     ER stop( [in] bool_t brake );
-    ER rotate( [in] int degrees, [in] uint32_t speed_abs,
-              [in] bool_t blocking );
+    ER rotate( [in] int degrees,
+               [in] uint32_t speed_abs,
+                [in] bool_t blocking );
     void initializePort( [in]int32_t type );
 };
 \end{lstlisting}
@@ -434,9 +435,9 @@ celltype tRiteVMBluetooth1 {
     attr {
       [omit]char_t *mrubyLib;
       char_t *irepLib = 
-                    C_EXP("&$cell_global$_irep");
+                C_EXP("&$cell_global$_irep");
       uint32_t irepAppSize = 
-                    C_EXP( BUFFER_SIZE );
+                C_EXP( BUFFER_SIZE );
       FLGPTN setptn;
     };
     var {
@@ -454,8 +455,7 @@ celltype tRiteVMBluetooth1 {
 \centering
 \begin{lstlisting}
 /* tRiteVMBluetooth.c */
-void
-eMrubyBody_main( CELLIDX idx )
+void eMrubyBody_main( CELLIDX idx )
 {
   /* Omit: start of exclusive process by semaphore */
   /* Receive the bytecode via Bluetooth */
@@ -468,13 +468,15 @@ eMrubyBody_main( CELLIDX idx )
   VAR_context = mrbc_context_new( VAR_mrb );
   /* Omit: initialization of mruby-TECS bridge */
   /* Omit: synchronization of
-                initializing mruby application */
+            initializing mruby application */
   /* Load mruby library bytecode */
   mrb_load_irep_cxt( VAR_mrb,
-                        ATTR_irepLib, VAR_context );
+                     ATTR_irepLib,
+                     VAR_context );
   /* Load mruby application bytecode and run */
   mrb_load_irep_cxt( VAR_mrb,
-                        VAR_irepApp, VAR_context );
+                     VAR_irepApp,
+                     VAR_context );
   if ( mrb->exc ) {
     /* Failure to execute */
     mrb_p( VAR_mrb, 
@@ -482,7 +484,7 @@ eMrubyBody_main( CELLIDX idx )
     exit( 0 );
   }
   /* Omit: synchronization of
-                terminating mruby application */
+            terminating mruby application */
   /* Free mruby context */
   mrbc_context_free( VAR_mrb, VAR_context );
   /* Free interpreter instance */
@@ -590,7 +592,8 @@ celltype tCyclicHandler {
     [inline] entry sCyclic eCyclic;
     call siHandlerBody  ciBody;
     attr {
-        [omit] ATR    attribute   = C_EXP("TA_NULL");
+        [omit] ATR    attribute   =
+                            C_EXP("TA_NULL");
     	[omit] RELTIM cyclicTime;
     	[omit] RELTIM cyclicPhase;
     };
@@ -699,13 +702,13 @@ Note that the C file does not need to be rewritten even if the Eventflag is not 
 \begin{table}[t]
     \centering
 \caption{Comparison of size and load process time between an mruby application with and without mruby libraries}
-    %\scriptsize
+    \scriptsize
     {\tabcolsep=0.1cm
     \begin{tabular}{c||c|c|c}
-                            & App\&Lib     & App        &   App\&Lib/App  \\ \hline
-          Bytecode Size     & 14,044 bytes & 199 bytes  &   $\times$70.6          \\ %\hline
-          Loading Time      & 305.081 msec & 7.774 msec &   $\times$39.2          \\
-          Compile Time  & 8.7 msec     & 0.3 msec   &   $\times$29.0          \\
+                        & App\&Lib     & App        &   App\&Lib/App  \\ \hline
+        Bytecode Size   & 14,044 bytes & 199 bytes  &   $\times$70.6          \\ %\hline
+        Loading Time    & 305.081 msec & 7.774 msec &   $\times$39.2          \\
+        Compile Time    & 8.7 msec     & 0.3 msec   &   $\times$29.0          \\
     \end{tabular}
     }
     \label{tab:size_and_time}
@@ -789,14 +792,14 @@ Note that a smaller periodic time is better for multitasking due to concurrent o
 \begin{table}[t]
     \centering
     \caption{C and CDL file code for the number of RiteVMs}
-    %\scriptsize
-    {\tabcolsep=0.2cm
+    \footnotesize
+    {\tabcolsep=0.1cm
     \begin{tabular}{c||c|c|c}
-                & (A)       & (B)     & Diff  \\ \hline
-        C (Total)      & 8$\times$$\alpha$$+$134  & 130     & 8$\times$$\alpha+$4\\
+                       & (A)       & (B)     & Diff  \\ \hline
+        C (Total)          & 8$\times$$\alpha$$+$134  & 130     & 8$\times$$\alpha+$4\\
         C (Modification)   & 10$\times\alpha$$-$2 & 0   &  10$\times\alpha$$-$2 \\
         CDL    & 18$\times$$\alpha$$+$25   & 18$\times$$\alpha$$+$25 & 0     \\
-        \multicolumn{3}{l}{{\small $\alpha$} : {\scriptsize the number of RiteVM}}
+        \multicolumn{3}{l}{ $\alpha$ : the number of RiteVMs}
     \end{tabular}
     }
     \label{tab:codesize}
@@ -836,21 +839,28 @@ Skillful CBD yields advantages such as the decreased number of lines of codes an
     \caption{Comparison of proposed and previous methods}
     \label{tab:comparison}
     \begin{center}
-    \begin{tabular}{c||c|ccccccc}
-        & Bluetooth Loader & \shortstack{Call\\C Function} & \shortstack{Legacy Code of\\Embedded System} & \shortstack{VM\\Management} & \shortstack{VM\\Scheduler} & \shortstack{Synchronization of\\Applications} & Co-routine \\ \hline
-        python-on-a-chip \cite{url:python-on-a-chip} &            &            &            &            &             &            & \checkmark \\
-        Owl system \cite{par:owl}                    &            & \checkmark & Partially  &            &             &            & \checkmark \\
-        eLua \cite{url:eLua}                         &            & \checkmark & Partially  &            &             &            & \checkmark \\
-        Squirrel \cite{url:Squirrel}                 &            & \checkmark &            &            &             &            & \checkmark \\
-        mruby \cite{par:mruby}                       &            & \checkmark &            &            &             &            & \checkmark \\
-        mruby on TECS \cite{par:mrubyonTECS}         &            & \checkmark & \checkmark & \checkmark &             &            & \checkmark \\
-        Proposed framework                           & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark  & \checkmark & \checkmark \\
+    {\tabcolsep=0.05cm
+    \begin{tabular}{c||c|cccccc}
+        & \shortstack{Bluetooth\\Loader}
+        & \shortstack{Call\\C Function} 
+        & \shortstack{Legacy Code of\\Embedded System} 
+        & \shortstack{VM\\Management} 
+        & \shortstack{VM\\Scheduler} 
+        & \shortstack{Synchronization\\of Applications} \\ \hline
+        python-on-a-chip \cite{url:python-on-a-chip} &            &            &            &            &             &            \\
+        Owl system \cite{par:owl}                    &            & \checkmark & Partially  &            &             &            \\
+        eLua \cite{url:eLua}                         &            & \checkmark & Partially  &            &             &            \\
+        ChaiScript \cite{url:ChaiScript}             &            &            &            &            &             &            \\
+        Squirrel \cite{url:Squirrel}                 &            & \checkmark &            &            &             &            \\
+        mruby \cite{par:mruby}                       &            & \checkmark &            &            &             &            \\
+        mruby on TECS \cite{par:mrubyonTECS}         &            & \checkmark & \checkmark & \checkmark &             &            \\
+        Proposed framework                           & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark  & \checkmark \\
     \end{tabular}
+    }
     \end{center}
 \end{table*}
 
-
-Open-source runtime systems for scripting languages have been proposed previously such python-on-a-chip \cite{url:python-on-a-chip}, the Owl system \cite{par:owl}, eLua \cite{url:eLua}, Squirrel \cite{url:Squirrel}, mruby \cite{par:mruby}, \cite{url:mruby}, and mruby on TECS \cite{par:mrubyonTECS}.
+Open-source runtime systems for scripting languages have been proposed previously such python-on-a-chip \cite{url:python-on-a-chip}, the Owl system \cite{par:owl}, eLua \cite{url:eLua}, ChaiScript\cite{url:ChaiScript}, Squirrel \cite{url:Squirrel}, mruby \cite{par:mruby}, \cite{url:mruby}, and mruby on TECS \cite{par:mrubyonTECS}.
 
 {\bf python-on-a-chip:} python-on-a-chip (p14p) is a Python runtime system that uses a reduced Python VM called PyMite.
 The VM runs a significant subset of the Python language with few resources on a microcontroller.
@@ -866,6 +876,11 @@ Lua is one of the most popular scripting languages for embedded systems \cite{ur
 Lua supports a co-routine, which is referred to as cooperative multitasking.
 A co-routine in Lua is used as an independently executed thread.
 Note that a co-routine can only suspend and resume multiple routines; thus, a Lua co-routine is not like multitasks in multitask systems.
+
+{\bf ChaiScript:} ChaiScript is a scripting language to be embedded in C++ applications.
+It is a dialect of ECMAScript (a.k.a. JavaScript).
+ChaiScript is header only, that is, it only needs to include the header files in order to use it in an application.
+ChaiScript will support co-routines, but not now. 
 
 {\bf Squirrel:} Squirrel is an object-oriented programming language designed as a lightweight scripting language that satisfies the real-time requirements of applications.
 Squirrel was inspired by Lua.
@@ -887,11 +902,11 @@ The proposed framework implements all of the features shown in the table.
 In particular, the proposed framework supports the loader, the VM scheduler, and application synchronization.
 
 \section{Results of Research}
-\label{sec:}
-The mruby on TECS framework has been certified for the official platform of ET Robocon 2016.
-In addition, the proposed framework on LEGO MINDSTORMS EV3 has been commercialized by Afrel Co., Ltd.
+\label{sec:Results}
+The proposed framework on LEGO MINDSTORMS EV3 \cite{url:download} has been certified for the official platform of ET Robocon 2016\footnote{http://www.etrobo.jp/2016/}.
 
- 
+In addition, the proposed framework on LEGO MINDSTORMS EV3 has been commercialized for education by Afrel Co., Ltd\footnote{http://www.afrel.co.jp/lineup/textset (in Japanese)}, which is an official partner of LEGO Education.
+
 \section{Conclusion}
 \label{sec:Conclusion}
 This paper presents an extended framework of mruby on TECS, i.e., the proposed framework implements a Bluetooth loader for mruby bytecode and a RiteVM scheduler.
