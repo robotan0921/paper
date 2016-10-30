@@ -829,12 +829,15 @@ Note that a smaller periodic time is better for multitasking due to concurrent o
 
 To execute multiple mruby applications, a synchronization mechanism for RiteVM tasks is implemented in the proposed framework.
 We measured the time from the execution of the first RiteVM task to the execution of the last RiteVM task.
-It was confirmed that the time was within (periodic time)$\times$(number of RiteVM tasks $-$ 1).
-Fig.\ref{fig:eval_synchronization} shows the results for two, three, and four RiteVM tasks.
+It was confirmed that the time was within the theoretical value. Theoretical value is 
+\begin{displaymath}
+    {\scriptsize periodic\ time \times (number\ of\ RiteVM\ tasks - 1)}
+\end{displaymath}
+Fig.\ref{fig:eval_synchronization} shows the case of two to eight RiteVM tasks.
 % Fig.\ref{fig:eval_synchronization} shows the case of four RiteVM tasks.
 % The periodic time is one msec, and the number of RiteVM is four.
-The periodic time is 1 msec, and the number of RiteVMs is two, three, and four.
-As shown in Fig.\ref{fig:eval_synchronization}, the time is within 1 msec, 2 msec, and 3 msec respectively, which indicates successful synchronization of multiple RiteVM tasks.
+Note that the periodic time is 1 msec.
+As shown in Fig.\ref{fig:eval_synchronization}, the time is within the theoretical value respectively, which indicates successful synchronization of multiple RiteVM tasks.
 
 
 
