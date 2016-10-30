@@ -535,20 +535,6 @@ When all mruby applications are completed, mrb\_state and mrbc\_context are free
 The proposed framework supports continuous loading; thus, this process loops.
 After the variables are freed, the RiteVM waits for the next mruby application bytecode.
 
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=6.5cm,clip]{figure/rotateReadyQueue.eps}
-\caption{RiteVM scheduler design}
-\label{fig:rotateReadyQueue}
-\end{figure} 
-
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=6.5cm,clip]{figure/cyclic_handler.eps}
-\caption{Component diagram of RiteVM scheduler}
-\label{fig:cyclic_handler}
-\end{figure}
-
 \subsection{RiteVM Scheduler}
 \label{sec:RiteVM Scheduler}
 This section describes the implementation of the RiteVM scheduler in the proposed framework.
@@ -570,6 +556,19 @@ The application programs can also utilize existing programs because their struct
 
 The RiteVM scheduler is a fair scheduler that is implemented as a TECS component in the proposed framework.
 Therefore, when developers create software with priority-based scheduling, the RiteVM scheduler can be removed easily.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=6.5cm,clip]{figure/rotateReadyQueue.eps}
+\caption{RiteVM scheduler design}
+\label{fig:rotateReadyQueue}
+\end{figure} 
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=6.5cm,clip]{figure/cyclic_handler.eps}
+\caption{Component diagram of RiteVM scheduler}
+\label{fig:cyclic_handler}
+\end{figure}
 
 
 \subsubsection{RiteVM Scheduler Design}
@@ -593,41 +592,41 @@ In this case, the order is rotated to task2, task3, and task1 when {\it rotateRe
     \begin{lstlisting}
 /* tRiteVMScheduler.cdl */
 celltype tCyclicHandler {
-    [inline] entry sCyclic eCyclic;
-    call siHandlerBody  ciBody;
-    attr {
-        [omit] ATR    attribute   =
-                            C_EXP("TA_NULL");
-    	[omit] RELTIM cyclicTime;
-    	[omit] RELTIM cyclicPhase;
-    };
+  [inline] entry sCyclic eCyclic;
+  call siHandlerBody  ciBody;
+  attr {
+      [omit] ATR    attribute   =
+                      C_EXP("TA_NULL");
+      [omit] RELTIM cyclicTime;
+      [omit] RELTIM cyclicPhase;
+  };
 };
 celltype tRiteVMSchedulerMain {
-    require tKernel.eiKernel;
-    entry   siHandlerBody eiBody;
-    attr {
-        PRI priority;
-    };
+  require tKernel.eiKernel;
+  entry   siHandlerBody eiBody;
+  attr {
+      PRI priority;
+  };
 };
 
 composite tRiteVMScheduler {
-    attr {
-        ATR    attribute      = C_EXP("TA_NULL");
-        RELTIM cyclicTime  = 1;
-        RELTIM cyclicPhase = 1;
-        PRI    priority;
-    };
-    cell tRiteVMSchedulerMain RiteVMSchedulerMain {
-        priority = composite.priority;
-    };
-    cell tCyclicHandler CyclicHandler {
-        ciBody      = RiteVMSchedulerMain.eiBody;
-        attribute   = composite.attribute;
-        cyclicTime  = composite.cyclicTime;
-        cyclicPhase = composite.cyclicPhase;
-    };
+  attr {
+      ATR    attribute      = C_EXP("TA_NULL");
+      RELTIM cyclicTime  = 1;
+      RELTIM cyclicPhase = 1;
+      PRI    priority;
+  };
+  cell tRiteVMSchedulerMain RiteVMSchedulerMain {
+      priority = composite.priority;
+  };
+  cell tCyclicHandler CyclicHandler {
+      ciBody      = RiteVMSchedulerMain.eiBody;
+      attribute   = composite.attribute;
+      cyclicTime  = composite.cyclicTime;
+      cyclicPhase = composite.cyclicPhase;
+  };
 };
-    \end{lstlisting}
+\end{lstlisting}
 \caption{Celltype description of RiteVM scheduler}
 \label{celltype_cyclic_handler}
 \end{figure}
@@ -744,7 +743,7 @@ We implemented the proposed system on a LEGO MINDSTORMS EV3 \cite{par:EV3} (300M
 
 \begin{table}[t]
     \centering
-\caption{Comparison of size and load process time between an mruby application with and without mruby libraries}
+\caption{Size and load process time of an mruby application with/without libraries}
     \scriptsize
     {\tabcolsep=0.1cm
     \begin{tabular}{c||c|c|c}
@@ -776,12 +775,6 @@ These advantages improve the efficiency of software development.
 
 \subsection{RiteVM Scheduler}
 
-A comparison of the application execution time with singletasking, co-routine, and multitasking is shown in Fig.\ref{fig:comparison_s_c_m}.
-A program with 100,000 loops was used as an mruby application for the evaluation of execution time.
-Here, the singletask program looped 100,000 times and the multitask and co-routine programs looped 50,000 times for each task.
-
-\subsubsection{Execution Time with Singletasking, Co-routine, and Proposed Multitasking}
-
 \begin{figure}[t]
     \centering
     \includegraphics[width=6.5cm,clip]{figure/comparison_s_c_m.eps}
@@ -789,25 +782,27 @@ Here, the singletask program looped 100,000 times and the multitask and co-routi
 \label{fig:comparison_s_c_m}
 \end{figure}
 
+% A comparison of the application execution time with singletasking, co-routine, and multitasking is shown in Fig.\ref{fig:comparison_s_c_m}.
+% A program with 100,000 loops was used as an mruby application for the evaluation of execution time.
+% Here, the singletask program looped 100,000 times and the multitask and co-routine programs looped 50,000 times for each task.
+
+%\subsubsection{Execution Time with Singletasking, Co-routine, and Proposed Multitasking}
+{%\bf Execution Time with Singletasking, Co-routine, and Proposed Multitasking}
+
 Fig.\ref{fig:comparison_s_c_m} shows that the proposed design is superior to multitask using delay method and co-routine in terms of execution time.
 The {\it delay} and co-routine methods run on a RiteVM, which causes the slowdown compared to the proposed multitasking.
 The scheduler runs as the periodic handler of RTOS.
 % In Fig.\ref{fig:comparison_s_c_m}, the periodic time of the periodic handler for multitasking is 1 msec.
 % This shows that the proposed design is superior to co-routine in terms of execution time.
+
 Moreover, developers can utilize the scheduler practically because the RiteVM scheduler overhead is approximately 5\%.
 The scheduler interrupts and switches tasks, which causes this overhead.Although the overhead is larger as the number of RiteVMs increases, it also spreads the difference between multitask and co-routine.
 Therefore, the scheduler is the more efficient approach for multitasking than the existing multitasking and co-routine.
 Here, the periodic time of the scheduler is 1 msec.
 It takes approximately 3 $\mu$sec on average to switch tasks once.
 
-\subsubsection{Periodic Time Overhead}
-
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=6.5cm,clip]{figure/comparison_msec.eps}
-\caption{Comparison of overhead for each cyclic period of RiteVM scheduler}
-\label{fig:comparison_msec}
-\end{figure}
+%\subsubsection{Periodic Time Overhead}
+%{\bf Periodic Time Overhead}
 
 Fig.\ref{fig:comparison_msec} shows the execution time of multitasking with the periodic handler.
 The lower limit of the periodic time is 1 msec due to the specifications of TOPPERS/HRP2, i.e., the RTOS.
@@ -816,6 +811,13 @@ The execution time decreases as the periodic time increases, because the number 
 Note that an execution time of 1 msec is approximately 1\% greater than that of 8 msec.
 The RiteVM scheduler with a short periodic time can execute multiple tasks effectively because the periodic time overhead is not large.
 Note that a smaller periodic time is better for multitasking due to concurrent or parallel processing.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=6.5cm,clip]{figure/comparison_msec.eps}
+\caption{Comparison of overhead for each cyclic period of RiteVM scheduler}
+\label{fig:comparison_msec}
+\end{figure}
 
 
 \subsection{Synchronization of Multiple RiteVM Tasks}
