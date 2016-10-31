@@ -1,0 +1,41 @@
+論文種別 : ソフトウェア論文
+
+査読種別 : 通常論文
+
+募集種別 : 特集論文
+    特集号名称 : 「ソフトウェア論文」特集
+
+「会員投稿」
+
+題目 : 
+Component-Based Framework of Lightweight Ruby for Efficient Embedded Software Development
+軽量Rubyを用いた効率的な組込みソフトウェア開発コンポーネントベースフレームワーク
+
+著者 :
+* 山本拓朗 (やまもとたくろう)
+大阪大学大学院基礎工学研究科
+t-yamamoto@hopf.sys.es.osaka-u.ac.jp
+〒560-8531　大阪府豊中市待兼山町1-3 潮研究室
+
+* 大山博司 (おおやまひろし)
+オークマ株式会社
+hi-ooyama@okuma.co.jp
+
+* 安積卓也 (あづみたくや)
+会員番号 : 119-75781
+大阪大学大学院基礎工学研究科
+takuya@sys.es.osaka-u.ac.jp
+
+投稿年月日 : 2016/10/31
+
+概要 :
+The complexity and scale of embedded software have increased.
+To improve the productivity, the mruby on TOPPERS embedded component system (TECS) framework, which employs a scripting language (i.e., lightweight Ruby) and supports component-based development, has been proposed.
+In the current mruby on TECS framework, mruby programs must be compiled and linked every time they are modified, because mruby bytecode are incorporated in the platform.
+Moreover, while the framework supports multiple virtual machines (VMs), developers must be familiar with the functions of real-time operating systems to effectively execute multiple mruby programs concurrently or in parallel.
+This paper proposed an extended mruby on TECS framework that improves development efficiency more than the current framework.
+We implemented a Bluetooth loader receives an mruby bytecode, and a RiteVM scheduler simplifies multitasking.
+Synchronization of initializing multiple tasks is also implemented using an Eventflag.
+Experimental results demonstrate the advantages of the proposed framework.
+
+ページ数 : 14

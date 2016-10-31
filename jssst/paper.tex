@@ -831,7 +831,7 @@ Note that a smaller periodic time is better for multitasking due to concurrent o
 
 To execute multiple mruby applications, a synchronization mechanism for RiteVM tasks is implemented in the proposed framework.
 We measured the time from the execution of the first RiteVM task to that of the last RiteVM task.
-It was confirmed that the time was within the theoretical value. Theoretical value is 
+It was confirmed that the time was within the theoretical value which is 
 \begin{displaymath}
     {\scriptsize periodic\ time \times (number\ of\ RiteVM\ tasks - 1).}
 \end{displaymath}
@@ -889,10 +889,10 @@ Skillful CBD yields advantages such as the decreased number of lines of codes an
         & \shortstack{VM\\Management} 
         & \shortstack{VM\\Scheduler} 
         & \shortstack{Synchronization\\of Applications} \\ \hline
+        ChaiScript \cite{url:ChaiScript}             &            &            &            &            &             &            \\
         python-on-a-chip \cite{url:python-on-a-chip} &            &            &            &            &             &            \\
         Owl system \cite{par:owl}                    &            & \checkmark & Partially  &            &             &            \\
         eLua \cite{url:eLua}                         &            & \checkmark & Partially  &            &             &            \\
-        ChaiScript \cite{url:ChaiScript}             &            &            &            &    -       &    -        &            \\
         Squirrel \cite{url:Squirrel}                 &            & \checkmark &            &            &             &            \\
         mruby \cite{par:mruby}                       &            & \checkmark &            &            &             &            \\
         mruby on TECS \cite{par:mrubyonTECS}         &            & \checkmark & \checkmark & \checkmark &             &            \\
@@ -902,7 +902,12 @@ Skillful CBD yields advantages such as the decreased number of lines of codes an
     \end{center}
 \end{table*}
 
-Open-source runtime systems for scripting languages have been proposed previously such python-on-a-chip \cite{url:python-on-a-chip}, the Owl system \cite{par:owl}, eLua \cite{url:eLua}, ChaiScript\cite{url:ChaiScript}, Squirrel \cite{url:Squirrel}, mruby \cite{par:mruby}, \cite{url:mruby}, and mruby on TECS \cite{par:mrubyonTECS}.
+Open-source runtime systems for scripting languages have been proposed such as ChaiScript\cite{url:ChaiScript}, python-on-a-chip \cite{url:python-on-a-chip}, the Owl system \cite{par:owl}, eLua \cite{url:eLua}, Squirrel \cite{url:Squirrel}, mruby \cite{par:mruby}, \cite{url:mruby}, and mruby on TECS \cite{par:mrubyonTECS}.
+
+{\bf ChaiScript:} ChaiScript is a scripting language to be embedded in C++ applications.
+It is a dialect of ECMAScript (a.k.a. JavaScript).
+ChaiScript is header only, that is, it only needs to include the header files in order to be used it in an application.
+ChaiScript will support co-routines, but not now. 
 
 {\bf python-on-a-chip:} python-on-a-chip (p14p) is a Python runtime system that uses a reduced Python VM called PyMite.
 The VM runs a significant subset of the Python language with few resources on a microcontroller.
@@ -918,11 +923,6 @@ Lua is one of the most popular scripting languages for embedded systems \cite{ur
 Lua supports a co-routine, which is referred to as cooperative multitasking.
 A co-routine in Lua is used as an independently executed thread.
 Note that a co-routine can only suspend and resume multiple routines; thus, a Lua co-routine is not like multitasks in multitask systems.
-
-{\bf ChaiScript:} ChaiScript is a scripting language to be embedded in C++ applications.
-It is a dialect of ECMAScript (a.k.a. JavaScript).
-ChaiScript is header only, that is, it only needs to include the header files in order to be used it in an application.
-ChaiScript will support co-routines, but not now. 
 
 {\bf Squirrel:} Squirrel is an object-oriented programming language designed as a lightweight scripting language that satisfies the real-time requirements of applications.
 Squirrel was inspired by Lua.
@@ -944,7 +944,7 @@ The proposed framework implements all of the features shown in the table.
 In particular, the proposed framework supports the loader, the VM scheduler, and application synchronization.
 Note that the idea that a bytecode is transferred to the target device via Bluetooth can be applied to scripting languages other than mruby if the VM mechanism is used.
  
-\section{Actual Results}
+\section{Practical Use}
 \label{sec:Results}
 The proposed framework on LEGO MINDSTORMS EV3 \cite{url:download} has been certified for the official platform of ET Robocon 2016\footnote{http://www.etrobo.jp/2016/ (in Japanese)}.
 In ET Robocon 2016, the team with the proposed framework stood second in a regional competition.
