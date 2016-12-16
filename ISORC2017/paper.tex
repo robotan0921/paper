@@ -118,12 +118,13 @@
 Embedded systems are applied to Internet of Things (IoT), and the high productivity of embedded network software is required.
 
 TINET is a TCP/IP protocol stack for embedded systems.
-TINET is a compact TCP/IP protocol stack, however consists of many complex source codes.
+Although TINET is a compact TCP/IP protocol stack, it consists of many complex source codes.
 Therefore, it is difficult to maintain, extend, and analysis the software.
 
 To improve the scalability and configurability, this paper has proposed a component-based TCP/IP protocol stack for embedded systems: TINET componentized with TOPPERS embedded component system (TECS).
-The component-based TINET provides software developers high productivity such as change of network buffer size and add/remove TCP (or UDP) function.
-We evaluate the component-based TINET compared with the original TINET, and confirm that the overheads of execution time and memory consumption are low and  that the configurability is improved.
+The component-based TINET provides software developers high productivity such as change of network buffer size and adding/removing TCP (or UDP) function.
+We evaluate the component-based TINET compared with the original TINET.
+We confirm that the overheads of execution time and memory consumption are low, and that the configurability is improved.
 
 In this paper, we also demonstrates a use case of the dynamic component connection method of TECS with a network application.
 
@@ -151,18 +152,19 @@ Therefore, embedded network software is required for the high productivity and q
 
 TINET (Tomakomai InterNETworking) is a compact TCP/IP protocol stack for embedded systems \cite{url:TINET}.
 TINET supports the ability such as minimum copy frequency and elimination of dynamic memory control.
-TINET needs small memory for its TCP/IP protocol stack, therefore it is suitable for embedded systems.
+TINET needs only small memory for its TCP/IP protocol stack; therefore it is suitable for embedded systems.
 However, there are several issues that TINET consists of many complex source codes.
-It may take a lot of time for software developers to maintain, extend, and analysis the software because TINET is composed of many files and defines many macros.
+In other words, TINET is composed of many files and defines many macros.
+This may take a lot of time for software developers to maintain, extend, and analysis the software.
 
 Component-based development is an approach to improve software productivity.
 Component-based development is a design technique that can be applied to reusable software development \cite{par:CBD}, such as TECS \cite{par:TECS}, AUTOSAR \cite{url:AUTOSAR}, and SaveCCM \cite{par:SAVEapproach}.
 Component-based systems are flexible to software extension and specification changes.
-In addition, individual Component diagrams enable the visualization of an entire system.
+In addition, individual component diagrams enable the visualization of an entire system.
 
 In this paper, component-based TCP/IP protocol stack, i.e., componentized TINET, is proposed to improve the configurability and scalability of software.
 TECS (TOPPERS Embedded Component System) \cite{par:TECS} is utilized to componentize TINET, because TECS is a component system suitable for embedded systems.
-TECS supports static configuration, that component behaviors and interconnections are defined statically, thus TECS can optimize the overhead of componentization.
+TECS supports static configuration, which statically defines component behaviors and interconnections, thus TECS can optimize the overhead of componentization.
 
 
 {\bf Contributions:} This paper provides the following contributions.
@@ -170,7 +172,7 @@ TECS supports static configuration, that component behaviors and interconnection
 \begin{enumerate}
 
     \item {\bf Improve configurability}\mbox{}\\
-        TINET+TECS is a component-based system, therefore the software is flexible to change the configuration such as resize network buffer, add/remove TCP (or UDP) functions, and support both IPv4 and IPv6.
+        TINET+TECS is a component-based system, therefore the software is flexible to change the configuration such as resizing network buffer, adding/removing TCP (or UDP) functions, and support both IPv4 and IPv6.
         In addition, a component diagram provides visualization of TINET, a complicated system.
 
     \item {\bf Dynamic connection method}\mbox{}\\
@@ -196,7 +198,7 @@ Conclusions and suggestions for future work are presented in Section \ref{sec:Co
 \subsection{TINET}
 
 TINET is a compact TCP/IP protocol stack for embedded systems based on the ITRON TCP/IP API Specification \cite{url:ITRON_TCP/IP_API_Spec}, developed by TOPPERS (Toyohashi OPen Platform for Embedded Real-time Systems) Project \cite{url:TOPPERS}.
-To take restrictions for embedded systems such as memory capacity, size, and power consumption, TINET supports following functions:
+To satisfy restrictions for embedded systems such as memory capacity, size, and power consumption, TINET supports following functions:
 
 \begin{enumerate}
     \item Minimum copy frequency
@@ -225,7 +227,7 @@ Fig. \ref{fig:TINET_Hier} shows the hierarchy diagram of TINET and TOPPERS/ASP3.
 \label{sec:TECS}
 
 TECS is a component system suitable for embedded systems.
-TECS can increase productivity and reduce development costs due to improved reusability of software components.
+TECS can increase productivity and reduce development costs owing to improved reusability of software components.
 TECS also provides component diagrams, which help developers visualize the overall structure of a system.
 
 In TECS, component deployment and composition are performed statically.
@@ -250,19 +252,20 @@ A {\it cell} has one or more {\it entry} ports and {\it call} ports.
 The type of {\it entry}/{\it call} port is defined by a {\it signature}, which is a set of functions.
 A {\it signature} is the interface definition of a {\it cell}.
 The {\it cell}'s  {\it call} port can be connected to the {\it entry} port of another {\it cell} by the same {\it signature}.
-Here, {\it celltype} defines one or more {\it call}/{\it entry} ports, attributes, and internal variables of a {\it cell}.
+Note that {\it celltype} defines one or more {\it call}/{\it entry} ports, attributes, and internal variables of a {\it cell}.
 
 
 \subsubsection{Component Description}
 
-In TECS, components are described by {\it signature}, {\it celltype}, and build written in component description language (CDL).
+In TECS, components are described with component description language (CDL).
+CDL can be divided into three categories: {\it signature}, {\it celltype}, and build description.
 These components are described as follows.
 
 \begin{description}
     \item[{\bf Signature Description}]\mbox{}\\
         The {\it signature} defines a {\it cell} interface.
-        The {\it signature} name follows the keyword {\it signature} and takes the prefix ``s'' e.g., sMotor (Fig.\ref{signature}).
-        In TECS, to clarify the function of an interface, specifiers such as [in] and [out] are used, which represent input and output, respectively.
+        The {\it signature} name follows the keyword {\it signature} and takes the prefix ``s'', e.g., sMotor (Fig.\ref{signature}).
+        In TECS, to clarify the function of an interface, specifiers such as [in] and [out] are used, which represent input and output respectively.
 \begin{figure}[t]
 \centering
 \begin{lstlisting}
@@ -309,8 +312,8 @@ celltype tMotor {
         The build description is used to instantiate and connect {\it cell}s.
         Fig.\ref{build} shows an example of a build description.
         A {\it celltype} name and {\it cell} name, e.g., tMotor and Motor, respectively, follow the keyword {\it cell}.
-        To compose {\it cell}s, a {\it call} port, {\it cell}'s name, and an {\it entry} port are described in that order.
-        In Fig.\ref{build}, {\it entry} port eMotor in {\it cell} Motor is connected to {\it call} port cMotor in {\it cell} Caller.
+        A {\it call} port, {\it cell}'s name, and an {\it entry} port are described in that order to compose {\it cell}s,
+        In Fig. \ref{build}, {\it entry} port eMotor in {\it cell} Motor is connected to {\it call} port cMotor in {\it cell} Caller.
         {\it C\_EXP} calls macros defined in C files.
 
 \begin{figure}[t]
@@ -332,26 +335,26 @@ cell tCaller Caller {
 \section{Design and Implementation}
 \label{sec:Design and Implementation}
 
-\subsection{send, receive specifier}
+\subsection{send/receive specifier}
 
-TECS supports send and receive specifiers, which are interface specifiers \cite{par:RPC}.
-TINET+TECS uses send and receive specifiers instead of in and out to reduce the number of copies.
+TECS supports {\it send}/{\it receive} specifiers, which are interface specifiers \cite{par:RPC}.
+TINET+TECS uses {\it send} and {\it receive} specifiers instead of {\it in} and {\it out} to reduce the number of copies.
 
-in is a specifier for input arguments.
-A callee side uses the memory of arguments with in while executing the callee function.
+{\it in} is a specifier for input arguments.
+A callee side uses the memory of arguments with {\it in} during executing the callee function.
 When the processing returns to the caller side, the caller can reuse and deallocate the memory.
 
-send is also a specifier for transferring data to a callee from a caller such as in.
-The difference between in and send is whether to deallocate the data memory in caller or callee, shown as Figure \ref{fig:SendReceive}.
-In case of in specifier, both allocating and deallocating the data memory are performed in the caller.
-On the other hand, in case of send, the caller allocates the data memory and the callee deallocates it.
+{\it send} is also a specifier for transferring data to a callee from a caller such as {\it in}.
+The difference between {\it in} and {\it send} is whether to deallocate the data memory in a caller or callee, shown as Fig. \ref{fig:SendReceive}.
+In case of {\it in} specifier, both allocating and deallocating the data memory are performed in the caller.
+On the other hand, in case of {\it send}, the caller allocates the data memory and the callee deallocates it.
 
-out is a specifier for output arguments.
+{\it out} is a specifier for output arguments.
 A callee writes data in the memory allocated by a caller, and the caller receives the data.
 
-receive is also a specifier for a caller receiving data from a callee such as out.
-The difference between out and receive is whether to allocate the data memory in caller or callee, shown as Figure \ref{fig:SendReceive}.
-While, in case of out, a callee writes data in the memory allocated by a caller, in case of receive, the callee allocates the data memory.
+{\it receive} is also a specifier for a caller receiving data from a callee such as {\it out}.
+The difference between {\it out} and {\it receive} is whether to allocate the data memory in a caller or callee, shown as Fig. \ref{fig:SendReceive}.
+While, in case of {\it out}, a callee writes data in the memory allocated by a caller, in case of {\it receive}, the callee allocates the data memory.
 Deallocating the memory is performed in the caller in both cases.
 
 \begin{figure}[t]
@@ -382,7 +385,7 @@ signature sNicDriver {
 \subsection{TECS Adapter}
 
 TECS supports {\it Adapter} functionality which enables to call a function in TECS from C codes.
-An adapter connects a TECS component, links a C function to a TECS function shown as Fig. \ref{fig:TECS_Adapter}.
+An adapter connects a TECS component, and links a C function to a TECS function shown as Fig. \ref{fig:TECS_Adapter}.
 Software developers can utilize an existing application for TECS owing to the adapter.
 
 \begin{figure}[t]
