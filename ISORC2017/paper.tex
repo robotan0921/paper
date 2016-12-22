@@ -65,7 +65,7 @@
 % use a multiple column layout for up to three different
 % affiliations
 \author{\IEEEauthorblockN{Takuro Yamamoto}
-\IEEEauthorblockA{Graduate School of Engineering Science,\\Osaka University}
+\IEEEauthorblockA{Graduate School of Engineering Science\\Osaka University}
 \and
 \IEEEauthorblockN{Takuma Hara}
 \IEEEauthorblockA{}
@@ -80,7 +80,7 @@
 \IEEEauthorblockA{}
 \and
 \IEEEauthorblockN{Takuya Azumi}
-\IEEEauthorblockA{Graduate School of Engineering Science,\\Osaka University}
+\IEEEauthorblockA{Graduate School of Engineering Science\\Osaka University}
 }
 
 % conference papers do not typically use \thanks and this command
@@ -116,7 +116,6 @@
 \begin{abstract}
 
 Embedded systems are applied to Internet of Things (IoT), and the high productivity of embedded network software is required.
-
 TINET is a TCP/IP protocol stack for embedded systems.
 Although TINET is a compact TCP/IP protocol stack, it consists of many complex source codes.
 Therefore, it is difficult to maintain, extend, and analysis the software.
@@ -148,7 +147,7 @@ In this paper, we also demonstrates a use case of the dynamic component connecti
 Internet of Things (IoT) is an essential keyword for the next era.
 Such as wearable devices, smart devices, and smart homes, various things are connected to the Internet, enriching our lives.
 Embedded systems are the elements constituting IoT, e.g., sensing data and controlling actuators.
-Therefore, embedded network software is required for the high productivity and quality.
+It is not practical to implement the same communication function as a general computer because embedded systems have several restrictions such as low memory capacity.
 
 TINET (Tomakomai InterNETworking) is a compact TCP/IP protocol stack for embedded systems \cite{url:TINET}.
 TINET supports the ability such as minimum copy frequency and elimination of dynamic memory control.
@@ -156,6 +155,7 @@ TINET needs only small memory for its TCP/IP protocol stack; therefore it is sui
 However, there are several issues that TINET consists of many complex source codes.
 In other words, TINET is composed of many files and defines many macros.
 This may take a lot of time for software developers to maintain, extend, and analysis the software.
+Embedded network software is required for the high productivity and quality.
 
 Component-based development is an approach to improve software productivity.
 Component-based development is a design technique that can be applied to reusable software development \cite{par:CBD}, such as TECS \cite{par:TECS}, AUTOSAR \cite{url:AUTOSAR}, and SaveCCM \cite{par:SAVEapproach}.
@@ -185,19 +185,37 @@ TECS supports static configuration, which statically defines component behaviors
 \end{enumerate}
 
 {\bf Organization}: The remainder of this paper is organized as follows.
-Section \ref{sec:Basic Technology} introduces the basic technologies, i.e., TINET and TECS.
+Section \ref{sec:System Model} introduces the system model and basic technologies, i.e., TINET and TECS.
 Section \ref{sec:Design and Implementation} describes the design and implementation of the proposed framework.
 Section \ref{sec:Evaluation and Demonstration} evaluates the proposed framework.
 Related work is discussed in Section \ref{sec:Related Work}.
 Conclusions and suggestions for future work are presented in Section \ref{sec:Conclusion}.
 
 
-\section{Basic Technology}
-\label{sec:Basic Technology}
+\section{System Model}
+\label{sec:System Model}
+
+This section describes system model, including the basic technologies such as TINET and TECS.
+System model of the proposed system is shown as Fig. \ref{fig:System Model}.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=6.5cm,clip]{figure/SystemModel.pdf}
+    \caption{System model}
+    \label{fig:SystemModel}
+\end{figure}
 
 \subsection{TINET}
 
 TINET is a compact TCP/IP protocol stack for embedded systems based on the ITRON TCP/IP API Specification \cite{url:ITRON_TCP/IP_API_Spec}, developed by TOPPERS (Toyohashi OPen Platform for Embedded Real-time Systems) Project \cite{url:TOPPERS}.
+TINET has been released as open source.
+
+\subsubsection{Overview}
+
+TINET runs as middleware on TOPPERS/ASP3 \cite{url:ASP3}, a realtime kernel.
+Fig. \ref{fig:TINET_Hier} shows the hierarchy diagram of TINET and TOPPERS/ASP3.
+TINET supports ITRON TCP/IP API such as {\it tcp\_snd\_buf}, {\it tcp\_rcv\_buf}, {\it udp\_snd\_buf}, and {\it udp\_rcv\_buf}.
+
 To satisfy restrictions for embedded systems such as memory capacity, size, and power consumption, TINET supports following functions:
 
 \begin{enumerate}
@@ -208,17 +226,13 @@ To satisfy restrictions for embedded systems such as memory capacity, size, and 
 \end{enumerate}
 
 
-TINET runs as middleware on TOPPERS/ASP3 \cite{url:ASP3}, a realtime kernel.
-TINET has been released as open source.
 
-\subsubsection{Overview}
 
-Fig. \ref{fig:TINET_Hier} shows the hierarchy diagram of TINET and TOPPERS/ASP3.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=6.5cm,clip]{figure/TINET_Hier.pdf}
-    \caption{Hierarchy Diagram of TINET and TOPPERS/ASP3}
+    \caption{Hierarchy diagram of TINET and TOPPERS/ASP3}
     \label{fig:TINET_Hier}
 \end{figure}
 
@@ -335,6 +349,15 @@ cell tCaller Caller {
 \section{Design and Implementation}
 \label{sec:Design and Implementation}
 
+\subsection{Component of protocol stack}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=6.5cm,clip]{figure/ComponentProtocolStack.pdf}
+    \caption{Component diagram of protocol stack}
+    \label{fig:ComponentProtocolStack}
+\end{figure}
+
 \subsection{send/receive specifier}
 
 TECS supports {\it send}/{\it receive} specifiers, which are interface specifiers \cite{par:RPC}.
@@ -419,6 +442,23 @@ Software developers can utilize an existing application for TECS owing to the ad
 
 \section{Related Work}
 \label{sec:Related Work}
+
+Open-source TCP/IP protocol stacks for embedded systems have been developed such uIP \cite{par:uIP}.
+
+{\bf uIP:}
+uIP (microIP) is a very small TCP/IP stack intended for tiny 8-bit and 16-bit microcontrollers.
+uIP only requires about five kilobytes of code size and several hundred bytes of RAM.
+uIP has been ported to various systems and has found its way into many commercial products.
+After ver. 1.0 is released, later versions of uIP, including uIPv6, are integrated with Contiki OS \cite{par:Contiki},\cite{url:Contiki}, an operating system to connect tiny microcontroller to the Internet.
+
+{\bf lwIP:}
+lwIP (lightweightIP) is a small TCP/IP implementation for embedded systems.
+The focus of lwIP is to reduce memory resource while still having a full scale TCP.
+lwIP requires about 40 kilobytes of ROM and tens of kilobytes of RAM.
+lwIP is larger than uIP, but provides better throughput.
+
+{\bf CiAO/IP:}
+
 
 \section{Conclusion}
 \label{sec:Conclusion}
