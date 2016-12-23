@@ -64,20 +64,21 @@
 % author names and affiliations
 % use a multiple column layout for up to three different
 % affiliations
-\author{\IEEEauthorblockN{Takuro Yamamoto}
+\author{
+\IEEEauthorblockN{Takuro Yamamoto}
 \IEEEauthorblockA{Graduate School of Engineering Science\\Osaka University}
 \and
 \IEEEauthorblockN{Takuma Hara}
-\IEEEauthorblockA{}
+\IEEEauthorblockA{Graduate School of Information Science\\Nagoya University}
 \and
 \IEEEauthorblockN{Takuya Ishikawa}
-\IEEEauthorblockA{}
+\IEEEauthorblockA{Graduate School of Information Science\\Nagoya University}
 \and
 \IEEEauthorblockN{Hiroshi Oyama}
 \IEEEauthorblockA{OKUMA Corporation}
 \and
 \IEEEauthorblockN{Hiroaki Takada}
-\IEEEauthorblockA{}
+\IEEEauthorblockA{Graduate School of Information Science\\Nagoya University}
 \and
 \IEEEauthorblockN{Takuya Azumi}
 \IEEEauthorblockA{Graduate School of Engineering Science\\Osaka University}
@@ -91,19 +92,18 @@
 % for over three affiliations, or if they all won't fit within the width
 % of the page, use this alternative format:
 % 
-% \author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
-% Homer Simpson\IEEEauthorrefmark{2},
-% James Kirk\IEEEauthorrefmark{3}, 
-% Montgomery Scott\IEEEauthorrefmark{3} and
-% Eldon Tyrell\IEEEauthorrefmark{4}}
-% \IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
-% Georgia Institute of Technology,
-% Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
-% \IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
-% Email: homer@thesimpsons.com}
-% \IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
-% Telephone: (800) 555--1212, Fax: (888) 555--1212}
-% \IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
+% \author{
+% \IEEEauthorblockN{
+% Takuro Yamamoto\IEEEauthorrefmark{1},
+% Takuma Hara\IEEEauthorrefmark{2},
+% Takuya Ishikawa\IEEEauthorrefmark{2}, 
+% Hiroshi Oyama\IEEEauthorrefmark{3},
+% Hiroaki Takada\IEEEauthorrefmark{2} and
+% Takuya Azumi\IEEEauthorrefmark{1}}
+% \IEEEauthorblockA{\IEEEauthorrefmark{1}Graduate School of Engineering Science, Osaka University}
+% \IEEEauthorblockA{\IEEEauthorrefmark{2}Graduate School of Information Science, Nagoya University}
+% \IEEEauthorblockA{\IEEEauthorrefmark{3}OKUMA Corporation}
+% }
 
 % use for special paper notices
 %\IEEEspecialpapernotice{(Invited Paper)}
@@ -158,14 +158,14 @@ This may take a lot of time for software developers to maintain, extend, and ana
 Embedded network software is required for the high productivity and quality.
 
 Component-based development is an approach to improve software productivity.
-Component-based development is a design technique that can be applied to reusable software development \cite{par:CBD}, such as TECS \cite{par:TECS}, AUTOSAR \cite{url:AUTOSAR}, and SaveCCM \cite{par:SAVEapproach}.
+Component-based development is a design technique that can be applied to reusable software development \cite{par:Crnkovic}\cite{par:CBD}, such as TECS \cite{par:TECS}, AUTOSAR \cite{url:AUTOSAR}, and SaveCCM \cite{par:SAVEapproach}.
 Component-based systems are flexible to software extension and specification changes.
 In addition, individual component diagrams enable the visualization of an entire system.
 
 In this paper, component-based TCP/IP protocol stack, i.e., componentized TINET, is proposed to improve the configurability and scalability of software.
 TECS (TOPPERS Embedded Component System) \cite{par:TECS} is utilized to componentize TINET, because TECS is a component system suitable for embedded systems.
 TECS supports static configuration, which statically defines component behaviors and interconnections, thus TECS can optimize the overhead of componentization.
-
+This paper evaluates the overheads of execution time and memory consumption and amount of code line change for adding/removing the functionalities, which demonstrates TINET+TECS can improve the configurability with small overheads.
 
 {\bf Contributions:} This paper provides the following contributions.
 
@@ -179,7 +179,7 @@ TECS supports static configuration, which statically defines component behaviors
         
 
     \item {\bf Support legacy codes}\mbox{}\\
-        TECS supports the adapter to call TECS functions from C codes, thus TINET+TECS can use an existing application.
+        TECS supports the adapter to call TECS functions from existing C codes, thus TINET+TECS can be applied to an existing application.
     % \item {\bf Software visualization}
 
 \end{enumerate}
@@ -202,7 +202,7 @@ System model of the proposed system is shown as Fig. \ref{fig:System Model}.
     \centering
     \includegraphics[width=6.5cm,clip]{figure/SystemModel.pdf}
     \caption{System model}
-    \label{fig:SystemModel}
+    \label{fig:System Model}
 \end{figure}
 
 \subsection{TINET}
@@ -210,22 +210,28 @@ System model of the proposed system is shown as Fig. \ref{fig:System Model}.
 TINET is a compact TCP/IP protocol stack for embedded systems based on the ITRON TCP/IP API Specification \cite{url:ITRON_TCP/IP_API_Spec}, developed by TOPPERS (Toyohashi OPen Platform for Embedded Real-time Systems) Project \cite{url:TOPPERS}.
 TINET has been released as open source.
 
-\subsubsection{Overview}
-
-TINET runs as middleware on TOPPERS/ASP3 \cite{url:ASP3}, a realtime kernel.
-Fig. \ref{fig:TINET_Hier} shows the hierarchy diagram of TINET and TOPPERS/ASP3.
-TINET supports ITRON TCP/IP API such as {\it tcp\_snd\_buf}, {\it tcp\_rcv\_buf}, {\it udp\_snd\_buf}, and {\it udp\_rcv\_buf}.
-
 To satisfy restrictions for embedded systems such as memory capacity, size, and power consumption, TINET supports following functions:
 
-\begin{enumerate}
+\begin{itemize}
     \item Minimum copy frequency
     \item Elimination of dynamic memory control
     \item Asynchronous interface
     \item Error detailed per API
-\end{enumerate}
+\end{itemize}
 
+\subsubsection{Overview}
 
+TINET runs as middleware on TOPPERS/ASP3 \cite{url:ASP3}, which is a realtime kernel based on $\mu$ITRON \cite{par:microITRON}.
+TINET also supports other RTOSs such as TOPPERS/ASP and TOPPERS/JSP because TINET is compatible with TOPPERS RTOS.
+Fig. \ref{fig:TINET_Hier} shows the hierarchy diagram of TINET and TOPPERS/ASP3.
+% TINET supports ITRON TCP/IP API such as {\it tcp\_snd\_buf}, {\it tcp\_rcv\_buf}, {\it udp\_snd\_buf}, and {\it udp\_rcv\_buf}.
+Users transmit and receive the data using a Communication End Point (CEP) which is an interface like a socket.
+In transmission process, headers are attached to the data body passed to the CEP at each protocol layer, and the data is transmitted from the network device.
+In reception process, headers of the data body received in the network device are analyzed at each protocol layer, and the data is passed to the CEP.
+
+In TINET, the number of the data copy between each protocol layers is minimized.
+A TCP/IP protocol stack for general computers has large overheads of execution time and memory consumption because the data is copied at each protocol layers.
+To solve the problem, TINET does pass the pointer of the data buffer between each protocol layers, not perform data copy.
 
 
 
@@ -349,7 +355,11 @@ cell tCaller Caller {
 \section{Design and Implementation}
 \label{sec:Design and Implementation}
 
-\subsection{Component of protocol stack}
+TINET+TECS, the proposed componentized TCP/IP protocol stack, consists of some TECS components.
+This section describes the components with component diagrams.
+In addition, TECS functionalities applied to the proposed system such as {\it send}/{\it receive} specifier and adapter are explained.
+
+\subsection{Components of protocol stack}
 
 \begin{figure}[t]
     \centering
@@ -407,7 +417,7 @@ signature sNicDriver {
 
 \subsection{TECS Adapter}
 
-TECS supports {\it Adapter} functionality which enables to call a function in TECS from C codes.
+TECS supports {\it Adapter} functionality which enables to call a function in TECS from existing C codes.
 An adapter connects a TECS component, and links a C function to a TECS function shown as Fig. \ref{fig:TECS_Adapter}.
 Software developers can utilize an existing application for TECS owing to the adapter.
 
