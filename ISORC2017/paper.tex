@@ -64,25 +64,25 @@
 % author names and affiliations
 % use a multiple column layout for up to three different
 % affiliations
-\author{
-\IEEEauthorblockN{Takuro Yamamoto}
-\IEEEauthorblockA{Graduate School of Engineering Science\\Osaka University}
-\and
-\IEEEauthorblockN{Takuma Hara}
-\IEEEauthorblockA{Graduate School of Information Science\\Nagoya University}
-\and
-\IEEEauthorblockN{Takuya Ishikawa}
-\IEEEauthorblockA{Graduate School of Information Science\\Nagoya University}
-\and
-\IEEEauthorblockN{Hiroshi Oyama}
-\IEEEauthorblockA{OKUMA Corporation}
-\and
-\IEEEauthorblockN{Hiroaki Takada}
-\IEEEauthorblockA{Graduate School of Information Science\\Nagoya University}
-\and
-\IEEEauthorblockN{Takuya Azumi}
-\IEEEauthorblockA{Graduate School of Engineering Science\\Osaka University}
-}
+% \author{
+% \IEEEauthorblockN{Takuro Yamamoto}
+% \IEEEauthorblockA{Graduate School of Engineering Science\\Osaka University}
+% \and
+% \IEEEauthorblockN{Takuma Hara}
+% \IEEEauthorblockA{Graduate School of Information Science\\Nagoya University}
+% \and
+% \IEEEauthorblockN{Takuya Ishikawa}
+% \IEEEauthorblockA{Graduate School of Information Science\\Nagoya University}
+% \and
+% \IEEEauthorblockN{Hiroshi Oyama}
+% \IEEEauthorblockA{OKUMA Corporation}
+% \and
+% \IEEEauthorblockN{Hiroaki Takada}
+% \IEEEauthorblockA{Graduate School of Information Science\\Nagoya University}
+% \and
+% \IEEEauthorblockN{Takuya Azumi}
+% \IEEEauthorblockA{Graduate School of Engineering Science\\Osaka University}
+% }
 
 % conference papers do not typically use \thanks and this command
 % is locked out in conference mode. If really needed, such as for
@@ -92,18 +92,18 @@
 % for over three affiliations, or if they all won't fit within the width
 % of the page, use this alternative format:
 % 
-% \author{
-% \IEEEauthorblockN{
-% Takuro Yamamoto\IEEEauthorrefmark{1},
-% Takuma Hara\IEEEauthorrefmark{2},
-% Takuya Ishikawa\IEEEauthorrefmark{2}, 
-% Hiroshi Oyama\IEEEauthorrefmark{3},
-% Hiroaki Takada\IEEEauthorrefmark{2} and
-% Takuya Azumi\IEEEauthorrefmark{1}}
-% \IEEEauthorblockA{\IEEEauthorrefmark{1}Graduate School of Engineering Science, Osaka University}
-% \IEEEauthorblockA{\IEEEauthorrefmark{2}Graduate School of Information Science, Nagoya University}
-% \IEEEauthorblockA{\IEEEauthorrefmark{3}OKUMA Corporation}
-% }
+\author{
+\IEEEauthorblockN{
+Takuro Yamamoto\IEEEauthorrefmark{1},
+Takuma Hara\IEEEauthorrefmark{2},
+Takuya Ishikawa\IEEEauthorrefmark{2}, 
+Hiroshi Oyama\IEEEauthorrefmark{3},
+Hiroaki Takada\IEEEauthorrefmark{2} and
+Takuya Azumi\IEEEauthorrefmark{1}}
+\IEEEauthorblockA{\IEEEauthorrefmark{1}Graduate School of Engineering Science, Osaka University}
+\IEEEauthorblockA{\IEEEauthorrefmark{2}Graduate School of Information Science, Nagoya University}
+\IEEEauthorblockA{\IEEEauthorrefmark{3}OKUMA Corporation}
+}
 
 % use for special paper notices
 %\IEEEspecialpapernotice{(Invited Paper)}
@@ -165,7 +165,7 @@ In addition, individual component diagrams enable the visualization of an entire
 In this paper, component-based TCP/IP protocol stack, i.e., componentized TINET, is proposed to improve the configurability and scalability of software.
 TECS (TOPPERS Embedded Component System) \cite{par:TECS} is utilized to componentize TINET, because TECS is a component system suitable for embedded systems.
 TECS supports static configuration, which statically defines component behaviors and interconnections, thus TECS can optimize the overhead of componentization.
-This paper evaluates the overheads of execution time and memory consumption and amount of code line change for adding/removing the functionalities, which demonstrates TINET+TECS can improve the configurability with small overheads.
+This paper evaluates the overheads of execution time and memory consumption and the amount of code line change for adding/removing the functionalities, which demonstrates TINET+TECS can improve the configurability with small overheads.
 
 {\bf Contributions:} This paper provides the following contributions.
 
@@ -361,6 +361,18 @@ In addition, TECS functionalities applied to the proposed system such as {\it se
 
 \subsection{Components of protocol stack}
 
+The components of protocol stack for TINET+TECS is shown as Fig. \ref{fig:ComponentProtocolStack}.
+Note that some small particle components such as a kernel object, dataqueques, and semaphores are omitted to simplify the component diagram.
+In TINET+TECS, the components are divided for each protocol, and the functionalities such as input function and output function are defined as each a component.
+Therefore, software visibility is improving because of small grain components.
+
+To utilize the protocol stack as same as the original TINET, communication object components such as tTCPCEP, tUDPCEP, and tREP are defined as an interface between TINET+TECS and an application.
+The communication object component is a component corresponding to a CEP or REP of the original TINET.
+An application developers can utilize the TINET+TECS functionalities by generating and combining as many components as necessary.
+
+The protocol stack of TINET+TECS supports coexistence of multiple protocols.
+By developing the IPv6 and Point-to-Point Protocol (PPP) components, TINET+TECS can make IPv4 and IPv6 coexist and support PPP without a modification of component implementation.
+
 \begin{figure}[t]
     \centering
     \includegraphics[width=6.5cm,clip]{figure/ComponentProtocolStack.pdf}
@@ -368,7 +380,9 @@ In addition, TECS functionalities applied to the proposed system such as {\it se
     \label{fig:ComponentProtocolStack}
 \end{figure}
 
-\subsection{send/receive specifier}
+\subsection{Memory allocator component} 
+
+\subsubsection{send/receive specifier}
 
 TECS supports {\it send}/{\it receive} specifiers, which are interface specifiers \cite{par:RPC}.
 TINET+TECS uses {\it send} and {\it receive} specifiers instead of {\it in} and {\it out} to reduce the number of copies.
@@ -414,6 +428,8 @@ signature sNicDriver {
 \label{src:SendReceive}
 \end{figure}
 
+\subsection{Network timer component}
+
 
 \subsection{TECS Adapter}
 
@@ -434,6 +450,13 @@ Software developers can utilize an existing application for TECS owing to the ad
 \section{Evaluation and Demonstration}
 \label{sec:Evaluation and Demonstration}
 
+\subsection{Evaluation environment}
+
+GR-PEACH is employed as the evaluation board.
+We connected the board and the host PC with a LAN cable, and evaluated the data transmission and reception.
+The detail specification of the board is shown in TABLE \ref{tab:EvaluationBoardEnvironment}.
+We also employ TINET 1.5.4 and the compiler arm-none-eabi--gcc 5.2.
+
 \begin{table}[t]
     \centering
     \caption{Evaluation Board Environment}
@@ -446,7 +469,7 @@ Software developers can utilize an existing application for TECS owing to the ad
         LAN Controller  &   LAN8710A                \\
         \hline
     \end{tabular}
-    \label{tab:Evaluation_Board_Environment}
+    \label{tab:EvaluationBoardEnvironment}
 \end{table}
 
 
@@ -478,6 +501,9 @@ lwIP is larger than uIP, but provides better throughput.
 
 % use section* for acknowledgment
 \section*{Acknowledgment}
+
+The authers would like to thank OO for supporting this research.
+This work is supported by JSPS KAKENHI Grant Number 15H05305.
 
 % trigger a \newpage just before the given reference
 % number - used to balance the columns on the last page
