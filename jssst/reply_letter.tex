@@ -1,0 +1,121 @@
+\documentclass{article}
+
+\usepackage{a4wide}
+\usepackage{graphicx}
+\usepackage{fancybox}
+\usepackage{ascmac}
+\usepackage{xspace}
+%\usepackage{pdfpages}
+\usepackage{pifont}
+\usepackage{array}
+
+\newcommand\st{\textsuperscript{st}\xspace}
+\newcommand\nd{\textsuperscript{nd}\xspace}
+\newcommand\rd{\textsuperscript{rd}\xspace}
+
+\begin{document}
+
+% cover letter
+\begin{flushleft}
+  2017-01-13\newline 
+  ソフトウェア論文特集\newline
+  論文・記事番号：16-S-05\newline
+  題目：Component-Based Framework of Lightweight Ruby for Efficient Embedded Software Development\newline
+  著者: Takuro Yamamoto, Hiroshi Oyama, and Takuya Azumi\newline
+\end{flushleft}
+\textbf{Dear Editor and Reviewer,}\newline
+
+We highly appreciate the insightful suggestions and detailed valuable comments on our paper. 
+The suggestions of the reviewers are very helpful for us and the suggestions are now incorporated in the revised paper as follows.
+We have attached the last paper review and revised paper in our reply letter.
+We hope the editor and the reviewers will be satisfied with our replies to the comments and the revised paper.\newline\newline
+
+\begin{flushleft}
+  Yours sincerely,\newline
+
+  Takuro Yamamoto\newline
+  Osaka University\newline
+  Email address: t-yamamoto@hopf.sys.es.osaka-u.ac.jp\newline
+\end{flushleft}
+
+\clearpage
+
+\section{Response to 1\st reviewer}
+
+\begin{enumerate}
+
+\item \begin{flushleft}
+    \textbf{Comment:
+}初見では、Fig.21 をどう解釈すればよいかが分かりにくかったです。
+図の解釈について説明を追加いただければ、多くの読者にとってわかりやすくなると思います。
+  \end{flushleft}
+
+  \begin{flushleft}
+    \textbf{Our reply:}
+Thank you for your suggestion.
+We have added and modified the section as follows. (page 13)
+
+\begin{itembox}[|]{4.3 Synchronization of Multiple RiteVMs}
+To execute multiple mruby applications, a synchronization mechanism for RiteVM tasks is implemented in the proposed framework.
+We measured the execution time from the execution of the first RiteVM task to that of the last RiteVM task.
+Fig. 21 shows the case of two to eight RiteVM tasks.
+Note that the periodic time is 1 msec.
+It was confirmed that the execution time was within the theoretical value which is {\it\scriptsize periodic time $\times$ (number of RiteVM tasks - 1).}
+In the case of two RiteVM tasks, the theoretical value is 1 msec and the execution time does not exceed the theoretical value. 
+As shown in Fig. 21, the execution time is within the theoretical value, which indicates successful synchronization of multiple RiteVM tasks.
+\end{itembox}\\
+  \end{flushleft}
+
+
+\item \begin{flushleft}
+    \textbf{Comment:}
+3ページ左カラムの下から2行目で「4. Benets of CBD:」で始まっていますが、他の項目は「.」で終わっています。
+この点、ご確認ください。
+  \end{flushleft}
+
+  \begin{flushleft}
+    \textbf{Our reply:}
+Thank you for your careful reading.
+We have modified other contributions to ``:'' such as "Improved software development efficiency:". (page 3)
+  \end{flushleft}
+
+\end{enumerate}
+
+\newpage
+
+\section{Response to 2\nd reviewer}
+
+\begin{enumerate}
+
+\item \begin{flushleft}
+    \textbf{Comment:}
+Figure 11 seems to be a wrong diagram.
+Maybe this is an old version.
+Please replace it with a correct one so that A, B, C, D matches to the description in the text.
+  \end{flushleft}
+
+  \begin{flushleft}
+    \textbf{Our reply:}
+Thank you for your suggestion.
+As you said, we used the different figure.
+We have replaced it with the correct figure. (page 7)
+  \end{flushleft}
+
+
+\item \begin{flushleft}
+    \textbf{Comment:}
+The first reference of Figure 12 from the text is after Figure 13 is refereed.
+Please change the order.
+  \end{flushleft}
+
+  \begin{flushleft}
+    \textbf{Our reply:}
+Thank you for your suggestion.
+We have switched the order of Fig. 12 and Fig. 13. (page 7-8)
+  \end{flushleft}
+
+
+\end{enumerate}
+
+\end{document}
+
