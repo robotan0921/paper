@@ -730,7 +730,7 @@ We implemented the proposed system on a LEGO MINDSTORMS EV3 \cite{par:EV3} (300M
     {\tabcolsep=0.1cm
     \begin{tabular}{c||c}
                             & Development procedure \\ \hline
-        Exisiting framework &    (1) + (2) + (3)    \\ %\hline
+        Existiting framework &    (1) + (2) + (3)    \\ %\hline
         Proposed framework  &          (4)          \\ \hline
         \multicolumn{2}{l}{ (1): Rewrite the storage device} \\
         \multicolumn{2}{l}{ (2): Insert the storage device into the target} \\
@@ -863,7 +863,7 @@ Developers can add or remove the functionalities easily by modifying the CDL fil
 Moreover, CBD decreases code size and improves productivity and maintainability.
 
 %\subsubsection{Code size utilizing component-based development}
-To demonstrate the superiority of CBD, a comparison of the number of lines of codes C and ACL codes between two situations is shown in Table \ref{tab:codesize}.
+To demonstrate the superiority of CBD, a comparison of the number of lines of C and CDL codes between two situations is shown in Table \ref{tab:codesize}.
 In Table \ref{tab:codesize}, (A) and (B) represent the source files in the upper and lower parts of Fig. \ref{fig:Eventflag}, respectively. 
 For C, (B)'s code lines do not increase even if the number of RiteVMs increases, while (A)'s code lines increase as the number of RiteVMs increases.
 Note that (B)'s C file can be utilized without modification regardless of the number of RiteVMs.
@@ -966,16 +966,16 @@ For software developed with fixed-priority-based scheduling, developers only hav
 Note that our prototype system and the application programs used in the performance evaluation are all open-source and can be downloaded from our website \cite{url:download}.
 
 In the future, CDL files for the RiteVM and mruby-TECS bridge will be generated automatically using a plugin, and developers will be able to transfer bytecodes using the ZMODEM protocol on the command line.
-Moreover, we will support mruby libraries as mrbgems, which is an mruby distribution packaging system.
+Moreover, we will support mruby libraries as mrbgems, which is an mruby distribution packaging system.\newline
 
 %%%%%%%%%%%% Acknowledgement %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Acknowledgement}
-
+% \section*{Acknowledgement}
+{\bf Acknowledgement}\ 
 This work was supported by JSPS KAKENHI Grant Number 15H05305.
 We would like to thank Takuya Ishikawa, Hiroshi Mimaki, and Kazuaki Tanaka for supporting this research.
 
 %%%%%%%%%%%% Reference %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\bibliographystyle{abbrv}
+\bibliographystyle{article/jssst}
 \bibliography{ref}
 
 
