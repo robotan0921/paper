@@ -21,12 +21,12 @@
 \usepackage{listings,jlisting}
 \lstset{%
     language={c},%
-    basicstyle={\small\ttfamily},%
-    identifierstyle={\small},%
+    basicstyle={\footnotesize\ttfamily},%
+    identifierstyle={\footnotesize},%
     commentstyle={\footnotesize\itshape},%
-    keywordstyle={\small},%\bfseries},%
-    ndkeywordstyle={\small},%
-    stringstyle={\small\it},
+    keywordstyle={\footnotesize},%\bfseries},%
+    ndkeywordstyle={\footnotesize},%
+    stringstyle={\footnotesize\it},
     frame={tb},
     breaklines=true,
     columns=[l]{fullflexible},%
@@ -147,7 +147,7 @@ In this paper, we also demonstrates a use case of the dynamic component connecti
 Internet of Things (IoT) is an essential keyword for the next era.
 Such as wearable devices, smart devices, and smart homes, various things are connected to the Internet, enriching our lives.
 Embedded systems are the elements constituting IoT, e.g., sensing data and controlling actuators.
-It is not practical to implement the same communication function as a general computer because embedded systems have several restrictions such as low memory capacity.
+It is not practical to implement the same TCP/IP protocol stack as a general computer because embedded systems have several restrictions such as low memory capacity.
 
 TINET (Tomakomai InterNETworking) is a compact TCP/IP protocol stack for embedded systems \cite{url:TINET}.
 TINET supports the ability such as minimum copy frequency and elimination of dynamic memory control.
@@ -162,7 +162,7 @@ Component-based development is a design technique that can be applied to reusabl
 Component-based systems are flexible to software extension and specification changes.
 In addition, individual component diagrams enable the visualization of an entire system.
 
-In this paper, component-based TCP/IP protocol stack, i.e., componentized TINET, is proposed to improve the configurability and scalability of software.
+This paper proposes component-based TCP/IP protocol stack, i.e., componentized TINET, to improve the configurability and scalability of software.
 TECS (TOPPERS Embedded Component System) \cite{par:TECS} is utilized to componentize TINET, because TECS is a component system suitable for embedded systems.
 TECS supports static configuration, which statically defines component behaviors and interconnections, thus TECS can optimize the overhead of componentization.
 This paper evaluates the overheads of execution time and memory consumption and the amount of code line change for adding/removing the functionalities, which demonstrates TINET+TECS can improve the configurability with small overheads.
@@ -172,7 +172,7 @@ This paper evaluates the overheads of execution time and memory consumption and 
 \begin{enumerate}
 
     \item {\bf Improve configurability}\mbox{}\\
-        TINET+TECS is a component-based system, therefore the software is flexible to change the configuration such as resizing network buffer, adding/removing TCP (or UDP) functions, and support both IPv4 and IPv6.
+        Since TINET+TECS is a component-based system, the software is flexible to change the configuration such as resizing network buffer, adding/removing TCP (or UDP) functions, and supporting both IPv4 and IPv6.
         In addition, a component diagram provides visualization of TINET, a complicated system.
 
     \item {\bf Dynamic connection method}\mbox{}\\
@@ -200,7 +200,7 @@ System model of the proposed system is shown as Fig. \ref{fig:System Model}.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=6.5cm,clip]{figure/SystemModel.pdf}
+    \includegraphics[width=7.0cm,clip]{figure/SystemModel.pdf}
     \caption{System model}
     \label{fig:System Model}
 \end{figure}
@@ -221,7 +221,7 @@ To satisfy restrictions for embedded systems such as memory capacity, size, and 
 
 \subsubsection{Overview}
 
-TINET runs as middleware on TOPPERS/ASP3 \cite{url:ASP3}, which is a realtime kernel based on $\mu$ITRON \cite{par:microITRON}.
+TINET runs as middleware on TOPPERS/ASP3 \cite{par:ASP3} \cite{url:ASP3}, which is a realtime kernel based on $\mu$ITRON \cite{par:microITRON}.
 TINET also supports other RTOSs such as TOPPERS/ASP and TOPPERS/JSP because TINET is compatible with TOPPERS RTOS.
 Fig. \ref{fig:TINET_Hier} shows the hierarchy diagram of TINET and TOPPERS/ASP3.
 % TINET supports ITRON TCP/IP API such as {\it tcp\_snd\_buf}, {\it tcp\_rcv\_buf}, {\it udp\_snd\_buf}, and {\it udp\_rcv\_buf}.
@@ -229,19 +229,19 @@ Users transmit and receive the data using a Communication End Point (CEP) which 
 In transmission process, headers are attached to the data body passed to the CEP at each protocol layer, and the data is transmitted from the network device.
 In reception process, headers of the data body received in the network device are analyzed at each protocol layer, and the data is passed to the CEP.
 
+A TCP reception point called Reception Point (REP) is prepared to wait for a connection request from the partner side.
+An REP has an IP address ({\it myaddr}) and a port number ({\it myportno}) as attributes, and performs functions like {\it bind()} and {\it listen()}.
+
 In TINET, the number of the data copy between each protocol layers is minimized.
 A TCP/IP protocol stack for general computers has large overheads of execution time and memory consumption because the data is copied at each protocol layers.
 To solve the problem, TINET does pass the pointer of the data buffer between each protocol layers, not perform data copy.
 
-
-
 \begin{figure}[t]
     \centering
-    \includegraphics[width=6.5cm,clip]{figure/TINET_Hier.pdf}
+    \includegraphics[width=7.0cm,clip]{figure/TINET_Hier.pdf}
     \caption{Hierarchy diagram of TINET and TOPPERS/ASP3}
     \label{fig:TINET_Hier}
 \end{figure}
-
 
 \subsection{TECS}
 \label{sec:TECS}
@@ -256,14 +256,14 @@ TECS can be implemented in C, and demonstrates various feature such as source le
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=6.5cm,clip]{figure/component_diagram.eps}
+    \includegraphics[width=7.0cm,clip]{figure/component_diagram.eps}
     \caption{Component Diagram}
     \label{fig:component}
 \end{figure}
 
 \subsubsection{Component Model}
 
-Fig.\ref{fig:component} shows a component diagram.
+Fig. \ref{fig:component} shows a component diagram.
 A {\it cell}, which is an instance of a component in TECS, consists of {\it entry} ports, {\it call} ports, attributes and internal variables.
 An {\it entry} port is an interface that provides functions to other {\it cell}s, and a {\it call} port is an interface that enables the use of other {\it cell}'s functions.
 A {\it cell} has one or more {\it entry} ports and {\it call} ports.
@@ -274,7 +274,6 @@ A {\it signature} is the interface definition of a {\it cell}.
 The {\it cell}'s  {\it call} port can be connected to the {\it entry} port of another {\it cell} by the same {\it signature}.
 Note that {\it celltype} defines one or more {\it call}/{\it entry} ports, attributes, and internal variables of a {\it cell}.
 
-
 \subsubsection{Component Description}
 
 In TECS, components are described with component description language (CDL).
@@ -284,7 +283,7 @@ These components are described as follows.
 \begin{description}
     \item[{\bf Signature Description}]\mbox{}\\
         The {\it signature} defines a {\it cell} interface.
-        The {\it signature} name follows the keyword {\it signature} and takes the prefix ``s'', e.g., sMotor (Fig.\ref{signature}).
+        The {\it signature} name follows the keyword {\it signature} and takes the prefix ``s'', e.g., sMotor (Fig. \ref{signature}).
         In TECS, to clarify the function of an interface, specifiers such as [in] and [out] are used, which represent input and output respectively.
 \begin{figure}[t]
 \centering
@@ -305,7 +304,7 @@ signature sMotor {
 \end{figure}
     \item[{\bf Celltype Description}]\mbox{}\\
         The {\it celltype} defines {\it entry} ports, {\it call} ports, attributes, and variables.
-        A {\it celltype} name with the prefix ``t'' follows the keyword {\it celltype}, e.g., tCaller (Fig.\ref{celltype}).
+        A {\it celltype} name with the prefix ``t'' follows the keyword {\it celltype}, e.g., tCaller (Fig. \ref{celltype}).
         To define {\it entry} ports, a {\it signature}, e.g., sMotor, and an {\it entry} port name, e.g., eMotor, follow the keyword {\it entry}.
         {\it Call} ports are defined similarly.
         Attributes and variables follow the keywords {\it attr} and {\it var}, respectively.
@@ -330,7 +329,7 @@ celltype tMotor {
 \end{figure}
     \item[{\bf Build Description}]\mbox{}\\
         The build description is used to instantiate and connect {\it cell}s.
-        Fig.\ref{build} shows an example of a build description.
+        Fig. \ref{build} shows an example of a build description.
         A {\it celltype} name and {\it cell} name, e.g., tMotor and Motor, respectively, follow the keyword {\it cell}.
         A {\it call} port, {\it cell}'s name, and an {\it entry} port are described in that order to compose {\it cell}s,
         In Fig. \ref{build}, {\it entry} port eMotor in {\it cell} Motor is connected to {\it call} port cMotor in {\it cell} Caller.
@@ -355,16 +354,54 @@ cell tCaller Caller {
 \section{Design and Implementation}
 \label{sec:Design and Implementation}
 
-TINET+TECS, the proposed componentized TCP/IP protocol stack, consists of some TECS components.
-This section describes the components with component diagrams.
-In addition, TECS functionalities applied to the proposed system such as {\it send}/{\it receive} specifier and adapter are explained.
+This section describes design and implementation of the proposed framework, TINET+TECS.
+The proposed framework is component-based TCP/IP protocol stack for embedded systems, i.e., componentized TINET using TECS.
+In addition, A TECS novel functionality, dynamic connection method, and TECS adapter to support legacy codes are described with the use case of the proposed framework.
 
-\subsection{Components of protocol stack}
+\subsection{TINET+TECS}
+TINET+TECS, the proposed componentized TCP/IP protocol stack, consists of some TECS components.
+This section describes the components of TINET+TECS framework with component diagrams.
+% In addition, TECS functionalities applied to the proposed system such as {\it send}/{\it receive} specifier and adapter are explained.
+
+\subsubsection{Components of protocol stack}
 
 The components of protocol stack for TINET+TECS is shown as Fig. \ref{fig:ComponentProtocolStack}.
 Note that some small particle components such as a kernel object, dataqueques, and semaphores are omitted to simplify the component diagram.
 In TINET+TECS, the components are divided for each protocol, and the functionalities such as input function and output function are defined as each a component.
 Therefore, software visibility is improving because of small grain components.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=7.0cm,clip]{figure/ComponentProtocolStack.pdf}
+    \caption{Component diagram of protocol stack}
+    \label{fig:ComponentProtocolStack}
+\end{figure}
+
+The components of each protocol are described below.\\
+
+{\bf Application layer:}
+An application in TINET+TECS is implemented as a component such as tApplication.
+Software with TINET uses ITRON TCP/IP API such as {\it tcp\_snd\_buf} and {\it tcp\_rcv\_buf}.
+In TINET+TECS, the application component calls TECS functions such as {\it cTCPAPI\_sendBuffer} and {\it cTCPAPI\_receiveBuffer}.
+Moreover, TINET+TECS supporting a TECS adapter (\ref{sec:TECS Adapter}), an exiting application with TINET can run on TINET+TECS framework without transporting.
+Therefore, software can be developed either with exiting methods or as a TECS component.
+
+{\bf Transport layer:}
+tTCPCEP (tUDPCEP) is a CEP compornent for TCP (UDP), and tREP is a REP component.
+For example, a server program supporting multiple clients can be developed by preparing the multiple tTCPCEP components.
+tTCPInput (tUDPInput) and tTCPOutput (tUDPOutput) are components performing the receiving and sending processing respectively in the transport layer.
+
+{\bf Network layer:}
+tIPv4Input and tIPv4Output are components performing the receiving and sending processing respectively in the network layer.
+tIPv4Functions component performs some functions such as checksum, tICMP component is for the ICMP protocol, and tIPv4RoutingTable component operates a routing table.
+
+{\bf Data link layer:}
+tEthernetInputTaskBody and tEthernetOutputTaskBody (tEthernetOutput) are components performing the receiving and sending processing respectively in the data link layer.
+tArp component is for the ARP protocol.
+
+{\bf Physical layer:}
+tNetworkInterfaceContoroller component implements a network device driver.
+Software can run on other devices by replacing the component because only the component depends on the target device.\\
 
 To utilize the protocol stack as same as the original TINET, communication object components such as tTCPCEP, tUDPCEP, and tREP are defined as an interface between TINET+TECS and an application.
 The communication object component is a component corresponding to a CEP or REP of the original TINET.
@@ -373,17 +410,28 @@ An application developers can utilize the TINET+TECS functionalities by generati
 The protocol stack of TINET+TECS supports coexistence of multiple protocols.
 By developing the IPv6 and Point-to-Point Protocol (PPP) components, TINET+TECS can make IPv4 and IPv6 coexist and support PPP without a modification of component implementation.
 
+\subsubsection{Memory allocator component} 
+
+The original TINET eliminates dynamic memory control to meet the sever memory restriction of embedded systems.
+A memory area for sending/receiving data in the protocol stack is allocated and released within an predetermined area.
+Memory allocator component performs the elimination of dynamic memory control in TINET+TECS.
+The component provides a requested memory area from the memory area statically allocated.
+
+The memory allocator component connects to as many tFixedSizeMemoryPool as needed, shown as Fig. \ref{fig:tMemoryAllocator}.
+tFixedSizeMemoryPool is a componentized kernel object of TOPPERS/ASP3 to alloc and release a memory area of the requested size. 
+tFixedSizeMemoryPool components with various sizes are prepared, and an appropriate memory area can be allocated according to the used data size.
+On the other hands, all components which need allocate and deallocate memory connect to the memory allocator component, e.g., tTCPInput and tEthernetOutput.
+
+In addition, TINET+TECS utilizes {\it send/receive} specifier of TECS to minimize the memory copy frequency, which is a functionality supported by TINET.
+
 \begin{figure}[t]
     \centering
-    \includegraphics[width=6.5cm,clip]{figure/ComponentProtocolStack.pdf}
-    \caption{Component diagram of protocol stack}
-    \label{fig:ComponentProtocolStack}
+    \includegraphics[width=7.0cm,clip]{figure/tMemoryAllocator.pdf}
+    \caption{Component diagram of tMemoryAllocator}
+    \label{fig:tMemoryAllocator}
 \end{figure}
 
-\subsection{Memory allocator component} 
-
-\subsubsection{send/receive specifier}
-
+{\bf send/receive specifier:}
 TECS supports {\it send}/{\it receive} specifiers, which are interface specifiers \cite{par:RPC}.
 TINET+TECS uses {\it send} and {\it receive} specifiers instead of {\it in} and {\it out} to reduce the number of copies.
 
@@ -406,7 +454,7 @@ Deallocating the memory is performed in the caller in both cases.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=6.5cm,clip]{figure/SendReceive.pdf}
+    \includegraphics[width=7.0cm,clip]{figure/SendReceive.pdf}
     \caption{Differences between in/out and send/receive}
     \label{fig:SendReceive}
 \end{figure}
@@ -415,12 +463,16 @@ Deallocating the memory is performed in the caller in both cases.
 \centering
 \begin{lstlisting}
 signature sNicDriver {
-  void start([send(sNetworkAlloc),size_is(size)]int8_t *outputp,
-             [in]int32_t size,
-             [in]uint8_t align);
-  void read([receive(sNetworkAlloc),size_is(*size)]int8_t **inputp,
-            [out]int32_t *size,
-            [in]uint8_t align);
+  void start(
+    [send(sNetworkAlloc),size_is(size)]
+        int8_t *outputp,
+    [in]int32_t size,
+    [in]uint8_t align);
+  void read(
+    [receive(sNetworkAlloc),size_is(*size)]
+        int8_t **inputp,
+    [out]int32_t *size,
+    [in]uint8_t align);
     /* Omit: other functions */
 };
 \end{lstlisting}
@@ -428,10 +480,13 @@ signature sNicDriver {
 \label{src:SendReceive}
 \end{figure}
 
-\subsection{Network timer component}
+\subsubsection{Network timer component}
 
+
+\subsection{Dynamic Connection of TECS}
 
 \subsection{TECS Adapter}
+\label{sec:TECS Adapter}
 
 TECS supports {\it Adapter} functionality which enables to call a function in TECS from existing C codes.
 An adapter connects a TECS component, and links a C function to a TECS function shown as Fig. \ref{fig:TECS_Adapter}.
@@ -439,13 +494,10 @@ Software developers can utilize an existing application for TECS owing to the ad
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=6.5cm,clip]{figure/TECS_Adapter.pdf}
+    \includegraphics[width=7.0cm,clip]{figure/TECS_Adapter.pdf}
     \caption{TECS Adapter}
     \label{fig:TECS_Adapter}
 \end{figure}
-
-
-
 
 \section{Evaluation and Demonstration}
 \label{sec:Evaluation and Demonstration}
@@ -502,7 +554,7 @@ lwIP is larger than uIP, but provides better throughput.
 % use section* for acknowledgment
 \section*{Acknowledgment}
 
-The authers would like to thank OO for supporting this research.
+The authers would like to thank H. Nagashima for supporting this research.
 This work is supported by JSPS KAKENHI Grant Number 15H05305.
 
 % trigger a \newpage just before the given reference
