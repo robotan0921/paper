@@ -119,13 +119,10 @@ Embedded systems are applied to Internet of Things (IoT), and the high productiv
 TINET is a TCP/IP protocol stack for embedded systems.
 Although TINET is a compact TCP/IP protocol stack, it consists of many complex source codes.
 Therefore, it is difficult to maintain, extend, and analysis the software.
-
-To improve the scalability and configurability, this paper has proposed a component-based TCP/IP protocol stack for embedded systems: TINET componentized with TOPPERS embedded component system (TECS).
+To improve the scalability and configurability, this paper has proposed TINET+TECS, a component-based TCP/IP protocol stack for embedded systems: TINET componentized with TOPPERS embedded component system (TECS).
 The component-based TINET provides software developers high productivity such as change of network buffer size and adding/removing TCP (or UDP) function.
 We evaluate the component-based TINET compared with the original TINET.
 We confirm that the overheads of execution time and memory consumption are low, and that the configurability is improved.
-
-In this paper, we also demonstrates a use case of the dynamic component connection method of TECS with a network application.
 
 \end{abstract}
 
@@ -144,8 +141,8 @@ In this paper, we also demonstrates a use case of the dynamic component connecti
 \section{Introduction}
 \label{sec:Introduction}
 
-Internet of Things (IoT) is an essential keyword for the next era.
-Such as wearable devices, smart devices, and smart homes, various things are connected to the Internet, enriching our lives.
+Internet of Things (IoT) is an essential keyword for the next era \cite{par:IoTIndustries} \cite{par:IoTComputing}.
+Various things, such as wearable devices, smart devices, and smart homes, connected to the Internet will enrich our lives.
 Embedded systems are the elements constituting IoT, e.g., sensing data and controlling actuators.
 It is not practical to implement the same TCP/IP protocol stack as a general computer because embedded systems have several restrictions such as low memory capacity.
 
@@ -157,14 +154,25 @@ In other words, TINET is composed of many files and defines many macros.
 This may take a lot of time for software developers to maintain, extend, and analysis the software.
 Embedded network software is required for the high productivity and quality.
 
-Component-based development is an approach to improve software productivity.
-Component-based development is a design technique that can be applied to reusable software development \cite{par:Crnkovic}\cite{par:CBD}, such as TECS \cite{par:TECS}, AUTOSAR \cite{url:AUTOSAR}, and SaveCCM \cite{par:SAVEapproach}.
+An approach to improve software productivity is component-based development, which is a design technique that can be applied to reusable software development for embedded systems \cite{par:Crnkovic}\cite{par:CBD}, such as TECS \cite{par:TECS} \cite{par:hr-tecs}, AUTOSAR \cite{url:AUTOSAR}, and SaveCCM \cite{par:SAVEapproach}.
 Component-based systems are flexible to software extension and specification changes.
 In addition, individual component diagrams enable the visualization of an entire system.
 
-This paper proposes component-based TCP/IP protocol stack, i.e., componentized TINET, to improve the configurability and scalability of software.
+This paper proposes component-based TCP/IP protocol stack, i.e., TINET+TECS, to improve the configurability and scalability of software.
 TECS (TOPPERS Embedded Component System) \cite{par:TECS} is utilized to componentize TINET, because TECS is a component system suitable for embedded systems.
 TECS supports static configuration, which statically defines component behaviors and interconnections, thus TECS can optimize the overhead of componentization.
+
+In addition, the proposed framework utilizes dynamic connection, a novel method of TECS, to switch component bindings dynamically.
+A general TCP/IP protocol server dynamically processes the requested port i.e., HTTP (port: 80), HTTPS (prot: 443).
+However, embedded systems can not dynamically generate components due to the strict memory restriction.
+TINET+TECS statically generates components, and dynamically combines them.
+Therefore, 
+
+In the proposed framework, software application can be developed by not only TECS method but also existing method.
+Software appication can be developed as a TECS component because TINET+TECS is a component-based framework using TECS.
+Moreover, TECS supports an adapter to call functions of TECS components from non TECS codes.
+The legacy codes such as an existing application can be supported in the proposed framework.
+
 This paper evaluates the overheads of execution time and memory consumption and the amount of code line change for adding/removing the functionalities, which demonstrates TINET+TECS can improve the configurability with small overheads.
 
 {\bf Contributions:} This paper provides the following contributions.
@@ -176,10 +184,10 @@ This paper evaluates the overheads of execution time and memory consumption and 
         In addition, a component diagram provides visualization of TINET, a complicated system.
 
     \item {\bf Dynamic connection method}\mbox{}\\
+        Dynamically switching the binding of components, that is switching between a communication endpoint and reception point of TINET, realizes a TCP/IP protocol stack for embedded systems.
         
-
     \item {\bf Support legacy codes}\mbox{}\\
-        TECS supports the adapter to call TECS functions from existing C codes, thus TINET+TECS can be applied to an existing application.
+        TINET+TECS can be applied to an existing application because TECS supports the adapter to call TECS functions from C codes. 
     % \item {\bf Software visualization}
 
 \end{enumerate}
@@ -196,18 +204,23 @@ Conclusions and suggestions for future work are presented in Section \ref{sec:Co
 \label{sec:System Model}
 
 This section describes system model, including the basic technologies such as TINET and TECS.
-System model of the proposed system is shown as Fig. \ref{fig:System Model}.
+System model of the proposed framework is shown as Fig. \ref{fig:SystemModel}.
+TINET+TECS is a component-based TCP/IP protocol stack, so TCP output task (tTCPOutput) and Ethernet input task (tEhternetInput) are implemented as TECS components.
+CEP and REP (Section \ref{sec:TINET}), which are also implemented as TECS components, dynamically switch bindings by TECS method.
+Moreover, TECS adapter supports the legacy codes such as an existing application.
+
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=7.0cm,clip]{figure/SystemModel.pdf}
     \caption{System model}
-    \label{fig:System Model}
+    \label{fig:SystemModel}
 \end{figure}
 
 \subsection{TINET}
+\label{sec:TINET}
 
-TINET is a compact TCP/IP protocol stack for embedded systems based on the ITRON TCP/IP API Specification \cite{url:ITRON_TCP/IP_API_Spec}, developed by TOPPERS (Toyohashi OPen Platform for Embedded Real-time Systems) Project \cite{url:TOPPERS}.
+TINET is a compact TCP/IP protocol stack for embedded systems based on the ITRON\footnote{ITRON is a realtime operating system (RTOS) developed by TRON project.} TCP/IP API Specification \cite{url:ITRON_TCP/IP_API_Spec}, developed by TOPPERS (Toyohashi OPen Platform for Embedded Real-time Systems) Project \cite{url:TOPPERS}.
 TINET has been released as open source.
 
 To satisfy restrictions for embedded systems such as memory capacity, size, and power consumption, TINET supports following functions:
@@ -223,7 +236,7 @@ To satisfy restrictions for embedded systems such as memory capacity, size, and 
 
 TINET runs as middleware on TOPPERS/ASP3 \cite{par:ASP3} \cite{url:ASP3}, which is a realtime kernel based on $\mu$ITRON \cite{par:microITRON}.
 TINET also supports other RTOSs such as TOPPERS/ASP and TOPPERS/JSP because TINET is compatible with TOPPERS RTOS.
-Fig. \ref{fig:TINET_Hier} shows the hierarchy diagram of TINET and TOPPERS/ASP3.
+Fig. \ref{fig:TINETHierarchyDiagram} shows the hierarchy diagram of TINET and TOPPERS/ASP3.
 % TINET supports ITRON TCP/IP API such as {\it tcp\_snd\_buf}, {\it tcp\_rcv\_buf}, {\it udp\_snd\_buf}, and {\it udp\_rcv\_buf}.
 Users transmit and receive the data using a Communication End Point (CEP) which is an interface like a socket.
 In transmission process, headers are attached to the data body passed to the CEP at each protocol layer, and the data is transmitted from the network device.
@@ -238,9 +251,9 @@ To solve the problem, TINET does pass the pointer of the data buffer between eac
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=7.0cm,clip]{figure/TINET_Hier.pdf}
+    \includegraphics[width=7.0cm,clip]{figure/TINETHierarchyDiagram.pdf}
     \caption{Hierarchy diagram of TINET and TOPPERS/ASP3}
-    \label{fig:TINET_Hier}
+    \label{fig:TINETHierarchyDiagram}
 \end{figure}
 
 \subsection{TECS}
@@ -256,14 +269,14 @@ TECS can be implemented in C, and demonstrates various feature such as source le
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=7.0cm,clip]{figure/component_diagram.eps}
+    \includegraphics[width=7.0cm,clip]{figure/ComponentDiagram.pdf}
     \caption{Component Diagram}
-    \label{fig:component}
+    \label{fig:ComponentDiagram}
 \end{figure}
 
 \subsubsection{Component Model}
 
-Fig. \ref{fig:component} shows a component diagram.
+Fig. \ref{fig:ComponentDiagram} shows a component diagram.
 A {\it cell}, which is an instance of a component in TECS, consists of {\it entry} ports, {\it call} ports, attributes and internal variables.
 An {\it entry} port is an interface that provides functions to other {\it cell}s, and a {\it call} port is an interface that enables the use of other {\it cell}'s functions.
 A {\it cell} has one or more {\it entry} ports and {\it call} ports.
@@ -283,70 +296,77 @@ These components are described as follows.
 \begin{description}
     \item[{\bf Signature Description}]\mbox{}\\
         The {\it signature} defines a {\it cell} interface.
-        The {\it signature} name follows the keyword {\it signature} and takes the prefix ``s'', e.g., sMotor (Fig. \ref{signature}).
-        In TECS, to clarify the function of an interface, specifiers such as [in] and [out] are used, which represent input and output respectively.
+        The {\it signature} name follows the keyword {\it signature} and takes the prefix ``s'', e.g., sIPv4Output (Fig. \ref{src:signature}).
+        In TECS, to clarify the function of an interface, specifiers such as [in], [out], and [inout] are used, which represent input, output, and input/output respectively.
+        [size\_is({\it len})] represents an array of size {\it len}.
 \begin{figure}[t]
 \centering
 \begin{lstlisting}
-signature sMotor {
-    int32_t getCounts( void );
-    ER resetCounts( void );
-    ER setPower( [in]int power );
-    ER stop( [in] bool_t brake );
-    ER rotate( [in] int degrees,
-               [in] uint32_t speed_abs,
-                [in] bool_t blocking );
-    void initializePort( [in]int32_t type );
+signature sIPv4Output {
+  T_IN4_ADDR getIPv4Address(void);
+  ER         getOffset([inout]T_OFF_BUF *offset);
+  ER         setHeader([inout,size_is(size)]
+                        int8_t *outputp,
+                        [in]int32_t size,
+                        [in]T_IN4_ADDR dstaddr,
+                        [in]T_IN4_ADDR srcaddr);
+    /* Omit: other functions */
 };
 \end{lstlisting}
-\caption{Signature Description}
-\label{signature}
+\caption{Signature description}
+\label{src:signature}
 \end{figure}
     \item[{\bf Celltype Description}]\mbox{}\\
         The {\it celltype} defines {\it entry} ports, {\it call} ports, attributes, and variables.
-        A {\it celltype} name with the prefix ``t'' follows the keyword {\it celltype}, e.g., tCaller (Fig. \ref{celltype}).
-        To define {\it entry} ports, a {\it signature}, e.g., sMotor, and an {\it entry} port name, e.g., eMotor, follow the keyword {\it entry}.
+        A {\it celltype} name with the prefix ``t'' follows the keyword {\it celltype}, e.g., tIPv4Output (Fig. \ref{src:celltype}).
+        To define {\it entry} ports, a {\it signature}, e.g., sIPv4Output, and an {\it entry} port name, e.g., eIPv4Output, follow the keyword {\it entry}.
         {\it Call} ports are defined similarly.
         Attributes and variables follow the keywords {\it attr} and {\it var}, respectively.
 \begin{figure}[t]
 \centering
 \begin{lstlisting}
-celltype tCaller {
-    call sMotor cMotor;
-};
-celltype tMotor {
-    entry sMotor eMotor;
-    attr {
-        int32_t port;
+celltype tIPv4Output {
+    /* Entry port */
+    entry sIPv4Output eOutput;
+
+    /* Call port */
+    call sEthernetOutput cEthernetOutput;
+    /* Omit: other call ports */
+
+    attr {  /* Attribute */
+        uint16_t fragInit = 0;
     };
-    var {
-        int32_t currentSpeed = 0;
+    var {   /* Variable */
+        uint16_t fragId = fragInit;
     };
 };
 \end{lstlisting}
-\caption{Celltype Description}
-\label{celltype}
+\caption{Celltype description}
+\label{src:celltype}
 \end{figure}
     \item[{\bf Build Description}]\mbox{}\\
         The build description is used to instantiate and connect {\it cell}s.
-        Fig. \ref{build} shows an example of a build description.
-        A {\it celltype} name and {\it cell} name, e.g., tMotor and Motor, respectively, follow the keyword {\it cell}.
+        Fig. \ref{src:build} shows an example of a build description.
+        A {\it celltype} name and {\it cell} name, e.g., tIPv4Output and IPv4Output, respectively, follow the keyword {\it cell}.
         A {\it call} port, {\it cell}'s name, and an {\it entry} port are described in that order to compose {\it cell}s,
-        In Fig. \ref{build}, {\it entry} port eMotor in {\it cell} Motor is connected to {\it call} port cMotor in {\it cell} Caller.
+        In Fig. \ref{src:build}, {\it entry} port eIPv4Output in {\it cell} IPv4Output is connected to {\it call} port cIPv4Output in {\it cell} TCPOutput.
         {\it C\_EXP} calls macros defined in C files.
 
 \begin{figure}[t]
 \centering
 \begin{lstlisting}
-cell tMotor Motor {
-    port = C_EXP("PORT_A");
+cell tIPv4Output IPv4Output {
+    /* Omit: other build description */
+    
+    fragInit = 0; /* Attribute */
 };
-cell tCaller Caller {
-    cMotor = Motor.eMotor;
+cell tTCPOutput TCPOutput {
+    cIPv4Output = IPv4Output.eOutput;
+    /* Omit: other build description */
 };
 \end{lstlisting}
-\caption{Build Description}
-\label{build}
+\caption{Build description}
+\label{src:build}
 \end{figure}
 
 \end{description}
@@ -431,6 +451,13 @@ In addition, TINET+TECS utilizes {\it send/receive} specifier of TECS to minimiz
     \label{fig:tMemoryAllocator}
 \end{figure}
 
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=7.0cm,clip]{figure/SendReceive.pdf}
+    \caption{Differences between in/out and send/receive}
+    \label{fig:SendReceive}
+\end{figure}
+
 {\bf send/receive specifier:}
 TECS supports {\it send}/{\it receive} specifiers, which are interface specifiers \cite{par:RPC}.
 TINET+TECS uses {\it send} and {\it receive} specifiers instead of {\it in} and {\it out} to reduce the number of copies.
@@ -452,12 +479,6 @@ The difference between {\it out} and {\it receive} is whether to allocate the da
 While, in case of {\it out}, a callee writes data in the memory allocated by a caller, in case of {\it receive}, the callee allocates the data memory.
 Deallocating the memory is performed in the caller in both cases.
 
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=7.0cm,clip]{figure/SendReceive.pdf}
-    \caption{Differences between in/out and send/receive}
-    \label{fig:SendReceive}
-\end{figure}
 
 \begin{figure}[t]
 \centering
@@ -484,6 +505,95 @@ signature sNicDriver {
 
 
 \subsection{Dynamic Connection of TECS}
+\label{sec:DynamicConnection}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=7.0cm,clip]{figure/DynamicConnection.pdf}
+    \caption{Dynamic connection}
+    \label{fig:DynamicConnection}
+\end{figure}
+
+TECS supports dynamic connection method as a novel functionality.
+Dynamic connection is a method to switch the binding of components at runtime as shown in Fig. \ref{fig:DynamicConnection}.
+Note that all components are statically generated in TECS.
+TECS can optimize the overhead of componentization because components are statically configured.
+Dynamically generating the components causes a lot of memory consumption, which is a serious propoblem for embedded systems with strict memory constraint.
+The proposed framework realizes the componentization of TINET while satisfying the memory constraint, because components statically generate and dynamically connect in TECS.
+
+TINET+TECS utilizes the dynamic connection to swith between CEP and REP components as shown in Fig. \ref{fig:DynamicConnectionUseCase}.
+In a server application, CEP is associated with REP in the state waiting for connection request from clients\footnote{ITRON TCP/IP API Specification \cite{url:ITRON_TCP/IP_API_Spec}\\tcp\_acp\_cep(ID cepid, ID repid, T\_IPV4EP *p\_dstaddr, TMO tmout)}.
+For example, when processing with HTTP protocol, CEP passively opens with REP of port number 80.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=7.0cm,clip]{figure/DynamicConnectionUseCase.pdf}
+    \caption{Dynamic connection between CEP and REP}
+    \label{fig:DynamicConnectionUseCase}
+\end{figure}
+
+To utilize dynamic connection, the selector should be defined.
+The selector connects all the components that can be dynamically connnected, to refer the descripter of them.
+Descriptor is an identifier to access the component.
+cREP ports are call ports array, which connect the number of tREP cells (Line 9 in Fig. \ref{src:DynamicCDLcode}).
+{\it [ref\_desc]} is described to identify the call port refers to descriptors. 
+In the case of Fig. \ref{fig:DynamicConnectionUseCase}, the tRepSelector cell connects all tREP cells.
+
+A CEP component has two call ports.
+cRepSelector port connects eRepSelector port of tRepSelector cell and cREP4 port connects either of tREP cells (Lines 13-15 in Fig. \ref{src:DynamicCDLcode}).
+cREP port is defined with {\it [dynamic]} to identify the call port dynamically switch the components.
+The call port with {\it [dynamic]} specifier is not optimized and allocated in RAM by a plug-in.
+
+\begin{figure}[t]
+\centering
+\begin{lstlisting}
+signature sRepSelector {
+    void  getRep([out]Descriptor(sREP4) *desc,
+                 [in]int_t i);
+};
+
+celltype tRepSelector {
+    entry sRepSelector eRepSelector;
+    [ref_desc]
+        call sREP4 cREP[NUM_REP];
+};
+
+celltype tTCPCEP {
+    call sRepSelector cRepSelector;
+    [dynamic]
+        call sREP4 cREP;
+    /* Omit: other call/entry ports */
+    /* Omit: attributes and variables */
+};
+\end{lstlisting}
+\caption{Signature and celltype description for dynamic connection}
+\label{src:DynamicCDLcode}
+\end{figure}
+
+Fig. \ref{src:DynamicCcode} shows a sample code of dynamic connection.
+The eAPI\_accept function is the function wrapping {\it tcp\_acp\_cep} with TECS, which is utilized to be the state waiting for connection request.
+In the function, dynamic connection is performed as shown in Fig. \ref{src:DynamicCcode}.
+First, get the descriptor of REP to be joined (Line 3 in Fig. \ref{src:DynamicCcode}).
+The first argument, {\it \&desc}, is a variable to store the descriptor information, and the second argument, {\it repid}, is the index of tREP cells.
+Next, set the desctriptor (Line 5 in Fig. \ref{src:DynamicCcode}).
+cREP port combines the tREP cell that descriptor specify.
+Thus, the tCEP cell can call the function of tREP cell to be joined (Line 7 in Fig. \ref{src:DynamicCcode}).
+
+\begin{figure}[t]
+\centering
+\begin{lstlisting}
+eAPI_accept (.., ..) {
+    /* Get a descripter of intended REP cell */
+    cRepSelector_getRep(&desc, repid);
+    /* Set the descripter */
+    cREP_set_descriptor(desc);
+    /* Call the function of intended REP cell */
+    cREP_getEndpoint();
+}
+\end{lstlisting}
+\caption{Accept function (a dynamic connection example)}
+\label{src:DynamicCcode}
+\end{figure}
 
 \subsection{TECS Adapter}
 \label{sec:TECS Adapter}
@@ -499,8 +609,8 @@ Software developers can utilize an existing application for TECS owing to the ad
     \label{fig:TECS_Adapter}
 \end{figure}
 
-\section{Evaluation and Demonstration}
-\label{sec:Evaluation and Demonstration}
+\section{Evaluation}
+\label{sec:Evaluation}
 
 \subsection{Evaluation environment}
 
@@ -528,7 +638,7 @@ We also employ TINET 1.5.4 and the compiler arm-none-eabi--gcc 5.2.
 \section{Related Work}
 \label{sec:Related Work}
 
-Open-source TCP/IP protocol stacks for embedded systems have been developed such uIP \cite{par:uIP}.
+Open-source TCP/IP protocol stacks for embedded systems have been developed such uIP \cite{par:uIP}, lwIP \cite{par:lwIP}.
 
 {\bf uIP:}
 uIP (microIP) is a very small TCP/IP stack intended for tiny 8-bit and 16-bit microcontrollers.
@@ -548,13 +658,18 @@ lwIP is larger than uIP, but provides better throughput.
 \section{Conclusion}
 \label{sec:Conclusion}
 
+In the future, the proposed framework will cooperate with mruby on TECS \cite{par:mrubyonTECS}.
+Note that mruby is a scripting language for embedded systems \cite{par:mruby}.
+We will support the functionality that TINET functions can be utilized from mruby programs as an extension of mruby-socket \cite{url:mruby-library}.
+
+    
 % conference papers do not normally have an appendix
 
 
 % use section* for acknowledgment
 \section*{Acknowledgment}
 
-The authers would like to thank H. Nagashima for supporting this research.
+The authers would like to thank Hiroaki Nagashima for supporting this research.
 This work is supported by JSPS KAKENHI Grant Number 15H05305.
 
 % trigger a \newpage just before the given reference
