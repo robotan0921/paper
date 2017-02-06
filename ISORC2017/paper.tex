@@ -111,6 +111,13 @@ Takuya Azumi\IEEEauthorrefmark{1}}
 % make the title area
 \maketitle
 
+\setcounter{topnumber}{5}       % ページ上部の図表は 5 個まで
+\def\topfraction{1.00}          % ページの上 1.00 まで図表で占めて可
+\setcounter{bottomnumber}{5}    % ページ下部の図表は 5 個まで
+\def\bottomfraction{1.00}       % ページの下 1.00 まで図表で占めて可
+\setcounter{totalnumber}{10}    % ページあたりの図表は 10 個まで
+\def\textfraction{0.04}         % ページうち本文が占める割合の下限
+
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
