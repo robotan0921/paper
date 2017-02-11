@@ -148,63 +148,54 @@ The results of an experimental comparison between the proposed component-based a
 \section{Introduction}
 \label{sec:Introduction}
 
-Internet of Things (IoT) is an essential keyword for the next era \cite{par:IoTIndustries} \cite{par:IoTComputing}.
-Various things, such as wearable devices, smart devices, and smart homes, connected to the Internet will enrich our lives.
-Embedded systems are the elements constituting IoT, e.g., sensing data and controlling actuators.
-It is not practical to implement the same TCP/IP protocol stack as a general computer because embedded systems have several restrictions such as low memory capacity.
+The Internet of Things (IoT) is an essential next evolutionary step for the Internet \cite{par:IoTIndustries} \cite{par:IoTComputing} in which various items and platforms, for example, wearable devices, smart devices, and smart homes, will be connected via the Internet to further enrich people's lives.
+However, as the IoT uses embedded systems such as data sensors and controlling actuators as elemental constituents, it is often not practical to implement the same Transmission Control Protocol/Internet Protocol (TCP/IP) protocol stacks used by traditional computing systems because embedded systems face restrictions in terms of, for example, low memory capacity.
 
-TINET (Tomakomai InterNETworking) is a compact TCP/IP protocol stack for embedded systems \cite{url:TINET}.
-TINET supports the ability such as minimum copy frequency and elimination of dynamic memory control.
-TINET needs only small memory for its TCP/IP protocol stack; therefore it is suitable for embedded systems.
-However, there are several issues that TINET consists of many complex source codes.
-In other words, TINET is composed of many files and defines many macros.
-This may take a lot of time for software developers to maintain, extend, and analysis the software.
-Embedded network software is required for the high productivity and quality.
+Tomakomai InterNETworking (TINET) is a compact TCP/IP protocol stack for embedded systems \cite{url:TINET}.
+As TINET supports functionalities such as a minimum copy frequency and the elimination of dynamic memory control, it requires significantly reduced memory for its TCP/IP protocol stack and is therefore suitable for embedded systems.
+However, TINET comprises many complex source codes, i.e., it contains many files and defines many macros, which can be problematic for software developers seeking to maintain, extend, and analyze the software.
+Thus, embedded network software is required for high productivity and quality.
 
-An approach to improve software productivity is component-based development, which is a design technique that can be applied to reusable software development for embedded systems \cite{par:Crnkovic}\cite{par:CBD}, such as TECS \cite{par:TECS} \cite{par:hr-tecs}, AUTOSAR \cite{url:AUTOSAR}, and SaveCCM \cite{par:SAVEapproach}.
+One approach to improving software productivity is component-based development, a design technique that can be applied in reusable software development for embedded systems \cite{par:Crnkovic}\cite{par:CBD} such as TECS \cite{par:TECS} \cite{par:hr-tecs}, AUTOSAR \cite{url:AUTOSAR}, or SaveCCM \cite{par:SAVEapproach}.
 Component-based systems are flexible to software extension and specification changes.
-In addition, individual component diagrams enable the visualization of an entire system.
 
-This paper proposes a component-based TCP/IP protocol stack for embedded systems, i.e., TINET+TECS, to improve the configurability and scalability of TCP/IP software.
-TECS (TOPPERS Embedded Component System) \cite{par:TECS} \cite{par:hr-tecs} is utilized to componentize TINET, because TECS is a component system suitable for embedded systems.
-TECS supports static configuration, which statically defines component behaviors and interconnections.
-Thus, TECS can optimize the overhead of componentization.
+This paper proposes a component-based TCP/IP protocol stack for embedded systems--TINET componentized with the Toyohashi Open Platform for Embedded Real-time Systems (TOPPERS) embedded component system (TINET+TECS)--to improve the configurability and scalability of TCP/IP software.
+Because it is a component system suitable for embedded systems, TECS \cite{par:TECS} \cite{par:hr-tecs} is used to componentize TINET in the proposed protocol stack.
+As TECS supports static configurations that statically define component behaviors and interconnections, it can optimize the componentization overhead.
 
-In addition, satisfying the original TINET specification, the proposed framework utilizes dynamic connection, a method of TECS, to dynamically switch component bindings.
-A general TCP/IP protocol server dynamically processes the requested port, i.e., HTTP (port: 80) and HTTPS (port: 443).
-However, embedded systems are restricted dynamic processing due to the strict memory restriction.
-TINET supports static generation of CEPs and REPs which are like sockets.
-As TINET+TECS statically generates components and dynamically combines them as well as TINET, TINET+TECS reduces dynamically increasing memory consumption.
+In addition to satisfying the original TINET specifications, the proposed framework utilizes the TECS dynamic connection capability to dynamically switch component bindings.
+Although general TCP/IP protocol servers dynamically process requested ports, i.e., HTTP (port: 80) and HTTPS (port: 443), embedded systems are restricted in their dynamic processing ability owing to strict memory constraints.
+TINET supports the static generation of Communication Endpoints (CEPs) and Reception Points (REPs), which are similar to sockets.
+As TINET+TECS, like TINET, statically generates components and dynamically combines them in the same manner, TINET+TECS reduces the dynamic increase of memory consumption.
 
-In the proposed framework, software applications can be developed by not only TECS method but also existing method.
-The software applications can be developed as a TECS component because TINET+TECS is a component-based framework using TECS.
-Moreover, TECS supports an adapter to call functions of TECS components from non TECS codes.
-The adapter allows the use of existing TCP/IP applications without modification.
+In the proposed framework, software applications can be developed using both TECS method and existing methods.
+Software applications can be developed as TECS components because TINET+TECS is a component-based framework.
+Furthermore, TECS supports the use of an adapter to call TECS component functions from non-TECS codes, which allows for the use of existing TCP/IP applications without modification.
 
-This paper evaluates the overheads of execution time and memory consumption and the amount of code line change for adding/removing the functionalities, which demonstrates TINET+TECS can improve the configurability with small overheads.
-Moreover, the advantages of dynamic connection in terms of memory consumption and the low overhead of the TECS adapter are demonstrated.
+This paper evaluates the overheads of execution time and memory consumption and the amount of code line changes needed to add and remove functionalities in order to improve configurability with small overheads.
+Furthermore, the advantages of dynamic connection in terms of the memory consumption and low overhead of the TECS adapter are demonstrated.
 
-{\bf Contributions:} This paper provides the following contributions.
+{\bf Contributions:} This paper provides the following contributions:
 
 \begin{enumerate}
 
     \item {\bf Improve configurability}\mbox{}\\
-        Since TINET+TECS is a component-based system, the software is flexible to change the configuration such as resizing network buffer, adding/removing TCP (or UDP) functions, and supporting both IPv4 and IPv6.
-        In addition, a component diagram provides visualization of TINET, a complicated system.
+        Because TINET+TECS is a component-based system, its software can flexibly change as system's configuration by, for example, resizing network buffer, adding/removing TCP (or UDP) functionality, or supporting either IPv4 or IPv6.
+        In addition, the use by TINET+TECS of individual component diagrams enables visualization of an entire system.
 
     \item {\bf Dynamic connection method}\mbox{}\\
-        Dynamically switching the binding of components, that is switching between a communication endpoint and reception point of TINET, realizes a TCP/IP protocol stack for embedded systems.
+        Dynamically switching the binding of components, that is, switching between a TINET communication endpoint and REP, realizes a TCP/IP protocol stack for an embedded system.
         
     \item {\bf Support legacy codes}\mbox{}\\
-        TINET+TECS can be applied to an existing application because TECS supports the adapter to call TECS functions from C codes. 
+        TINET+TECS can be applied to existing applications because TECS supports the ability of the adapter to call TECS functions from C codes. 
     % \item {\bf Software visualization}
 
 \end{enumerate}
 
 {\bf Organization}: The remainder of this paper is organized as follows.
-Section \ref{sec:System Model} introduces the system model and basic technologies, i.e., TINET and TECS.
+Section \ref{sec:System Model} introduces the system model and its basic technologies, i.e., TINET and TECS.
 Section \ref{sec:Design and Implementation} describes the design and implementation of the proposed framework.
-Section \ref{sec:Evaluation} evaluates the proposed framework and demonstrates the advantages.
+Section \ref{sec:Evaluation} evaluates the proposed framework and demonstrates its advantages.
 Related work is discussed in Section \ref{sec:Related Work}.
 Conclusions and suggestions for future work are presented in Section \ref{sec:Conclusion}.
 
@@ -262,7 +253,7 @@ To solve the problem, TINET does pass the pointer of the data buffer between eac
 \begin{figure}[t]
     \centering
     \includegraphics[width=8.0cm,clip]{figure/TINETHierarchyDiagram.pdf}
-    \caption{Hierarchy diagram of TINET and TOPPERS/ASP3}
+    \caption{TINET and TOPPERS/ASP3 hierarchy diagrams}
     \label{fig:TINETHierarchyDiagram}
 \end{figure}
 
