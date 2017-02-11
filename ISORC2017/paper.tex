@@ -679,13 +679,13 @@ The processes and data to manage TECS components, such as initialization of cell
 \begin{table}[t]
     \centering
     \caption{Memory consumption of TINET and TINET+TECS}
-    \begin{tabular}{c|r|r}
+    \begin{tabular}{c|r|r|r|r}
         \hline\hline
-                  &   TINET      &   TINET+TECS  \\ \hline
-        ROM       &   74.93 KB   &   76.62 KB   \\
-        RAM       &   27.36 KB   &   28.24 KB   \\
-        ROM + RAM &   102.29 KB  &   103.86 KB   \\
+                    &   text       &  data    &   bss      &  total     \\ \hline
+        TINET       &   183.94 KB  &  5.37 KB &  132.03 KB &  322.34 KB \\
+        TINET+TECS  &   170.73 KB  &  5.37 KB &  149.13 KB &  325.23 KB \\
         \hline
+        \multicolumn{5}{r}{Including the application and kernel objects}
     \end{tabular}
     \label{tab:EvaluationOfMemoryConsumption}
 \end{table}
@@ -700,11 +700,14 @@ Thus, the proposed framework improves the configurability.
     \begin{tabular}{c|r|r|r}
         \hline\hline
                          &   Size       &   Size (- Default)  & CDL  \\ \hline
-        Default          &   104.86 KB  &   0 KB           & 0    \\
-        I                &   80.79 KB   &   - 24.07 KB     & 18    \\
-        I + I\hspace{-.1em}I &   80.50 KB  &   - 26.35 KB  & 26    \\
-        I + I\hspace{-.1em}I + I\hspace{-.1em}I\hspace{-.1em}I   & 72.03 KB & - 32.83 KB  & 31 \\
+        Default          &   325.23 KB  &             0 KB    &  0 lines   \\
+        I                &   305.40 KB  &       - 19.83 KB    & 18 lines    \\
+        I + I\hspace{-.1em}I &   304.12 KB  &   - 21.10 KB    & 27 lines   \\
+        I + I\hspace{-.1em}I + I\hspace{-.1em}I\hspace{-.1em}I & 303.45 KB & - 21.77 KB  & 32 lines \\
         \hline
+        \multicolumn{4}{l}{I: Remove TCP}\\
+        \multicolumn{4}{l}{I\hspace{-.1em}I: Remove ICMP}\\
+        \multicolumn{4}{l}{I\hspace{-.1em}I\hspace{-.1em}I: Change network buffer (Remove memory pools)}
     \end{tabular}
     \label{tab:EvaluationOfConfigurability}
 \end{table}
@@ -736,6 +739,72 @@ The total memory consumption is fewer in the proposed framework.
     \caption{Memory consumption of two cases (with/without dynamic connection)}
     \label{fig:EvaluationOfDynamicConnection}
 \end{figure}
+
+\begin{table}[t]
+    \centering
+    \caption{CDL code lines of without/with dynamic connection}
+    \begin{tabular}{l|r|r|r}
+        \hline\hline
+                     &  without  &  with  &  Diff  \\ \hline
+        CEP:1 REP:1  &  344 lines     &  347 lines  &  -3 lines   \\
+        CEP:1 REP:5  &  369 lines     &  367 lines  &   2 lines   \\
+        CEP:2 REP:5  &  387 lines     &  382 lines  &   5 lines   \\
+        CEP:5 REP:10 &  485 lines     &  445 lines  &  40 lines   \\
+        \hline
+    \end{tabular}
+    \label{tab:EvaluationOfConfigurabilityByDynamicConnection}
+\end{table}
+
+\begin{figure}[t]
+ \centering
+ \begin{lstlisting}
+/* without Dynamic Connection */
+cell tTCPCEP TCPCEP_000 {
+    cREP[0] = REP_000.eREP;
+    ..
+    cREP[n] = REP_00n.eREP;
+};
+cell tTCPCEP TCPCEP_001 {
+    cREP[0] = REP_000.eREP;
+    ..
+    cREP[n] = REP_00n.eREP;
+};
+..
+cell tTCPCEP TCPCEP_00n {
+    cREP[0] = REP_000.eREP;
+    ..
+    cREP[n] = REP_00n.eREP;
+};
+ \end{lstlisting}
+ \centering
+ \begin{lstlisting}
+/* with Dynamic Connection */
+cell tRepSelector RepSelector {
+    cREP[0] = REP_000.eREP;
+    ..
+    cREP[n] = REP_00n.eREP;
+};
+cell tTCPCEP TCPCEP_000 {
+    cRepSelector = RepSelector.eRepSelector;
+};
+cell tTCPCEP TCPCEP_001 {
+    cRepSelector = RepSelector.eRepSelector;
+};
+..
+cell tTCPCEP TCPCEP_00n {
+    cRepSelector = RepSelector.eRepSelector;
+};
+ \end{lstlisting}
+ \caption{Comparison of CDL descriptions between without/with dynamic connection}
+ \label{src:ComparisonOfCDL}
+\end{figure}
+
+The comparison of CDL code lines of without/with dynamic connection is shown in TABLE \ref{tab:EvaluationOfConfigurabilityByDynamicConnection}, to demonstrate improved configurability by dynamic connection.
+As the number of CEPs and REPs increases, the amount of CDL code lines to be added increases.
+In the left part of Fig. \ref{fig:ComparisonOfDynamicConnection}, each CEP connects all REPs as shown in the upper of Fig. \ref{src:ComparisonOfCDL}. 
+In the right part of Fig. \ref{fig:ComparisonOfDynamicConnection}, a CEP dynamically connects an REP, and only the selector connects all REPs as shown in the lower of Fig. \ref{src:ComparisonOfCDL}. 
+Since the difference spreads as the number of CEPs and REPs increases, it is effective for software that uses many ports.
+
 
 \subsection{Overhead of Adapter}
 
