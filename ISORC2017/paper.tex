@@ -58,7 +58,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{TINET+TECS: Component-based TCP/IP Protocol Stack for Embedded Systems}
+\title{TINET+TECS: Component-Based TCP/IP Protocol Stack for Embedded Systems}
 
 
 % author names and affiliations
@@ -122,15 +122,14 @@ Takuya Azumi\IEEEauthorrefmark{1}}
 % in the abstract
 \begin{abstract}
 
-Embedded systems are applied to Internet of Things (IoT), and the high productivity of embedded network software is required.
-TINET is a TCP/IP protocol stack for embedded systems.
-Although TINET is a compact TCP/IP protocol stack, it consists of many complex source codes.
-Therefore, it is difficult to maintain, extend, and analysis the software.
-To improve the scalability and configurability, this paper proposes TINET+TECS, a component-based TCP/IP protocol stack for embedded systems: TINET componentized with TOPPERS embedded component system (TECS).
-The component-based TINET provides software developers high productivity such as change of network buffer size and adding/removing TCP (or UDP) function.
-TINET+TECS utilizes a dynamic connection method of TECS components to satisfy the original TINET specification.
-We evaluate the component-based TINET compared with the original TINET.
-Experimental results show that the overheads of execution time and memory consumption are low, and that the configurability is improved.
+% Embedded systems are applied to Internet of Things (IoT), and the high productivity of embedded network software is required.
+High productivity embedded network software is required to run embedded systems within the Internet of Things (IoT).
+Tomakomai InterNETworking (TINET) is a Transmission Control Protocol/Internet Protocol (TCP/IP) protocol stack for use in embedded systems.
+Although TINET is a compact protocol stack, it comprises many complex source codes and is difficult to maintain, extend, and analyze.
+To improve scalability and configurability, this paper proposes TINET componentized with the Toyohashi Open Platform for Embedded Real-time Systems (TOPPERS) embedded component system (TINET+TECS), a component-based TCP/IP protocol stack for embedded systems.
+This component-based TINET offers software developers high productivity through variable network buffer sizes and the ability to add or remove TCP (or UDP) functionality.
+TINET+TECS utilizes a dynamic TECS component connection method to satisfy the original TINET specifications.
+The results of an experimental comparison between the proposed component-based and original TINETs show that the execution time and memory consumption overhead are reduced and the configurability is improved.
 
 \end{abstract}
 
