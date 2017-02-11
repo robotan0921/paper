@@ -164,7 +164,7 @@ Because it is a component system suitable for embedded systems, TECS \cite{par:T
 As TECS supports static configurations that statically define component behaviors and interconnections, it can optimize the componentization overhead.
 
 In addition to satisfying the original TINET specifications, the proposed framework utilizes the TECS dynamic connection capability to dynamically switch component bindings.
-Although general TCP/IP protocol servers dynamically process requested ports, i.e., HTTP (port: 80) and HTTPS (port: 443), embedded systems are restricted in their dynamic processing ability owing to strict memory constraints.
+Although general TCP/IP protocol servers dynamically process requested ports, i.e., Hypertext Transfer Protocol (HTTP, port: 80) and Hypertext Transfer Protocol Secure (HTTPS, port: 443), embedded systems are restricted in their dynamic processing ability owing to strict memory constraints.
 TINET supports the static generation of Communication Endpoints (CEPs) and Reception Points (REPs), which are similar to sockets.
 As TINET+TECS, like TINET, statically generates components and dynamically combines them in the same manner, TINET+TECS reduces the dynamic increase of memory consumption.
 
@@ -371,75 +371,73 @@ cell tTCPOutput TCPOutput {
 \section{Design and Implementation}
 \label{sec:Design and Implementation}
 
-This section describes design and implementation of the proposed framework, TINET+TECS.
-The proposed framework is component-based TCP/IP protocol stack for embedded systems, i.e., componentized TINET using TECS.
-In addition, A TECS novel functionality, dynamic connection method, and TECS adapter to support legacy codes are described with the use case of the proposed framework.
+This section describes the design and implementation of the proposed TINET+TECS framework.
+The proposed framework is a component-based TCP/IP protocol stack for embedded systems: in other words, a componentized TINET using TECS.
+In this section, a new TECS functionality--the dynamic connection method--and the TECS adapter to support legacy codes are described via a use case of the proposed framework.
 
 \subsection{TINET+TECS}
-TINET+TECS, the proposed componentized TCP/IP protocol stack, consists of some TECS components.
-This section describes the components of TINET+TECS framework with component diagrams.
+TINET+TECS, the proposed componentized TCP/IP protocol stack, comprises a number of some TECS components.
+This section describes the components of the TINET+TECS framework with the aid of component diagrams.
 % In addition, TECS functionalities applied to the proposed system such as {\it send}/{\it receive} specifier and adapter are explained.
 
-\subsubsection{Components of protocol stack}
+\subsubsection{Components of a protocol stack}
 
-The components of a protocol stack for TINET+TECS is shown in Fig. \ref{fig:ComponentProtocolStack}.
-Note that some small particle components such as a kernel object, dataqueques, and semaphores are omitted to simplify the component diagram.
-In TINET+TECS, the components are divided for each protocol, and the functionalities such as input function and output function are defined as each a component.
-Therefore, software visibility is improving because of small grain components.
+The components of a TINET+TECS protocol stack are shown in Fig. \ref{fig:ComponentProtocolStack}.
+Note that some small particle components, such as a kernel object, data queues, and semaphores, are omitted to simplify the component diagram.
+In TINET+TECS, the components are divided for each protocol, and functionalities such as input and output functions are defined as respective components.
+By using such small grain components, software visibility is improved.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=8.0cm,clip]{figure/ComponentProtocolStack.pdf}
-    \caption{Component diagram of protocol stack}
+    \caption{Component diagram of a protocol stack}
     \label{fig:ComponentProtocolStack}
 \end{figure}
 
-The components of each protocol are described below.\\
+The components of each protocol are described in the following.\\
 
 {\bf Application layer:}
 An application in TINET+TECS is implemented as a component such as tApplication.
 Software with TINET uses ITRON TCP/IP API \cite{url:ITRON_TCP/IP_API_Spec} such as {\it tcp\_snd\_dat} and {\it tcp\_rcv\_dat}.
 In TINET+TECS, the application component calls TECS functions such as {\it cTCPAPI\_sendData} and {\it cTCPAPI\_receiveData}.
-Moreover, TINET+TECS supporting a TECS adapter (\ref{sec:TECS Adapter}), an existing application with TINET can run on TINET+TECS framework without transporting.
-Therefore, software can be developed either with existing methods or as a TECS component.
+Moreover, in TINET+TECS supporting a TECS adapter (\ref{sec:TECS Adapter}), an existing application with TINET can run on the TINET+TECS framework without transporting, and therefore, software can be developed either using existing methods or as TECS components.
 
 {\bf Transport layer:}
-tTCPCEP (tUDPCEP) is a CEP component for TCP (UDP), and tREP is a REP component.
-For example, a server program supporting multiple clients can be developed by preparing the multiple tTCPCEP components.
-tTCPInput (tUDPInput) and tTCPOutput (tUDPOutput) are components performing the receiving and sending processing respectively in the transport layer.
+tTCPCEP (tUDPCEP) and tREP are, respectively, CEP and REP components TCP (UDP).
+For example, a server program supporting multiple clients can be developed by preparing multiple tTCPCEP components.
+tTCPInput (tUDPInput) and tTCPOutput (tUDPOutput) are components for performing, respectively, receiving and sending processing in the transport layer.
 
 {\bf Network layer:}
-tIPv4Input and tIPv4Output are components performing the receiving and sending processing respectively in the network layer.
-tIPv4Functions component performs some functions such as checksum, tICMP component is for the ICMP protocol, and tIPv4RoutingTable component operates a routing table.
+tIPv4Input and tIPv4Output are components that perform, respectively, the receiving and sending processing in the network layer.
+The tIPv4Functions component performs functions such as checksum, the tICMP component is for implementing the Internet Control Message Protocol (ICMP), and the tIPv4RoutingTable component operates a routing table.
 
 {\bf Data link layer:}
-tEthernetInputTaskBody and tEthernetOutputTaskBody (tEthernetOutput) are components performing the receiving and sending processing respectively in the data link layer.
-tArp component is for the ARP protocol.
+tEthernetInputTaskBody and tEthernetOutputTaskBody (tEthernetOutput) are components for performing, respectively, receiving and sending processing in the data link layer.
+The tArp component is used for the Address Resolution Protocol (ARP).
 
 {\bf Physical layer:}
-tNetworkInterfaceContoroller component implements a network device driver.
-Software can run on other devices by replacing the component because only the component depends on the target device.\\
+The tNetworkInterfaceContoroller component implements a network device driver.
+Software can be run on other devices by replacing the component because only the component depends on the target device.\\
 
-To utilize the protocol stack as same as the original TINET, communication object components such as tTCPCEP, tUDPCEP, and tREP are defined as an interface between TINET+TECS and an application.
-The communication object component is a component corresponding to a CEP or REP of the original TINET.
+To utilize the protocol stack in the same manner in the original TINET, communication object components such as tTCPCEP, tUDPCEP, and tREP are defined as an interface between TINET+TECS and an application.
+The communication object component corresponds to a CEP or REP of the original TINET.
 Application developers can utilize the TINET+TECS functionalities by generating and combining as many components as necessary.
 
-The protocol stack of TINET+TECS supports coexistence of multiple protocols.
-By developing the IPv6 and Point-to-Point Protocol (PPP) components, TINET+TECS can make IPv4 and IPv6 coexist and support PPP without a modification of component implementation.
+The protocol stack of TINET+TECS supports the coexistence of multiple protocols.
+Though its use of IPv6 and Point-to-Point Protocol (PPP) components, TINET+TECS can make IPv4 and IPv6 coexist and support PPP without modification of component implementation.
 
 \subsubsection{Memory allocator component} 
 
-The original TINET eliminates dynamic memory control to meet the severe memory restriction of embedded systems.
+The original TINET eliminates dynamic memory control to meet the severe memory restrictions of embedded systems.
 A memory area for sending/receiving data in the protocol stack is allocated and released within a predetermined area.
-Memory allocator component performs the elimination of dynamic memory control in TINET+TECS.
-The component provides a requested memory area from the memory area statically allocated.
+The memory allocator component allows for elimination of dynamic memory control in TINET+TECS by providing a requested memory area from the statically allocated memory area.
 
-The memory allocator component connects to as many tFixedSizeMemoryPool as needed, shown in Fig. \ref{fig:tMemoryAllocator}.
-tFixedSizeMemoryPool is a componentized kernel object of TOPPERS/ASP3 to alloc and release a memory area of the requested size. 
-tFixedSizeMemoryPool components with various sizes are prepared, and an appropriate memory area can be allocated according to the used data size.
-On the other hands, all components which need allocate and deallocate memory connect to the memory allocator component, e.g., tTCPInput and tEthernetOutput.
+The memory allocator component connects to as many tFixedSizeMemoryPool as required, as shown in Fig. \ref{fig:tMemoryAllocator}.
+tFixedSizeMemoryPool is a componentized kernel object of TOPPERS/ASP3 for allocating and release memory areas of a requested size. 
+tFixedSizeMemoryPool components of various sizes are prepared, and an appropriate memory area can be allocated according to the used data size.
+On the other hand, all components that need to allocate or deallocate memory, e.g., tTCPInput and tEthernetOutput, connect to the memory allocator component.
 
-In addition, TINET+TECS utilizes {\it send/receive} specifier of TECS to minimize the memory copy frequency, which is a functionality supported by TINET.
+In addition, TINET+TECS utilizes the TECS {\it send/receive} specifier to minimize the memory copy frequency, which is a functionality supported by TINET.
 
 \begin{figure}[t]
     \centering
@@ -455,28 +453,29 @@ In addition, TINET+TECS utilizes {\it send/receive} specifier of TECS to minimiz
     \label{fig:SendReceive}
 \end{figure}
 
-{\bf send/receive specifier:}
-TECS supports {\it send}/{\it receive} specifiers, which are interface specifiers \cite{par:RPC}.
-TINET+TECS uses {\it send} and {\it receive} specifiers instead of {\it in} and {\it out} to reduce the number of copies.
+{\bf Send/receive specifiers:}
+TECS supports {\it send}/{\it receive} interface specifiers \cite{par:RPC}.
+TINET+TECS uses {\it send} and {\it receive} specifiers instead of {\it in} and {\it out} to reduce the number of copies:
 
-{\it in} is a specifier for input arguments.
-A callee side uses the memory of arguments with {\it in} during executing the callee function.
+\begin{itemize}
+\item {\it in} is a specifier for input arguments.
+A callee side uses the memory of arguments with {\it in} when executing the callee function.
 When the processing returns to the caller side, the caller can reuse and deallocate the memory.
 
-{\it send} is also a specifier for transferring data to a callee from a caller such as {\it in}.
-The difference between {\it in} and {\it send} is whether to deallocate the data memory in a caller or callee, shown in Fig. \ref{fig:SendReceive}.
-In case of {\it in} specifier, both allocating and deallocating the data memory are performed in the caller.
-On the other hand, in case of {\it send}, the caller allocates the data memory and the callee deallocates it.
+\item {\it send} is another specifier for transferring data to a callee from a caller such as {\it in}.
+The difference between {\it in} and {\it send} is whether the data memory is deallocated in the caller or callee, as shown in Fig. \ref{fig:SendReceive}.
+In the case of the {\it in} specifier, both allocating and deallocating of the data memory are performed in the caller.
+By contrast, in the case of {\it send}, the caller allocates the data memory and the callee deallocates it.
 
-{\it out} is a specifier for output arguments.
-A callee writes data in the memory allocated by a caller, and the caller receives the data.
+\item {\it out} is a specifier for output arguments through which a callee writes data in the memory allocated by a caller while the caller receives the data.
 
-{\it receive} is also a specifier for a caller receiving data from a callee such as {\it out}.
-The difference between {\it out} and {\it receive} is whether to allocate the data memory in a caller or callee, shown in Fig. \ref{fig:SendReceive}.
-While, in case of {\it out}, a callee writes data in the memory allocated by a caller, in case of {\it receive}, the callee allocates the data memory.
-Deallocating the memory is performed in the caller in both cases.
+\item {\it receive} is another specifier for a caller receiving data from a callee such as {\it out}.
+The difference between {\it out} and {\it receive} lies in whether the data memory is allocated in the caller or callee, as shown in Fig. \ref{fig:SendReceive}.
+In the case of {\it out}, the callee writes data in the memory allocated by a caller, whereas in the {\it receive} case, the callee allocates the data memory.
+Deallocating of the memory is performed in the caller in both cases.
+\end{itemize}
 
-As shown in Fig. \ref{src:SendReceive}, the arguments of sending and receiving data such as {\it outputp} and {\it inputp} are defines with the {\it send/receive} specifiers in the signature description.
+As shown in Fig. \ref{src:SendReceive}, data sending and receiving arguments such as {\it outputp} and {\it inputp} are defined using, respectively, the {\it send/receive} specifier in the signature description.
 
 \begin{figure}[t]
 \centering
@@ -502,7 +501,7 @@ signature sNicDriver {
 % \subsubsection{Network timer component}
 
 
-\subsection{Dynamic Connection of TECS}
+\subsection{Dynamic connection in TECS}
 \label{sec:DynamicConnection}
 
 \begin{figure}[t]
@@ -512,16 +511,14 @@ signature sNicDriver {
     \label{fig:DynamicConnection}
 \end{figure}
 
-TECS supports dynamic connection as a new functionality.
-Dynamic connection is a method to switch the binding of components at runtime as shown in Fig. \ref{fig:DynamicConnection}.
-Note that all components are statically generated in TECS.
-TECS can optimize the overhead of componentization because components are statically configured.
-Dynamically generating the components causes a lot of memory consumption, which is a serious problem for embedded systems with strict memory constraint.
-The proposed framework realizes the componentization of TINET while satisfying the memory constraint, because components statically generate and dynamically connect in TECS.
+TECS supports dynamic connection, a method for switching the binding of components at runtime (Fig. \ref{fig:DynamicConnection}) as a new functionality.
+Note that all components are statically generated in TECS, which can optimize the overhead of componentization because components are statically configured.
+Dynamically generating components causes a good deal of memory consumption, which is a serious problem for embedded systems with strict memory constraints.
+The proposed framework can take advantage of the componentization in TINET while satisfying the memory constraint because components are statically generated and dynamically connected in TECS.
 
-TINET+TECS utilizes the dynamic connection to switch between CEP and REP components as shown in Fig. \ref{fig:DynamicConnectionUseCase}.
-In a server application, CEP is associated with REP in the state waiting for connection request from clients\footnote{ITRON TCP/IP API Specification \cite{url:ITRON_TCP/IP_API_Spec}\\tcp\_acp\_cep(ID cepid, ID repid, T\_IPV4EP *p\_dstaddr, TMO tmout)}.
-For example, when processing with HTTP protocol, CEP passively opens with REP of port number 80.
+TINET+TECS utilizes dynamic connection to switch between CEP and REP components, as shown in Fig. \ref{fig:DynamicConnectionUseCase}.
+In a server application, CEP is associated with REP in the state of waiting for connection request from clients\footnote{ITRON TCP/IP API Specification \cite{url:ITRON_TCP/IP_API_Spec}\\tcp\_acp\_cep(ID cepid, ID repid, T\_IPV4EP *p\_dstaddr, TMO tmout).}.
+For example, when processing with the HTTP protocol, CEP passively opens with an REP of port number 80.
 
 \begin{figure}[t]
     \centering
@@ -530,17 +527,15 @@ For example, when processing with HTTP protocol, CEP passively opens with REP of
     \label{fig:DynamicConnectionUseCase}
 \end{figure}
 
-To utilize dynamic connection, the selector should be defined.
-The selector connects all the components that can be dynamically connnected, to refer the descriptor of them.
-Descriptor is an identifier to access the component \cite{par:optimization}.
-cREP ports are call ports array, which connect the number of tREP cells (Line 9 in Fig. \ref{src:DynamicCDLcode}).
-{\it [ref\_desc]} is described to identify the call port refers to descriptors. 
-In the case of Fig. \ref{fig:DynamicConnectionUseCase}, the tRepSelector cell connects all tREP cells.
+To utilize dynamic connectivity, a selector should be defined.
+A selector connects all components that can be dynamically connected under a common descriptor that serves as an identifier to access each component \cite{par:optimization}.
+The cREP ports form a call port array connecting to connecting to all tREP cells (Line 9 in Fig. \ref{src:DynamicCDLcode}).
+{\it [ref\_desc]} is used to identify call ports referring to descriptors. 
+In the case shown in Fig. \ref{fig:DynamicConnectionUseCase}, the tRepSelector cell connects all tREP cells.
 
-A CEP component has two call ports.
-cRepSelector port connects eRepSelector port of tRepSelector cell and cREP4 port connects either of tREP cells (Lines 13-15 in Fig. \ref{src:DynamicCDLcode}).
-cREP port is defined with {\it [dynamic]} to identify the call port dynamically switch the components.
-The call port with {\it [dynamic]} specifier is not optimized and allocated in RAM by a plug-in.
+A CEP component has two call ports: the cRepSelector port, which connects to the eRepSelector port of tRepSelector cell, and the cREP4 port, which connects to either of the tREP cells (Lines 13--15 in Fig. \ref{src:DynamicCDLcode}).
+The cREP port is defined using {\it [dynamic]} to identify the call port used to dynamically switch the components.
+The call port with the {\it [dynamic]} specifier is not optimized and is allocated in RAM using a plug-in.
 
 \begin{figure}[t]
 \centering
@@ -569,13 +564,11 @@ celltype tTCPCEP {
 \end{figure}
 
 Fig. \ref{src:DynamicCcode} shows a sample code of dynamic connection.
-The eAPI\_accept function is the function wrapping {\it tcp\_acp\_cep} with TECS, which is utilized to be the state waiting for connection request.
-In the function, dynamic connection is performed as shown in Fig. \ref{src:DynamicCcode}.
-First, get the descriptor of REP to be joined (Line 3 in Fig. \ref{src:DynamicCcode}).
-The first argument, {\it \&desc}, is a variable to store the descriptor information, and the second argument, {\it repid}, is the index of tREP cells.
-Next, set the desctriptor (Line 5 in Fig. \ref{src:DynamicCcode}).
-cREP port combines the tREP cell that descriptor specify.
-Thus, the tCEP cell can call the function of tREP cell to be joined (Line 7 in Fig. \ref{src:DynamicCcode}).
+The eAPI\_accept function is the function wrapping {\it tcp\_acp\_cep} under TECS, which is set as the state waiting for connection request.
+Dynamic connection in the function is performed as shown in Fig. \ref{src:DynamicCcode}.
+First, the descriptor of REP to be joined is obtained (Line 3 in Fig. \ref{src:DynamicCcode}).
+The first argument, {\it \&desc}, is a variable used to store the descriptor information, whereas the second argument, {\it repid}, is the index of tREP cells.
+Next, the descriptor is set (Line 5 in Fig. \ref{src:DynamicCcode}), and the cREP port combines the tREP cell specified by the descriptor, enabling the tCEP cell to call the function of the tREP cell to be joined (Line 7 in Fig. \ref{src:DynamicCcode}).
 
 \begin{figure}[t]
 \centering
@@ -589,19 +582,18 @@ eAPI_accept (.., ..) {
     cREP_getEndpoint();
 }
 \end{lstlisting}
-\caption{Accept function (a dynamic connection example)}
+\caption{Accept function (Dynamic connection example)}
 \label{src:DynamicCcode}
 \end{figure}
 
-\subsection{TECS Adapter}
+\subsection{TECS adapter}
 \label{sec:TECS Adapter}
 
-TECS supports {\it Adapter} functionality which enables to call a function in TECS from existing C codes.
-An adapter is implemented between C codes and a TECS component, and links a C function to a TECS function shown in Fig. \ref{fig:TECS_Adapter}.
-In TINET+TECS, when the application calls an API such as {\it tcp\_snd\_dat}, the adapter component calls the function of tTCPCEP such as {\it eAPI\_sendData}.
-Note that {\it tcp\_snd\_dat} is defined with the name {\it eAPI\_sendData} in TINET+TECS.
-The adapter wraps the APIs used in the existing applications into TECS functions.
-Therefore, software developers can utilize an existing TCP/IP application by using the adapter.
+TECS supports {\it Adapter} functionality, which enables to calling a function in TECS from existing C codes.
+The adapter is implemented between C codes and a TECS component and links a C function to a TECS function as shown in Fig. \ref{fig:TECS_Adapter}.
+In TINET+TECS, when an application calls an API such as {\it tcp\_snd\_dat}, the adapter component calls a function of tTCPCEP such as {\it eAPI\_sendData}.
+Note that {\it tcp\_snd\_dat} is defined under the name {\it eAPI\_sendData} in TINET+TECS.
+The adapter wraps the APIs used in the existing applications into TECS functions, enabling software developers to utilize an existing TCP/IP application via the adapter.
 
 \begin{figure}[t]
     \centering
