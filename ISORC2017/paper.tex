@@ -605,14 +605,14 @@ The adapter wraps the APIs used in the existing applications into TECS functions
 \section{Evaluation}
 \label{sec:Evaluation}
 
-This section describes our experimental evaluation to demonstrate the effectiveness of the proposed framework.
+This section describes the experimental evaluation used to demonstrate the effectiveness of the proposed framework.
 
-\subsection{Evaluation Environment}
+\subsection{Evaluation environment}
 
-GR-PEACH is employed as the evaluation board.
-We connected the board and the host PC with a LAN cable, and evaluated the data transmission and reception.
-The detail specification of the board is shown in TABLE \ref{tab:EvaluationBoardEnvironment}.
+GR-PEACH was employed as the evaluation board.
+Detailed specifications of the board are shown in TABLE \ref{tab:EvaluationBoardEnvironment}.
 We also employ TINET 1.5.4 and the compiler arm-none-eabi--gcc 5.2
+To pretest the system, we connected the board to a host PC via a LAN cable and evaluated the data transmission and reception.
 
 \begin{table}[t]
     \centering
@@ -631,28 +631,25 @@ We also employ TINET 1.5.4 and the compiler arm-none-eabi--gcc 5.2
 
 \subsection{Performance of TINET+TECS}
 
-To demonstrate the low overhead of TINET+TECS, we evaluated the execution time and the memory consumption of TINET+TECS compared with TINET.
+To demonstrate the low overhead of TINET+TECS, we compared its execution time and memory consumption with that of TINET, producing the comparison results shown in Fig. \ref{fig:EvaluationOfExecutionTime}.
 
-The comparison of execution time between TINET and TINET+TECS is shown in Fig. \ref{fig:EvaluationOfExecutionTime}.
-The APIs used for the evaluation are {\it tcp\_snd\_dat} to send TCP data and {\it tcp\_rcv\_dat} to receive TCP data.
-For {\it tcp\_snd\_dat}, we measured the executing time from the API calling by the application to the return of the processing result.
-In TINET+TECS, the process is performed in the order of tApplication, tTCPCEP, tTCPOutputTaskBody, tIPv4Output, tEthernetOutput, tArp, tEthernetOutputTaskBody, and tIfMbed of Fig. \ref{fig:ComponentProtocolStack}.
-For {\it tcp\_rcv\_dat}, we measured the execution time from the data receiving in the LAN driver to the data acquisition in the application.
-In TINET+TECS, the process is performed in the order of tIfMbed, tEthernetInputTaskBody, tIPv4Input, tTCPInput, tTCPCEP, and tApplication of Fig. \ref{fig:ComponentProtocolStack}.
-The execution time of TINET+TECS is as well as that of TINET; the overhead is about 3 usec.
-{\it send/receive} specifiers enable to access the buffer address without data copies.
-Therefore, the overhead of componentization does not effect the execution time.
+The {\it tcp\_snd\_dat} and {\it tcp\_rcv\_dat} APIs were used in the evaluation to, respectively, send and receive TCP data.
+For {\it tcp\_snd\_dat}, we measured the executing time starting from the API call through the application until the return of the processing result.
+In TINET+TECS, this process is performed in the order tApplication, tTCPCEP, tTCPOutputTaskBody, tIPv4Output, tEthernetOutput, tArp, tEthernetOutputTaskBody, and tIfMbed, as shown in Fig. \ref{fig:ComponentProtocolStack}.
+For {\it tcp\_rcv\_dat}, we measured the execution time from the data receipt in the LAN driver until data acquisition in the application.
+In TINET+TECS, the process is performed in the order tIfMbed, tEthernetInputTaskBody, tIPv4Input, tTCPInput, tTCPCEP, and tApplication, as shown in Fig. \ref{fig:ComponentProtocolStack}.
+The execution time of TINET+TECS is close to that of TINET, with an overhead of about 3 ms.
+As the use of the {\it send/receive} specifier enables accessing of the buffer address without data copying, the componentization overhead does not affect the execution time.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=8.0cm,clip]{figure/EvaluationOfExecutionTime.pdf}
-    \caption{Execution time of TINET and TINET+TECS}
+    \caption{Execution times of TINET and TINET+TECS}
     \label{fig:EvaluationOfExecutionTime}
 \end{figure}
 
 The memory consumptions of TINET and TINET+TECS are compared in TABLE \ref{tab:EvaluationOfMemoryConsumption}.
-The memory consumption of TINET+TECS increases about 2.5\% compared with TINET.
-The processes and data to manage TECS components, such as initialization of cells, descriptors, function tables, and skeleton functions, cause the increase memory consumption.
+The memory consumption of TINET+TECS is about 1\% higher than that of TINET, as the data and processes such as initialization of cells, descriptors, function tables, and skeleton functions needed to manage TECS components increase memory consumption.
 
 \begin{table}[t]
     \centering
@@ -669,8 +666,7 @@ The processes and data to manage TECS components, such as initialization of cell
 \end{table}
 
 As shown in TABLE \ref{tab:EvaluationOfConfigurabilty}, the code lines for modification were measured to demonstrate the improved configurability.
-We can change the composition of the protocol stack with a small workload.
-Thus, the proposed framework improves the configurability.
+This demonstrated the ability to change the composition of the protocol stack with a small workload, confirming that the proposed framework improves the configurability.
 
 \begin{table}[t]
     \centering
@@ -691,30 +687,29 @@ Thus, the proposed framework improves the configurability.
 \end{table}
 
 
-\subsection{Dynamic Connection}
+\subsection{Dynamic connection}
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=8.0cm,clip]{figure/ComparisonOfDynamicConnection.pdf}
-    \caption{Component diagrams of two cases (without/with dynamic connection)}
+    \caption{Component diagrams for two cases (without/with dynamic connection)}
     \label{fig:ComparisonOfDynamicConnection}
 \end{figure}
 
-The memory consumption without and with TECS dynamic connection was evaluated.
-As shown in the left of Fig. \ref{fig:ComparisonOfDynamicConnection}, a CEP component should statically connect to all REP components in the case dynamic connection is not used.
-As the number of REPs increases, call ports of CEP are required for that.
-Thus, it consumes a lot of memory. 
-Dynamic connection reduces the memory consumption because only one call port of CEP for REP, which is drawn with red lines in the right of Fig. \ref{fig:ComparisonOfDynamicConnection}, is required per CEP.
-Even when the number of REPs increases, a call port of the selector, not the CEP, is joined.
+Memory consumption without and with TECS dynamic connection was then evaluated.
+As shown in the left panel of Fig. \ref{fig:ComparisonOfDynamicConnection}, each CEP component should be statically connected to all REP components if dynamic connection is not used.
+As the number of REPs increases, additional call ports of CEP are required, in turn increasing the consumption of memory. 
+Dynamic connection reduces memory consumption because only one CEP-to-REP call port is required per CEP, as illustrated with red lines in the right panel of Fig. \ref{fig:ComparisonOfDynamicConnection}.
+Even if the number of REPs increases, additional call ports can be joined through the selector, instead of the CEPs.
 
-The memory consumption of two cases, without/with dynamic connection, is shown in Fig. \ref{fig:EvaluationOfDynamicConnection}.
-The case of dynamic connection consumes the RAM memory more than the other case because the call ports with {\it [dynamic]} is not optimized and allocated in RAM areas as mentioned in Section \ref{sec:DynamicConnection}.
-The total memory consumption is fewer in the proposed framework.
+Memory consumption of without and with dynamic connection is shown in Fig. \ref{fig:EvaluationOfDynamicConnection}.
+The dynamic connection case consumes the more RAM memory because, as mentioned in Section \ref{sec:DynamicConnection}, call ports with {\it [dynamic]} are not optimized and allocated in RAM areas.
+However, the overall memory consumption is lower under the proposed framework.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=8.0cm,clip]{figure/EvaluationOfDynamicConnection.pdf}
-    \caption{Memory consumption of two cases (with/without dynamic connection)}
+    \caption{Memory consumption in two cases (with/without dynamic connection)}
     \label{fig:EvaluationOfDynamicConnection}
 \end{figure}
 
@@ -777,23 +772,21 @@ cell tTCPCEP TCPCEP_00n {
  \label{src:ComparisonOfCDL}
 \end{figure}
 
-The comparison of CDL code lines of without/with dynamic connection is shown in TABLE \ref{tab:EvaluationOfConfigurabilityByDynamicConnection}, to demonstrate improved configurability by dynamic connection.
+The comparison of CDL code lines of without and with dynamic connection is shown in TABLE \ref{tab:EvaluationOfConfigurabilityByDynamicConnection}, to demonstrate improved configurability by dynamic connection.
 As the number of CEPs and REPs increases, the amount of CDL code lines to be added increases.
-In the left part of Fig. \ref{fig:ComparisonOfDynamicConnection}, each CEP connects all REPs as shown in the upper of Fig. \ref{src:ComparisonOfCDL}. 
-In the right part of Fig. \ref{fig:ComparisonOfDynamicConnection}, a CEP dynamically connects an REP, and only the selector connects all REPs as shown in the lower of Fig. \ref{src:ComparisonOfCDL}. 
-Since the difference spreads as the number of CEPs and REPs increases, it is effective for software that uses many ports.
+In the left panel of Fig. \ref{fig:ComparisonOfDynamicConnection}, each CEP connects all REPs as shown in the upper of Fig. \ref{src:ComparisonOfCDL}. 
+In the right panel of Fig. \ref{fig:ComparisonOfDynamicConnection}, a CEP dynamically connects an REP, and only the selector connects all REPs as shown in the lower of Fig. \ref{src:ComparisonOfCDL}. 
+It is effective for software that uses many ports because the difference spreads as the number of CEPs and REPs increases.
 
+\subsection{Adapter overhead}
 
-\subsection{Overhead of Adapter}
-
-The execution time of API with the adapter such as {\it tcp\_snd\_dat/eAPI\_sendData} to analyze the overhead of TECS adapter which supports existing applications.
-As shown in Fig. \ref{fig:EvaluationOfAdapter}, the overhead of TECS adapter is very small because the adapter only passes the parameters to TECS components from C codes.
-Therefore, TECS adapter does not affect the system.
+The API execution time when using an adapter such as {\it tcp\_snd\_dat/eAPI\_sendData} was used to analyze the overhead of the TECS adapter supporting existing applications.
+As shown in Fig. \ref{fig:EvaluationOfAdapter}, the overhead of the TECS adapter is very small because the adapter only passes parameters from C codes to TECS components; thus, the TECS adapter overhead does not affect the system.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=8.0cm,clip]{figure/EvaluationOfAdapter.pdf}
-    \caption{Execution time of two cases (without/with TECS adapter)}
+    \caption{Execution times in two cases (without/with TECS adapter)}
     \label{fig:EvaluationOfAdapter}
 \end{figure}
 
@@ -804,14 +797,13 @@ Therefore, TECS adapter does not affect the system.
 Open-source TCP/IP protocol stacks for embedded systems have been developed such uIP \cite{par:uIP}, lwIP \cite{par:lwIP}.
 
 {\bf uIP:}
-uIP (microIP) is a very small TCP/IP stack intended for tiny 8-bit and 16-bit microcontrollers.
-    uIP only requires about five KB of code size and several hundreds bytes of RAM.
+uIP (microIP) is a very small TCP/IP stack intended for tiny 8- and 16-bit microcontrollers.
+uIP requires only about 5 KB of code size and several hundred bytes of RAM.
 uIP has been ported to various systems and has found its way into many commercial products.
-After ver. 1.0 is released, later versions of uIP, including uIPv6, are integrated with Contiki OS \cite{par:Contiki},\cite{url:Contiki}, an operating system to connect tiny microcontroller to the Internet.
+Following the release of ver. 1.0, later versions of uIP, including uIPv6, have been integrated with Contiki OS \cite{par:Contiki},\cite{url:Contiki}, an operating system to connect tiny microcontrollers to the Internet.
 
 {\bf lwIP:}
-lwIP (lightweightIP) is a small TCP/IP implementation for embedded systems.
-The focus of lwIP is to reduce memory resource while still having a full scale TCP.
+lwIP (lightweightIP) is a small TCP/IP implementation for embedded systems that is intended to reduce memory resource usage while still maintaining a full-scale TCP.
 lwIP requires about 40 KB of ROM and tens of KB of RAM.
 lwIP is larger than uIP, but provides better throughput.
 
@@ -826,19 +818,18 @@ lwIP is larger than uIP, but provides better throughput.
 \label{sec:Conclusion}
 
 This paper proposed TINET+TECS, a component-based TCP/IP protocol stack for embedded systems.
-TINET+TECS is componentized TINET, which is a compact TCP/IP protocol stack, using TECS.
-TINET consists of many macros and complicated codes and the software productivity are low.
-The proposed framework improves the configurability while suppressing the overhead of componentization.
-The proposed framework also improves the scalability because the component-based framework simplifies to add/remove and change protocols such as TCP/UDP, IPv4/IPv6, and Ethernet/PPP.
+TINET+TECS is a componentized version of TINET, a compact TCP/IP protocol stack that uses TECS.
+Because TINET comprises many macros and complicated codes, its software productivity is low.
+The proposed framework improves on TINET's configurability while suppressing the overhead of componentization.
+Scalability is also improved because the component-based framework simplifies to add/remove and change protocols such as TCP/UDP, IPv4/IPv6, and Ethernet/PPP.
 
-In addition, this paper presents dynamic connection, a new method of TECS, to enable dynamic processing while reducing memory consumption.
-To satisfy TINET specification that TINET support static generation of CEPs and REPs, TINET+TECS utilizes dynamic connection.
-TECS adapter supports legacy codes, existing TCP/IP applications can run without modification in the proposed framework.
+This paper also presented dynamic connection, a new TECS method, to enable dynamic processing while reducing memory consumption.
+TINET+TECS utilizes dynamic connection to satisfy the TINET specification for supporting static generation of CEPs and REPs.
+As the TECS adapter supports legacy codes, existing TCP/IP applications can run without modification in the proposed framework.
 
-In the future, the proposed framework will cooperate with mruby on TECS \cite{par:mrubyonTECS} to easily manage IoT devices.
+In future work, we will adapt the proposed framework to cooperate with mruby on TECS \cite{par:mrubyonTECS} to more easily manage IoT devices.
 Note that mruby is a scripting language for embedded systems \cite{par:mruby}.
-We will support the functionalities that TINET functions can be utilized from mruby programs as an extension of mruby-socket \cite{url:mruby-library}.
-
+We will support functionalities in which TINET functions can be utilized from mruby programs as an extension of mruby-socket \cite{url:mruby-library}.
     
 % conference papers do not normally have an appendix
 
