@@ -98,7 +98,7 @@ Takuro Yamamoto\IEEEauthorrefmark{1},
 Takuma Hara\IEEEauthorrefmark{2},
 Takuya Ishikawa\IEEEauthorrefmark{2}, 
 Hiroshi Oyama\IEEEauthorrefmark{3},
-Hiroaki Takada\IEEEauthorrefmark{2} and
+Hiroaki Takada\IEEEauthorrefmark{2}, and
 Takuya Azumi\IEEEauthorrefmark{1}}
 \IEEEauthorblockA{\IEEEauthorrefmark{1}Graduate School of Engineering Science, Osaka University}
 \IEEEauthorblockA{\IEEEauthorrefmark{2}Graduate School of Information Science, Nagoya University}
@@ -203,9 +203,9 @@ Conclusions and suggestions for future work are presented in Section \ref{sec:Co
 
 This section describes the system model of TINET+TECS, including basic technologies such as TINET and TECS.
 A system model of the proposed framework is shown in Fig. \ref{fig:SystemModel}.
-TINET+TECS is a component-based TCP/IP protocol stack in which the TCP output task (tTCPOutput) and Ethernet input task (tEhternetInput) are implemented as TECS components.
-CEPs and REPs (Section \ref{sec:TINET}), which are also implemented as TECS components, dynamically switch bindings using the TECS method.
-Moreover, the TECS adapter supports the legacy codes for existing TCP/IP applications.
+TINET+TECS is a component-based TCP/IP protocol stack in which the TCP output task (tTCPOutput) and Ethernet input task (tEhternetInput) are implemented as TECS components (Section \ref{sec:TINET+TECS}).
+CEPs and REPs (Section \ref{sec:TINET}), which are also implemented as TECS components, dynamically switch bindings using the TECS method (Section \ref{sec:DynamicConnection}).
+Moreover, the TECS adapter supports the legacy codes for existing TCP/IP applications (Section \ref{sec:TECSAdapter}).
 
 \begin{figure}[t]
     \centering
@@ -372,6 +372,8 @@ The proposed framework is a component-based TCP/IP protocol stack for embedded s
 In this section, a new TECS functionality--the dynamic connection method--and the TECS adapter to support legacy codes are described via a use case of the proposed framework.
 
 \subsection{TINET+TECS}
+\label{sec:TINET+TECS}
+
 TINET+TECS, the proposed componentized TCP/IP protocol stack, comprises a number of some TECS components.
 This section describes the components of the TINET+TECS framework with the aid of component diagrams.
 % In addition, TECS functionalities applied to the proposed system such as {\it send}/{\it receive} specifier and adapter are explained.
@@ -508,6 +510,7 @@ signature sNicDriver {
 \end{figure}
 
 TECS supports dynamic connection, a method for switching the binding of components at runtime (Fig. \ref{fig:DynamicConnection}) as a new functionality.
+In Fig. \ref{fig:DynamicConnection}, the solid line represents binding and the dotted line represents non-binding.
 Note that all components are statically generated in TECS, which can optimize the overhead of componentization because components are statically configured.
 Dynamically generating components causes a good deal of memory consumption, which is a serious problem for embedded systems with strict memory constraints.
 The proposed framework can take advantage of the componentization in TINET while satisfying the memory constraint because components are statically generated and dynamically connected in TECS.
@@ -581,7 +584,7 @@ eAPI_accept (.., ..) {
 \end{figure}
 
 \subsection{TECS adapter}
-\label{sec:TECS Adapter}
+\label{sec:TECSAdapter}
 
 TECS supports {\it Adapter} functionality, which enables to calling a function in TECS from existing C codes.
 The adapter is implemented between C codes and a TECS component and links a C function to a TECS function as shown in Fig. \ref{fig:TECS_Adapter}.
@@ -696,7 +699,7 @@ As the number of REPs increases, additional call ports of CEP are required, in t
 Dynamic connection reduces memory consumption because only one CEP-to-REP call port is required per CEP, as illustrated with red lines in the right panel of Fig. \ref{fig:ComparisonOfDynamicConnection}.
 Even if the number of REPs increases, additional call ports can be joined through the selector, instead of the CEPs.
 
-Memory consumption of without and with dynamic connection is shown in Fig. \ref{fig:EvaluationOfDynamicConnection}.
+Memory consumption of without and with dynamic connection is shown in TABLE \ref{fig:EvaluationOfDynamicConnection}.
 The dynamic connection case consumes the more RAM memory because, as mentioned in Section \ref{sec:DynamicConnection}, call ports with {\it [dynamic]} are not optimized and allocated in RAM areas.
 However, the overall memory consumption is lower under the proposed framework.
 
@@ -708,7 +711,8 @@ However, the overall memory consumption is lower under the proposed framework.
 % \end{figure}
 \begin{table}[t]
     \centering
-    \vspace{-1mm} \caption{Memory consumption in two cases (with/without dynamic connection)}
+    \vspace{-1mm} \caption{Memory consumption in two cases\protect\linebreak (with/without dynamic connection)}
+    {\tabcolsep = 1mm
     \begin{tabular}{c|r|r|r|r}
         \hline\hline
                 &  CEP:1 REP:1 & CEP:1 REP:5 & CEP:2 REP:5 & CEP:5 REP:10 \\ \hline
@@ -716,6 +720,7 @@ However, the overall memory consumption is lower under the proposed framework.
         with    &  325.23 KB   & 325.32 KB   & 327.24 KB   & 330.48 KB   \\
         \hline
     \end{tabular}
+    }
     \label{fig:EvaluationOfDynamicConnection}
 \end{table}
 
@@ -784,11 +789,6 @@ In the left panel of Fig. \ref{fig:ComparisonOfDynamicConnection}, each CEP conn
 In the right panel of Fig. \ref{fig:ComparisonOfDynamicConnection}, a CEP dynamically connects an REP, and only the selector connects all REPs as shown in the lower of Fig. \ref{src:ComparisonOfCDL}. 
 It is effective for software that uses many ports because the difference spreads as the number of CEPs and REPs increases.
 
-\subsection{Adapter overhead}
-
-The API execution time when using an adapter such as {\it tcp\_snd\_dat/eAPI\_sendData} was used to analyze the overhead of the TECS adapter supporting existing applications.
-As shown in Fig. \ref{fig:EvaluationOfAdapter}, the overhead of the TECS adapter is very small because the adapter only passes parameters from C codes to TECS components; thus, the TECS adapter overhead does not affect the system.
-
 \begin{figure}[t]
     \centering
     \includegraphics[width=8.0cm,clip]{figure/EvaluationOfAdapter.pdf}
@@ -796,11 +796,17 @@ As shown in Fig. \ref{fig:EvaluationOfAdapter}, the overhead of the TECS adapter
     \vspace{-1mm} \label{fig:EvaluationOfAdapter}
 \end{figure}
 
+\subsection{Adapter overhead}
+
+The API execution time when using an adapter such as {\it tcp\_snd\_dat/eAPI\_sendData} was used to analyze the overhead of the TECS adapter supporting existing applications.
+As shown in Fig. \ref{fig:EvaluationOfAdapter}, the overhead of the TECS adapter is very small because the adapter only passes parameters from C codes to TECS components; thus, the TECS adapter overhead does not affect the system.
+
+
 
 \section{Related Work}
 \label{sec:Related Work}
 
-Open-source TCP/IP protocol stacks for embedded systems have been developed such uIP \cite{par:uIP}, lwIP \cite{par:lwIP}.
+Open-source TCP/IP protocol stacks for embedded systems have been developed such uIP \cite{par:uIP} and lwIP \cite{par:lwIP}.
 
 {\bf uIP:}
 uIP (microIP) is a very small TCP/IP stack intended for tiny 8- and 16-bit microcontrollers.
@@ -832,6 +838,7 @@ Scalability is also improved because the component-based framework simplifies to
 This paper also presented dynamic connection, a new TECS method, to enable dynamic processing while reducing memory consumption.
 TINET+TECS utilizes dynamic connection to satisfy the TINET specification for supporting static generation of CEPs and REPs.
 As the TECS adapter supports legacy codes, existing TCP/IP applications can run without modification in the proposed framework.
+TINET+TECS and application programs used in the evaluation are all open-source, and may be downloaded from our website \cite{url:TINET+TECS}.
 
 In future work, we will adapt the proposed framework to cooperate with mruby on TECS \cite{par:mrubyonTECS} to more easily manage IoT devices.
 Note that mruby is a scripting language for embedded systems \cite{par:mruby}.
