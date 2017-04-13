@@ -635,7 +635,7 @@ For {\it tcp\_snd\_dat}, we measured the executing time starting from the API ca
 In TINET+TECS, this process is performed in the order tApplication, tTCPCEP, tTCPOutputTaskBody, tIPv4Output, tEthernetOutput, tArp, tEthernetOutputTaskBody, and tIfMbed, as shown in Fig. \ref{fig:ComponentProtocolStack}.
 For {\it tcp\_rcv\_dat}, we measured the execution time from the data receipt in the LAN driver until data acquisition in the application.
 In TINET+TECS, the process is performed in the order tIfMbed, tEthernetInputTaskBody, tIPv4Input, tTCPInput, tTCPCEP, and tApplication, as shown in Fig. \ref{fig:ComponentProtocolStack}.
-The execution time of TINET+TECS is close to that of TINET, with an overhead of about 3 ms.
+The execution time of TINET+TECS is close to that of TINET, with an overhead of about 3 us.
 As the use of the {\it send/receive} specifier enables accessing of the buffer address without data copying, the componentization overhead does not affect the execution time.
 
 \begin{figure}[t]
