@@ -148,15 +148,15 @@ The results of an experimental comparison between the proposed component-based a
 \section{Introduction}
 \label{sec:Introduction}
 
-The Internet of Things (IoT) is an essential next evolutionary step for the Internet \cite{par:IoTIndustries} \cite{par:IoTComputing} in which various items and platforms, for example, wearable devices and smart devices, will be connected via the Internet to further enrich people's lives.
+The Internet of Things (IoT) is an essential next evolutionary step for the Internet \cite{par:IoTComputing} in which various items and platforms, for example, wearable devices and smart devices, will be connected via the Internet to further enrich people's lives.
 However, as the IoT uses embedded systems such as data sensors and controlling actuators as elemental constituents, it is often not practical to implement the same Transmission Control Protocol/Internet Protocol (TCP/IP) protocol stacks used by traditional computing systems because embedded systems face restrictions in terms of low memory capacity.
 
 Tomakomai InterNETworking (TINET) is a compact TCP/IP protocol stack for embedded systems \cite{url:TINET}.
-As TINET supports functionalities such as a minimum copy frequency and the elimination of dynamic memory control, it requires significantly reduced memory for its TCP/IP protocol stack and is therefore suitable for embedded systems.
+As TINET supports functionalities such as a minimum copy frequency and the elimination of dynamic memory control, it requires significantly reduced memory for its TCP/IP protocol stack and is, therefore, suitable for embedded systems.
 However, TINET comprises many complex source codes, i.e., it contains many files and defines many macros, which can be problematic for software developers seeking to maintain, extend, and analyze the software.
 Thus, embedded network software is required for high productivity and quality.
 
-One approach to improving software productivity is component-based development, a design technique that can be applied in reusable software development for embedded systems \cite{par:Crnkovic}\cite{par:CBD} such as TECS \cite{par:TECS} \cite{par:hr-tecs}, AUTOSAR \cite{url:AUTOSAR}, or SaveCCM \cite{par:SAVEapproach}.
+One approach to improving software productivity is component-based development (CBD), a design technique that can be applied in reusable software development for embedded systems \cite{par:Crnkovic}\cite{par:CBD} such as TECS \cite{par:TECS} \cite{par:hr-tecs}, AUTOSAR \cite{url:AUTOSAR}, or SaveCCM \cite{par:SAVEapproach}.
 Component-based systems are flexible to software extension and specification changes.
 
 This paper proposes a component-based TCP/IP protocol stack for embedded systems--TINET componentized with the Toyohashi Open Platform for Embedded Real-time Systems (TOPPERS) embedded component system (TINET+TECS)--to improve the configurability and scalability of TCP/IP software.
@@ -245,11 +245,11 @@ The REP has an IP address ({\it myaddr}) and a port number ({\it myportno}) as a
 
 In TINET, the amount of data copying between each protocol layers is minimized.
 In standard computing systems, the TCP/IP protocol stack has large overheads in terms of execution time and memory consumption because the data are copied at each protocol layer.
-To solve this problem, TINET does passes the pointer of the data buffer between each protocol layer instead of performing data copying.
+To solve this problem, TINET does pass the pointer of the data buffer between each protocol layer instead of performing data copying.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=8.0cm,clip]{figure/TINETHierarchyDiagram.pdf}
+    \includegraphics[width=7.0cm,clip]{figure/TINETHierarchyDiagram.pdf}
     \vspace{-1mm} \caption{TINET and TOPPERS/ASP3 hierarchy diagrams}
     \vspace{-1mm} \label{fig:TINETHierarchyDiagram}
 \end{figure}
@@ -260,7 +260,7 @@ To solve this problem, TINET does passes the pointer of the data buffer between 
 TECS is a component system suitable for embedded systems that can increase productivity and reduce development costs based on the improved reusability of software components.
 TECS also provides component diagrams that can help developers visualize the overall structure of a system.
 
-In TECS, component deployment and composition are performed statically, and as a consequently, component connection does not incur significant overhead, and memory requirements can be reduced.
+In TECS, component deployment and composition are performed statically, and as a consequently, a component connection does not incur significant overhead, and memory requirements can be reduced.
 TECS has various features such as source level portability and fine-grained components and can be implemented in C.
 
 \begin{figure}[t]
@@ -273,7 +273,7 @@ TECS has various features such as source level portability and fine-grained comp
 \subsubsection{Component model}
 
 Fig. \ref{fig:ComponentDiagram} shows a component diagram.
-{\it Cells}, which are instance of components in TECS, consist of {\it entry} ports, {\it call} ports, attributes, and internal variables.
+{\it Cells}, which are instances of components in TECS, consist of {\it entry} ports, {\it call} ports, attributes, and internal variables.
 An {\it entry} port is an interface that provides functions to other {\it cells}, whereas a {\it call} port is an interface that enables the use of other {\it cells}' functions.
 Each {\it cell} has one or more {\it entry} ports and {\it call} ports.
 {\it Cell} functions are implemented in C.
@@ -308,7 +308,7 @@ signature sIPv4Output {
     /* Omit: other functions */
 };
 \end{lstlisting}
-\vspace{-1mm} \caption{Signature description}
+\vspace{-2mm} \caption{Signature description}
 \vspace{-1mm} \label{src:signature}
 \end{figure}
 
@@ -327,7 +327,6 @@ celltype tIPv4Output {
     entry sIPv4Output eOutput;
     /* Call port */
     call sEthernetOutput cEthernetOutput;
-    /* Omit: other call ports */
     attr {  /* Attribute */
         uint16_t fragInit = 0;
     };
@@ -336,7 +335,7 @@ celltype tIPv4Output {
     };
 };
 \end{lstlisting}
-\vspace{-1mm} \caption{Celltype description}
+\vspace{-2mm} \caption{Celltype description}
 \vspace{-1mm} \label{src:celltype}
 \end{figure}
 
@@ -352,15 +351,13 @@ In Fig. \ref{src:build}, {\it entry} port eIPv4Output in {\it cell} IPv4Output i
 \centering
 \begin{lstlisting}
 cell tIPv4Output IPv4Output {
-    /* Omit: other build description */
     fragInit = 0; /* Attribute */
 };
 cell tTCPOutput TCPOutput {
     cIPv4Output = IPv4Output.eOutput;
-    /* Omit: other build description */
 };
 \end{lstlisting}
-\vspace{-1mm} \caption{Build description}
+\vspace{-2mm} \caption{Build description}
 \vspace{-1mm} \label{src:build}
 \end{figure}
 
@@ -439,14 +436,14 @@ In addition, TINET+TECS utilizes the TECS {\it send/receive} specifier to minimi
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=8.0cm,clip]{figure/tMemoryAllocator.pdf}
+    \includegraphics[width=7.0cm,clip]{figure/tMemoryAllocator.pdf}
     \vspace{-1mm} \caption{Component diagram of tMemoryAllocator}
     \vspace{-1mm} \label{fig:tMemoryAllocator}
 \end{figure}
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=8.0cm,clip]{figure/SendReceive.pdf}
+    \includegraphics[width=7.0cm,clip]{figure/SendReceive.pdf}
     \vspace{-1mm} \caption{Differences between in/out and send/receive}
     \vspace{-1mm} \label{fig:SendReceive}
 \end{figure}
@@ -473,7 +470,10 @@ In the case of {\it out}, the callee writes data in the memory allocated by a ca
 Deallocating of the memory is performed in the caller in both cases.
 \end{itemize}
 
-As shown in Fig. \ref{src:SendReceive}, data sending and receiving arguments such as {\it outputp} and {\it inputp} are defined using, respectively, the {\it send/receive} specifier in the signature description.
+As shown in Fig. \ref{src:SendReceive}, sending and receiving arguments such as {\it outputp} and {\it inputp} are defined using, respectively, the {\it send/receive} specifier in the signature description.
+Developers hardly make mistakes of memory operation because these specifiers completely pass an ownership of memory.
+Common object request broker architecture (CORBA) does not consider memory sharing; CORBA has no functionalities
+such as {\it send}/{\it receive}.
 
 \begin{figure}[t]
 \centering
@@ -481,18 +481,14 @@ As shown in Fig. \ref{src:SendReceive}, data sending and receiving arguments suc
 signature sNicDriver {
   void start(
     [send(sNetworkAlloc),size_is(size)]
-        int8_t *outputp,
-    [in]int32_t size,
-    [in]uint8_t align);
+        int8_t *outputp, .., ..);
   void read(
     [receive(sNetworkAlloc),size_is(*size)]
-        int8_t **inputp,
-    [out]int32_t *size,
-    [in]uint8_t align);
+        int8_t **inputp, .., ..);
     /* Omit: other functions */
 };
 \end{lstlisting}
-\vspace{-1mm} \caption{Signature description of the nic driver (An example of send/receive)}
+\vspace{-2mm} \caption{Signature description of the nic driver (An example of send/receive)}
 \vspace{-1mm} \label{src:SendReceive}
 \end{figure}
 
@@ -504,24 +500,24 @@ signature sNicDriver {
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=8.0cm,clip]{figure/DynamicConnection.pdf}
-    \vspace{-1mm} \caption{Dynamic connection}
+    \includegraphics[width=7.0cm,clip]{figure/DynamicConnection.pdf}
+    \vspace{-3mm} \caption{Dynamic connection}
     \vspace{-1mm} \label{fig:DynamicConnection}
 \end{figure}
 
-TECS supports dynamic connection, a method for switching the binding of components at runtime (Fig. \ref{fig:DynamicConnection}) as a new functionality.
+TECS supports a dynamic connection, a method for switching the binding of components at runtime (Fig. \ref{fig:DynamicConnection}) as a new functionality.
 In Fig. \ref{fig:DynamicConnection}, the solid line represents binding and the dotted line represents non-binding.
 Note that all components are statically generated in TECS, which can optimize the overhead of componentization because components are statically configured.
 Dynamically generating components causes a good deal of memory consumption, which is a serious problem for embedded systems with strict memory constraints.
 The proposed framework can take advantage of the componentization in TINET while satisfying the memory constraint because components are statically generated and dynamically connected in TECS.
 
-TINET+TECS utilizes dynamic connection to switch between CEP and REP components, as shown in Fig. \ref{fig:DynamicConnectionUseCase}.
+TINET+TECS utilizes the dynamic connection to switch between CEP and REP components, as shown in Fig. \ref{fig:DynamicConnectionUseCase}.
 In a server application, CEP is associated with REP in the state of waiting for connection request from clients\footnote{tcp\_acp\_cep(ID cepid, ID repid, T\_IPV4EP *p\_dstaddr, TMO tmout).}.
 For example, when processing with the HTTP protocol, CEP passively opens with an REP of port number 80.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=8.0cm,clip]{figure/DynamicConnectionUseCase.pdf}
+    \includegraphics[width=7.0cm,clip]{figure/DynamicConnectionUseCase.pdf}
     \vspace{-1mm} \caption{Dynamic connection between CEP and REP}
     \vspace{-1mm} \label{fig:DynamicConnectionUseCase}
 \end{figure}
@@ -556,7 +552,7 @@ celltype tTCPCEP {
     /* Omit: attributes and variables */
 };
 \end{lstlisting}
-\vspace{-1mm} \caption{Signature and celltype description for dynamic connection}
+\vspace{-2mm} \caption{Signature and celltype description for dynamic connection}
 \vspace{-1mm} \label{src:DynamicCDLcode}
 \end{figure}
 
@@ -579,7 +575,7 @@ eAPI_accept (.., ..) {
     cREP_getEndpoint();
 }
 \end{lstlisting}
-\vspace{-1mm} \caption{Accept function (Dynamic connection example)}
+\vspace{-2mm} \caption{Accept function (Dynamic connection example)}
 \vspace{-1mm} \label{src:DynamicCcode}
 \end{figure}
 
@@ -594,7 +590,7 @@ The adapter wraps the APIs used in the existing applications into TECS functions
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=8.0cm,clip]{figure/TECS_Adapter.pdf}
+    \includegraphics[width=7.0cm,clip]{figure/TECS_Adapter.pdf}
     \vspace{-1mm} \caption{TECS adapter}
     \vspace{-1mm} \label{fig:TECS_Adapter}
 \end{figure}
@@ -604,7 +600,7 @@ The adapter wraps the APIs used in the existing applications into TECS functions
 
 This section describes the experimental evaluation used to demonstrate the effectiveness of the proposed framework.
 
-\subsection{Evaluation environment}
+% \subsection{Evaluation environment}
 
 GR-PEACH was employed as the evaluation board.
 Detailed specifications of the board are shown in TABLE \ref{tab:EvaluationBoardEnvironment}.
@@ -614,6 +610,7 @@ To pretest the system, we connected the board to a host PC via a LAN cable and e
 \begin{table}[t]
     \centering
     \vspace{-1mm} \caption{Evaluation Board Environment}
+\vspace{-2mm}
     \begin{tabular}{l|l}
         \hline\hline
         Board           &   GR-PEACH                \\
@@ -640,7 +637,7 @@ As the use of the {\it send/receive} specifier enables accessing of the buffer a
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=8.0cm,clip]{figure/EvaluationOfExecutionTime.pdf}
+    \includegraphics[width=7.5cm,clip]{figure/EvaluationOfExecutionTime.pdf}
     \vspace{-1mm} \caption{Execution times of TINET and TINET+TECS}
     \vspace{-1mm} \label{fig:EvaluationOfExecutionTime}
 \end{figure}
@@ -651,6 +648,7 @@ The memory consumption of TINET+TECS is about 1\% higher than that of TINET, as 
 \begin{table}[t]
     \centering
     \vspace{-1mm} \caption{Memory consumption of TINET and TINET+TECS}
+\vspace{-2mm}
     \begin{tabular}{c|r|r|r|r}
         \hline\hline
                     &   text       &  data    &   bss      &  total     \\ \hline
@@ -668,6 +666,7 @@ This demonstrated the ability to change the composition of the protocol stack wi
 \begin{table}[t]
     \centering
     \vspace{-1mm} \caption{Modified code lines of CDL}
+\vspace{-2mm}
     \begin{tabular}{c|r|r|r}
         \hline\hline
                          &   Size       &   Size (-- Default) & CDL  \\ \hline
@@ -680,6 +679,7 @@ This demonstrated the ability to change the composition of the protocol stack wi
         \multicolumn{4}{l}{I\hspace{-.1em}I: Remove ICMP}\\
         \multicolumn{4}{l}{I\hspace{-.1em}I\hspace{-.1em}I: Change network buffer (Remove memory pools)}
     \end{tabular}
+\vspace{-3mm}
     \label{tab:EvaluationOfConfigurability}
 \end{table}
 
@@ -712,6 +712,7 @@ However, the overall memory consumption is lower under the proposed framework.
 \begin{table}[t]
     \centering
     \vspace{-1mm} \caption{Memory consumption in two cases\protect\linebreak (with/without dynamic connection)}
+\vspace{-2mm}
     {\tabcolsep = 1mm
     \begin{tabular}{c|r|r|r|r}
         \hline\hline
@@ -727,6 +728,7 @@ However, the overall memory consumption is lower under the proposed framework.
 \begin{table}[t]
     \centering
     \vspace{-1mm} \caption{CDL code lines of without/with dynamic connection}
+\vspace{-2mm}
     \begin{tabular}{l|r|r|r}
         \hline\hline
                      &  without  &  with  &  Diff  \\ \hline
@@ -760,6 +762,7 @@ cell tTCPCEP TCPCEP_00n {
     cREP[n] = REP_00n.eREP;
 };
  \end{lstlisting}
+ \vspace{-2mm}
  \centering
  \begin{lstlisting}
 /* with Dynamic Connection */
@@ -779,7 +782,7 @@ cell tTCPCEP TCPCEP_00n {
     cRepSelector = RepSelector.eRepSelector;
 };
  \end{lstlisting}
- \vspace{-1mm} \caption{Two CDL codes (without/with dynamic connection)}
+ \vspace{-2mm} \caption{Two CDL codes (without/with dynamic connection)}
  \vspace{-1mm} \label{src:ComparisonOfCDL}
 \end{figure}
 
@@ -791,7 +794,7 @@ It is effective for software that uses many ports because the difference spreads
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=8.0cm,clip]{figure/EvaluationOfAdapter.pdf}
+    \includegraphics[width=7.5cm,clip]{figure/EvaluationOfAdapter.pdf}
     \vspace{-1mm} \caption{Execution times in two cases (without/with TECS adapter)}
     \vspace{-1mm} \label{fig:EvaluationOfAdapter}
 \end{figure}
@@ -803,9 +806,30 @@ As shown in Fig. \ref{fig:EvaluationOfAdapter}, the overhead of the TECS adapter
 
 
 
+\begin{table*}[t]
+    \caption{Comparison of related and proposed framework}
+    \label{tab:comparison}
+\vspace{-2mm}
+    \centering
+    \begin{tabular}{c||ccccccc}
+        \hline\hline
+        & \shortstack{Configurability}
+        & \shortstack{Generation} 
+        & \shortstack{Binding} 
+        & \shortstack{Support CBD} 
+        & \shortstack{Memory saving} \\ \hline
+        uIP \cite{par:uIP}     & $\bigtriangleup$          & Dynamic    & Dynamic  &              & \checkmark \\
+        lwIP \cite{par:lwIP}   & $\bigtriangleup$          & Dynamic    & Dynamic  &              & \checkmark \\
+        TINET \cite{url:TINET} &            & Static     & Dynamic  &              & \checkmark \\
+        Proposed framework     & \checkmark & Static     & Dynamic  & \checkmark   & \checkmark \\
+    \end{tabular}
+        \vspace{-5mm}
+\end{table*}
+
 \section{Related Work}
 \label{sec:Related Work}
 
+Table \ref{tab:comparison} shows a comparison of TINET+TECS and previous work.
 Open-source TCP/IP protocol stacks for embedded systems have been developed such uIP \cite{par:uIP} and lwIP \cite{par:lwIP}.
 
 {\bf uIP:}
@@ -818,6 +842,10 @@ Following the release of ver. 1.0, later versions of uIP, including uIPv6, have 
 lwIP (lightweightIP) is a small TCP/IP implementation for embedded systems that is intended to reduce memory resource usage while still maintaining a full-scale TCP.
 lwIP requires about 40 KB of ROM and tens of KB of RAM.
 lwIP is larger than uIP, but provides better throughput.
+To customize protocols and buffer size, users should handle a lot of macros.
+
+Note that the proposed framework, TINET+TECS, has demonstrated all features shown in Table \ref{tab:comparison}.
+In particular, TINET+TECS is configurable and is suitable for embedded systems with memory constraint.
 
 % {\bf CiAO/IP:}
 % \\
@@ -840,12 +868,10 @@ TINET+TECS utilizes dynamic connection to satisfy the TINET specification for su
 As the TECS adapter supports legacy codes, existing TCP/IP applications can run without modification in the proposed framework.
 TINET+TECS and application programs used in the evaluation are all open-source, and may be downloaded from our website \cite{url:TINET+TECS}.
 
-In future work, we will adapt the proposed framework to cooperate with mruby on TECS \cite{par:mrubyonTECS} to more easily manage IoT devices.
-Note that mruby is a scripting language for embedded systems \cite{par:mruby}.
+In future work, we will adapt the proposed framework to cooperate with mruby on TECS \cite{par:mrubyonTECS}, to more easily manage IoT devices.
 We will support functionalities in which TINET functions can be utilized from mruby programs as an extension of mruby-socket \cite{url:mruby-library}.
     
 % conference papers do not normally have an appendix
-
 
 % use section* for acknowledgment
 \section*{Acknowledgment}
