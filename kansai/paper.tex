@@ -27,7 +27,7 @@
     numberstyle={\scriptsize},%
     stepnumber=1,
     numbersep=1zw,%
-    lineskip=-1.5ex%
+    lineskip=-0.5ex%
 }
 
 \def\Underline{\setbox0\hbox\bgroup\let\\\endUnderline}
@@ -57,23 +57,37 @@ OKUMA Corporation}
 \maketitle
 
 \section{はじめに}
+近年，組込みシステムは多くの機器に組み込まれており，このIoT社会を支える重要な役割を担っている．
+組込みシステムには，厳しいリソース制約があり，効率的なメモリ確保が要求される．
+さらに，リアルタイム性を要求される組込みシステムでは，メモリ確保の実行時間も重要である．
+
+このような要求を満たす，組込みシステムに適した動的メモリアロケータとして，TLSFアロケータが提案されている．
+TLSFアロケータは，メモリブロックを2段階で分類することでメモリ利用効率を向上させており，常にオーダー1で実行するため最悪実行時間が存在しない．
+TLSFアロケータは，メモリ利用効率が良く，リアルタイムシステムに向いているため，多くのリアルタイムOSで利用されている．
+
+しかし，現状では，複数のスレッドが並行動作すると，メモリの衝突が起きる場合がある．
+本研究では，組込み向けコンポーネントシステムTECSを用いてTLSFアロケータをコンポーネント化し，スレッドセーフなアロケータを実現した．
+さらに，メモリサイズの変更等が柔軟になる．
 
 \section{基礎技術}
 \label{sec:Background}
 
 \subsection{TLSF}
+\label{sec:TLSF}
+TLSF (Two-Level Segregate Fit)アロケータは，M. Masmanoらによって提案されたリアルタイムシステムに適した動的メモリアロケータである．
+TLSF
 
 \subsection{TECS}
-%TECSは，組込みシステム向けのコンポーネントシステムである．
-TECSによるコンポーネントベース開発は，ソフトウェアの再利用性を上げるため，生産性を向上できる．
-%システム全体の構造を可視化するため，システムの難しさを減らすことができる．
-%ソフトウェアの共通部分はコンポーネントとして扱われるため，開発の重複を減らし，生産性を向上させる．
+TECS (TOPPERS Embedded Component System)は，TOPPERSプロジェクトで開発されている組込みシステム向けのコンポーネントシステムである．
+コンポーネントベース開発は，ソフトウェアの部品(コンポーネント)を組み合わせて開発を行う手法である．
+ソフトウェアの再利用性が改善する上に，コンポーネント図によりシステム全体の構造を可視化するため，ソフトウェア開発の生産性を向上できる．
+さらに，システムの拡張や仕様変更にも柔軟に対応することができる．
 
 % TECSでのコンポーネントの生成と結合は静的に行われるため，最適化され，実行時間や消費メモリのオーバヘッドは少ない．
 % 他の特徴として，C言語での実装，ソースレベルでの移植性，コンポーネントの粒度が小さいことなどがある．
 
 \subsubsection{コンポーネントモデル}
-図\ref{fig:component}にコンポーネント図の例を示す．
+図\ref{fig:component}にTECSコンポーネント図の例を示す．
 TECSでは，インスタンス化されたコンポーネントはセル({\it cell})と呼ばれ，受け口({\it entry})，呼び口({\it call})，属性，変数を持つ．
 受け口は自身の機能を提供するインタフェースで，呼び口は他のセルの機能を利用するためのインタフェースである．
 セルは複数の受け口や呼び口を持つことができる．
@@ -94,8 +108,8 @@ TECSでは，インスタンス化されたコンポーネントはセル({\it c
 TECSのコンポーネント記述は，シグニチャ記述，セルタイプ記述，組上げ記述に分類され，cdlファイルに記述する．
 図\ref{fig:component}のコンポーネント記述について次に述べる．
 
-% \begin{description}
-%     \item[{\bf シグニチャ記述}]\mbox{}\\
+\begin{description}
+    \item[{\bf シグニチャ記述}]\mbox{}\\
         シグニチャ記述は，セルのインタフェースを定義する．
         図\ref{signature}に示す通り，{\it signature}キーワードに続けて，シグニチャ名(sMotor)を記述する．
         %図\ref{signature}のようにシグニチャsMotorを定義できる.
@@ -104,7 +118,7 @@ TECSのコンポーネント記述は，シグニチャ記述，セルタイプ�
 \begin{figure}[t]
 \centering
 \begin{lstlisting}
-signature sMotor{
+signature sMotor {
     int32_t getCounts( void );
     ER resetCounts( void );
     ER setPower( [in]int power );
@@ -118,7 +132,7 @@ signature sMotor{
 \label{signature}
 \end{figure}
 
-    % \item[{\bf セルタイプ記述}]\mbox{}\\
+    \item[{\bf セルタイプ記述}]\mbox{}\\
         セルタイプ記述は，受け口，呼び口，属性，変数を用いてセルタイプを定義する．
         {\it celltype}キーワードに続けて，セルタイプ名(tCaller)を記述する．
         図\ref{celltype}に示す通り，受け口は，{\it entry}キーワードに続けて，シグニチャ名，受け口名を記述する．
@@ -128,10 +142,10 @@ signature sMotor{
 \begin{figure}[t]
 \centering
 \begin{lstlisting}
-celltype tCaller{
+celltype tCaller {
     call sMotor cMotor;
 };
-celltype tMotor{
+celltype tMotor {
     entry sMotor eMotor;
     attr{ int32_t attr = 100; };
     var{ int32_t var; };
@@ -141,18 +155,18 @@ celltype tMotor{
 \label{celltype}
 \end{figure}
 
-    % \item[{\bf 組上げ記述}]\mbox{}\\
+    \item[{\bf 組上げ記述}]\mbox{}\\
         組上げ記述は，セルをインスタンス化し，セルを結合する．
         {\it cell}キーワードに続けて，セルタイプ名，セル名を記述する．
         呼び口名，``="，結合先の受け口名の順に記述し，セルを結合する．
-        図\ref{build}では，セルCallerの呼び口cMotorと，セルMotorの受け口eMotorが接続されている．
+        図\ref{build}では，セルCallerの呼び口cMotorと，セルMotorの受け口eMotorが結合されている．
         
 \begin{figure}[t]
 \centering
 \begin{lstlisting}
-cell tMotor Motor{
+cell tMotor Motor {
 };
-cell tCaller Caller{
+cell tCaller Caller {
     cMotor = Motor.eMotor;
 };
 \end{lstlisting}
@@ -160,7 +174,7 @@ cell tCaller Caller{
 \label{build}
 \end{figure}
 
-% \end{description}
+\end{description}
 
 \section{設計と実装}
 \label{sec:Design and Implementation}
