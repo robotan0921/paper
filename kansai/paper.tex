@@ -30,22 +30,14 @@
     lineskip=-0.5ex%
 }
 
-\def\Underline{\setbox0\hbox\bgroup\let\\\endUnderline}
-\def\endUnderline{\vphantom{y}\egroup\smash{\underline{\box0}}\\}
-\def\|{\verb|}
-
-\setcounter{巻数}{53}%vol53=2012
-\setcounter{号数}{10}
-\setcounter{page}{1}
-
 \begin{document}
 
-\title{組込みシステムに適した動的メモリアロケータのコンポーネント化}
+\title{組込みシステムに適した\\動的メモリアロケータのコンポーネント化}
 
 \etitle{Componentized Dynamic Memory Allocator for Embedded Systems}
 
 \affiliate{OU}{大阪大学基礎工学研究科\\
-School of Engineering Science, Osaka University}
+Graduate School of Engineering Science, Osaka University}
 
 \affiliate{OKUMA}{オークマ株式会社\\
 OKUMA Corporation}
@@ -58,16 +50,21 @@ OKUMA Corporation}
 
 \section{はじめに}
 近年，組込みシステムは多くの機器に組み込まれており，このIoT社会を支える重要な役割を担っている．
-組込みシステムには，厳しいリソース制約があり，効率的なメモリ確保が要求される．
-さらに，リアルタイム性を要求される組込みシステムでは，メモリ確保の実行時間も重要である．
+多くの組込みシステムは，厳しいリソース制約を持っており，効率的なメモリ確保が要求される．
+さらに，リアルタイム性を要求される組込みシステムでは，メモリ確保の実行時間も重要となる．
 
-このような要求を満たす，組込みシステムに適した動的メモリアロケータとして，TLSFアロケータが提案されている．
+このような要求を満たす，組込みシステムに適した動的メモリアロケータとして，TLSF (Two-Level Segregate Fit) アロケータが提案されている．
 TLSFアロケータは，メモリブロックを2段階で分類することでメモリ利用効率を向上させており，常にオーダー1で実行するため最悪実行時間が存在しない．
 TLSFアロケータは，メモリ利用効率が良く，リアルタイムシステムに向いているため，多くのリアルタイムOSで利用されている．
 
 しかし，現状では，複数のスレッドが並行動作すると，メモリの衝突が起きる場合がある．
-本研究では，組込み向けコンポーネントシステムTECSを用いてTLSFアロケータをコンポーネント化し，スレッドセーフなアロケータを実現した．
+本研究では，組込み向けコンポーネントシステムであるTECS (TOPPERS Embedded Component System) を用いてTLSFアロケータをコンポーネント化し，スレッドセーフなアロケータを実現した．
 さらに，メモリサイズの変更等が柔軟になる．
+
+% 本論文における貢献は次の通りである．
+% \begin{enumerate}
+%
+% \end{enumerate}
 
 \section{基礎技術}
 \label{sec:Background}
@@ -178,7 +175,44 @@ cell tCaller Caller {
 
 \section{設計と実装}
 \label{sec:Design and Implementation}
+本章では，TLSFアロケータのコンポーネント設計について述べる．
+% 図\ref{fig:TLSFComponent}に，コンポーネント化されたTLSFアロケータのコンポーネント図を示す．
 
+\begin{figure}[t]
+\centering
+\begin{lstlisting}
+[deviate]
+signature sMalloc {
+    int    initializeMemoryPool(void);
+    void   *calloc( [in]size_t nelem, [in]size_t elem_size );
+    void   *malloc( [in]size_t size );
+    void   *realloc( [in]const void *ptr, [in]size_t new_size );
+    void   free( [in]const void *ptr );
+};
+\end{lstlisting}
+\caption{メモリ管理用のシグニチャ記述}  
+\label{src:TLSFSignature}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\begin{lstlisting}
+celltype tTLSFMalloc {
+    [inline]
+        entry  sMalloc  eMalloc;
+    attr {
+        /* memory pool size in bytes */
+        size_t  memoryPoolSize;
+    };
+    var {
+        [size_is( memoryPoolSize / 8 )]
+            uint64_t   *pool;
+    };
+};
+\end{lstlisting}
+\caption{TLSFアロケータのセルタイプ記述}  
+\label{src:TLSFCelltype}
+\end{figure}
 
 \section{評価実験}
 \label{sec:Evaluation}
