@@ -58,29 +58,33 @@ TLSFアロケータは，メモリブロックを2段階で分類することで
 TLSFアロケータは，メモリ利用効率が良く，リアルタイムシステムに向いているため，多くのリアルタイムOSで利用されている．
 
 しかし，現状では，複数のスレッドが並行動作すると，メモリの衝突が起きる場合がある．
-本研究では，組込み向けコンポーネントシステムであるTECS (TOPPERS Embedded Component System) を用いてTLSFアロケータをコンポーネント化し，スレッドセーフなアロケータを実現した．
-さらに，メモリサイズの変更等が柔軟になる．
+本研究では，組込み向けコンポーネントシステムであるTECS (TOPPERS Embedded Component System) を用いてTLSFアロケータをコンポーネント化する．
+コンポーネント化されたTLSFアロケータでは，各コンポーネントで独自のヒープ領域を保持するため，スレッドセーフなアロケータを実現できる．
+さらに，コンポーネントとして特性を利用できるため，メモリサイズの変更等が柔軟になる．
+本論文では，提案するTLSFメモリアロケータコンポーネントのユースケースとして，利用例を述べる．
 
-% 本論文における貢献は次の通りである．
+% 本論文における貢献は以下の通りである．
 % \begin{enumerate}
 %
 % \end{enumerate}
 
-\section{基礎技術}
-\label{sec:Background}
+本論文の構成は次の通りである．
+まず\ref{sec:ComponentBasedDevelopment}章で，コンポーネントベース開発と提案するアロケータのベースとして用いるTECSについて述べる．
+\ref{sec:Design and Implementation}章では，TLSFアロケータのコンポーネント設計と実装について述べる．
+\ref{sec:Use Case}章では，ユースケースとして，利用例を述べる．
+\ref{sec:Related Work}章では，関連研究を述べ，最後に\ref{sec:Conclusion}章で本論文をまとめる．
 
-\subsection{TLSF}
-\label{sec:TLSF}
-TLSF (Two-Level Segregate Fit)アロケータは，M. Masmanoらによって提案されたリアルタイムシステムに適した動的メモリアロケータである．
-TLSF
+\section{コンポーネントベース開発}
+\label{sec:ComponentBasedDevelopment}
 
-\subsection{TECS}
-TECS (TOPPERS Embedded Component System)は，TOPPERSプロジェクトで開発されている組込みシステム向けのコンポーネントシステムである．
+ソフトウェア開発の生産性を向上させる手法のひとつにコンポーネントベース開発がある．
 コンポーネントベース開発は，ソフトウェアの部品(コンポーネント)を組み合わせて開発を行う手法である．
 ソフトウェアの再利用性が改善する上に，コンポーネント図によりシステム全体の構造を可視化するため，ソフトウェア開発の生産性を向上できる．
 さらに，システムの拡張や仕様変更にも柔軟に対応することができる．
 
-% TECSでのコンポーネントの生成と結合は静的に行われるため，最適化され，実行時間や消費メモリのオーバヘッドは少ない．
+\subsection{TECS}
+TECS (TOPPERS Embedded Component System)は，TOPPERSプロジェクトで開発されている組込みシステム向けのコンポーネント技術である．
+TECSでは，コンポーネントの生成と結合はすべて静的に行われ，最適化されるため，コンポーネント化における実行時間や消費メモリのオーバヘッドを抑えることができる．
 % 他の特徴として，C言語での実装，ソースレベルでの移植性，コンポーネントの粒度が小さいことなどがある．
 
 \subsubsection{コンポーネントモデル}
@@ -144,8 +148,12 @@ celltype tCaller {
 };
 celltype tMotor {
     entry sMotor eMotor;
-    attr{ int32_t attr = 100; };
-    var{ int32_t var; };
+    attr {
+        int32_t attr = 100;
+    };
+    var {
+        int32_t var;
+    };
 };
 \end{lstlisting}
 \caption{セルタイプ記述}  
@@ -175,8 +183,14 @@ cell tCaller Caller {
 
 \section{設計と実装}
 \label{sec:Design and Implementation}
+
 本章では，TLSFアロケータのコンポーネント設計について述べる．
 % 図\ref{fig:TLSFComponent}に，コンポーネント化されたTLSFアロケータのコンポーネント図を示す．
+
+
+\subsection{TLSF}
+\label{sec:TLSF}
+TLSF (Two-Level Segregate Fit)アロケータは，M. Masmanoらによって提案されたリアルタイムシステムに適した動的メモリアロケータである．
 
 \begin{figure}[t]
 \centering
