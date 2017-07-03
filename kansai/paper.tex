@@ -100,7 +100,7 @@ TECSでは，インスタンス化されたコンポーネントはセル({\it c
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=8cm,clip]{../EMSOFT2016/figure/component_diagram.pdf}
+    \includegraphics[width=8cm,clip]{figure/component_diagram.pdf}
     \caption{TECSコンポーネント図の例}
     \label{fig:component}
 \end{figure}
@@ -182,7 +182,7 @@ cell tCaller Caller {
 \end{description}
 
 \section{設計と実装}
-\label{sec:Design and Implementation}
+\label{sec:DesignImplementation}
 
 本章では，TLSFアロケータのコンポーネント設計について述べる．
 % 図\ref{fig:TLSFComponent}に，コンポーネント化されたTLSFアロケータのコンポーネント図を示す．
@@ -228,11 +228,41 @@ celltype tTLSFMalloc {
 \label{src:TLSFCelltype}
 \end{figure}
 
-\section{評価実験}
-\label{sec:Evaluation}
+\section{ユースケース}
+\label{sec:UseCase}
+
+本章では，提案するコンポーネント化されたTLSFメモリアロケータのユースケースとして，利用されるプラットフォームとその効果について述べる．
+
+\subsection{mruby on TECS}
+\label{sec:mrubyonTECS}
+
+mruby on TECS は，mruby (軽量Ruby)を用いたコンポーネントベース開発が可能な組込みソフトウェア開発フレームワークである．
+スクリプト言語を用いることで，組込みソフトウェア開発の生産性向上を目指している．
+一般に，スクリプト言語は実行速度が遅いため，組込みソフトウェアに向いていないが，mruby on TECSでは，mruby-TECSブリッジの機能によって，mruby プログラムからC 言語の関数を呼び出すことができるため，C言語と変わらない速度でプログラムを実行することができる．
+mrubyプログラムは，mrubyコンパイラによってバイトコードに変換され，RiteVMと呼ばれるVM上で実行される．
+本フレームワークでは，RiteVMやRTOS (Real-Time OS)の機能もすべてTECSによってコンポーネント化されている．
+
+% 本研究では，RTOS として，TOPPERS/HRP2 [6] を使用した．
+% TOPPERS/HRP2 は，$\mu$ITRONをベースにしたメモリ保護機能を持つRTOSである．
+% しかし，TECSはTOPPERS/HRP2 だけでなく，OSEKやTOPPERS/ASPといったRTOS にも対応しているため，mruby on TECS はRTOS に依存しない．
+
+\subsubsection{マルチVM対応}
+
+本フレームワークでは，VMが行うメモリ管理にTLSFメモリアロケータを採用している．
+しかし，既存のTLSFメモリアロケータではスレッドセーフではないため，複数のスレッドからメモリの確保や解放を行うと，メモリ衝突が起きてしまう．
+VMは高い頻度でメモリの確保と解放を繰り返すため，マルチVMとして複数のVMを起動すると，すぐに衝突を起こしてしまう．
+
+図\ref{fig:TLSF-mruby}のように，VMにTLSFメモリアロケータコンポーネントを結合し，各VMで独自のヒープ領域を持つように設計する．
+各VMがそれぞれメモリプールを保持しているため，複数のVMがメモリ衝突を起こすことなく，実行できる．
+さらに，RiteVMはインクリメンタルGC (Garbage Collection)を行うが，独自のメモリプールを保持しているため，GCを始めたVMがGCの実行によって，他のVMの実行を妨げることもない．
+    
+\subsection{TINET+TECS}
+\label{sec:TINET+TECS}
+
+TINET+TECSは，組込み向けのTCP/IPプロトコルスタックであるTINET (Tomakomai InterNETworking)をTECSによってコンポーネント化したTCP/IPプロトコルスタックである．
 
 \section{関連研究}
-\label{sec:Related Work}
+\label{sec:RelatedWork}
 
 \section{おわりに}
 \label{sec:Conclusion}
