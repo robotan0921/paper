@@ -224,7 +224,7 @@ celltype tTLSFMalloc {
     };
 };
 \end{lstlisting}
-\caption{TLSFアロケータのセルタイプ記述}  
+\caption{TLSFメモリアロケータのセルタイプ記述}  
 \label{src:TLSFCelltype}
 \end{figure}
 
@@ -260,6 +260,11 @@ VMは高い頻度でメモリの確保と解放を繰り返すため，マルチ
 \label{sec:TINET+TECS}
 
 TINET+TECSは，組込み向けのTCP/IPプロトコルスタックであるTINET (Tomakomai InterNETworking)をTECSによってコンポーネント化したTCP/IPプロトコルスタックである．
+複雑で大規模なソースコードやマクロで構成されているTINETをTECSによってコンポーネント化することで，実行時間やメモリ消費量のオーバヘッドを抑えつつ，TCP/UDPやIPv4/IPv6といった通信プロトコルの変更等のコンフィグラビリティが向上している．
+
+\subsubsection{データ送受信用のメモリ管理}
+
+
 
 \section{関連研究}
 \label{sec:RelatedWork}
