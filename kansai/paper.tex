@@ -327,17 +327,39 @@ TLSFメモリアロケータコンポーネントのセルタイプ記述を図\
 \begin{figure}[t]
 \centering
 \begin{lstlisting}
+cell tTask Task_001 {
+    cMalloc = TLSFMalloc_001.eMalloc;
+};
+cell tTLSFMalloc TLSFMalloc_001 {
+    memoryPoolSize = 1024*1024; /* 1MB */
+};
+cell tTask Task_002 {
+    cMalloc = TLSFMalloc_002.eMalloc;
+};
+cell tTLSFMalloc TLSFMalloc_002 {
+    memoryPoolSize = 2*1024*1024; /* 2MB */
+};
+\end{lstlisting}
+\caption{TLSFメモリアロケータコンポーネントの組上げ記述}  
+\label{src:TLSFBuild}
+\end{figure}
+
+
+\begin{figure}[t]
+\centering
+\begin{lstlisting}
 void*
-mrb_TECS_allocf(mrb_state *mrb, void *p, size_t size, void *ud)
+mrb_TECS_allocf(mrb_state *mrb, void *p, 
+                  size_t size, void *ud)
 {
-    CELLCB	*p_cellcb= (CELLCB *)ud;
+    CELLCB	*p_cellcb = (CELLCB *)ud;
     if (size == 0) {
-        cMalloc_free(p);
         //tlsf_free(p);
+        cMalloc_free(p);
         return NULL;
     }
-    else if (p){
-        //return tlsf_realloc(p,size);
+    else if (p) {
+        //return tlsf_realloc(p, size);
         return cMalloc_realloc(p, size);
     }
     else {
@@ -349,6 +371,18 @@ mrb_TECS_allocf(mrb_state *mrb, void *p, size_t size, void *ud)
 \caption{TLSFメモリアロケータコンポーネントの利用部分}  
 \label{src:TLSFC}
 \end{figure}
+
+図\ref{src:TLSFBuild}に，図\ref{fig:WithTECS}のコンポーネント図で表されるTLSFメモリアロケータコンポーネントの組上げ記述を示す\footnote{他にも呼び口や受け口，属性，内部変数を記述するが，ここでは簡略化のため省略している．}．
+2組のタスクコンポーネントとTLSFコンポーネントが結合されている．
+それぞれのメモリプールサイズは5行目及び11行目のように内部変数として設定可能である．
+図\ref{src:TLSFC}は，TLSFメモリアロケータコンポーネントの受け口関数を実際に呼び出しているコード部分である．
+利用部分は，\ref{sec:mrubyonTECS}章で紹介するmruby on TECSフレームワーク\cite{par:mrubyonTECS}で，VMがメモリ管理を行う関数である．
+8行目は，TLSFメモリアロケータコンポーネントの{\it free}関数を呼び出している．
+{\it cMalloc\_}は，呼び口名を表わしている(図\ref{src:TLSFBuild}の2行目)
+同様に，13行目，17行目はメモリ確保を行っている部分である．
+図\ref{src:TLSFC}のコードが実行されるセルが，{\it Task\_001}の場合は{\it TLSFMalloc\_001}で，{\it Task\_002}の場合は{\it TLSFMalloc\_002}でメモリ管理が行われる．
+このように，TECSを用いたコンポーネントベース開発では，それぞれ結合しているセルは異なるものの，同じコードで動作させることが出来る．
+
 
 
 \section{ユースケース}
@@ -399,12 +433,13 @@ TINET+TECSは，組込み向けのTCP/IPプロトコルスタックであるTINE
 データの送受信処理を行う際，各プロトコルでメモリ領域の確保と解放が行われる．
 TINET+TECSやTINETは，プロトコル間のデータコピー回数を最少とするなど，組込みシステムの厳しいメモリ制約に対応している．
 しかし，現状ではTOPPERS/ASP\footnote{TOPPERS/ASPは，TOPPERSプロジェクトで開発されている$\mu$ITRON\cite{par:microITRON}をベースにしたリアルタイムOSである．}でサポートされている固定長メモリアロケータを利用している．
-TLSFメモリアロケータは，固定長メモリアロケータと比べて，同じ速度でメモリ効率を向上できる．
-したがって，TINET+TECSにTLSFメモリアロケータを組み込むことで，より良いメモリ効率を期待できる．
+TCP/IPプロトコルスタックでは，TCP層やIP層，Ethernet層といった各層でメモリの確保や解放が繰り返されるので，アロケータの役割は重要になっている．
+図\ref{fig:UseCase_TINET}のように，TINET+TECSではメモリ管理を行うすべてのコンポーネントがアロケータと結合されている．
+TLSFメモリアロケータは，固定長メモリアロケータと比べて，同じ速度でメモリ効率を向上できるため，TINET+TECSにTLSFメモリアロケータを組み込むことで，より良いメモリ効率を期待できる．
 
 さらに，図\ref{fig:UseCase_TINET}のように，固定長メモリアロケータは異なるサイズのメモリプールを用意し，必要に応じてメモリプールを選択する必要がある．
 TLSFメモリアロケータコンポーネントを利用することで，メモリプールを選択する必要もなく，効率的にメモリ管理を行うことが可能になる．
-TINET+TECSは，TECSによってコンポーネント化されているため，提案するTLSFメモリアロケータコンポーネントを拡張することが容易になっている．
+TINET+TECSは，TECSによってコンポーネントベースで開発されているため，提案するTLSFメモリアロケータコンポーネントの拡張性も良い．
 
 \begin{figure}[t]
     \centering
@@ -425,6 +460,7 @@ TINET+TECSは，TECSによってコンポーネント化されているため，
 ヒープ領域のサイズはコンポーネントの内部変数として設定するため，サイズ変更も容易になる．
 
 提案するTLSFメモリアロケータは，コンポーネント化によって再利用性も向上している．
+ユースケースとして，mruby on TECSフレームワークや，TINET+TECSで利用できることを述べたが，その他にもTECSを採用したリアルタイムOSであるTOPPERS/ASP3\cite{par:ASP3}に適用することも可能である．
 利用したいシステムのメモリアロケータ部分をTLSFコンポーネントに入れ替えるだけで，利用可能となる．
 さらに，コンポーネント図によってシステムを可視化でき，複雑で大規模なシステムを把握することに役立つ．
 
