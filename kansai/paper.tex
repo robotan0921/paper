@@ -9,6 +9,7 @@
 \usepackage[dvipdfmx]{graphicx}
 \usepackage{amssymb}
 \usepackage{enumerate,cite,url}
+\usepackage{fancyhdr}
 \usepackage{listings,jlisting}
 \lstset{%
     language={c},%
@@ -30,6 +31,8 @@
     lineskip=-0.5ex%
 }
 
+\pagestyle{empty}
+
 \begin{document}
 
 \title{
@@ -40,7 +43,7 @@
 \etitle{\vspace{-3.5cm}}
 % \etitle{Componentized Dynamic Memory Allocator for Embedded Systems}
 
-\affiliate{OU}{大阪大学基礎工学研究科\\
+\affiliate{OU}{大阪大学大学院基礎工学研究科\\
 Graduate School of Engineering Science, Osaka University}
 
 \affiliate{OKUMA}{オークマ株式会社\\
@@ -52,9 +55,16 @@ OKUMA Corporation}
 
 \maketitle
 
+\thispagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt} % ヘッダーの羅線をなくす
+\lhead[]{\vspace{+1.5cm} \huge A-03 \vspace{-1.5cm}}
+\chead[]{}
+\rhead[]{\vspace{+1.0cm} 2017 年度情報処理学会関西支部 支部大会 \\ \ \\ \vspace{-1.0cm}}
+\cfoot[]{}
+
 \section{はじめに}
 
-近年，組込みシステムは多くの機器に組み込まれており，このIoT社会を支える重要な役割を担っている\cite{par:IoTIndustries}\cite{par:IoTComputing}．
+近年，組込みシステムは高性能化しており，このIoT社会を支える重要な役割を担っている\cite{par:IoTIndustries}\cite{par:IoTComputing}．
 多くの組込みシステムは，厳しいリソース制約を持っており，効率的なメモリ確保が要求される．
 さらに，リアルタイム性を要求される組込みシステムでは，メモリ確保の実行時間も重要となる．
 
@@ -98,6 +108,7 @@ TECS (TOPPERS Embedded Component System)は，TOPPERSプロジェクト\cite{url
 TECSでは，コンポーネントの生成と結合はすべて静的に行われ，最適化されるため，コンポーネント化における実行時間や消費メモリのオーバヘッドを抑えることができる．
 さらに，組込みシステム開発に広く用いられているC言語による開発を採用しており，組込みシステムに特化したコンポーネントシステムである．
 
+\vspace{3mm}
 \subsubsection{コンポーネントモデル}
 
 図\ref{fig:component}にTECSコンポーネント図の例を示す．
@@ -117,6 +128,7 @@ TECSでは，インスタンス化されたコンポーネントはセル({\it c
     \label{fig:component}
 \end{figure}
 
+\vspace{3mm}
 \subsubsection{コンポーネント記述}
 TECSのコンポーネント記述は，シグニチャ記述，セルタイプ記述，組上げ記述に分類され，CDL (Component Description Language)ファイルに記述する．
 図\ref{fig:component}のコンポーネント記述について次に述べる．
@@ -194,9 +206,17 @@ cell tCaller Caller {
 
 \end{description}
 
+\vspace{3mm}
 \subsubsection{開発フロー}
 
-図\ref{fig:DevelopmentFlow}にTECSを利用した開発フローを示す．
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/TECSFlow.pdf}
+    \caption{TECSの開発フロー}
+    \label{fig:TECSFlow}
+\end{figure}
+
+図\ref{fig:TECSFlow}にTECSを利用した開発フローを示す．
 TECSジェネレータは，CDLファイルから，C言語のインターフェースコード(.hや.c)とリアルタイムOSのシステム設定ファイル(.cfg)を生成する．
 
 TECSを用いたソフトウェア開発者は，コンポーネント設計者とアプリケーション開発者に分けられる．
@@ -206,15 +226,15 @@ TECSを用いたソフトウェア開発者は，コンポーネント設計者�
 アプリケーション開発者は，コンポーネント図や定義済みのセルタイプを利用して，組上げ記述によりセル同士を結合させることでアプリケーションを開発する．
 最終的にヘッダ，インターフェースコード，セルタイプコードをコンパイル・リンクすることで，アプリケーションモジュールが生成される．
 
-
-
 \section{設計と実装}
 \label{sec:DesignImplementation}
 
+本研究では，組込みシステム向けの動的メモリアロケータであるTLSFメモリアロケータのコンポーネント化を行った．
+本章では，TLSFメモリアロケータについて詳細を述べ，提案するTLSFメモリアロケータのコンポーネント設計について述べる．
 
 \subsection{TLSF}
 \label{sec:TLSF}
-TLSF (Two-Level Segregate Fit)メモリアロケータは，M. Masmanoらによって提案されたリアルタイムシステムに適した動的メモリアロケータである．
+TLSF (Two-Level Segregate Fit)メモリアロケータ\cite{par:TLSF}\cite{url:TLSF}は，M. Masmanoらによって提案されたリアルタイムシステムに適した動的メモリアロケータである．
 TLSFメモリアロケータは以下のような特徴がある．
 \begin{description}
     \item[{\bf リアルタイム性}]\mbox{}\\
@@ -222,7 +242,7 @@ TLSFメモリアロケータは以下のような特徴がある．
         応答時間を見積もることができるため，リアルタイムシステムに適したメモリアロケータである．
     \item[{高速}]\mbox{}\\
         最悪実行時間が常に見積もれることに加え，TLSFは高速に実行される．
-        x86アーキテクチャで最大168のプロセッサ命令を実行することができる．
+        % x86アーキテクチャで最大168のプロセッサ命令を実行することができる．
     \item[{効率的なメモリ消費}]\mbox{}\\
         TLSFでは，メモリの断片化(フラグメンテーション)を抑えることで，メモリ効率化を実現している．
         様々なテストで，平均フラグメンテーション15％未満，最大フラグメンテーション25％未満を得ている．
@@ -241,7 +261,7 @@ TLSFアルゴリズムは，メモリブロックを2段階に分類して，要
 この範囲にあるフリーブロック\footnote{フリーブロックは使用可能なメモリブロックのことである．}を使用するという流れである．
 
 単純な固定サイズブロック確保では最大50\%の無駄を生じてしまうが，TLSFでは2段階で細かく分類するため，メモリ効率が良いアルゴリズムとなっている．
-また，検索にかかる時間も高速で常に同じ速度で実行される．
+さらに，検索にかかる時間も高速で常に同じ速度で実行される．
 
 
 \begin{figure}[t]
@@ -261,7 +281,6 @@ TLSFメモリアロケータのコンポーネント設計について述べる�
 \begin{figure}[t]
 \centering
 \begin{lstlisting}
-[deviate]
 signature sMalloc {
     int    initializeMemoryPool(void);
     void   *calloc( [in]size_t nelem,
@@ -376,7 +395,7 @@ mrb_TECS_allocf(mrb_state *mrb, void *p,
 2組のタスクコンポーネントとTLSFコンポーネントが結合されている．
 それぞれのメモリプールサイズは5行目及び11行目のように内部変数として設定可能である．
 図\ref{src:TLSFC}は，TLSFメモリアロケータコンポーネントの受け口関数を実際に呼び出しているコード部分である．
-利用部分は，\ref{sec:mrubyonTECS}章で紹介するmruby on TECSフレームワーク\cite{par:mrubyonTECS}で，VMがメモリ管理を行う関数である．
+利用部分は，\ref{sec:mrubyonTECS}章で紹介するmruby on TECSフレームワーク\cite{par:mrubyonTECS}\cite{par:mrubyonTECS2}で，VMがメモリ管理を行う関数である．
 8行目は，TLSFメモリアロケータコンポーネントの{\it free}関数を呼び出している．
 {\it cMalloc\_}は，呼び口名を表わしている(図\ref{src:TLSFBuild}の2行目)
 同様に，13行目，17行目はメモリ確保を行っている部分である．
@@ -393,17 +412,24 @@ mrb_TECS_allocf(mrb_state *mrb, void *p,
 \subsection{mruby on TECS}
 \label{sec:mrubyonTECS}
 
-mruby on TECS は，mruby (軽量Ruby)\cite{par:mruby}\cite{url:mruby}を用いたコンポーネントベース開発が可能な組込みソフトウェア開発フレームワークである\cite{par:mrubyonTECS}．
+mruby on TECS は，mruby (軽量Ruby)\cite{par:mruby}\cite{url:mruby}を用いたコンポーネントベース開発が可能な組込みソフトウェア開発フレームワークである\cite{par:mrubyonTECS}\cite{par:mrubyonTECS2}．
 スクリプト言語を用いることで，組込みソフトウェア開発の生産性向上を目指している．
 一般に，スクリプト言語は実行速度が遅いため，組込みソフトウェアに向いていないが，mruby on TECSでは，mruby-TECSブリッジの機能によって，mruby プログラムからC 言語の関数を呼び出すことができるため，C言語と変わらない速度でプログラムを実行することができる．
 mrubyプログラムは，mrubyコンパイラによってバイトコードに変換され，RiteVMと呼ばれるVM上で実行される．
-本フレームワークでは，RiteVMやRTOS (Real-Time OS)の機能もすべてTECSによってコンポーネント化されている．
+本フレームワークでは，RiteVMやリアルタイムOSの機能もすべてTECSによってコンポーネント化されている．
 
 % 本研究では，RTOS として，TOPPERS/HRP2 [6] を使用した．
 % TOPPERS/HRP2 は，$\mu$ITRONをベースにしたメモリ保護機能を持つRTOSである．
 % しかし，TECSはTOPPERS/HRP2 だけでなく，OSEKやTOPPERS/ASPといったRTOS にも対応しているため，mruby on TECS はRTOS に依存しない．
 
-\subsubsection{マルチVM対応}
+% \subsubsection{マルチVM対応}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/UseCase_mruby.pdf}
+    \caption{RiteVMとTLSFのコンポーネント図}
+    \label{fig:UseCase_mruby}
+\end{figure}
 
 本フレームワークでは，VMが行うメモリ管理にTLSFメモリアロケータを採用している．
 しかし，既存のTLSFメモリアロケータではスレッドセーフではないため，複数のスレッドからメモリの確保や解放を行うと，メモリ衝突が起きてしまう．
@@ -414,13 +440,6 @@ VMは高い頻度でメモリの確保と解放を繰り返すため，マルチ
 図\ref{fig:UseCase_mruby}では，1つ目のVMが1MB (1024*1024)のヒープ領域，2つ目のVMが2MB (2*1024*1024)のヒープ領域を持っていることを示している．
 コンポーネント化により，各VMで異なるヒープ領域を設定することが容易になっている．
 さらに，RiteVMはインクリメンタルGC (Garbage Collection)を行うが，独自のメモリプールを保持しているため，GCを始めたVMがGCの実行によって，他のVMの実行を妨げることもない．
-
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=8cm,clip]{figure/UseCase_mruby.pdf}
-    \caption{RiteVMとTLSFのコンポーネント図}
-    \label{fig:UseCase_mruby}
-\end{figure}
     
 \subsection{TINET+TECS}
 \label{sec:TINET+TECS}
@@ -428,7 +447,14 @@ VMは高い頻度でメモリの確保と解放を繰り返すため，マルチ
 TINET+TECSは，組込み向けのTCP/IPプロトコルスタックであるTINET (Tomakomai InterNETworking)\cite{url:TINET}\cite{par:TINET}をTECSによってコンポーネント化したTCP/IPプロトコルスタックである\cite{par:TINET+TECS}．
 複雑で大規模なソースコードやマクロで構成されているTINETをTECSによってコンポーネント化することで，実行時間やメモリ消費量のオーバヘッドを抑えつつ，TCP/UDPやIPv4/IPv6といった通信プロトコルの変更等のコンフィグラビリティが向上している．
 
-\subsubsection{データ送受信用のメモリ管理}
+% \subsubsection{データ送受信用のメモリ管理}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/UseCase_TINET.pdf}
+    \caption{固定長メモリアロケータとTLSFメモリアロケータ}
+    \label{fig:UseCase_TINET}
+\end{figure}
 
 データの送受信処理を行う際，各プロトコルでメモリ領域の確保と解放が行われる．
 TINET+TECSやTINETは，プロトコル間のデータコピー回数を最少とするなど，組込みシステムの厳しいメモリ制約に対応している．
@@ -441,14 +467,6 @@ TLSFメモリアロケータは，固定長メモリアロケータと比べて�
 TLSFメモリアロケータコンポーネントを利用することで，メモリプールを選択する必要もなく，効率的にメモリ管理を行うことが可能になる．
 TINET+TECSは，TECSによってコンポーネントベースで開発されているため，提案するTLSFメモリアロケータコンポーネントの拡張性も良い．
 
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=8cm,clip]{figure/UseCase_TINET.pdf}
-    \caption{固定長メモリアロケータとTLSFメモリアロケータ}
-    \label{fig:UseCase_TINET}
-\end{figure}
-    
-
 % \section{関連研究}
 % \label{sec:RelatedWork}
 
@@ -460,11 +478,11 @@ TINET+TECSは，TECSによってコンポーネントベースで開発されて
 ヒープ領域のサイズはコンポーネントの内部変数として設定するため，サイズ変更も容易になる．
 
 提案するTLSFメモリアロケータは，コンポーネント化によって再利用性も向上している．
-ユースケースとして，mruby on TECSフレームワークや，TINET+TECSで利用できることを述べたが，その他にもTECSを採用したリアルタイムOSであるTOPPERS/ASP3\cite{par:ASP3}に適用することも可能である．
+ユースケースとして，mruby on TECSフレームワークや，TINET+TECSで利用できることを述べたが，その他にもTECSを採用したリアルタイムOSであるTOPPERS/ASP3\cite{par:ASP3}やTOPPERS/HRP2\cite{par:hr-tecs}に適用することも可能である．
 利用したいシステムのメモリアロケータ部分をTLSFコンポーネントに入れ替えるだけで，利用可能となる．
 さらに，コンポーネント図によってシステムを可視化でき，複雑で大規模なシステムを把握することに役立つ．
 
-今後は，提案するTLSFコンポーネントの拡張として，統計情報を取得できるような機能を提供する．
+今後は，提案するTLSFコンポーネントの拡張として，統計情報を取得できる機能を提供する．
 メモリ確保の頻度や残りのヒープ領域サイズ等の情報を取得することで，メモリ制約の厳しい組込みシステムのソフトウェア開発の一助になると考えている．
 
 %%%%%%%%%%%% Reference %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
