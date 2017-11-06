@@ -1,7 +1,6 @@
 # Generated files of LaTeX
 *.aux
 *.dvi
-*.pdf
 *.log
 *.bbl
 *.blg
