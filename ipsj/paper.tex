@@ -349,6 +349,170 @@ Thus, when a method is called in an mruby program, the mruby-TECS bridge calls t
 \section{Proposed Framework}
 \label{sec:Proposed Framework}
 
+\subsection{TINET+TECS}
+\label{sec:TINET+TECS}
+
+\subsubsection{TINET}
+
+TINET is a compact TCP/IP protocol stack for embedded systems based on the ITRON\footnote{ITRON is a real-time operating system (RTOS) developed by the TRON project.} TCP/IP API Specification \cite{url:ITRON_TCP/IP_API_Spec}, developed by the TOPPERS Project \cite{url:TOPPERS}.
+TINET has been released as an open-source tool.
+
+To satisfy restrictions for embedded systems in terms of, for example, memory capacity, size, and power consumption, TINET supports the following functions:
+
+\begin{itemize}
+    \item minimum copy frequency,
+    \item elimination of dynamic memory control,
+    \item asynchronous interfacing,
+    \item error detailing per API.
+\end{itemize}
+
+{\bf Overview:}
+TINET runs as middleware on TOPPERS/ASP3 \cite{par:ASP3} \cite{url:ASP3}, a real-time kernel based on $\mu$ITRON \cite{par:microITRON}.
+As it is compatible with TOPPERS RTOS, TINET also supports other RTOSs such as TOPPERS/ASP and TOPPERS/JSP.
+
+Fig.\ref{fig:TINETHierarchyDiagram} shows the hierarchy diagram of TINET and TOPPERS/ASP3.
+Users transmit and receive data using a Communication End Point (CEP), an interface that functions like a socket.
+In the transmission process, headers are attached to the data body passed to the CEP at each protocol layer before the data are transmitted from the network device.
+In the reception process, the headers of the data bodies received by the network device are analyzed at each protocol layer, and the data are then passed to the CEP.
+
+A TCP reception point called the REP stands by to receive connection requests from the partner side.
+The REP has an IP address ({\it myaddr}) and a port number ({\it myportno}) as attributes and performs functions such {\it bind()} and {\it listen()}.
+
+In TINET, the amount of data copying between each protocol layers is minimized.
+In standard computing systems, the TCP/IP protocol stack has large overheads in terms of execution time and memory consumption because the data are copied at each protocol layer.
+To solve this problem, TINET does pass the pointer of the data buffer between each protocol layer instead of performing data copying.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=7.0cm,clip]{figure/TINETHierarchyDiagram.pdf}
+    \caption{TINET and TOPPERS/ASP3 hierarchy diagrams}
+    \label{fig:TINETHierarchyDiagram}
+\end{figure}
+
+\subsubsection{Component Design of TINET+TECS}
+
+TINET+TECS, the proposed componentized TCP/IP protocol stack, comprises a number of some TECS components.
+This section describes the components of the TINET+TECS framework with the aid of component diagrams.
+
+\subsubsection*{Components of a protocol stack}
+
+The components of a TINET+TECS protocol stack are shown in Fig.\ref{fig:ComponentProtocolStack}.
+Note that some small particle components, such as a kernel object, data queues, and semaphores, are omitted to simplify the component diagram.
+In TINET+TECS, the components are divided for each protocol, and functionalities such as input and output functions are defined as respective components.
+By using such small grain components, software visibility is improved.
+The components of each protocol are described in the following.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8.0cm,clip]{figure/ComponentProtocolStack.pdf}
+    \caption{Component diagram of a protocol stack}
+    \label{fig:ComponentProtocolStack}
+\end{figure}
+
+
+{\bf Application layer:}
+An application in TINET+TECS is implemented as a component such as tApplication.
+Software with TINET uses ITRON TCP/IP API \cite{url:ITRON_TCP/IP_API_Spec} such as {\it tcp\_snd\_dat} and {\it tcp\_rcv\_dat}.
+In TINET+TECS, the application component calls TECS functions such as {\it cTCPAPI\_sendData} and {\it cTCPAPI\_receiveData}.
+Moreover, in TINET+TECS supporting a TECS adapter, an existing application with TINET can run on the TINET+TECS framework without transporting, and therefore, software can be developed either using existing methods or as TECS components.
+
+{\bf Transport layer:}
+tTCPCEP (tUDPCEP) and tREP are, respectively, CEP and REP components TCP (UDP).
+For example, a server program supporting multiple clients can be developed by preparing multiple tTCPCEP components.
+tTCPInput (tUDPInput) and tTCPOutput (tUDPOutput) are components for performing, respectively, receiving and sending processing in the transport layer.
+
+{\bf Network layer:}
+The tIPv4Input and tIPv4Output components perform, respectively, the receiving and sending processing in the network layer.
+The tIPv4Functions component performs functions such as checksum, the tICMP component is used for the Internet Control Message Protocol (ICMP), and the tIPv4RoutingTable component operates a routing table.
+
+{\bf Data link layer:}
+tEthernetInputTaskBody and tEthernetOutputTaskBody (tEthernetOutput) are components for performing, respectively, receiving and sending processing in the data link layer.
+The tArp component is for implementing the Address Resolution Protocol (ARP).
+
+{\bf Physical layer:}
+The tNetworkInterfaceContoroller component implements a network device driver.
+Software can be run on other devices by replacing the component because only the component depends on the target device.
+
+To utilize the protocol stack in the same manner in the original TINET, communication object components such as tTCPCEP, tUDPCEP, and tREP are defined as an interface between TINET+TECS and an application.
+The communication object component corresponds to a CEP or REP of the original TINET.
+Application developers can utilize the TINET+TECS functionalities by generating and combining as many components as necessary.
+
+The protocol stack of TINET+TECS supports the coexistence of multiple protocols.
+Though its use of IPv6 and Point-to-Point Protocol (PPP) components, TINET+TECS can make IPv4 and IPv6 coexist and support PPP without modification of component implementation.
+
+\subsubsection*{Memory allocator component} 
+
+The original TINET eliminates dynamic memory control to meet the severe memory restrictions of embedded systems.
+A memory area for sending/receiving data in the protocol stack is allocated and released within a predetermined area.
+The memory allocator component allows for elimination of dynamic memory control in TINET+TECS by providing a requested memory area from the statically allocated memory area.
+
+The memory allocator component connects to as many tFixedSizeMemoryPool as required, as shown in Fig.\ref{fig:tMemoryAllocator}.
+tFixedSizeMemoryPool is a componentized kernel object of TOPPERS/ASP3 for allocating and release memory areas of a requested size. 
+tFixedSizeMemoryPool components of various sizes are prepared, and an appropriate memory area can be allocated according to the used data size.
+On the other hand, all components that need to allocate or deallocate memory, e.g., tTCPInput and tEthernetOutput, connect to the memory allocator component.
+
+In addition, TINET+TECS utilizes the TECS {\it send/receive} specifier to minimize the memory copy frequency, which is a functionality supported by TINET.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=7.0cm,clip]{figure/tMemoryAllocator.pdf}
+    \caption{Component diagram of tMemoryAllocator}
+    \label{fig:tMemoryAllocator}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=7.0cm,clip]{figure/SendReceive.pdf}
+    \caption{Differences between in/out and send/receive}
+    \label{fig:SendReceive}
+\end{figure}
+
+{\bf Send/receive specifiers:}
+TECS supports {\it send}/{\it receive} interface specifiers \cite{par:RPC}.
+TINET+TECS uses {\it send} and {\it receive} specifiers instead of {\it in} and {\it out} to reduce the number of copies:
+
+\begin{itemize}
+\item {\it in} is a specifier for input arguments.
+A callee side uses the memory of arguments with {\it in} when executing the callee function.
+When the processing returns to the caller side, the caller can reuse and deallocate the memory.
+
+\item {\it send} is another specifier for transferring data to a callee from a caller such as {\it in}.
+The difference between {\it in} and {\it send} is whether the data memory is deallocated in the caller or callee, as shown in Fig.\ref{fig:SendReceive}.
+In the case of the {\it in} specifier, both allocating and deallocating of the data memory are performed in the caller.
+By contrast, in the case of {\it send}, the caller allocates the data memory and the callee deallocates it.
+
+\item {\it out} is a specifier for output arguments through which a callee writes data in the memory allocated by a caller while the caller receives the data.
+
+\item {\it receive} is another specifier for a caller receiving data from a callee such as {\it out}.
+The difference between {\it out} and {\it receive} lies in whether the data memory is allocated in the caller or callee, as shown in Fig.\ref{fig:SendReceive}.
+In the case of {\it out}, the callee writes data in the memory allocated by a caller, whereas in the {\it receive} case, the callee allocates the data memory.
+Deallocating of the memory is performed in the caller in both cases.
+\end{itemize}
+
+As shown in Fig.\ref{src:SendReceive}, sending and receiving arguments such as {\it outputp} and {\it inputp} are defined using, respectively, the {\it send/receive} specifier in the signature description.
+Developers hardly make mistakes of memory operation because these specifiers completely pass an ownership of memory.
+Common object request broker architecture (CORBA) does not consider memory sharing; CORBA has no functionalities
+such as {\it send}/{\it receive}.
+
+\begin{figure}[t]
+\centering
+\begin{lstlisting}
+signature sNicDriver {
+  void start(
+    [send(sNetworkAlloc),size_is(size)]
+        int8_t *outputp, .., ..);
+  void read(
+    [receive(sNetworkAlloc),size_is(*size)]
+        int8_t **inputp, .., ..);
+    /* Omit: other functions */
+};
+\end{lstlisting}
+\caption{Signature description of the nic driver (An example of send/receive)}
+\label{src:SendReceive}
+\end{figure}
+
+
+
 \subsection{TLSF+TECS}
 \label{sec:TLSF+TECS}
 
@@ -391,7 +555,7 @@ In addition, TLSF searches at the same speed and at high speed, $O(1)$.
 \end{figure}
 
 
-\subsubsection{Component Design of TLSF}
+\subsubsection{Component Design of TLSF+TECS}
 
 This section describes the component design of TLSF memory allocator.
 In this research, we are using TECS to componentize TLSF.
