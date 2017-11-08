@@ -55,7 +55,7 @@
 \title{Component-based Software Development Framework \\for Embedded IoT Devices（仮）}
 
 \affiliate{OSAKA}{Graduate School of Engineering Science, Osaka University}
-\affiliate{NAGOYA}{Graduate School of Information Science, Nagoya University}
+\affiliate{NAGOYA}{Graduate School of Informatics, Nagoya University}
 \affiliate{OKUMA}{OKUMA Corporation}
 
 \author{Takuro Yamamoto}{OSAKA}
@@ -78,6 +78,58 @@
 
 %1
 \section{Introduction}
+\label{sec:Introduction}
+
+The Internet of Things (IoT) is an essential next evolutionary step for the Internet \cite{par:IoTComputing} in which various items and platforms, for example, wearable devices and smart devices, will be connected via the Internet to further enrich people's lives.
+The IoT uses embedded systems such as data sensors and controlling actuators as elemental constituents, and they must demonstrate high quality and high performance.
+This requirement has led to an increase in their complexity and scale; moreover, these systems need to have low production costs and short development cycles.
+
+Complex and large-scale software systems can be developed efficiently by using component-based techniques \cite{par:Crnkovic}, \cite{par:CBD}.
+Component-Based Development (CBD) is a design technique that can be applied to reusable software development.
+Verification of component-based systems has been extensively researched \cite{par:Blaming}, \cite{par:Verification}.
+Individual component diagrams enable the visualization of an entire system.
+In addition, component-based systems are flexible with regard to extensibility and specification changes.
+The TOPPERS embedded component system (TECS) \cite{par:TECS}, AUTOSAR \cite{url:AUTOSAR}, and SaveCCM \cite{par:SAVEapproach} are typical CBD tools for embedded systems.
+
+In addition, scripting languages, such as Ruby, JavaScript, Perl, Python, and Lua, offer efficient approaches to software development.
+Currently, most embedded software are programmed in C language.
+However, development in C language results in large code size, incurs high costs, and requires significant development time.
+In contrast, the use of scripting languages improves the efficiency of software engineering and can shorten the development period because it is relatively easy to reuse scripts. 
+
+For embedded systems, real-time properties, such as estimation of worst-case execution time, are very important.
+Although scripting languages are easy to use and read, their execution requires more time than that required by the codes written in C.
+Therefore, applying scripting languages to embedded systems is difficult.
+To address the above limitation, ``mruby on TECS,'' a component-based framework for running script programs, has been proposed \cite{par:mrubyonTECS}.
+This framework integrates two technologies, i.e., mruby, which is a lightweight implementation of Ruby for embedded systems \cite{par:mruby}, \cite{url:mruby}, and TECS, which is a component-based framework for embedded systems \cite{par:TECS}, \cite{url:TOPPERS}.
+
+This paper proposes an extended framework of mruby on TECS that can be applied to embedded network software development for IoT devices.
+In the proposed framework, a component-based TCP/IP protocol stack, TINET+TECS \cite{par:TINET+TECS}, is comprised, and it is possible to utilize TINET function from mruby programs.
+
+TINET is a compact TCP/IP protocol stack for embedded systems \cite{url:TINET}.
+TINET comprises many complex source codes, i.e., it contains many files and defines many macros, which can be problematic for software developers seeking to maintain, extend, and analyze the software.
+TINET+TECS is a componentized TIENT with TECS to improve the configurability and scalability of TCP/IP software.
+
+In addition, this paper proposes a component-based dynamic memory allocator, TLSF+TECS. 
+TLSF is a dynamic memory allocator for real-time systems, which can always run with $O(1)$ and improve memory usage efficiency by deviding memory blocks in two stages.
+In the current version of TLSF, memory contention may occur when multiple threads run at the same time.
+TLSF+TECS is a componentized TLSF memory allocator, which can be thread-safe allocator because each component has its own heap area.
+
+
+
+{\bf Contributions}: The proposed framework provides the following contributions.
+\begin{enumerate}
+\item {\bf :}
+\item {\bf :}
+\item {\bf :}
+\item {\bf :}
+\end{enumerate}
+
+{\bf Organization}: The remainder of this paper is organized as follows.
+Section \ref{sec:System Model} introduces the system model of the proposed framework and the basic technologies, i.e., mruby, TECS, and mruby on TECS.
+Section \ref{sec:Proposed Framework} describes the design and implementation of the proposed framework, including TINET+TECS and TLSF+TECS.
+Section \ref{sec:Evaluation} evaluates the proposed framework.
+Related work is discussed in Section \ref{sec:Related Work}.
+Conclusions and suggestions for future work are presented in Section \ref{sec:Conclusion}.
 
 
 %2
@@ -232,12 +284,10 @@ An application module is generated by compiling and linking the header, the inte
 
 %3
 \section{Proposed Framework}
-
+\label{sec:Proposed Framework}
 
 \subsection{TLSF+TECS}
 \label{sec:TLSF+TECS}
-
-
 
 \subsubsection{TLSF}
 
@@ -278,7 +328,7 @@ In addition, TLSF searches at the same speed and at high speed, $O(1)$.
 \end{figure}
 
 
-\subsubsection{Component Design of TLSF memory allocator}
+\subsubsection{Component Design of TLSF}
 
 This section describes the component design of TLSF memory allocator.
 In this research, we are using TECS to componentize TLSF.
@@ -410,15 +460,17 @@ In this way, in the component-based development using TECS, it is possible to op
 
 %4
 \section{Evaluation}
+\label{sec:Evaluation}
 
 
 %5
 \section{Related Work}
+\label{sec:Related Work}
 
 
 %6
 \section{Conclusion}
-
+\label{sec:Conclusion}
 
 
 \begin{acknowledgment}
