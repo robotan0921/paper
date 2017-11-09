@@ -7,6 +7,7 @@
 \usepackage{amssymb}
 \usepackage{float}
 \usepackage{enumerate,cite,url}
+\usepackage{color}
 \usepackage{listings,jlisting}
 \lstset{%
     language={c},%
@@ -136,11 +137,16 @@ Conclusions and suggestions for future work are presented in Section \ref{sec:Co
 \section{System Model}
 \label{sec:System Model}
 
-This section describes the system model of the proposed framework, including basic technologies such as TECS.
-The system model of the proposed framework is shown in Fig.\ref{fig:SystemModel}.
-
+This section describes the system model of the proposed framework, including basic technologies such as TECS and mruby.
 The proposed framework is an extension of mruby on TECS framework \cite{par:mrubyonTECS}\cite{par:mrubyonTECS2}, and utilizes two technologies: mruby and TECS.
-In this section, TECS,  mruby, and mruby on TECS framework are described.
+The system model of the proposed framework is shown in Fig.\ref{fig:SystemModel}.
+In the proposed framework, each mruby program runs on a RiteVM mapped to a componentized task of an RTOS.
+mruby programs can call the TINET functions required for network programming through the mruby-TECS bridge, and thus software to be embedded in IoT devices can be developed.
+Moreover, the proposed framework comprises TLSF+TECS.
+TLSF+TECS is utilized for memory management of mruby's RiteVMs and TINET+TECS, which helps to improve the efficiency of memory consumption.
+
+The following subsection explains TECS, mruby, and mruby on TECS framework.
+
 
 \begin{figure}[t]
     \centering
@@ -311,7 +317,7 @@ An mruby-TECS bridge provides native libraries for mruby and can call a native p
 The mruby-TECS bridge also provides TECS components for receiving the invocation from an mruby program.
 
 In this paper, TOPPERS/ASP3 \cite{par:ASP}, \cite{url:ASP} is the target RTOS and is based on $\mu$ITRON \cite{par:microITRON} .
-However, mruby on TECS does not depend on the RTOS because TECS supports not only TOPPERS/HRP2 but also the other RTOSs such as OSEK \cite{par:OSEK} and TOPPERS/HRP2 \cite{url:HRP2}, \cite{par:hr-tecs}.
+However, mruby on TECS does not depend on the RTOS because TECS supports not only TOPPERS/ASP3 but also the other RTOSs such as OSEK \cite{par:OSEK} and TOPPERS/HRP2 \cite{url:HRP2}, \cite{par:hr-tecs}.
 
 \begin{figure}[t]
     \centering
@@ -340,7 +346,6 @@ The right side of BridgeMotor belongs to TECS component.
 \end{figure}
 
 The mruby-TECS bridge generates a {\it celltype}, which is called from the mruby code, and an mruby class, which corresponds to a developer-specified TECS component to invoke a C function from the mruby program.
-
 The generated mruby-TECS bridge supports registration of classes and methods for mruby.
 Methods in an mruby class are defined by generation codes for an mruby-TECS bridge, such as setPower and stop.
 Thus, when a method is called in an mruby program, the mruby-TECS bridge calls the function defined in the TECS component such as a Motor {\it cell}.
@@ -348,6 +353,12 @@ Thus, when a method is called in an mruby program, the mruby-TECS bridge calls t
 %3
 \section{Proposed Framework}
 \label{sec:Proposed Framework}
+
+\textcolor{red}{TODO: セクションの概要を追加}
+
+\subsection{Extended mruby on TECS (仮)}
+
+\textcolor{red}{TODO: mrubyからTINETを利用する説明とかmrubyでエコーサーバのコード例とか}
 
 \subsection{TINET+TECS}
 \label{sec:TINET+TECS}
@@ -679,7 +690,7 @@ Each memory pool size can be configured as an variable (Lines 5 and 11 in Fig.\r
 Fig.\ref{src:TLSFC} is the part of the code actually calling the function of the TLSF memory allocator component.
 The use part shows a function that the mruby VM allocates memory in the mruby on TECS framework\cite{par:mrubyonTECS}\cite{par:mrubyonTECS2} which is introduced in Section \ref{sec:mrubyonTECS}.
 Lines 8 calls the {\it free} function of the TLSF memory allocator component.
-{\it cMalloc\_} represents the name of the calle port (Lines 2 in Fig.\ref{src:TLSFBuild}).
+{\it cMalloc\_} represents the name of the call port (Lines 2 in Fig.\ref{src:TLSFBuild}).
 Likewise, Lines 13 and 17 call the function for memory allocation.
 The heap area of {\it TLSFMalloc\_001} component is used if the code of \ref{src:TLSFC} is executed in {\it Task\_001}, and if that is executed in {\it Task\_002}, the heap area of {\it TLSFMalloc\_002} component is used, respectively.
 In this way, in the component-based development using TECS, it is possible to operate with the same code without modifying the C code, although the cells are different.
