@@ -354,7 +354,12 @@ Thus, when a method is called in an mruby program, the mruby-TECS bridge calls t
 \section{Proposed Framework}
 \label{sec:Proposed Framework}
 
-\textcolor{red}{TODO: セクションの概要を追加}
+The proposed framework is an extended mruby on TECS framework for network programming.
+It can use TINET+TECS functions from mruby programs.
+TINET+TECS is a component-based TCP/IP protocol stack comprised in the proposed framework, and it compensates for the original TINET's weak point, that it is hard to maintain, extend, and analyze the software due to many complex source codes and improves the configurability.
+In addition, TLSF+TECS, a component-based dynamic memory allocator, is used for memory management of mruby's RiteVMs and TCP/IP buffers in the proposed framework.
+Since each component holds its own heap area, TLSF+TECS allows concurrent operation without exclusive control while improving the efficiency of memory consumption which is a merit of TLSF.
+
 
 \subsection{Extended mruby on TECS (仮)}
 
