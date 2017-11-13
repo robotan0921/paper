@@ -361,10 +361,6 @@ In addition, TLSF+TECS, a component-based dynamic memory allocator, is used for 
 Since each component holds its own heap area, TLSF+TECS allows concurrent operation without exclusive control while improving the efficiency of memory consumption which is a merit of TLSF.
 
 
-\subsection{Extended mruby on TECS (仮)}
-
-\textcolor{red}{TODO: mrubyからTINETを利用する説明とかmrubyでエコーサーバのコード例とか}
-
 \subsection{TINET+TECS}
 \label{sec:TINET+TECS}
 
@@ -528,6 +524,11 @@ signature sNicDriver {
 \end{figure}
 
 
+
+
+\subsection{Extended mruby on TECS (仮)}
+
+\textcolor{red}{TODO: mrubyからTINETを利用する説明とかmrubyでエコーサーバのコード例とか}
 
 \subsection{TLSF+TECS}
 \label{sec:TLSF+TECS}
@@ -704,6 +705,89 @@ In this way, in the component-based development using TECS, it is possible to op
 %4
 \section{Evaluation}
 \label{sec:Evaluation}
+
+This section describes the experimental evaluation used to demonstrate the effectiveness of the proposed framework.
+
+% \subsection{Evaluation environment}
+
+GR-PEACH was employed as the evaluation board.
+Detailed specifications of the board are shown in Table \ref{tab:EvaluationBoardEnvironment}.
+We also employ TINET 1.5.4 and the compiler arm-none-eabi-gcc 5.2
+To pretest the system, we connected the board to a host PC via a LAN cable and evaluated the data sending and receiving.
+
+\begin{table}[t]
+    \centering
+    \caption{Evaluation Board Environment}
+    \begin{tabular}{l|l}
+        \hline\hline
+        Board           &   GR-PEACH                \\
+        CPU             &   Cortex-A9 RZ/A1H 400MHz \\
+        Flash ROM       &   8 MB                    \\
+        RAM             &   10 MB                   \\
+        LAN Controller  &   LAN8710A                \\
+        \hline
+    \end{tabular}
+    \label{tab:EvaluationBoardEnvironment}
+\end{table}
+
+\subsection{Performance of TINET+TECS}
+
+To demonstrate the low overhead of TINET+TECS, we compared its execution time and memory consumption with that of TINET, producing the results shown in Fig. \ref{fig:EvaluationOfExecutionTime}.
+
+The {\it tcp\_snd\_dat} and {\it tcp\_rcv\_dat} APIs were used in the evaluation to, respectively, send and receive TCP data.
+For {\it tcp\_snd\_dat}, we measured the executing time starting from the API call through the application until the return of the processing result.
+In TINET+TECS, this process is performed in the order tApplication, tTCPCEP, tTCPOutputTaskBody, tIPv4Output, tEthernetOutput, tArp, tEthernetOutputTaskBody, and tIfMbed, as shown in Fig. \ref{fig:ComponentProtocolStack}.
+For {\it tcp\_rcv\_dat}, we measured the execution time from the data receipt in the LAN driver until data acquisition in the application.
+In TINET+TECS, the process is performed in the order tIfMbed, tEthernetInputTaskBody, tIPv4Input, tTCPInput, tTCPCEP, and tApplication, as shown in Fig. \ref{fig:ComponentProtocolStack}.
+The execution time of TINET+TECS is close to that of TINET, with an overhead of about 3 us.
+As the use of the {\it send/receive} specifier enables accessing of the buffer address without data copying, the componentization overhead does not affect the execution time.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=7.5cm,clip]{figure/EvaluationOfExecutionTime.pdf}
+    \caption{Execution times of TINET and TINET+TECS}
+    \label{fig:EvaluationOfExecutionTime}
+\end{figure}
+
+The memory consumptions of TINET and TINET+TECS are compared in Table \ref{tab:EvaluationOfMemoryConsumption}.
+The memory consumption of TINET+TECS is about 1\% higher than that of TINET, as the data and processes such as initialization of cells, descriptors, function tables, and skeleton functions needed to manage TECS components increase memory consumption.
+
+\begin{table}[t]
+    \centering
+    \caption{Memory consumption of TINET and TINET+TECS}
+    \begin{tabular}{c|r|r|r|r}
+        \hline\hline
+                    &   text       &  data    &   bss      &  total     \\ \hline
+        TINET       &   183.94 KB  &  5.37 KB &  132.03 KB &  322.34 KB \\
+        TINET+TECS  &   170.73 KB  &  5.37 KB &  149.13 KB &  325.23 KB \\
+        \hline
+        \multicolumn{5}{r}{Including the application and kernel objects}
+    \end{tabular}
+    \label{tab:EvaluationOfMemoryConsumption}
+\end{table}
+
+As shown in Table \ref{tab:EvaluationOfConfigurability}, the code lines for modification were measured to demonstrate the improved configurability.
+This demonstrated the ability to change the composition of the protocol stack with a small workload, confirming that the proposed framework improves the configurability.
+
+\begin{table}[t]
+    \centering
+    \caption{Modified code lines of CDL}
+    \begin{tabular}{c|r|r|r}
+        \hline\hline
+                         &   Size       &   Size (-- Default) & CDL  \\ \hline
+        Default          &   325.23 KB  &              0 KB   &  0 lines   \\
+        I                &   305.40 KB  &       -- 19.83 KB   & 18 lines   \\
+        I + I\hspace{-.1em}I &   304.12 KB  &   -- 21.10 KB   & 27 lines   \\
+        I + I\hspace{-.1em}I + I\hspace{-.1em}I\hspace{-.1em}I & 303.45 KB & -- 21.77 KB  & 32 lines \\
+        \hline
+        \multicolumn{4}{l}{I: Remove TCP}\\
+        \multicolumn{4}{l}{I\hspace{-.1em}I: Remove ICMP}\\
+        \multicolumn{4}{l}{I\hspace{-.1em}I\hspace{-.1em}I: Change network buffer (Remove memory pools)}
+    \end{tabular}
+    \label{tab:EvaluationOfConfigurability}
+\end{table}
+
+\subsection{Performance of TLSF+TECS}
 
 
 %5
