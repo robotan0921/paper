@@ -534,10 +534,6 @@ signature sNicDriver {
 
 
 
-\subsection{Extended mruby on TECS (仮)}
-
-\textcolor{red}{TODO: mrubyからTINETを利用する説明とかmrubyでエコーサーバのコード例とか}
-
 \subsection{TLSF+TECS}
 \label{sec:TLSF+TECS}
 
@@ -745,6 +741,31 @@ TLSF+TECS efficiently manages the memory without selecting a memory pool.
 Since TINET+TECS is component-based system, TLSF+TECS can be easily extended to TINET+TECS.
 
 %4
+\subsection{Use case}
+\label{sec:UseCase}
+
+
+\begin{figure}[t]
+\centering
+\begin{lstlisting}
+begin
+    io = AnalogIO.new(A0, INPUT)
+    cep = TCP.new()	
+    cep.accept
+    loop do		
+        val = io.read  
+        cep.snd val.to_s + "\n"		
+        RTOS.delay(1000)			
+    end
+rescue => e	
+    puts "[ERROR]" + e
+end
+\end{lstlisting}
+\caption{Example of mruby application}
+\label{src:mruby}
+\end{figure}
+
+
 \section{Evaluation}
 \label{sec:Evaluation}
 
