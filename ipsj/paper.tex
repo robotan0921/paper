@@ -709,6 +709,40 @@ Likewise, Line 13 and 17 call the function for memory allocation.
 The heap area of {\it TLSFMalloc\_001} component is used if the code of \ref{src:TLSFC} is executed in {\it Task\_001}, and if that is executed in {\it Task\_002}, the heap area of {\it TLSFMalloc\_002} component is used, respectively.
 In this way, in the component-based development using TECS, it is possible to operate with the same code without modifying the C code, although the cells are different.
 
+\subsubsection{Multiple RiteVM}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/UseCase_mruby.pdf}
+    \caption{Component description of RiteVM and TLSF+TECS}
+    \label{fig:UseCase_mruby}
+\end{figure}
+
+The proposed framework uses TLSF memory allocator for memory management of RiteVMs.
+However, since the existing TLSF is not thread-safe, if memory is allocated or deallocated from multiple, memory contention will occur.
+As a RiteVM allocates and deallocates memory at high frequency, the memory contention immediately occurs in the case of multiple VMs.
+
+The TLSF components are connected to the RiteVMs to hold its own heap area in each RiteVM as shown in Fig.\ref{fig:UseCase_mruby}.
+Since each TLSF component holds a memory pool, multiple RiteVMs can be executed without memory contention.
+Fig.\ref{fig:UseCase_mruby} shows that the first RiteVM has a heap area of 1 MB (1024*1024) and the second VM has a heap area of 2 MB (2*1024*1024).
+It is easy to set different heap areas in each RiteVM.
+In addition, RiteVM performs incremental GC (Garbage Collection), and a VM that started GC does not disturb the execution of other VMs by running GC.
+    
+\subsubsection{Memory management for data sending and receiving}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/UseCase_TINET.pdf}
+    \caption{Fixed-size and TLSF memory allocator components}
+    \label{fig:UseCase_TINET}
+\end{figure}
+
+In TCP/IP protocol stack, memory allocation and release are repeated in each layer such as TCP layer, IP layer, and Ethernet layer, so the role of allocator is important.
+TINET+TECS combines all components that manage memory with the allocator.
+The TLSF memory allocator can execute at the same speed as compared with the fixed-size memory allocator which TOPPERS/ASP3 supports as standard, and can improve the memory efficiency.
+In addition, as shown in Fig.\ref{fig:UseCase_TINET}, the fixed-size memory allocator needs to prepare memory pools of different sizes, and select a memory pool as necessary.
+TLSF+TECS efficiently manages the memory without selecting a memory pool.
+Since TINET+TECS is component-based system, TLSF+TECS can be easily extended to TINET+TECS.
 
 %4
 \section{Evaluation}
