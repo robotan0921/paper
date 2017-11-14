@@ -119,9 +119,18 @@ TLSF+TECS is a componentized TLSF memory allocator, which can be thread-safe all
 
 {\bf Contributions}: The proposed framework provides the following contributions.
 \begin{enumerate}
-\item {\bf :}
-\item {\bf :}
-\item {\bf :}
+\item {\bf Applicable to various devices:}
+The proposed framework does not depend on RTOSs or hardware, it can be utilized in various devices.
+mruby code is portable, so it is possible to run the same program on different devices.
+
+\item {\bf Improve configurability:}
+Because TINET+TECS is a component-based system, its software can flexibly change as system's configuration by, for example, resizing network buffer, adding/removing TCP (or UDP) functionality, or supporting either IPv4 or IPv6.
+In addition, the use by TINET+TECS of individual component diagrams enables visualization of an entire system.
+
+\item {\bf Thread-safe memory allocator:}
+TLSF+TECS runs thread safely without exclusive control even if multiple threads operate in parallel.
+Moreover, each thread can easily set its own heap area.
+
 \end{enumerate}
 
 {\bf Organization}: The remainder of this paper is organized as follows.
