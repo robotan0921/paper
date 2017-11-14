@@ -866,6 +866,22 @@ This demonstrated the ability to change the composition of the protocol stack wi
 \section{Related Work}
 \label{sec:Related Work}
 
+To develop the software of IoT systems, several approaches have been proposed \cite{par:frameworkCPS} such as General-purpose Programming Languages (GPLs), Wireless Sensor Network (WSN) macroprogramming, Cloud-based platforms, and Model-Driven Development (MDD).
+
+The development using GPLs such as C, JavaScript, Python, and Android allows the extremely efficient systems based on the complete control over individual devices.
+However, GPLs need more development effort, and it is difficult to reuse software due to platform-dependent design.
+
+WSN macroprogramming provides abstractions to specify high-level collaborative behaviors, while hiding low-level details such as message passing and state maintenance.
+nesC, a programming language used to build applications for the TinyOS platform \cite{par:nesc}, has been proposed.
+nesC/TinyOS is designed for WSN nodes with limited resources e.g., 8 kilobytes of program memory, 512 bytes of RAM, but not supported TCP/IP implementation.
+
+Cloud-based platform reduces development efforts by providing cloud-base APIs and high-level constructs (e.g., drag-and-drop).
+In addition, it offers the ease deployment and evolution because the application logic is centrally located in a cloud platform.
+However, it is platform-dependent design, and restricts developers in terms of functionality such as in-network aggregation or direct node-to-node communication locally.
+
+To address the issues of development efforts and platform-dependent design, MDD has been proposed \cite{par:MDD}.
+MDD provides the benefits of re-usable, platform-independent, extensible design, however it needs long development time to build a MDD system.
+
 
 %6
 \section{Conclusion}
