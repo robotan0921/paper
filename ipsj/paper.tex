@@ -100,11 +100,11 @@ In contrast, the use of scripting languages improves the efficiency of software 
 For embedded systems, real-time properties, such as estimation of worst-case execution time, are very important.
 Although scripting languages are easy to use and read, their execution requires more time than that required by the codes written in C.
 Therefore, applying scripting languages to embedded systems is difficult.
-To address the above limitation, ``mruby on TECS,'' a component-based framework for running script programs, has been proposed \cite{par:mrubyonTECS}.
+To address the above limitation, ``mruby on TECS,'' a component-based framework for running script programs, has been proposed \cite{par:mrubyonTECS}, \cite{mrubyonTECS3}.
 This framework integrates two technologies, i.e., mruby, which is a lightweight implementation of Ruby for embedded systems \cite{par:mruby}, \cite{url:mruby}, and TECS, which is a component-based framework for embedded systems \cite{par:TECS}, \cite{url:TOPPERS}.
 
 This paper proposes an extended framework of mruby on TECS that can be applied to embedded network software development for IoT devices.
-In the proposed framework, a component-based TCP/IP protocol stack, TINET+TECS \cite{par:TINET+TECS}, is comprised, and it is possible to utilize TINET function from mruby programs.
+In the proposed framework, a component-based TCP/IP protocol stack, TINET+TECS, is comprised, and it is possible to utilize TINET function from mruby programs.
 
 TINET is a compact TCP/IP protocol stack for embedded systems \cite{url:TINET}.
 TINET comprises many complex source codes, i.e., it contains many files and defines many macros, which can be problematic for software developers seeking to maintain, extend, and analyze the software.
@@ -138,7 +138,7 @@ Conclusions and suggestions for future work are presented in Section \ref{sec:Co
 \label{sec:System Model}
 
 This section describes the system model of the proposed framework, including basic technologies such as TECS and mruby.
-The proposed framework is an extension of mruby on TECS framework \cite{par:mrubyonTECS}\cite{par:mrubyonTECS2}, and utilizes two technologies: mruby and TECS.
+The proposed framework is an extension of mruby on TECS framework \cite{par:mrubyonTECS}\cite{par:mrubyonTECS3}, and utilizes two technologies: mruby and TECS.
 The system model of the proposed framework is shown in Fig.\ref{fig:SystemModel}.
 In the proposed framework, each mruby program runs on a RiteVM mapped to a componentized task of an RTOS.
 mruby programs can call the TINET functions required for network programming through the mruby-TECS bridge, and thus software to be embedded in IoT devices can be developed.
@@ -694,7 +694,7 @@ Fig.\ref{src:TLSFBuild} shows the build description of the TLSF memory allocator
 Two sets of task components and TLSF components are combined.
 Each memory pool size can be configured as a variable (Line 5 and 11 in Fig.\ref{src:TLSFBuild}).
 Fig.\ref{src:TLSFC} is the part of the code actually calling the function of the TLSF memory allocator component.
-The use part shows a function that the mruby VM allocates memory in the mruby on TECS framework\cite{par:mrubyonTECS}\cite{par:mrubyonTECS2} which is introduced in Section \ref{sec:mrubyonTECS}.
+The use part shows a function that the mruby VM allocates memory in the mruby on TECS framework\cite{par:mrubyonTECS}\cite{par:mrubyonTECS3} which is introduced in Section \ref{sec:mrubyonTECS}.
 Line 8 calls the {\it free} function of the TLSF memory allocator component.
 {\it cMalloc\_} represents the name of the call port (Line 2 in Fig.\ref{src:TLSFBuild}).
 Likewise, Line 13 and 17 call the function for memory allocation.
