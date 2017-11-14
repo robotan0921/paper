@@ -744,6 +744,15 @@ Since TINET+TECS is component-based system, TLSF+TECS can be easily extended to 
 \subsection{Use case}
 \label{sec:UseCase}
 
+In the proposed framework, applications can call TINET functions such as TCP and UDP from mruby programs because mruby-TECS bridge automatically generates the code linking mruby and C.
+Fig.\ref{src:mruby} shows an mruby program to transmit the value acquired from a sensor.
+mruby makes it easier to develop applications than existing TINET, i.e., C language.
+
+In the case of a simple application, a few functions are only used and there are some unused functions.
+For example, the application only uses a function to send by TCP protocol as shown in Fig.\ref{src:mruby}.
+The proposed framework incorporates TINET+TECS, and can easily custimize such as removing UDP functions, supporting only IPv4, or removing TCP receiving function.
+It can be applied to embedded systems with strict memory constraints by removing unused functions.
+
 
 \begin{figure}[t]
 \centering
