@@ -105,11 +105,11 @@ This framework integrates two technologies, i.e., mruby, which is a lightweight 
 
 This paper proposes an extended framework of mruby on TECS that can be applied to embedded network software development for IoT devices.
 In the proposed framework, a component-based TCP/IP protocol stack, TINET+TECS, is comprised, and it is possible to utilize TINET function from mruby programs.
-
 TINET is a compact TCP/IP protocol stack for embedded systems \cite{url:TINET}.
 TINET comprises many complex source codes, i.e., it contains many files and defines many macros, which can be problematic for software developers seeking to maintain, extend, and analyze the software.
 TINET+TECS is a componentized TIENT with TECS to improve the configurability and scalability of TCP/IP software.
-
+In the case of only sending values obtained by sensors, it is better to custimize easily, such as removing unused functions.
+The improved configurability leads to satisfy strict memory constrains of embedded systems.
 In addition, this paper proposes a component-based dynamic memory allocator, TLSF+TECS. 
 TLSF is a dynamic memory allocator for real-time systems, which can always run with $O(1)$ and improve memory usage efficiency by deviding memory blocks in two stages.
 In the current version of TLSF, memory contention may occur when multiple threads run at the same time.
@@ -119,7 +119,6 @@ TLSF+TECS is a componentized TLSF memory allocator, which can be thread-safe all
 
 {\bf Contributions}: The proposed framework provides the following contributions.
 \begin{enumerate}
-\item {\bf :}
 \item {\bf :}
 \item {\bf :}
 \item {\bf :}
