@@ -118,8 +118,8 @@ In the proposed framework, a component-based TCP/IP protocol stack, TINET+TECS, 
 TINET is a compact TCP/IP protocol stack for embedded systems \cite{url:TINET}.
 TINET comprises many complex source codes, i.e., it contains many files and defines many macros, which can be problematic for software developers seeking to maintain, extend, and analyze the software.
 TINET+TECS is a componentized TIENT with TECS to improve the configurability and scalability of TCP/IP software.
-In the case of only sending values obtained by sensors, it is better to custimize easily, such as removing unused functions.
-The improved configurability leads to satisfy strict memory constrains of embedded systems.
+In the case of only sending values obtained by sensors, it is better to easily customize the minimum configuration of the TCP/IP protocol stack, such as removing unused functions.
+The improved configurability leads to satisfying strict memory constraints of embedded systems.
 In addition, this paper proposes a component-based dynamic memory allocator, TLSF+TECS. 
 TLSF is a dynamic memory allocator for real-time systems, which can always run with $O(1)$ and improve memory usage efficiency by deviding memory blocks in two stages.
 In the current version of TLSF, memory contention may occur when multiple threads run at the same time.
@@ -131,7 +131,8 @@ TLSF+TECS is a componentized TLSF memory allocator, which can be thread-safe all
 \begin{enumerate}
 \item {\bf Applicable to various devices:}
 The proposed framework does not depend on RTOSs or hardware, it can be utilized in various devices.
-mruby code is portable, so it is possible to run the same program on different devices.
+mruby code is portable.
+Therefore, it is possible to run the same program on different devices.
 
 \item {\bf Improve configurability:}
 Because TINET+TECS is a component-based system, its software can flexibly change as system's configuration by, for example, resizing network buffer, adding/removing TCP (or UDP) functionality, or supporting either IPv4 or IPv6.
@@ -139,7 +140,7 @@ In addition, the use by TINET+TECS of individual component diagrams enables visu
 
 \item {\bf Thread-safe memory allocator:}
 TLSF+TECS runs thread safely without exclusive control even if multiple threads operate in parallel.
-Moreover, each thread can easily set its own heap area.
+Moreover, each thread can easily set own heap area.
 
 \end{enumerate}
 
@@ -426,7 +427,7 @@ This section describes the components of the TINET+TECS framework with the aid o
 
 \subsubsection*{Components of a protocol stack}
 
-The components of a TINET+TECS protocol stack are shown in Fig.\ref{fig:ComponentProtocolStack}.
+The components of the TINET+TECS protocol stack are shown in Fig.\ref{fig:ComponentProtocolStack}.
 Note that some small particle components, such as a kernel object, data queues, and semaphores, are omitted to simplify the component diagram.
 In TINET+TECS, the components are divided for each protocol, and functionalities such as input and output functions are defined as respective components.
 By using such small grain components, software visibility is improved.
@@ -828,12 +829,13 @@ In addition, RiteVM performs incremental GC (Garbage Collection), and a VM that 
     \label{fig:UseCase_TINET}
 \end{figure}
 
-In TCP/IP protocol stack, memory allocation and release are repeated in each layer such as TCP layer, IP layer, and Ethernet layer, so the role of allocator is important.
+In the TCP/IP protocol stack, memory allocation and release are repeated in each layer such as TCP layer, IP layer, and Ethernet layer.
+Therefore, the role of allocator is important.
 TINET+TECS combines all components that manage memory with the allocator.
 The TLSF memory allocator can execute at the same speed as compared with the fixed-size memory allocator which TOPPERS/ASP3 supports as standard, and can improve the memory efficiency.
 In addition, as shown in Fig.\ref{fig:UseCase_TINET}, the fixed-size memory allocator needs to prepare memory pools of different sizes, and select a memory pool as necessary.
 TLSF+TECS efficiently manages the memory without selecting a memory pool.
-Since TINET+TECS is component-based system, TLSF+TECS can be easily extended to TINET+TECS.
+TLSF+TECS can be easily extended to TINET+TECS since TINET+TECS is a component-based system.
 
 %4
 \subsection{Use case}
@@ -845,7 +847,7 @@ mruby makes it easier to develop applications than existing TINET, i.e., C langu
 
 In the case of a simple application, a few functions are only used and there are some unused functions.
 For example, the application only uses a function to send by TCP protocol as shown in Fig.\ref{src:mruby}.
-The proposed framework incorporates TINET+TECS, and can easily custimize such as removing UDP functions, supporting only IPv4, or removing TCP receiving function.
+The proposed framework incorporates TINET+TECS, and can easily customize the TCP/IP protocol stack such as removing UDP functions, supporting only IPv4, or removing TCP receiving function.
 It can be applied to embedded systems with strict memory constraints by removing unused functions.
 
 
@@ -1070,17 +1072,20 @@ To develop the software of IoT systems, several approaches have been proposed \c
 
 The development using GPLs such as C, JavaScript, Python, and Android allows the extremely efficient systems based on the complete control over individual devices.
 However, GPLs need more development effort, and it is difficult to reuse software due to platform-dependent design.
+Several Open-source runtime systems for scripting languages have been proposed such as python-on-a-chip \cite{url:python-on-a-chip}, the Owl system \cite{par:owl}, eLua \cite{url:eLua}.
 
 WSN macroprogramming provides abstractions to specify high-level collaborative behaviors, while hiding low-level details such as message passing and state maintenance.
 nesC, a programming language used to build applications for the TinyOS platform \cite{par:nesc}, has been proposed.
 nesC/TinyOS is designed for WSN nodes with limited resources e.g., 8 kilobytes of program memory, 512 bytes of RAM, but not supported TCP/IP implementation.
 
-Cloud-based platform reduces development efforts by providing cloud-base APIs and high-level constructs (e.g., drag-and-drop).
+Cloud-based platform reduces development efforts by providing cloud-base APIs and high-level constructs (e.g., drag-and-drop) \cite{par:cloud-based}.
 In addition, it offers the ease deployment and evolution because the application logic is centrally located in a cloud platform.
 However, it is platform-dependent design, and restricts developers in terms of functionality such as in-network aggregation or direct node-to-node communication locally.
+The cloud-based mruby framework, enzi Board \cite{url:enzi}, has been proposed.
+enzi can be developed and simulated on the Web, and developer can download and run the program on the board.
 
 To address the issues of development efforts and platform-dependent design, MDD has been proposed \cite{par:MDD}.
-MDD provides the benefits of re-usable, platform-independent, extensible design, however it needs long development time to build a MDD system.
+MDD provides the benefits of re-usable, platform-independent, extensible design, however it needs long development time to build an MDD system.
 
 
 %6
