@@ -1077,6 +1077,20 @@ MDD provides the benefits of re-usable, platform-independent, extensible design,
 \section{Conclusion}
 \label{sec:Conclusion}
 
+This paper presented an extended framework of mruby on TECS, including TINET+TECS and TLSF+TECS.
+In the proposed framework, mruby programs can call TINET+TECS functions through the mruby-TECS brigde.
+Development of software for IoT devices such as sensors and actuators will be more efficient due to the high productivity of mruby.
+TINET+TECS is a componentized version of TINET, a compact TCP/IP protocol stack that uses TECS.
+It improves on TINET's configurability while suppressing the overhead of componentization.
+Scalability is also improved because the component-based framework simplifies to add/remove and change protocols such as TCP/UDP, IPv4/IPv6, and Ethernet/PPP.
+This paper also presented the dynamic connection, a new TECS method, to enable dynamic processing while reducing memory consumption.
+TINET+TECS utilizes the dynamic connection to satisfy the TINET specification for supporting the static generation of CEPs and REPs.
+TLSF+TECS is a component-based dynamic allocator.
+Since the TLSF+TECS can hold own heap area, memory contention will not occur even if memory is simultaneously allocated or released from multiple threads.
+The heap size can be easily changed because it is set as a variable of the component.
+In addition, the RiteVMs, TLSF+TECS, TLSF+TECS are implemented as components; therefore, developers can add, remove, or reuse their functionalities easily as required.
+Note that our prototype system and the application programs used in the performance evaluation are all open-source and can be downloaded from our website \cite{url:TECS}.
+In the future, we will support mruby libraries as mrbgems, which is an mruby distribution packaging system.\newline
 
 \begin{acknowledgment}
 
