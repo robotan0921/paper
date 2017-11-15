@@ -69,6 +69,16 @@
 
 \begin{abstract}
 
+High productivity of embedded network software is required to run embedded systems within the Internet of Things (IoT).
+To improve the productivity, the mruby on TOPPERS embedded component system (TECS) framework, which employs a scripting language (i.e., lightweight Ruby) and supports component-based development, has been proposed.
+This paper proposes an extended mruby on TECS framework to use for software development of IoT devices such as sensors and actuators.
+The proposed framework can call Tomakomai InterNETworking (TINET), a Transmission Control Protocol/Internet Protocol (TCP/IP) protocol stack for use in embedded systems, functions from mruby programs.
+In addition, this paper proposes two component-based functionality such as a componentized TINET--TINET+TECS--and a componentized Two-Level Segregate Fit (TLSF) dynamic memory allocator--TLSF+TECS--.
+TINET+TECS improves scalability and configurability, and offers software developers high productivity through variable network buffer sizes and the ability to add or remove TCP (or UDP) functionality.
+TINET+TECS utilizes a dynamic TECS component connection method to satisfy the original TINET specifications.
+TLSF+TECS is a thread-safe memory allocator that runs at high speed and efficiently consumes memory.
+The results of an experimental comparison between the proposed component-based and original TINETs show that the execution time and memory consumption overhead are reduced and the configurability is improved.
+
 \end{abstract}
 
 \begin{keyword}
