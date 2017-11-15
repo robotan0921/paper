@@ -534,6 +534,91 @@ signature sNicDriver {
 
 
 
+
+\subsubsection{Dynamic connection in TECS}
+\label{sec:DynamicConnection}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=7.0cm,clip]{figure/DynamicConnection.pdf}
+    \vspace{-3mm} \caption{Dynamic connection}
+    \vspace{-1mm} \label{fig:DynamicConnection}
+\end{figure}
+
+TECS supports a dynamic connection, a method for switching the binding of components at runtime (Fig. \ref{fig:DynamicConnection}) as a new functionality.
+In Fig. \ref{fig:DynamicConnection}, the solid line represents binding and the dotted line represents non-binding.
+Note that all components are statically generated in TECS, which can optimize the overhead of componentization because components are statically configured.
+Dynamically generating components causes a good deal of memory consumption, which is a serious problem for embedded systems with strict memory constraints.
+The proposed framework can take advantage of the componentization in TINET while satisfying the memory constraint because components are statically generated and dynamically connected in TECS.
+
+TINET+TECS utilizes the dynamic connection to switch between CEP and REP components, as shown in Fig. \ref{fig:DynamicConnectionUseCase}.
+In a server application, CEP is associated with REP in the state of waiting for a connection request from clients\footnote{tcp\_acp\_cep(ID cepid, ID repid, T\_IPV4EP *p\_dstaddr, TMO tmout).}.
+For example, when processing with the HTTP protocol, CEP passively opens with an REP of port number 80.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=7.0cm,clip]{figure/DynamicConnectionUseCase.pdf}
+    \caption{Dynamic connection between CEP and REP}
+    \label{fig:DynamicConnectionUseCase}
+\end{figure}
+
+To utilize dynamic connectivity, a selector should be defined.
+A selector connects all components that can be dynamically connected under a common descriptor that serves as an identifier to access each component \cite{par:optimization}.
+The cREP ports form a call port array connecting to connecting to all tREP cells (Line 8 in Fig. \ref{src:DynamicCDLcode}).
+{\it [ref\_desc]} is used to identify call ports referring to descriptors. 
+In the case shown in Fig. \ref{fig:DynamicConnectionUseCase}, the tRepSelector cell connects all tREP cells.
+
+A CEP component has two call ports: the cRepSelector port, which connects to the eRepSelector port of tRepSelector cell, and the cREP4 port, which connects to either of the tREP cells (Lines 11--13 in Fig. \ref{src:DynamicCDLcode}).
+The cREP port is defined using {\it [dynamic]} to identify the call port used to dynamically switch the components.
+The call port with the {\it [dynamic]} specifier is not optimized and is allocated in RAM using a plug-in.
+
+\begin{figure}[t]
+\centering
+\begin{lstlisting}
+signature sRepSelector {
+    void  getRep([out]Descriptor(sREP4) *desc,
+                 [in]int_t i);
+};
+celltype tRepSelector {
+    entry sRepSelector eRepSelector;
+    [ref_desc]
+        call sREP4 cREP[NUM_REP];
+};
+celltype tTCPCEP {
+    call sRepSelector cRepSelector;
+    [dynamic]
+        call sREP4 cREP;
+    /* Omit: other call/entry ports */
+    /* Omit: attributes and variables */
+};
+\end{lstlisting}
+\caption{Signature and celltype description for the dynamic connection}
+\label{src:DynamicCDLcode}
+\end{figure}
+
+Fig. \ref{src:DynamicCcode} shows a sample code of the dynamic connection.
+The eAPI\_accept function is the function wrapping {\it tcp\_acp\_cep} under TECS, which is set as the state waiting for a connection request.
+The dynamic connection in the function is performed as shown in Fig. \ref{src:DynamicCcode}.
+First, the descriptor of REP to be joined is obtained (Line 3 in Fig. \ref{src:DynamicCcode}).
+The first argument, {\it \&desc}, is a variable used to store the descriptor information, whereas the second argument, {\it repid}, is the index of tREP cells.
+Next, the descriptor is set (Line 5 in Fig. \ref{src:DynamicCcode}), and the cREP port combines the tREP cell specified by the descriptor, enabling the tCEP cell to call the function of the tREP cell to be joined (Line 7 in Fig. \ref{src:DynamicCcode}).
+
+\begin{figure}[t]
+\centering
+\begin{lstlisting}
+eAPI_accept (.., ..) {
+    /* Get a descriptor of intended REP cell */
+    cRepSelector_getRep(&desc, repid);
+    /* Set the descriptor */
+    cREP_set_descriptor(desc);
+    /* Call the function of intended REP cell */
+    cREP_getEndpoint();
+}
+\end{lstlisting}
+\caption{Accept function (a dynamic connection example)}
+\label{src:DynamicCcode}
+\end{figure}
+
 \subsection{TLSF+TECS}
 \label{sec:TLSF+TECS}
 
@@ -858,6 +943,111 @@ This demonstrated the ability to change the composition of the protocol stack wi
     \end{tabular}
     \label{tab:EvaluationOfConfigurability}
 \end{table}
+
+\subsection{Dynamic connection}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8.0cm,clip]{figure/ComparisonOfDynamicConnection.pdf}
+    \vspace{-1mm} \caption{Component diagrams for without/with the dynamic connection cases}
+    \vspace{-1mm} \label{fig:ComparisonOfDynamicConnection}
+\end{figure}
+
+Memory consumption without and with TECS dynamic connection was then evaluated.
+As shown in the left panel of Fig. \ref{fig:ComparisonOfDynamicConnection}, each CEP component should be statically connected to all REP components if the dynamic connection is not used.
+As the number of REPs increases, additional call ports of CEP are required, in turn increasing the consumption of memory. 
+The dynamic connection reduces memory consumption because only one CEP-to-REP call port is required per CEP, as illustrated with red lines in the right panel of Fig. \ref{fig:ComparisonOfDynamicConnection}.
+Even if the number of REPs increases, additional call ports can be joined through the selector, instead of the CEPs.
+
+Memory consumption of without and with dynamic connection is shown in TABLE \ref{fig:EvaluationOfDynamicConnection}.
+The dynamic connection case consumes the more RAM memory because, as mentioned in Section \ref{sec:DynamicConnection}, call ports with {\it [dynamic]} are not optimized and allocated in RAM areas.
+However, the overall memory consumption is lower under the proposed framework.
+
+% \begin{figure}[t]
+%     \centering
+%     \includegraphics[width=8.0cm,clip]{figure/EvaluationOfDynamicConnection.pdf}
+%     \vspace{-1mm} \caption{Memory consumption in two cases (with/without dynamic connection)}
+%     \vspace{-1mm} \label{fig:EvaluationOfDynamicConnection}
+% \end{figure}
+\begin{table}[t]
+    \centering
+    \caption{Memory consumption in two cases\protect\linebreak (with/without dynamic connection)}
+    {\tabcolsep = 1mm
+    \begin{tabular}{c|r|r|r|r}
+        \hline\hline
+                &  CEP:1 REP:1 & CEP:1 REP:5 & CEP:2 REP:5 & CEP:5 REP:10 \\ \hline
+        without &  324.98 KB   & 325.34 KB   & 326.39 KB   & 331.68 KB   \\
+        with    &  325.23 KB   & 325.32 KB   & 327.24 KB   & 330.48 KB   \\
+        \hline
+    \end{tabular}
+    }
+    \label{fig:EvaluationOfDynamicConnection}
+\end{table}
+
+\begin{table}[t]
+    \centering
+    \caption{CDL code lines of without/with dynamic connection}
+    \begin{tabular}{l|r|r|r}
+        \hline\hline
+                     &  without  &  with  &  Diff  \\ \hline
+        CEP:1 REP:1  &  344 lines     &  347 lines  &  -3 lines   \\
+        CEP:1 REP:5  &  369 lines     &  367 lines  &   2 lines   \\
+        CEP:2 REP:5  &  387 lines     &  382 lines  &   5 lines   \\
+        CEP:5 REP:10 &  485 lines     &  445 lines  &  40 lines   \\
+        \hline
+    \end{tabular}
+    \label{tab:EvaluationOfConfigurabilityByDynamicConnection}
+\end{table}
+
+\begin{figure}[t]
+ \centering
+ \begin{lstlisting}
+/* without Dynamic Connection */
+cell tTCPCEP TCPCEP_000 {
+    cREP[0] = REP_000.eREP;
+    ..
+    cREP[n] = REP_00n.eREP;
+};
+cell tTCPCEP TCPCEP_001 {
+    cREP[0] = REP_000.eREP;
+    ..
+    cREP[n] = REP_00n.eREP;
+};
+..
+cell tTCPCEP TCPCEP_00n {
+    cREP[0] = REP_000.eREP;
+    ..
+    cREP[n] = REP_00n.eREP;
+};
+ \end{lstlisting}
+ \centering
+ \begin{lstlisting}
+/* with Dynamic Connection */
+cell tRepSelector RepSelector {
+    cREP[0] = REP_000.eREP;
+    ..
+    cREP[n] = REP_00n.eREP;
+};
+cell tTCPCEP TCPCEP_000 {
+    cRepSelector = RepSelector.eRepSelector;
+};
+cell tTCPCEP TCPCEP_001 {
+    cRepSelector = RepSelector.eRepSelector;
+};
+..
+cell tTCPCEP TCPCEP_00n {
+    cRepSelector = RepSelector.eRepSelector;
+};
+ \end{lstlisting}
+ \caption{Two CDL codes (without/with dynamic connection)}
+ \label{src:ComparisonOfCDL}
+\end{figure}
+
+The code lines in CDL of without and with the dynamic connection is shown in TABLE \ref{tab:EvaluationOfConfigurabilityByDynamicConnection} to demonstrate improved configurability.
+As the number of CEPs and REPs increases, the amount of CDL code lines to be added increases.
+In the left panel of Fig. \ref{fig:ComparisonOfDynamicConnection}, each CEP connects all REPs as shown in the upper of Fig. \ref{src:ComparisonOfCDL}. 
+In the right panel of Fig. \ref{fig:ComparisonOfDynamicConnection}, a CEP dynamically connects an REP, and only the selector connects all REPs as shown in the lower of Fig. \ref{src:ComparisonOfCDL}. 
+It is effective for software that uses many ports because the difference spreads as the number of CEPs and REPs increases.
 
 \subsection{Performance of TLSF+TECS}
 
