@@ -72,17 +72,17 @@
 High productivity of embedded network software is required to run embedded systems within the Internet of Things (IoT).
 To improve the productivity, the mruby on TOPPERS embedded component system (TECS) framework, which employs a scripting language (i.e., lightweight Ruby) and supports component-based development, has been proposed.
 This paper proposes an extended mruby on TECS framework to use for software development of IoT devices such as sensors and actuators.
-The proposed framework can call Tomakomai InterNETworking (TINET), a Transmission Control Protocol/Internet Protocol (TCP/IP) protocol stack for use in embedded systems, functions from mruby programs.
-In addition, this paper proposes two component-based functionality such as a componentized TINET--TINET+TECS--and a componentized Two-Level Segregate Fit (TLSF) dynamic memory allocator--TLSF+TECS--.
-TINET+TECS improves scalability and configurability, and offers software developers high productivity through variable network buffer sizes and the ability to add or remove TCP (or UDP) functionality.
+The proposed framework can enables that that mruby program calls TINET, a TCP/IP protocol stack for use in embedded systems, functions.
+In addition, this paper proposes two component-based functionality such as a componentized TINET called TINET+TECS and a componentized Two-Level Segregate Fit (TLSF) dynamic memory allocator called TLSF+TECS.
+TINET+TECS improves scalability and configurability, and offers software developers high productivity through variable network buffer sizes and the ability to add or remove TCP (or UDP) functionalities.
 TINET+TECS utilizes a dynamic TECS component connection method to satisfy the original TINET specifications.
 TLSF+TECS is a thread-safe memory allocator that runs at high speed and efficiently consumes memory.
-The results of an experimental comparison between the proposed component-based and original TINETs show that the execution time and memory consumption overhead are reduced and the configurability is improved.
+Experimental results of comparison between TINET+TECS and original TINET show that the execution time and memory consumption overhead are reduced and the configurability is improved.
 
 \end{abstract}
 
 \begin{keyword}
-software development framework, component-based development, embedded systems, Internet of Things
+Internet of Things, software development framework, component-based development, embedded systems
 \end{keyword}
 
 \maketitle
@@ -121,9 +121,9 @@ TINET+TECS is a componentized TIENT with TECS to improve the configurability and
 In the case of only sending values obtained by sensors, it is better to easily customize the minimum configuration of the TCP/IP protocol stack, such as removing unused functions.
 The improved configurability leads to satisfying strict memory constraints of embedded systems.
 In addition, this paper proposes a component-based dynamic memory allocator, TLSF+TECS. 
-TLSF is a dynamic memory allocator for real-time systems, which can always run with $O(1)$ and improve memory usage efficiency by deviding memory blocks in two stages.
+TLSF is a dynamic memory allocator for real-time systems, which can always run with $O(1)$ and improve memory usage efficiency by dividing memory blocks in two stages.
 In the current version of TLSF, memory contention may occur when multiple threads run at the same time.
-TLSF+TECS is a componentized TLSF memory allocator, which can be thread-safe allocator because each component has its own heap area.
+TLSF+TECS is a componentized TLSF memory allocator, which can be thread-safe allocator because each component has own heap area.
 
 
 
@@ -135,7 +135,7 @@ mruby code is portable.
 Therefore, it is possible to run the same program on different devices.
 
 \item {\bf Improve configurability:}
-Because TINET+TECS is a component-based system, its software can flexibly change as system's configuration by, for example, resizing network buffer, adding/removing TCP (or UDP) functionality, or supporting either IPv4 or IPv6.
+Because TINET+TECS is a component-based system, its software can flexibly change as system configuration by, for example, resizing network buffer, adding/removing TCP (or UDP) functionality, or supporting either IPv4 or IPv6.
 In addition, the use by TINET+TECS of individual component diagrams enables visualization of an entire system.
 
 \item {\bf Thread-safe memory allocator:}
@@ -329,7 +329,7 @@ This framework integrates two technologies, mruby and TECS, and enables to devel
 
 \subsubsection{System Model of mruby on TECS}
 The present mruby on TECS system model is shown in Fig.\ref{fig:mrubyonTECS}.
-Each mruby program, which is a bytecode, runs on its own RiteVM as a componentized task of an RTOS.
+Each mruby program, which is a bytecode, runs on own RiteVM as a componentized task of an RTOS.
 TECS components support various embedded drivers such as motor and sensor drivers.
 
 An mruby-TECS bridge provides native libraries for mruby and can call a native program (e.g., C legacy code) from an mruby program.
@@ -377,7 +377,7 @@ The proposed framework is an extended mruby on TECS framework for network progra
 It can use TINET+TECS functions from mruby programs.
 TINET+TECS is a component-based TCP/IP protocol stack comprised in the proposed framework, and it compensates for the original TINET's weak point, that it is hard to maintain, extend, and analyze the software due to many complex source codes and improves the configurability.
 In addition, TLSF+TECS, a component-based dynamic memory allocator, is used for memory management of mruby's RiteVMs and TCP/IP buffers in the proposed framework.
-Since each component holds its own heap area, TLSF+TECS allows concurrent operation without exclusive control while improving the efficiency of memory consumption which is a merit of TLSF.
+Since each component holds own heap area, TLSF+TECS allows concurrent operation without exclusive control while improving the efficiency of memory consumption which is a merit of TLSF.
 
 
 \subsection{TINET+TECS}
@@ -409,7 +409,7 @@ In the reception process, the headers of the data bodies received by the network
 A TCP reception point called the REP stands by to receive connection requests from the partner side.
 The REP has an IP address ({\it myaddr}) and a port number ({\it myportno}) as attributes and performs functions such {\it bind()} and {\it listen()}.
 
-In TINET, the amount of data copying between each protocol layers is minimized.
+In TINET, the amount of data copying between each protocol layer is minimized.
 In standard computing systems, the TCP/IP protocol stack has large overheads in terms of execution time and memory consumption because the data are copied at each protocol layer.
 To solve this problem, TINET does pass the pointer of the data buffer between each protocol layer instead of performing data copying.
 
@@ -660,7 +660,9 @@ In the second step, it is further classified.
 In this case, 64 to 128 are divided into 4, and 100 is in the block of 96 to 111.
 Free block\footnote{Free block is an available memory block.} in this range is used.
 
-A simple fixed-size memory block allocator results in waste of up to 50\%, but TLSF classifies it finely in two steps, so it is a memory efficient algorithm.
+A simple fixed-size memory block allocator results in the waste of up to 50 \%.
+However, TLSF classifies it finely in two steps.
+Therefore, it is a memory efficient algorithm.
 In addition, TLSF searches at the same speed and at high speed, $O(1)$.
 
 
@@ -722,7 +724,8 @@ The celltype description of the TLSF memory allocator component is shown in Fig.
 An entry port, {\it eMalloc}, is connected to all components that perform memory management such as $malloc$ and $free$.
 Here, {\it [inline]} is a specifier for Implementation as inline functions.
 A memory pool size is defined as an attribute, and a pointer to a memory pool is defined as a variable.
-Each component holds its own heap area, so even when calling functions for memory management at the same time in different threads, it is possible to operate without memory contention.
+Each component holds own heap area.
+Therefore, even when calling functions for memory management at the same time in different threads, it is possible to operate without memory contention.
 
 \begin{figure}[t]
     \centering
@@ -792,12 +795,12 @@ mrb_TECS_allocf(mrb_state *mrb, void *p,
 
 Fig.\ref{src:TLSFBuild} shows the build description of the TLSF memory allocator component shown in Fig.\ref{fig:WithTECS}\footnote{Other call/entry ports, attributes, and valuables are actually described, but it is omitted here for the simplicity.}.
 Two sets of task components and TLSF components are combined.
-Each memory pool size can be configured as a variable (Line 5 and 11 in Fig.\ref{src:TLSFBuild}).
+Each memory pool size can be configured as a variable (Lines 5 and 11 in Fig.\ref{src:TLSFBuild}).
 Fig.\ref{src:TLSFC} is the part of the code actually calling the function of the TLSF memory allocator component.
 The use part shows a function that the mruby VM allocates memory in the mruby on TECS framework\cite{par:mrubyonTECS}\cite{par:mrubyonTECS3} which is introduced in Section \ref{sec:mrubyonTECS}.
 Line 8 calls the {\it free} function of the TLSF memory allocator component.
 {\it cMalloc\_} represents the name of the call port (Line 2 in Fig.\ref{src:TLSFBuild}).
-Likewise, Line 13 and 17 call the function for memory allocation.
+Likewise, Lines 13 and 17 call the function for memory allocation.
 The heap area of {\it TLSFMalloc\_001} component is used if the code of \ref{src:TLSFC} is executed in {\it Task\_001}, and if that is executed in {\it Task\_002}, the heap area of {\it TLSFMalloc\_002} component is used, respectively.
 In this way, in the component-based development using TECS, it is possible to operate with the same code without modifying the C code, although the cells are different.
 
@@ -814,7 +817,7 @@ The proposed framework uses TLSF memory allocator for memory management of RiteV
 However, since the existing TLSF is not thread-safe, if memory is allocated or deallocated from multiple, memory contention will occur.
 As a RiteVM allocates and deallocates memory at high frequency, the memory contention immediately occurs in the case of multiple VMs.
 
-The TLSF components are connected to the RiteVMs to hold its own heap area in each RiteVM as shown in Fig.\ref{fig:UseCase_mruby}.
+The TLSF components are connected to the RiteVMs to hold own heap area in each RiteVM as shown in Fig.\ref{fig:UseCase_mruby}.
 Since each TLSF component holds a memory pool, multiple RiteVMs can be executed without memory contention.
 Fig.\ref{fig:UseCase_mruby} shows that the first RiteVM has a heap area of 1 MB (1024*1024) and the second VM has a heap area of 2 MB (2*1024*1024).
 It is easy to set different heap areas in each RiteVM.
@@ -1068,11 +1071,7 @@ It is effective for software that uses many ports because the difference spreads
 \section{Related Work}
 \label{sec:Related Work}
 
-To develop the software of IoT systems, several approaches have been proposed \cite{par:frameworkCPS} such as General-purpose Programming Languages (GPLs), Wireless Sensor Network (WSN) macroprogramming, Cloud-based platforms, and Model-Driven Development (MDD).
-
-The development using GPLs such as C, JavaScript, Python, and Android allows the extremely efficient systems based on the complete control over individual devices.
-However, GPLs need more development effort, and it is difficult to reuse software due to platform-dependent design.
-Several Open-source runtime systems for scripting languages have been proposed such as python-on-a-chip \cite{url:python-on-a-chip}, the Owl system \cite{par:owl}, eLua \cite{url:eLua}.
+To develop the software of IoT systems, several approaches have been proposed \cite{par:frameworkCPS} such as Wireless Sensor Network (WSN) macroprogramming, Cloud-based platforms, and Model-Driven Development (MDD), General-purpose Programming Languages (GPLs).
 
 WSN macroprogramming provides abstractions to specify high-level collaborative behaviors, while hiding low-level details such as message passing and state maintenance.
 nesC, a programming language used to build applications for the TinyOS platform \cite{par:nesc}, has been proposed.
@@ -1087,6 +1086,15 @@ enzi can be developed and simulated on the Web, and developer can download and r
 To address the issues of development efforts and platform-dependent design, MDD has been proposed \cite{par:MDD}.
 MDD provides the benefits of re-usable, platform-independent, extensible design, however it needs long development time to build an MDD system.
 
+The development using GPLs such as C, JavaScript, Python, and Android allows the extremely efficient systems based on the complete control over individual devices.
+However, GPLs need more development effort, and it is difficult to reuse software due to platform-dependent design.
+Several Open-source runtime systems for scripting languages have been proposed such as python-on-a-chip \cite{url:python-on-a-chip}, the Owl system \cite{par:owl}, eLua \cite{url:eLua}.
+
+The proposed framework can configure the TCP/IP protocol stack with minimum set compared to the other platforms.
+In addition, mruby on TECS supports legacy code such as motor driver.
+mruby has the same grammar as Ruby which has advantages to web application development as it uses in Rails framework \cite{url:rubyonrails}.
+
+
 
 %6
 \section{Conclusion}
@@ -1096,14 +1104,15 @@ This paper presented an extended framework of mruby on TECS, including TINET+TEC
 In the proposed framework, mruby programs can call TINET+TECS functions through the mruby-TECS brigde.
 Development of software for IoT devices such as sensors and actuators will be more efficient due to the high productivity of mruby.
 TINET+TECS is a componentized version of TINET, a compact TCP/IP protocol stack that uses TECS.
-It improves on TINET's configurability while suppressing the overhead of componentization.
+It improves on TINET configurability while suppressing the overhead of componentization.
 Scalability is also improved because the component-based framework simplifies to add/remove and change protocols such as TCP/UDP, IPv4/IPv6, and Ethernet/PPP.
-This paper also presented the dynamic connection, a new TECS method, to enable dynamic processing while reducing memory consumption.
+
+This paper also presented the dynamic connection, a new TECS functionality, to enable dynamic processing while reducing memory consumption.
 TINET+TECS utilizes the dynamic connection to satisfy the TINET specification for supporting the static generation of CEPs and REPs.
 TLSF+TECS is a component-based dynamic allocator.
 Since the TLSF+TECS can hold own heap area, memory contention will not occur even if memory is simultaneously allocated or released from multiple threads.
 The heap size can be easily changed because it is set as a variable of the component.
-In addition, the RiteVMs, TLSF+TECS, TLSF+TECS are implemented as components; therefore, developers can add, remove, or reuse their functionalities easily as required.
+In addition, the RiteVMs, TLSF+TECS, and TLSF+TECS are implemented as components; therefore, developers can add, remove, or reuse their functionalities easily as required.
 Note that our prototype system and the application programs used in the performance evaluation are all open-source and can be downloaded from our website \cite{url:TECS}.
 In the future, we will support mruby libraries as mrbgems, which is an mruby distribution packaging system.\newline
 
