@@ -26,3 +26,4 @@
 \contentsline {chapter}{\numberline {6}Conclusion}{27}
 \contentsline {chapter}{Acknowledgment}{28}
 \contentsline {chapter}{References}{29}
+\contentsline {chapter}{Published List}{32}
