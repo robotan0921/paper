@@ -14,10 +14,10 @@
 \contentsline {subsection}{\numberline {3.1.1}TINET}{9}
 \contentsline {subsection}{\numberline {3.1.2}Component Design of TINET+TECS}{10}
 \contentsline {subsection}{\numberline {3.1.3}Dynamic connection in TECS}{14}
-\contentsline {section}{\numberline {3.2}TLSF+TECS}{16}
-\contentsline {subsection}{\numberline {3.2.1}TLSF}{16}
+\contentsline {section}{\numberline {3.2}TLSF+TECS}{15}
+\contentsline {subsection}{\numberline {3.2.1}TLSF}{15}
 \contentsline {subsection}{\numberline {3.2.2}TLSF Algorithms}{16}
-\contentsline {subsection}{\numberline {3.2.3}Component Design of TLSF+TECS}{17}
+\contentsline {subsection}{\numberline {3.2.3}Component Design of TLSF+TECS}{16}
 \contentsline {section}{\numberline {3.3}Use case}{21}
 \contentsline {chapter}{\numberline {4}Evaluation}{22}
 \contentsline {section}{\numberline {4.1}Performance of TINET+TECS}{22}

@@ -83,7 +83,7 @@ High productivity of embedded network software is required to run embedded syste
 To improve the productivity, the mruby on TOPPERS embedded component system (TECS) framework, which employs a scripting language (i.e., lightweight Ruby) and supports component-based development, has been proposed.
 This paper proposes an extended mruby on TECS framework to use for software development of IoT devices such as sensors and actuators.
 The proposed framework enables that that mruby program calls TINET, a TCP/IP protocol stack for use in embedded systems, functions.
-In addition, this paper proposes two component-based functionality such as a componentized TINET called TINET+TECS and a componentized Two-Level Segregate Fit (TLSF) dynamic memory allocator called TLSF+TECS.
+In addition, this paper proposes two component-based functionalities: a componentized TINET called TINET+TECS and a componentized Two-Level Segregate Fit (TLSF) dynamic memory allocator called TLSF+TECS.
 TINET+TECS improves scalability and configurability, and offers software developers high productivity through variable network buffer sizes and the ability to add or remove TCP (or UDP) functionalities.
 TINET+TECS utilizes a dynamic TECS component connection method to satisfy the original TINET specifications.
 TLSF+TECS is a thread-safe memory allocator that runs at high speed and efficiently consumes memory.
@@ -109,11 +109,11 @@ The IoT uses embedded systems such as data sensors and controlling actuators as 
 This requirement has led to an increase in their complexity and scale; moreover, these systems need to have low production costs and short development cycles.
 
 Complex and large-scale software systems can be developed efficiently by using component-based techniques \cite{par:Crnkovic},\cite{par:CBD}.
-Component-Based Development is a design technique that can be applied to reusable software development.
+Component-based development is a design technique that can be applied to reusable software development.
 Verification of component-based systems has been extensively researched \cite{par:Blaming},\cite{par:Verification}.
 Individual component diagrams enable the visualization of an entire system.
 In addition, component-based systems are flexible with regard to extensibility and specification changes.
-The TOPPERS embedded component system (TECS) \cite{par:TECS}, AUTOSAR \cite{url:AUTOSAR}, and SaveCCM \cite{par:SAVEapproach} are typical CBD tools for embedded systems.
+The TOPPERS embedded component system (TECS) \cite{par:TECS}, AUTOSAR \cite{url:AUTOSAR}, and SaveCCM \cite{par:SAVEapproach} are used as typical component-based development for embedded systems.
 
 In addition, scripting languages, such as Ruby, JavaScript, Perl, Python, and Lua, offer efficient approaches to software development.
 Currently, most embedded software is programmed in C language.
@@ -132,7 +132,7 @@ TINET is a compact TCP/IP protocol stack for embedded systems \cite{url:TINET}.
 TINET comprises many complex source codes, i.e., it contains many files and defines many macros, which can be problematic for software developers seeking to maintain, extend, and analyze the software.
 TINET+TECS is a componentized TIENT with TECS to improve the configurability and scalability of TCP/IP software.
 In the case of only sending values obtained by sensors, it is better to easily customize the minimum configuration of the TCP/IP protocol stack, such as removing unused functions.
-The improved configurability leads to satisfying strict memory constraints of embedded systems.
+The improved configurability leads to satisfying strict memory constraints of IoT Devices.
 In addition, this paper proposes a component-based dynamic memory allocator, TLSF+TECS. 
 TLSF is a dynamic memory allocator for real-time systems, which can always run with $O(1)$ and improve memory usage efficiency by dividing memory blocks in two stages.
 In the current version of TLSF, memory contention may occur when multiple threads run at the same time.
@@ -192,7 +192,7 @@ TECS also provides component diagrams, which help developers visualize the overa
 
 TECS statically performs component deployment and composition.
 Consequently, connecting components does not incur significant overhead and memory requirements can be reduced.
-TECS can be implemented in C, and demonstrates various feature such as source level portability and fine-grained components.
+TECS can be implemented in C, and demonstrates various feature such as source-level portability and fine-grained components.
 
 \begin{figure}[t]
     \centering
@@ -203,7 +203,7 @@ TECS can be implemented in C, and demonstrates various feature such as source le
 
 \subsection{Component Model}
 Fig.\ref{fig:component} shows a component diagram.
-A {\it cell}, which is an instance of a TECS component, consists of {\it entry} ports, {\it call} ports, attributes and variables.
+A {\it cell}, which is an instance of a TECS component, consists of {\it entry} ports, {\it call} ports, attributes, and variables.
 An {\it entry} port is an interface that provides functions to other {\it cell}s, and a {\it call} port is an interface that enables the use of other {\it cell}'s functions.
 A {\it cell} has one or more {\it entry} ports and {\it call} ports.
 {\it Cell} functions are implemented in C.
@@ -229,7 +229,7 @@ These components are described as follows.
 signature sMotor {
     void initializePort( [in]int32_t type );
     ER setPower( [in]int power );
-    ER stop( [in] bool_t brake );
+    ER stop( [in]bool_t brake );
 };
 \end{lstlisting}
 \caption{Signature Description}
@@ -249,8 +249,12 @@ celltype tCaller {
 };
 celltype tMotor {
     entry sMotor eMotor;
-    attr { int32_t port; };
-    var { int32_t currentSpeed = 0; };
+    attr {
+        int32_t port;
+    };
+    var {
+        int32_t currentSpeed = 0;
+    };
 };
 \end{lstlisting}
 \caption{Celltype Description}
@@ -520,12 +524,8 @@ such as {\it send}/{\it receive}.
 \centering
 \begin{lstlisting}
 signature sNicDriver {
-  void start(
-    [send(sNetworkAlloc),size_is(size)]
-        int8_t *outputp, .., ..);
-  void read(
-    [receive(sNetworkAlloc),size_is(*size)]
-        int8_t **inputp, .., ..);
+    void start( [send(sNetworkAlloc),size_is(size)]int8_t *outputp, .., .. );
+    void read( [receive(sNetworkAlloc),size_is(*size)]int8_t **inputp, .., .. );
     /* Omit: other functions */
 };
 \end{lstlisting}
@@ -574,8 +574,7 @@ The call port with the {\it [dynamic]} specifier is not optimized and is allocat
 \centering
 \begin{lstlisting}
 signature sRepSelector {
-    void  getRep([out]Descriptor(sREP4) *desc,
-                 [in]int_t i);
+    void  getRep( [out]Descriptor(sREP4) *desc, [in]int_t i );
 };
 celltype tRepSelector {
     entry sRepSelector eRepSelector;
@@ -606,9 +605,9 @@ Next, the descriptor is set (Line 5 in Fig.\ref{src:DynamicCcode}), and the cREP
 \begin{lstlisting}
 eAPI_accept (.., ..) {
     /* Get a descriptor of intended REP cell */
-    cRepSelector_getRep(&desc, repid);
+    cRepSelector_getRep( &desc, repid );
     /* Set the descriptor */
-    cREP_set_descriptor(desc);
+    cREP_set_descriptor( desc );
     /* Call the function of intended REP cell */
     cREP_getEndpoint();
 }
@@ -649,7 +648,7 @@ Free block\footnote{Free block is an available memory block.} in this range is u
 A simple fixed-size memory block allocator results in the waste of up to 50 \%.
 However, TLSF classifies it finely in two steps.
 Therefore, it is a memory efficient algorithm.
-In addition, TLSF searches at the same speed and at high speed, $O(1)$.
+In addition, TLSF searches at the same speed and high speed, $O(1)$.
 
 
 \begin{figure}[t]
@@ -670,11 +669,11 @@ The version of TLSF used is 2.4.6\footnote{http://www.gii.upv.es/tlsf/main/repo}
 \centering
 \begin{lstlisting}
 signature sMalloc {
-  int    initializeMemoryPool(void);
-  void   *calloc([in]size_t nelem,[in]size_t size);
-  void   *malloc([in]size_t size);
-  void   *realloc([in]const void *ptr,[in]size_t size);
-  void   free([in]const void *ptr);
+  int    initializeMemoryPool( void );
+  void   *calloc( [in]size_t nelem, [in]size_t size );
+  void   *malloc( [in]size_t size );
+  void   *realloc( [in]const void *ptr, [in]size_t size );
+  void   free( [in]const void *ptr );
 };
 \end{lstlisting}
 \caption{Signature description of memory management}  
@@ -751,22 +750,21 @@ cell tTLSFMalloc TLSFMalloc_002 {
 \centering
 \begin{lstlisting}
 void*
-mrb_TECS_allocf(mrb_state *mrb, void *p, 
-                  size_t size, void *ud)
+mrb_TECS_allocf( mrb_state *mrb, void *p, size_t size, void *ud )
 {
     CELLCB	*p_cellcb = (CELLCB *)ud;
     if (size == 0) {
-        //tlsf_free(p);
-        cMalloc_free(p);
+        //tlsf_free( p );
+        cMalloc_free( p );
         return NULL;
     }
     else if (p) {
-        //return tlsf_realloc(p, size);
-        return cMalloc_realloc(p, size);
+        //return tlsf_realloc( p, size );
+        return cMalloc_realloc( p, size );
     }
     else {
-        //return tlsf_malloc(size);
-        return cMalloc_malloc(size);
+        //return tlsf_malloc( size );
+        return cMalloc_malloc( size );
     }
 }
 \end{lstlisting}
@@ -951,7 +949,7 @@ This demonstrated the ability to change the composition of the protocol stack wi
 Memory consumption without and with TECS dynamic connection was then evaluated.
 As shown in the left of Fig. \ref{fig:ComparisonOfDynamicConnection}, each CEP component should be statically connected to all REP components if the dynamic connection is not used.
 As the number of REPs increases, additional call ports of CEP are required, in turn increasing the consumption of memory. 
-The dynamic connection reduces memory consumption because only one CEP-to-REP call port is required per CEP, as illustrated with red lines in the right paneof Fig. \ref{fig:ComparisonOfDynamicConnection}.
+The dynamic connection reduces memory consumption because only one CEP-to-REP call port is required per CEP, as illustrated with red lines in the right of Fig. \ref{fig:ComparisonOfDynamicConnection}.
 Even if the number of REPs increases, additional call ports can be joined through the selector, instead of the CEPs.
 
 Memory consumption of without and with dynamic connection is shown in TABLE \ref{fig:EvaluationOfDynamicConnection}.
@@ -1063,7 +1061,7 @@ The cloud-based mruby framework, enzi Board \cite{url:enzi}, has been proposed.
 enzi can be developed and simulated on the Web, and developer can download and run the program on the board.
 
 To address the issues of development efforts and platform-dependent design, MDD has been proposed \cite{par:MDD}.
-MDD provides the benefits of reusable, platform-independent, extensible design, however it needs long development time to build MDD systems.
+MDD provides the benefits of reusable, platform-independent, extensible design; however, it needs long development time to build MDD systems.
 
 The development using GPLs such as C, JavaScript, Python, and Android allows the extremely efficient systems based on the complete control over individual devices.
 However, GPLs need more development effort, and it is difficult to reuse software due to platform-dependent design.
@@ -1080,7 +1078,7 @@ mruby has the same syntax as Ruby which has advantages to web application develo
 \label{sec:Conclusion}
 
 This paper presented an extended framework of mruby on TECS, including TINET+TECS and TLSF+TECS.
-In the proposed framework, mruby programs can call TINET+TECS functions through the mruby-TECS brigde.
+In the proposed framework, mruby programs can call TINET+TECS functions through the mruby-TECS bridge.
 Development of software for IoT devices such as sensors and actuators will be more efficient due to the high productivity of mruby.
 TINET+TECS is a componentized version of TINET, a compact TCP/IP protocol stack that uses TECS.
 It improves on TINET configurability while suppressing the overhead of componentization.
