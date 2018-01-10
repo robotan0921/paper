@@ -1049,6 +1049,12 @@ TLSF+TECS provides a functionality that acquires statistical information on dyna
 It is possible to analyze the operation status of TLSF such as GC on RiteVMs because TLSF+TECS acquires memory statistical information: the frequency of memory allocation/deallocation and the usage size of heap area.
 
 Fig. \ref{fig:EvaluationOfTLSFStatistics} shows the memory usage of a RiteVM acquired by statistical information of TLSF+TECS.
+When the VM is activated, a large memory is allocated and the initialization is performed.
+After that, the application is running and the VM is termnated.
+The reduction in memory usage at regular time intervals is due to the GC function of RiteVM.
+TLSF+TECS can visualize the behavior of GC and help to verify its operation.
+Furthermore, when the VM is terminated, the memory used by VM is not completely released and a little used memory remains.
+In this way, it is useful for finding bugs related to memory, which is hard to find.
 
 \begin{figure}[t]
     \centering
