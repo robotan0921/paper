@@ -1043,6 +1043,19 @@ In the right of Fig. \ref{fig:ComparisonOfDynamicConnection}, a CEP dynamically 
 It is effective for software that uses many ports because the difference spreads as the number of CEPs and REPs increases.
 
 
+\section{Performance of TLSF+TECS}
+
+TLSF+TECS provides a functionality that acquires statistical information on dynamic memory usage status.
+It is possible to analyze the operation status of TLSF such as GC on RiteVMs because TLSF+TECS acquires memory statistical information: the frequency of memory allocation/deallocation and the usage size of heap area.
+
+Fig. \ref{fig:EvaluationOfTLSFStatistics} shows the memory usage of a RiteVM acquired by statistical information of TLSF+TECS.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=10cm,clip]{figure/EvaluationOfTLSFStatistics.pdf}
+    \caption{Memory usage of RiteVM (mruby VM) by TLSFStatistics component}
+    \label{fig:EvaluationOfTLSFStatistics}
+\end{figure}
 
 %5
 \chapter{Related Work}
