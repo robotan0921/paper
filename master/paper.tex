@@ -617,6 +617,26 @@ eAPI_accept (.., ..) {
 \end{figure}
 
 
+
+\subsection{TECS adapter}
+\label{sec:TECSAdapter}
+
+TINET+TECS supports legacy codes because TECS supports {\it Adapter} functionality, which enables to calling a function in TECS from existing C codes.
+The adapter is implemented between C codes and a TECS component and links a C function to a TECS function as shown in Fig. \ref{fig:TECSAdapter}.
+In TINET+TECS, when an application calls an API such as {\it tcp\_snd\_dat}, the adapter component calls a function of tTCPCEP such as {\it eAPI\_sendData}.
+Note that {\it tcp\_snd\_dat} is defined under the name {\it eAPI\_sendData} in TINET+TECS.
+The adapter wraps the APIs used in the existing applications into TECS functions, enabling software developers to utilize an existing TCP/IP application via the adapter.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=10cm,clip]{figure/TECSAdapter.pdf}
+    \caption{TECS adapter}
+    \label{fig:TECSAdapter}
+\end{figure}
+
+Since existing communication programs are supported, a communication task can be applied without porting, and other tasks can be developed with mruby program.
+
+
 \section{TLSF+TECS}
 \label{sec:TLSF+TECS}
 
@@ -1042,6 +1062,18 @@ In the left of Fig. \ref{fig:ComparisonOfDynamicConnection}, each CEP connects a
 In the right of Fig. \ref{fig:ComparisonOfDynamicConnection}, a CEP dynamically connects an REP, and only the selector connects all REPs as shown in the lower of Fig. \ref{src:ComparisonOfCDL}. 
 It is effective for software that uses many ports because the difference spreads as the number of CEPs and REPs increases.
 
+
+\subsection{Adapter overhead}
+
+The API execution time when using an adapter such as {\it tcp\_snd\_dat/eAPI\_sendData} was used to analyze the overhead of the TECS adapter supporting existing applications.
+As shown in Fig. \ref{fig:EvaluationOfAdapter}, the overhead of the TECS adapter is very small because the adapter only passes parameters from C codes to TECS components; thus, the TECS adapter overhead does not affect the system.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=10cm,clip]{figure/EvaluationOfAdapter.pdf}
+    \caption{Execution times in two cases (without/with TECS adapter)}
+    \label{fig:EvaluationOfAdapter}
+\end{figure}
 
 \section{Performance of TLSF+TECS}
 
