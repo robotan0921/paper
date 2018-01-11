@@ -14,12 +14,12 @@
 \usepackage{listings,jlisting}
 \lstset{%
     language={c},%
-    basicstyle={\footnotesize\ttfamily},%
-    identifierstyle={\footnotesize},%
-    commentstyle={\scriptsize\itshape},%
-    keywordstyle={\footnotesize},%\bfseries},%
-    ndkeywordstyle={\footnotesize},%
-    stringstyle={\footnotesize\it},
+    basicstyle={\small\ttfamily},%
+    identifierstyle={\small},%
+    commentstyle={\footnotesize\itshape},%
+    keywordstyle={\small},%\bfseries},%
+    ndkeywordstyle={\small},%
+    stringstyle={\small\it},
     frame={tb},
     breaklines=true,
     columns=[l]{fullflexible},%
@@ -1011,8 +1011,9 @@ However, the overall memory consumption is lower under the proposed framework.
 \end{table}
 
 \begin{figure}[t]
- \centering
- \begin{lstlisting}
+ \begin{minipage}[t]{0.5\hsize}
+  \centering
+  \begin{lstlisting}
 /* without Dynamic Connection */
 cell tTCPCEP TCPCEP_000 {
     cREP[0] = REP_000.eREP;
@@ -1030,9 +1031,11 @@ cell tTCPCEP TCPCEP_00n {
     ..
     cREP[n] = REP_00n.eREP;
 };
- \end{lstlisting}
- \centering
- \begin{lstlisting}
+  \end{lstlisting}
+ \end{minipage}
+ \begin{minipage}[t]{0.5\hsize}
+  \centering
+  \begin{lstlisting}
 /* with Dynamic Connection */
 cell tRepSelector RepSelector {
     cREP[0] = REP_000.eREP;
@@ -1049,7 +1052,8 @@ cell tTCPCEP TCPCEP_001 {
 cell tTCPCEP TCPCEP_00n {
     cRepSelector = RepSelector.eRepSelector;
 };
- \end{lstlisting}
+  \end{lstlisting}
+ \end{minipage}
  \caption{Two CDL codes (without/with dynamic connection)}
  \label{src:ComparisonOfCDL}
 \end{figure}
