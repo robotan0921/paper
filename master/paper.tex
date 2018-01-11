@@ -1155,11 +1155,34 @@ Note that the RiteVM only supports a single thread.
 In addition, mruby supports co-routines but does not support multitasking for RTOSs.
 mruby has the same syntax as Ruby which has advantages to web application development as it uses in Rails framework \cite{url:rubyonrails}.
 
+Table \ref{tab:Scripting} compares the proposed framework to previous work.
 The proposed framework is a component-based framework for running mruby programs.
 mruby programs on TECS can be executed approximately 100 times faster than standard mruby programs.
 Software can be developed using CBD with mruby on TECS.
 In addition to supporting multitasking and co-routines, the mruby on TECS framework can be utilized RTOS functionalities such as periodic tasks and semaphores and supports legacy code such as a motor driver.
 
+\begin{table*}[t]
+    \caption{Comparison of open-source scripting Languages for embedded systems}
+    \label{tab:Scripting}
+    \centering
+    {\small \tabcolsep = 1mm
+    \begin{tabular}{c||cccccc}
+        \hline\hline
+        & \shortstack{Call\\C functions} 
+        & \shortstack{Legacy code of\\embedded system} 
+        & \shortstack{Multitasking} 
+        & \shortstack{Co-routines}
+        & \shortstack{RTOS\\functionalities} \\ \hline
+        ChaiScript \cite{url:ChaiScript}              &            &            &            &              &              \\
+        python-on-a-chip \cite{url:python-on-a-chip}  &            &            &            & green thread &              \\
+        Owl system \cite{par:owl}                     & \checkmark & Partially  &            & green thread &              \\
+        eLua \cite{url:eLua}                          & \checkmark & Partially  &            & \checkmark   &              \\
+        Squirrel \cite{url:Squirrel}                  & \checkmark &            &            & \checkmark   &              \\
+        mruby \cite{par:mruby}                        & \checkmark &            &            & \checkmark   &              \\
+        Proposed framework                            & \checkmark & \checkmark & \checkmark & \checkmark   & \checkmark   \\
+    \end{tabular}
+    }
+\end{table*}
 
 \section{TCP/IP protocol stacks for embedded systems}
 
@@ -1182,12 +1205,33 @@ TINET is a compact TCP/IP protocol stack for embedded systems based on the ITRON
 To satisfy restrictions for embedded systems, TINET supports several functions such as minimum copy frequency and elimination of  dynamic memory control.
 Since TINET is TINET statically generates CEPs and REPs, which are like sockets.
 
-The proposed framework, TINET+TECS, can configure the TCP/IP protocol stack with minimum set compared to the other platforms.
+Table \ref{tab:TCP/IP} shows a comparison of TINET+TECS and previous work.
+Note that the proposed framework, TINET+TECS, has demonstrated all features shown in Table \ref{tab:TCP/IP}.
 TINET+TECS improves configurability more than TINET and is suitable for embedded systems with memory constraint.
+The proposed framework, TINET+TECS, can configure the TCP/IP protocol stack with minimum set compared to the other platforms.
 
+\begin{table*}[t]
+    \caption{Comparison of open-source TCP/IP protocol stacks for embedded systems}
+    \label{tab:TCP/IP}
+    \centering
+    {\small \tabcolsep = 1mm
+    \begin{tabular}{c||ccccccc}
+        \hline\hline
+        & \shortstack{Configurability}
+        & \shortstack{Generation} 
+        & \shortstack{Binding} 
+        & \shortstack{Support CBD} 
+        & \shortstack{Memory saving} \\ \hline
+        uIP \cite{par:uIP}     & $\bigtriangleup$          & Dynamic    & Dynamic  &              & \checkmark \\
+        lwIP \cite{par:lwIP}   & $\bigtriangleup$          & Dynamic    & Dynamic  &              & \checkmark \\
+        TINET \cite{url:TINET} &            & Static     & Dynamic  &              & \checkmark \\
+        Proposed framework     & \checkmark & Static     & Dynamic  & \checkmark   & \checkmark \\
+    \end{tabular}
+    }
+\end{table*}
 
 %6
-\chapter{Conclusion}
+\chapter{Conclusions}
 \label{sec:Conclusion}
 
 This paper presented an extended framework of mruby on TECS, including TINET+TECS and TLSF+TECS.
