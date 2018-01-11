@@ -886,7 +886,7 @@ To pretest the system, we connected the board to a host PC via a LAN cable and e
 
 \begin{table}[t]
     \centering
-    \caption{Evaluation Board Environment}
+    \caption{Evaluation board environment}
     \begin{tabular}{l|l}
         \hline\hline
         Board           &   GR-PEACH                \\
@@ -985,7 +985,6 @@ However, the overall memory consumption is lower under the proposed framework.
 \begin{table}[t]
     \centering
     \caption{Memory consumption in two cases (with/without dynamic connection)}
-    {\tabcolsep = 1mm
     \begin{tabular}{c|r|r|r|r}
         \hline\hline
                 &  CEP:1 REP:1 & CEP:1 REP:5 & CEP:2 REP:5 & CEP:5 REP:10 \\ \hline
@@ -993,7 +992,6 @@ However, the overall memory consumption is lower under the proposed framework.
         with    &  325.23 KB   & 325.32 KB   & 327.24 KB   & 330.48 KB   \\
         \hline
     \end{tabular}
-    }
     \label{fig:EvaluationOfDynamicConnection}
 \end{table}
 
@@ -1063,7 +1061,7 @@ In the right of Fig. \ref{fig:ComparisonOfDynamicConnection}, a CEP dynamically 
 It is effective for software that uses many ports because the difference spreads as the number of CEPs and REPs increases.
 
 
-\subsection{Adapter overhead}
+\section{Adapter overhead}
 
 The API execution time when using an adapter such as {\it tcp\_snd\_dat/eAPI\_sendData} was used to analyze the overhead of the TECS adapter supporting existing applications.
 As shown in Fig. \ref{fig:EvaluationOfAdapter}, the overhead of the TECS adapter is very small because the adapter only passes parameters from C codes to TECS components; thus, the TECS adapter overhead does not affect the system.

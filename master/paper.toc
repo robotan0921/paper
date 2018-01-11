@@ -23,8 +23,8 @@
 \contentsline {chapter}{\numberline {4}Evaluation}{23}
 \contentsline {section}{\numberline {4.1}Performance of TINET+TECS}{23}
 \contentsline {section}{\numberline {4.2}Dynamic connection}{24}
-\contentsline {subsection}{\numberline {4.2.1}Adapter overhead}{26}
-\contentsline {section}{\numberline {4.3}Performance of TLSF+TECS}{27}
+\contentsline {section}{\numberline {4.3}Adapter overhead}{26}
+\contentsline {section}{\numberline {4.4}Performance of TLSF+TECS}{27}
 \contentsline {chapter}{\numberline {5}Related Work}{29}
 \contentsline {chapter}{\numberline {6}Conclusion}{30}
 \contentsline {chapter}{Acknowledgment}{31}
