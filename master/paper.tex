@@ -1114,12 +1114,76 @@ MDD provides the benefits of reusable, platform-independent, extensible design; 
 
 The development using GPLs such as C, JavaScript, Python, and Android allows the extremely efficient systems based on the complete control over individual devices.
 However, GPLs need more development effort, and it is difficult to reuse software due to platform-dependent design.
-Several Open-source runtime systems for scripting languages have been proposed such as python-on-a-chip \cite{url:python-on-a-chip}, the Owl system \cite{par:owl}, eLua \cite{url:eLua}.
 
-The proposed framework can configure the TCP/IP protocol stack with minimum set compared to the other platforms.
-In addition, the extended mruby on TECS supports legacy code such as a motor driver.
+\section{Scripting languages for embedded systems}
+
+Open-source runtime systems for scripting languages have been proposed such as ChaiScript\cite{url:ChaiScript}, python-on-a-chip \cite{url:python-on-a-chip}, the Owl system \cite{par:owl}, eLua \cite{url:eLua}, Squirrel \cite{url:Squirrel}, and mruby \cite{par:mruby}, \cite{url:mruby}.
+
+{\bf ChaiScript:}
+ChaiScript is a scripting language to be embedded in C++ applications.
+It is a dialect of ECMAScript (a.k.a. JavaScript).
+ChaiScript is header only, that is, it only needs to include the header files in order to be used it in an application.
+ChaiScript will support co-routines, but not now. 
+
+{\bf python-on-a-chip:}
+python-on-a-chip (p14p) is a Python runtime system that uses a reduced Python VM called PyMite.
+The VM runs a significant subset of the Python language with few resources on a microcontroller.
+p14p can also run multiple stackless green threads.
+
+{\bf Owl system:}
+The Owl system is an embedded Python runtime system.
+It is a complete system for ARM Cortex-M3 microcontrollers.
+The Owl toolchain produces relocatable memory images that are directly runnable on the microcontroller from Python code objects.
+Note that the Owl system interpreter is the same as that of python-on-a-chip.
+
+{\bf eLua:}
+eLua (embedded Lua) offers a full implementation of the Lua programming language for embedded systems.
+Lua is one of the most popular scripting languages for embedded systems \cite{url:Lua}, \cite{par:Lua}.
+Lua supports a co-routine, which is referred to as cooperative multitasking.
+A co-routine in Lua is used as an independently executed thread.
+Note that a co-routine can only suspend and resume multiple routines; thus, a Lua co-routine is not like multitasks in multitask systems.
+
+{\bf Squirrel:}
+Squirrel is an object-oriented programming language designed as a lightweight scripting language that satisfies the real-time requirements of applications.
+Squirrel was inspired by Lua.
+The Squirrel API is very similar to Lua and the table code is based on that of Lua; Squirrel also supports co-routines.
+
+{\bf mruby:}
+mruby, a lightweight implementation of the Ruby language, has been proposed for embedded systems.
+mruby programs can run on a RiteVM, which is the VM for mruby and reads the mruby bytecode.
+Note that the RiteVM only supports a single thread.
+In addition, mruby supports co-routines but does not support multitasking for RTOSs.
 mruby has the same syntax as Ruby which has advantages to web application development as it uses in Rails framework \cite{url:rubyonrails}.
 
+The proposed framework is a component-based framework for running mruby programs.
+mruby programs on TECS can be executed approximately 100 times faster than standard mruby programs.
+Software can be developed using CBD with mruby on TECS.
+In addition to supporting multitasking and co-routines, the mruby on TECS framework can be utilized RTOS functionalities such as periodic tasks and semaphores and supports legacy code such as a motor driver.
+
+
+\section{TCP/IP protocol stacks for embedded systems}
+
+Open-source TCP/IP protocol stacks for embedded systems have been developed such uIP \cite{par:uIP} and lwIP \cite{par:lwIP}.
+
+{\bf uIP:}
+uIP (microIP) is a very small TCP/IP stack intended for tiny 8- and 16-bit microcontrollers.
+uIP requires only about 5 KB of code size and several hundred bytes of RAM.
+uIP has been ported to various systems and has found its way into many commercial products.
+Following the release of ver. 1.0, later versions of uIP, including uIPv6, have been integrated with Contiki OS \cite{par:Contiki},\cite{url:Contiki}, an operating system to connect tiny microcontrollers to the Internet.
+
+{\bf lwIP:}
+lwIP (lightweightIP) is a small TCP/IP implementation for embedded systems that is intended to reduce memory resource usage while still maintaining a full-scale TCP.
+lwIP requires about 40 KB of ROM and tens of KB of RAM.
+lwIP is larger than uIP, but provides better throughput.
+To customize protocols and buffer size, users should handle a lot of macros.
+
+{\bf TINET:}
+TINET is a compact TCP/IP protocol stack for embedded systems based on the ITRON TCP/IP API Specification \cite{url:ITRON_TCP/IP_API_Spec}, developed by the TOPPERS Project \cite{url:TOPPERS}.
+To satisfy restrictions for embedded systems, TINET supports several functions such as minimum copy frequency and elimination of  dynamic memory control.
+Since TINET is TINET statically generates CEPs and REPs, which are like sockets.
+
+The proposed framework, TINET+TECS, can configure the TCP/IP protocol stack with minimum set compared to the other platforms.
+TINET+TECS improves configurability more than TINET and is suitable for embedded systems with memory constraint.
 
 
 %6

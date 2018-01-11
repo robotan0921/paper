@@ -26,7 +26,9 @@
 \contentsline {section}{\numberline {4.3}Adapter overhead}{26}
 \contentsline {section}{\numberline {4.4}Performance of TLSF+TECS}{27}
 \contentsline {chapter}{\numberline {5}Related Work}{29}
-\contentsline {chapter}{\numberline {6}Conclusion}{30}
-\contentsline {chapter}{Acknowledgment}{31}
-\contentsline {chapter}{References}{32}
-\contentsline {chapter}{Published List}{35}
+\contentsline {section}{\numberline {5.1}Scripting languages for embedded systems}{29}
+\contentsline {section}{\numberline {5.2}TCP/IP protocol stacks for embedded systems}{30}
+\contentsline {chapter}{\numberline {6}Conclusion}{32}
+\contentsline {chapter}{Acknowledgment}{33}
+\contentsline {chapter}{References}{34}
+\contentsline {chapter}{Published List}{37}
