@@ -31,4 +31,4 @@
 \contentsline {chapter}{\numberline {6}Conclusions}{31}
 \contentsline {chapter}{Acknowledgment}{32}
 \contentsline {chapter}{References}{33}
-\contentsline {chapter}{Published List}{36}
+\contentsline {chapter}{Publication List}{36}

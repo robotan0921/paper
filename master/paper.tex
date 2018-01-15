@@ -524,8 +524,8 @@ such as {\it send}/{\it receive}.
 \centering
 \begin{lstlisting}
 signature sNicDriver {
-    void start( [send(sNetworkAlloc),size_is(size)]int8_t *outputp, .., .. );
-    void read( [receive(sNetworkAlloc),size_is(*size)]int8_t **inputp, .., .. );
+  void start([send(sNetworkAlloc),size_is(size)]int8_t *outputp, .., ..);
+  void read([receive(sNetworkAlloc),size_is(*size)]int8_t **inputp, .., ..);
     /* Omit: other functions */
 };
 \end{lstlisting}
@@ -621,7 +621,7 @@ eAPI_accept (.., ..) {
 \subsection{TECS adapter}
 \label{sec:TECSAdapter}
 
-TINET+TECS supports legacy codes because TECS supports {\it Adapter} functionality, which enables to calling a function in TECS from existing C codes.
+TINET+TECS supports legacy codes because TECS supports {\it Adapter} functionality, which enables to call functions in TECS from existing C codes.
 The adapter is implemented between C codes and a TECS component and links a C function to a TECS function as shown in Fig. \ref{fig:TECSAdapter}.
 In TINET+TECS, when an application calls an API such as {\it tcp\_snd\_dat}, the adapter component calls a function of tTCPCEP such as {\it eAPI\_sendData}.
 Note that {\it tcp\_snd\_dat} is defined under the name {\it eAPI\_sendData} in TINET+TECS.
@@ -689,11 +689,11 @@ The version of TLSF used is 2.4.6\footnote{http://www.gii.upv.es/tlsf/main/repo}
 \centering
 \begin{lstlisting}
 signature sMalloc {
-  int    initializeMemoryPool( void );
-  void   *calloc( [in]size_t nelem, [in]size_t size );
-  void   *malloc( [in]size_t size );
-  void   *realloc( [in]const void *ptr, [in]size_t size );
-  void   free( [in]const void *ptr );
+    int    initializeMemoryPool( void );
+    void   *calloc( [in]size_t nelem, [in]size_t size );
+    void   *malloc( [in]size_t size );
+    void   *realloc( [in]const void *ptr, [in]size_t size );
+    void   free( [in]const void *ptr );
 };
 \end{lstlisting}
 \caption{Signature description of memory management}  
@@ -707,12 +707,14 @@ It defines the memory pool initialization function {\it initializeMemoryPool}, m
 \centering
 \begin{lstlisting}
 celltype tTLSFMalloc {
-    [inline]entry  sMalloc  eMalloc;
+    [inline]
+        entry  sMalloc  eMalloc;
     attr {
         size_t  memoryPoolSize;
     };
     var {
-        [size_is(memoryPoolSize/8)]uint64_t *pool;
+        [size_is(memoryPoolSize/8)]
+            uint64_t *pool;
     };
 };
 \end{lstlisting}
@@ -1084,7 +1086,7 @@ It is possible to analyze the operation status of TLSF such as GC on RiteVMs bec
 
 Fig. \ref{fig:EvaluationOfTLSFStatistics} shows the memory usage of a RiteVM acquired by statistical information of TLSF+TECS.
 When the VM is activated, a large memory is allocated and the initialization is performed.
-After that, the application is running and the VM is termnated.
+After that, the application is running and the VM is terminated.
 The reduction in memory usage at regular time intervals is due to the GC function of RiteVM.
 TLSF+TECS can visualize the behavior of GC and help to verify its operation.
 Furthermore, when the VM is terminated, the memory used by VM is not completely released and a little used memory remains.
