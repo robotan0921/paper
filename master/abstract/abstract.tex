@@ -1,17 +1,41 @@
 \documentclass[a4j,10pt,twocolumn]{../styles/utf8/abstract}
 %\documentclass[a4j,9pt,twocolumn]{abstract}
-\usepackage{graphicx}
-\usepackage[varg]{txfonts}
-%%% \begin{document}の前に，各エントリーを記述する
 
-\title{論文のタイトル}	% 論文のタイトル
-\author{氏名} 		% 著者
-\studentid{01C3456789} 	% 学籍番号
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{enumerate,cite,url}
+\usepackage{color}
+\usepackage{listings,jlisting}
+\lstset{%
+    language={c},%
+    basicstyle={\small\ttfamily},%
+    identifierstyle={\small},%
+    commentstyle={\footnotesize\itshape},%
+    keywordstyle={\small},%\bfseries},%
+    ndkeywordstyle={\small},%
+    stringstyle={\small\it},
+    frame={tb},
+    breaklines=true,
+    columns=[l]{fullflexible},%
+    numbers=left,%
+    xrightmargin=0zw,%
+    xleftmargin=3zw,%
+    numberstyle={\scriptsize},%
+    stepnumber=1,
+    numbersep=1zw,%
+    lineskip=-0.5ex%
+}
+
+\title{Component-Based Software Development Framework\\for Embedded IoT Devices}	% 論文のタイトル
+\author{山本 拓朗} 		% 著者
+\studentid{29C16100} 	% 学籍番号
 \lab{潮}		% 研究室名
 
 % 英語なら以下2行を定義
-%\englishtitle
-%\jptitle{日本語の題名}  % 日本語のタイトル
+\englishtitle
+\jptitle{組込みIoTデバイス向けコンポーネントベースソフトウェア開発フレームワーク}  % 日本語のタイトル
 
 \begin{document}
 \absttitle 		% 表題の出力
