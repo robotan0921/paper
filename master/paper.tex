@@ -16,7 +16,7 @@
     language={c},%
     basicstyle={\small\ttfamily},%
     identifierstyle={\small},%
-    commentstyle={\footnotesize\itshape},%
+    commentstyle={\small\itshape},%
     keywordstyle={\small},%\bfseries},%
     ndkeywordstyle={\small},%
     stringstyle={\small\it},
@@ -82,12 +82,13 @@
 High productivity of embedded network software is required to run embedded systems within the Internet of Things (IoT).
 To improve the productivity, the mruby on TOPPERS embedded component system (TECS) framework, which employs a scripting language (i.e., lightweight Ruby) and supports component-based development, has been proposed.
 This paper proposes an extended mruby on TECS framework to use for software development of IoT devices such as sensors and actuators.
-The proposed framework enables that that mruby program calls TINET, a TCP/IP protocol stack for use in embedded systems, functions.
+The proposed framework enables that mruby programs call TINET, a TCP/IP protocol stack for use in embedded systems, functions.
 In addition, this paper proposes two component-based functionalities: a componentized TINET called TINET+TECS and a componentized Two-Level Segregate Fit (TLSF) dynamic memory allocator called TLSF+TECS.
 TINET+TECS improves scalability and configurability, and offers software developers high productivity through variable network buffer sizes and the ability to add or remove TCP (or UDP) functionalities.
 TINET+TECS utilizes a dynamic TECS component connection method to satisfy the original TINET specifications.
 TLSF+TECS is a thread-safe memory allocator that runs at high speed and efficiently consumes memory.
 Experimental results of comparison between TINET+TECS and original TINET show that the execution time and memory consumption overhead are reduced and the configurability is improved.
+Moreover, the TLSF+TECS functionality which obtains statistical information of mruby VM's memory usage helps developers debug and verify the systems.
 
 \end{abstract}
 
@@ -168,7 +169,7 @@ Related work is discussed in Chapter \ref{sec:Related Work} and Chapter \ref{sec
 
 This chapter describes the system model of the proposed framework, including basic technologies such as TECS and mruby.
 The proposed framework is an extension of mruby on TECS framework \cite{par:mrubyonTECS}\cite{par:mrubyonTECS3}, and utilizes two technologies: mruby and TECS.
-The system model of the proposed framework is shown in Fig.\ref{fig:SystemModel}.
+The system model of the proposed framework is shown in Fig. \ref{fig:SystemModel}.
 In the proposed framework, each mruby program runs on a RiteVM mapped to a componentized task of an RTOS.
 mruby programs can call the TINET functions required for network programming through the mruby-TECS bridge, and thus software to be embedded in IoT devices can be developed.
 Moreover, the proposed framework comprises TLSF+TECS.
@@ -178,7 +179,7 @@ The following section explains TECS, mruby, and mruby on TECS framework.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=10cm,clip]{figure/SystemModel.pdf}
+    \includegraphics[width=12cm,clip]{figure/SystemModel.pdf}
     \caption{System model of the proposed framework}
     \label{fig:SystemModel}
 \end{figure}
@@ -196,13 +197,13 @@ TECS can be implemented in C, and demonstrates various feature such as source-le
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=10cm,clip]{figure/component_diagram.pdf}
+    \includegraphics[width=12cm,clip]{figure/component_diagram.pdf}
     \caption{Component Diagram}
     \label{fig:component}
 \end{figure}
 
 \subsection{Component Model}
-Fig.\ref{fig:component} shows a component diagram.
+Fig. \ref{fig:component} shows a component diagram.
 A {\it cell}, which is an instance of a TECS component, consists of {\it entry} ports, {\it call} ports, attributes, and variables.
 An {\it entry} port is an interface that provides functions to other {\it cell}s, and a {\it call} port is an interface that enables the use of other {\it cell}'s functions.
 A {\it cell} has one or more {\it entry} ports and {\it call} ports.
@@ -221,7 +222,7 @@ These components are described as follows.
 \begin{description}
     \item[{\bf Signature Description}]
         The {\it signature} defines a {\it cell} interface.
-        The {\it signature} name follows the keyword {\it signature} and takes the prefix ``s'' e.g., sMotor (Fig.\ref{signature}).
+        The {\it signature} name follows the keyword {\it signature} and takes the prefix ``s'' e.g., sMotor (Fig. \ref{signature}).
         In TECS, to clarify the function of an interface, specifiers such as [in] and [out] are used, which represent input and output, respectively.
 \begin{figure}[t]
 \centering
@@ -237,7 +238,7 @@ signature sMotor {
 \end{figure}
     \item[{\bf Celltype Description}]
         The {\it celltype} defines {\it entry} ports, {\it call} ports, attributes, and variables.
-        A {\it celltype} name with the prefix ``t'' follows the keyword {\it celltype}, e.g., tCaller (Fig.\ref{celltype}).
+        A {\it celltype} name with the prefix ``t'' follows the keyword {\it celltype}, e.g., tCaller (Fig. \ref{celltype}).
         To define {\it entry} ports, a {\it signature}, e.g., sMotor, and an {\it entry} port name, e.g., eMotor, follow the keyword {\it entry}.
         {\it Call} ports are defined similarly.
         Attributes and variables follow the keywords {\it attr} and {\it var}, respectively.
@@ -262,10 +263,10 @@ celltype tMotor {
 \end{figure}
     \item[{\bf Build Description}]
         The build description is used to instantiate and connect {\it cell}s.
-        Fig.\ref{build} shows an example of a build description.
+        Fig. \ref{build} shows an example of a build description.
         A {\it celltype} name and {\it cell} name, e.g., tMotor and Motor, respectively, follow the keyword {\it cell}.
         To compose {\it cell}s, a {\it call} port, {\it cell}'s name, and an {\it entry} port are described in that order.
-        In Fig.\ref{build}, {\it entry} port eMotor in {\it cell} Motor is connected to {\it call} port cMotor in {\it cell} Caller.
+        In Fig. \ref{build}, {\it entry} port eMotor in {\it cell} Motor is connected to {\it call} port cMotor in {\it cell} Caller.
         {\it C\_EXP} calls macros defined in C files.
 
 \begin{figure}[t]
@@ -288,12 +289,12 @@ cell tCaller Caller {
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=10cm,clip]{figure/TECSFlow.pdf}
+    \includegraphics[width=12cm,clip]{figure/TECSFlow.pdf}
     \caption{Development flow using TECS}
     \label{fig:TECSFlow}
 \end{figure}
 
-Fig.\ref{fig:TECSFlow} shows the development flow using TECS.
+Fig. \ref{fig:TECSFlow} shows the development flow using TECS.
 TECS generator generates the interface code (.H and .C) and the configure file of the RTOS (.cfg) from the CDL file.
 
 Software developers using TECS can be divided into component designers and application developers.
@@ -314,12 +315,12 @@ Ruby improves the productivity of software development due to its simple grammar
 
 mruby, which retains the usability and readability of Ruby, requires fewer resources, and thus, is suitable for embedded systems.
 In addition, mruby includes a VM mechanism, and thus, mruby programs can run on any operating system as long as a VM is implemented.
-The mruby/RiteVM mechanism is shown in Fig.\ref{fig:mruby}.
+The mruby/RiteVM mechanism is shown in Fig. \ref{fig:mruby}.
 The mruby compiler translates an mruby code into a bytecode, which can be interpreted by a RiteVM; thus, mruby programs can be executed on any target device with a RiteVM.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=10cm,clip]{figure/mruby.pdf}
+    \includegraphics[width=12cm,clip]{figure/mruby.pdf}
     \caption{mruby/RiteVM mechanism}
     \label{fig:mruby}
 \end{figure}
@@ -332,7 +333,7 @@ mruby on TECS is a component-based framework for running an mruby script languag
 This framework integrates two technologies, mruby and TECS, and enables to develop embedded software using a script language without slowing down the execution time. 
 
 \subsection{System Model of mruby on TECS}
-% The present mruby on TECS system model is shown in Fig.\ref{fig:mrubyonTECS}.
+% The present mruby on TECS system model is shown in Fig. \ref{fig:mrubyonTECS}.
 Each mruby program, which is a bytecode, runs on own RiteVM as a componentized task of an RTOS.
 TECS components support various embedded drivers such as motor and sensor drivers.
 An mruby-TECS bridge provides native libraries for mruby and can call a native program (e.g., C legacy code) from an mruby program.
@@ -356,21 +357,20 @@ Thus, it is difficult to use mruby exclusively.
 Using Ruby on embedded devices improves productivity and maintainability because it is easy to use and read.
 However, some C language codes are required to manipulate actuators and sensors and ensure that critical sections of the code run quickly.
 
-Fig.\ref{fig:mrubyTECSbridge} illustrates an mruby-TECS bridge used to control a motor.
+Fig. \ref{fig:mrubyTECSbridge} illustrates an mruby-TECS bridge used to control a motor.
 The left side of BridgeMotor belongs to the mruby program.
 The right side of BridgeMotor belongs to TECS component.
-
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=10cm,clip]{figure/mrubyTECSbridge.pdf}
-\caption{mruby-TECS bridge}
-\label{fig:mrubyTECSbridge}
-\end{figure}
-
 The mruby-TECS bridge generates a {\it celltype}, which is called from the mruby code, and an mruby class, which corresponds to a developer-specified TECS component to invoke a C function from the mruby program.
 The generated mruby-TECS bridge supports registration of classes and methods for mruby.
 Methods in an mruby class are defined by generation codes for an mruby-TECS bridge, such as setPower and stop.
 Thus, when a method is called in an mruby program, the mruby-TECS bridge calls the function defined in the TECS component such as a Motor {\it cell}.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=12cm,clip]{figure/mrubyTECSbridge.pdf}
+\caption{mruby-TECS bridge}
+\label{fig:mrubyTECSbridge}
+\end{figure}
 
 %3
 \chapter{Proposed Framework}
@@ -396,7 +396,7 @@ To satisfy restrictions for embedded systems in terms of, for example, memory ca
 TINET runs as middleware on TOPPERS/ASP3 \cite{par:ASP3} \cite{url:ASP3}, a real-time kernel based on $\mu$ITRON \cite{par:microITRON}.
 As it is compatible with TOPPERS RTOS, TINET also supports other RTOSs such as TOPPERS/ASP and TOPPERS/JSP.
 
-Fig.\ref{fig:TINETHierarchyDiagram} shows the hierarchy diagram of TINET and TOPPERS/ASP3.
+Fig. \ref{fig:TINETHierarchyDiagram} shows the hierarchy diagram of TINET and TOPPERS/ASP3.
 Users send and receive data using a Communication End Point (CEP), an interface that functions like a socket.
 In the transmission process, headers are attached to the data body passed to the CEP at each protocol layer before the data are transmitted from the network device.
 In the reception process, the headers of the data bodies received by the network device are analyzed at each protocol layer, and the data are then passed to the CEP.
@@ -410,7 +410,7 @@ To solve this problem, TINET does pass the pointer of the data buffer between ea
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=10cm,clip]{figure/TINETHierarchyDiagram.pdf}
+    \includegraphics[width=12cm,clip]{figure/TINETHierarchyDiagram.pdf}
     \caption{TINET and TOPPERS/ASP3 hierarchy diagrams}
     \label{fig:TINETHierarchyDiagram}
 \end{figure}
@@ -422,7 +422,7 @@ This section describes the components of the TINET+TECS framework with the aid o
 
 \subsection*{Components of a protocol stack}
 
-The components of the TINET+TECS protocol stack are shown in Fig.\ref{fig:ComponentProtocolStack}.
+The components of the TINET+TECS protocol stack are shown in Fig. \ref{fig:ComponentProtocolStack}.
 Note that some small particle components, such as a kernel object, data queues, and semaphores, are omitted to simplify the component diagram.
 In TINET+TECS, the components are divided for each protocol, and functionalities such as input/output functions are defined as respective components.
 By using such small grain components, software visibility is improved.
@@ -430,7 +430,7 @@ The components of each protocol are described as follows.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=8.0cm,clip]{figure/ComponentProtocolStack.pdf}
+    \includegraphics[width=12cm,clip]{figure/ComponentProtocolStack.pdf}
     \caption{Component diagram of a protocol stack}
     \label{fig:ComponentProtocolStack}
 \end{figure}
@@ -472,7 +472,7 @@ The original TINET eliminates dynamic memory control to meet the severe memory r
 A memory area for sending/receiving data in the protocol stack is allocated and released within a predetermined area.
 The memory allocator component allows for elimination of dynamic memory control in TINET+TECS by providing a requested memory area from the statically allocated memory area.
 
-The memory allocator component connects to as many tFixedSizeMemoryPool as required, as shown in Fig.\ref{fig:tMemoryAllocator}.
+The memory allocator component connects to as many tFixedSizeMemoryPool as required, as shown in Fig. \ref{fig:tMemoryAllocator}.
 tFixedSizeMemoryPool is a componentized kernel object of TOPPERS/ASP3 for allocating and releasing memory areas of a requested size. 
 tFixedSizeMemoryPool components of various sizes are prepared, and an appropriate memory area can be allocated according to the used data size.
 On the other hand, all components that need to allocate or deallocate memory, e.g., tTCPInput and tEthernetOutput, connect to the memory allocator component.
@@ -481,14 +481,14 @@ In addition, TINET+TECS utilizes the TECS {\it send/receive} specifier to minimi
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=10cm,clip]{figure/tMemoryAllocator.pdf}
+    \includegraphics[width=12cm,clip]{figure/tMemoryAllocator.pdf}
     \caption{Component diagram of tMemoryAllocator}
     \label{fig:tMemoryAllocator}
 \end{figure}
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=10cm,clip]{figure/SendReceive.pdf}
+    \includegraphics[width=12cm,clip]{figure/SendReceive.pdf}
     \caption{Differences between in/out and send/receive}
     \label{fig:SendReceive}
 \end{figure}
@@ -503,19 +503,19 @@ A callee side uses the memory of arguments with {\it in} when executing the call
 When the processing returns to the caller side, the caller can reuse and deallocate the memory.
 
 \item {\it send} is another specifier for transferring data to a callee from a caller.
-The difference between {\it in} and {\it send} is whether the data memory is deallocated in the caller or callee, as shown in Fig.\ref{fig:SendReceive}.
+The difference between {\it in} and {\it send} is whether the data memory is deallocated in the caller or callee, as shown in Fig. \ref{fig:SendReceive}.
 In the case of the {\it in} specifier, both allocating and deallocating of the data memory are performed in the caller.
 By contrast, in the case of {\it send}, the caller allocates the data memory and the callee deallocates it.
 
 \item {\it out} is a specifier for output arguments through which a callee writes data in the memory allocated by a caller while the caller receives the data.
 
 \item {\it receive} is another specifier for a caller receiving data from a callee.
-The difference between {\it out} and {\it receive} lies in whether the data memory is allocated in the caller or callee, as shown in Fig.\ref{fig:SendReceive}.
+The difference between {\it out} and {\it receive} lies in whether the data memory is allocated in the caller or callee, as shown in Fig. \ref{fig:SendReceive}.
 In the case of {\it out}, the callee writes data in the memory allocated by a caller, whereas in the {\it receive} case, the callee allocates the data memory.
 Deallocating of the memory is performed in the caller in both cases.
 \end{itemize}
 
-As shown in Fig.\ref{src:SendReceive}, sending and receiving arguments such as {\it outputp} and {\it inputp} are defined using, respectively, the {\it send/receive} specifier in the signature description.
+As shown in Fig. \ref{src:SendReceive}, sending and receiving arguments such as {\it outputp} and {\it inputp} are defined using, respectively, the {\it send/receive} specifier in the signature description.
 Developers hardly make mistakes of memory operation because these specifiers completely pass an ownership of memory.
 Common object request broker architecture (CORBA) does not consider memory sharing; CORBA has no functionalities
 such as {\it send}/{\it receive}.
@@ -538,33 +538,33 @@ signature sNicDriver {
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=10cm,clip]{figure/DynamicConnection.pdf}
+    \includegraphics[width=12cm,clip]{figure/DynamicConnection.pdf}
     \caption{Dynamic connection}
     \label{fig:DynamicConnection}
 \end{figure}
 
-TECS supports a dynamic connection, a method for switching the binding of components at runtime (Fig.\ref{fig:DynamicConnection}) as a new functionality.
-In Fig.\ref{fig:DynamicConnection}, the solid line represents binding and the dotted line represents non-binding.
+TECS supports a dynamic connection, a method for switching the binding of components at runtime (Fig. \ref{fig:DynamicConnection}) as a new functionality.
+In Fig. \ref{fig:DynamicConnection}, the solid line represents binding and the dotted line represents non-binding.
 Note that all components are statically generated in TECS, which can optimize the overhead of componentization because components are statically configured.
 Dynamically generating components causes a good deal of memory consumption, which is a serious problem for embedded systems with strict memory constraints.
 The proposed framework can take advantage of the componentization in TINET while satisfying the memory constraint because components are statically generated and dynamically connected in TECS.
 
-TINET+TECS utilizes the dynamic connection to switch between CEP and REP components, as shown in Fig.\ref{fig:DynamicConnectionUseCase}.
+TINET+TECS utilizes the dynamic connection to switch between CEP and REP components, as shown in Fig. \ref{fig:DynamicConnectionUseCase}.
 In a server application, CEP is associated with REP in the state of waiting for a connection request from clients\footnote{tcp\_acp\_cep(ID cepid, ID repid, T\_IPV4EP *p\_dstaddr, TMO tmout).}.
 For example, when processing with the HTTP protocol, CEP passively opens with an REP of port number 80.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=8.0cm,clip]{figure/DynamicConnectionUseCase.pdf}
+    \includegraphics[width=12cm,clip]{figure/DynamicConnectionUseCase.pdf}
     \caption{Dynamic connection between CEP and REP}
     \label{fig:DynamicConnectionUseCase}
 \end{figure}
 
 To utilize dynamic connectivity, a selector should be defined.
 A selector connects all components that can be dynamically connected under a common descriptor that serves as an identifier to access each component \cite{par:optimization}.
-The cREP ports form a call port array connecting to connecting to all tREP cells (Line 8 in Fig.\ref{src:DynamicCDLcode}).
+The cREP ports form a call port array connecting to connecting to all tREP cells (Line 8 in Fig. \ref{src:DynamicCDLcode}).
 {\it [ref\_desc]} is used to identify call ports referring to descriptors. 
-In the case of Fig.\ref{fig:DynamicConnectionUseCase}, the tRepSelector cell connects all tREP cells.
+In the case of Fig. \ref{fig:DynamicConnectionUseCase}, the tRepSelector cell connects all tREP cells.
 
 A CEP component has two call ports: the cRepSelector port, which connects to the eRepSelector port of tRepSelector cell, and the cREP4 port, which connects to either of the tREP cells (Lines 11--13 in Fig. \ref{src:DynamicCDLcode}).
 The cREP port is defined using {\it [dynamic]} to identify the call port used to dynamically switch the components.
@@ -593,12 +593,12 @@ celltype tTCPCEP {
 \label{src:DynamicCDLcode}
 \end{figure}
 
-Fig.\ref{src:DynamicCcode} shows a sample code of the dynamic connection.
+Fig. \ref{src:DynamicCcode} shows a sample code of the dynamic connection.
 The eAPI\_accept function is the function wrapping {\it tcp\_acp\_cep} under TECS, which is set as the state waiting for a connection request.
-The dynamic connection in the function is performed as shown in Fig.\ref{src:DynamicCcode}.
-First, the descriptor of REP to be joined is obtained (Line 3 in Fig.\ref{src:DynamicCcode}).
+The dynamic connection in the function is performed as shown in Fig. \ref{src:DynamicCcode}.
+First, the descriptor of REP to be joined is obtained (Line 3 in Fig. \ref{src:DynamicCcode}).
 The first argument, {\it \&desc}, is a variable used to store the descriptor information, whereas the second argument, {\it repid}, is the index of tREP cells.
-Next, the descriptor is set (Line 5 in Fig.\ref{src:DynamicCcode}), and the cREP port combines the tREP cell specified by the descriptor, enabling the tCEP cell to call the function of the tREP cell to be joined (Line 7 in Fig.\ref{src:DynamicCcode}).
+Next, the descriptor is set (Line 5 in Fig. \ref{src:DynamicCcode}), and the cREP port combines the tREP cell specified by the descriptor, enabling the tCEP cell to call the function of the tREP cell to be joined (Line 7 in Fig. \ref{src:DynamicCcode}).
 
 \begin{figure}[t]
 \centering
@@ -629,12 +629,12 @@ The adapter wraps the APIs used in the existing applications into TECS functions
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=10cm,clip]{figure/TECSAdapter.pdf}
+    \includegraphics[width=12cm,clip]{figure/TECSAdapter.pdf}
     \caption{TECS adapter}
     \label{fig:TECSAdapter}
 \end{figure}
 
-Since existing communication programs are supported, a communication task can be applied without porting, and other tasks can be developed with mruby program.
+Since existing communication programs are supported, a communication task can be applied without porting, and other tasks can be developed with mruby programs.
 
 
 \section{TLSF+TECS}
@@ -642,7 +642,7 @@ Since existing communication programs are supported, a communication task can be
 
 \subsection{TLSF}
 
-TLSF (Two-Level Segregate Fit) memory allocator\cite{par:TLSF}\cite{url:TLSF} is a dynamic memory allocator suitable for the real-time system proposed by M. Masmano et al.
+TLSF (Two-Level Segregate Fit) memory allocator\cite{par:TLSF}\cite{url:TLSF} is a dynamic memory allocator suitable for the real-time system.
 TLSF memory allocator has the following features.
 
 {\bf Real-time property:}
@@ -657,7 +657,7 @@ Various tests have obtained an average fragmentation of less than 15\% and a max
 \subsection{TLSF Algorithms}
 
 TLSF algorithm classifies memory blocks into two stages and searches for a memory block that is optimal for the requested memory size.
-The overview of TLSF algorithm is shown in Fig.\ref{fig:TLSF}.
+The overview of TLSF algorithm is shown in Fig. \ref{fig:TLSF}.
 Consider a case where a request, $malloc(100)$, is called to allocate a memory.
 First, it is classified by the most significant bit of the requested memory size.
 In this case, since 100 is represented by binary number as 1100100, it is in the range from 64 to 128 from the most significant bit.
@@ -673,7 +673,7 @@ In addition, TLSF searches at the same speed and high speed, $O(1)$.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=10cm,clip]{figure/TLSF.pdf}
+    \includegraphics[width=12cm,clip]{figure/TLSF.pdf}
     \caption{TLSF Algorithm}
     \label{fig:TLSF}
 \end{figure}
@@ -682,7 +682,7 @@ In addition, TLSF searches at the same speed and high speed, $O(1)$.
 \subsection{Component Design of TLSF+TECS}
 
 This section describes the component design of TLSF memory allocator.
-In this research, we are using TECS to componentize TLSF.
+In this research, TECS is used to componentize TLSF.
 The version of TLSF used is 2.4.6\footnote{http://www.gii.upv.es/tlsf/main/repo}.
 
 \begin{figure}[t]
@@ -700,7 +700,7 @@ signature sMalloc {
 \label{src:TLSFSignature}
 \end{figure}
 
-Fig.\ref{src:TLSFSignature} is a signature description for memory management used by the allocator.
+Fig. \ref{src:TLSFSignature} is a signature description for memory management used by the allocator.
 It defines the memory pool initialization function {\it initializeMemoryPool}, memory allocation function {\it calloc}, {\it malloc}, {\it realloc}, and memory release function {\it free} as a signature.
 
 \begin{figure}[t]
@@ -722,7 +722,7 @@ celltype tTLSFMalloc {
 \label{src:TLSFCelltype}
 \end{figure}
 
-The celltype description of the TLSF memory allocator component is shown in Fig.\ref{src:TLSFCelltype}.
+The celltype description of the TLSF memory allocator component is shown in Fig. \ref{src:TLSFCelltype}.
 An entry port, {\it eMalloc}, is connected to all components that perform memory management such as $malloc$ and $free$.
 Here, {\it [inline]} is a specifier for Implementation as inline functions.
 A memory pool size is defined as an attribute, and a pointer to a memory pool is defined as a variable.
@@ -731,20 +731,20 @@ Therefore, even when calling functions for memory management at the same time in
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=10cm,clip]{figure/WithoutTECS.pdf}
+    \includegraphics[width=12cm,clip]{figure/WithoutTECS.pdf}
     \caption{TLSF before componentization}
     \label{fig:WithoutTECS}
 \end{figure}
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=10cm,clip]{figure/WithTECS.pdf}
+    \includegraphics[width=12cm,clip]{figure/WithTECS.pdf}
     \caption{TLSF after componentization}
     \label{fig:WithTECS}
 \end{figure}
 
-As shown in Fig.\ref{fig:WithoutTECS}, since TLSF before componentization shares the heap area with multiple threads, if memory is allocated or released simultaneously from multiple threads, memory competition may occur in some cases.
-In the research, TLSF is componentized using TECS as shown in Fig.\ref{fig:WithTECS}.
+As shown in Fig. \ref{fig:WithoutTECS}, since TLSF before componentization shares the heap area with multiple threads, if memory is allocated or released simultaneously from multiple threads, memory competition may occur in some cases.
+In the research, TLSF is componentized using TECS as shown in Fig. \ref{fig:WithTECS}.
 It is possible to operate in thread safe without exclusive control, because each component independently holds a heap area and manages memory within it. 
 
 \begin{figure}[t]
@@ -794,13 +794,13 @@ mrb_TECS_allocf( mrb_state *mrb, void *p, size_t size, void *ud )
 \label{src:TLSFC}
 \end{figure}
 
-Fig.\ref{src:TLSFBuild} shows the build description of the TLSF memory allocator component shown in Fig.\ref{fig:WithTECS}\footnote{Other call/entry ports, attributes, and valuables are actually described, but it is omitted here for the simplicity.}.
+Fig. \ref{src:TLSFBuild} shows the build description of the TLSF memory allocator component shown in Fig. \ref{fig:WithTECS}\footnote{Other call/entry ports, attributes, and valuables are actually described, but it is omitted here for the simplicity.}.
 Two sets of task components and TLSF components are combined.
-Each memory pool size can be configured as a variable (Lines 5 and 11 in Fig.\ref{src:TLSFBuild}).
-Fig.\ref{src:TLSFC} is the part of the code actually calling the function of the TLSF memory allocator component.
+Each memory pool size can be configured as a variable (Lines 5 and 11 in Fig. \ref{src:TLSFBuild}).
+Fig. \ref{src:TLSFC} is the part of the code actually calling the function of the TLSF memory allocator component.
 The use part shows a function that the mruby VM allocates memory in the mruby on TECS framework\cite{par:mrubyonTECS}\cite{par:mrubyonTECS3} which is introduced in Section \ref{sec:mrubyonTECS}.
 Line 8 calls the {\it free} function of the TLSF memory allocator component.
-{\it cMalloc\_} represents the name of the call port (Line 2 in Fig.\ref{src:TLSFBuild}).
+{\it cMalloc\_} represents the name of the call port (Line 2 in Fig. \ref{src:TLSFBuild}).
 Likewise, Lines 13 and 17 call the function for memory allocation.
 The heap area of {\it TLSFMalloc\_001} component is used if the code of \ref{src:TLSFC} is executed in {\it Task\_001}, and if that is executed in {\it Task\_002}, the heap area of {\it TLSFMalloc\_002} component is used, respectively.
 In this way, in the component-based development using TECS, it is possible to operate with the same code without modifying the C code, although the cells are different.
@@ -809,7 +809,7 @@ In this way, in the component-based development using TECS, it is possible to op
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=10cm,clip]{figure/UseCase_mruby.pdf}
+    \includegraphics[width=12cm,clip]{figure/UseCase_mruby.pdf}
     \caption{Component description of RiteVM and TLSF+TECS}
     \label{fig:UseCase_mruby}
 \end{figure}
@@ -818,9 +818,9 @@ The proposed framework uses TLSF memory allocator for memory management of RiteV
 However, since the existing TLSF is not thread-safe, if memory is allocated or deallocated from multiple, memory contention will occur.
 As a RiteVM allocates and deallocates memory at high frequency, the memory contention immediately occurs in the case of multiple VMs.
 
-The TLSF components are connected to the RiteVMs to hold own heap area in each RiteVM as shown in Fig.\ref{fig:UseCase_mruby}.
+The TLSF components are connected to the RiteVMs to hold own heap area in each RiteVM as shown in Fig. \ref{fig:UseCase_mruby}.
 Since each TLSF component holds a memory pool, multiple RiteVMs can be executed without memory contention.
-Fig.\ref{fig:UseCase_mruby} shows that the first RiteVM has a heap area of 1 MB (1024*1024) and the second VM has a heap area of 2 MB (2*1024*1024).
+Fig. \ref{fig:UseCase_mruby} shows that the first RiteVM has a heap area of 1 MB (1024*1024) and the second VM has a heap area of 2 MB (2*1024*1024).
 It is easy to set different heap areas in each RiteVM.
 In addition, RiteVM performs incremental GC (Garbage Collection), and a VM that started GC does not disturb the execution of other VMs by running GC.
     
@@ -828,7 +828,7 @@ In addition, RiteVM performs incremental GC (Garbage Collection), and a VM that 
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=10cm,clip]{figure/UseCase_TINET.pdf}
+    \includegraphics[width=12cm,clip]{figure/UseCase_TINET.pdf}
     \caption{Fixed-size and TLSF memory allocator components}
     \label{fig:UseCase_TINET}
 \end{figure}
@@ -837,7 +837,7 @@ In the TCP/IP protocol stack, memory allocation and release are repeated in each
 Therefore, the role of allocator is important.
 TINET+TECS combines all components that manage memory with the allocator.
 The TLSF memory allocator can execute at the same speed as compared with the fixed-size memory allocator which TOPPERS/ASP3 supports as standard, and can improve the memory efficiency.
-In addition, as shown in Fig.\ref{fig:UseCase_TINET}, the fixed-size memory allocator needs to prepare memory pools of different sizes, and select a memory pool as necessary.
+In addition, as shown in Fig. \ref{fig:UseCase_TINET}, the fixed-size memory allocator needs to prepare memory pools of different sizes, and select a memory pool as necessary.
 TLSF+TECS efficiently manages the memory without selecting a memory pool.
 TLSF+TECS can be easily extended to TINET+TECS since TINET+TECS is a component-based system.
 
@@ -847,11 +847,11 @@ TLSF+TECS can be easily extended to TINET+TECS since TINET+TECS is a component-b
 \label{sec:UseCase}
 
 In the proposed framework, applications can call TINET functions such as TCP and UDP from mruby programs because mruby-TECS bridge automatically generates the code linking mruby and C.
-Fig.\ref{src:mruby} shows an mruby program to transmit the value acquired from a sensor.
+Fig. \ref{src:mruby} shows an mruby program to transmit the value acquired from a sensor.
 mruby makes it easier to develop applications than existing TINET, i.e., C language.
 
 In the case of a simple application, a few functions are only used and there are some unused functions.
-For example, the application only uses a function to send by TCP protocol as shown in Fig.\ref{src:mruby}.
+For example, the application only uses a function to send by TCP protocol as shown in Fig. \ref{src:mruby}.
 The proposed framework incorporates TINET+TECS, and can easily customize the TCP/IP protocol stack such as removing UDP functions, supporting only IPv4, or removing TCP receiving function.
 It can be applied to embedded systems with strict memory constraints by removing unused functions.
 
@@ -883,8 +883,8 @@ end
 This chapter describes the experimental evaluation used to demonstrate the effectiveness of the proposed framework.
 GR-PEACH was employed as the evaluation board.
 Detailed specifications of the board are shown in Table \ref{tab:EvaluationBoardEnvironment}.
-We also employ TINET 1.5.4 and the compiler arm-none-eabi-gcc 5.2
-To pretest the system, we connected the board to a host PC via a LAN cable and evaluated the data sending and receiving.
+I also employ TINET 1.5.4 and the compiler arm-none-eabi-gcc 5.2
+To pretest the system, I connected the board to a host PC via a LAN cable and evaluated the data sending and receiving.
 
 \begin{table}[t]
     \centering
@@ -903,19 +903,19 @@ To pretest the system, we connected the board to a host PC via a LAN cable and e
 
 \section{Performance of TINET+TECS}
 
-To demonstrate the low overhead of TINET+TECS, we compared its execution time and memory consumption with that of TINET, producing the results shown in Fig. \ref{fig:EvaluationOfExecutionTime}.
+To demonstrate the low overhead of TINET+TECS, I compared its execution time and memory consumption with that of TINET, producing the results shown in Fig. \ref{fig:EvaluationOfExecutionTime}.
 
 The {\it tcp\_snd\_dat} and {\it tcp\_rcv\_dat} APIs were used in the evaluation to, respectively, send and receive TCP data.
-For {\it tcp\_snd\_dat}, we measured the executing time starting from the API call through the application until the return of the processing result.
+For {\it tcp\_snd\_dat}, I measured the executing time starting from the API call through the application until the return of the processing result.
 In TINET+TECS, this process is performed in the order tApplication, tTCPCEP, tTCPOutputTaskBody, tIPv4Output, tEthernetOutput, tArp, tEthernetOutputTaskBody, and tIfMbed, as shown in Fig. \ref{fig:ComponentProtocolStack}.
-For {\it tcp\_rcv\_dat}, we measured the execution time from the data receipt in the LAN driver until data acquisition in the application.
+For {\it tcp\_rcv\_dat}, I measured the execution time from the data receipt in the LAN driver until data acquisition in the application.
 In TINET+TECS, the process is performed in the order tIfMbed, tEthernetInputTaskBody, tIPv4Input, tTCPInput, tTCPCEP, and tApplication, as shown in Fig. \ref{fig:ComponentProtocolStack}.
 The execution time of TINET+TECS is close to that of TINET, with an overhead of about 3 us.
 As the use of the {\it send/receive} specifier enables accessing of the buffer address without data copying, the componentization overhead does not affect the execution time.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=10cm,clip]{figure/EvaluationOfExecutionTime.pdf}
+    \includegraphics[width=12cm,clip]{figure/EvaluationOfExecutionTime.pdf}
     \caption{Execution times of TINET and TINET+TECS}
     \label{fig:EvaluationOfExecutionTime}
 \end{figure}
@@ -963,7 +963,7 @@ This demonstrated the ability to change the composition of the protocol stack wi
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=10cm,clip]{figure/ComparisonOfDynamicConnection.pdf}
+    \includegraphics[width=12cm,clip]{figure/ComparisonOfDynamicConnection.pdf}
     \caption{Component diagrams for without/with dynamic connection}
     \label{fig:ComparisonOfDynamicConnection}
 \end{figure}
@@ -1019,18 +1019,21 @@ However, the overall memory consumption is lower under the proposed framework.
 /* without Dynamic Connection */
 cell tTCPCEP TCPCEP_000 {
     cREP[0] = REP_000.eREP;
-    ..
+    cREP[1] = REP_001.eREP;
+    ...
     cREP[n] = REP_00n.eREP;
 };
 cell tTCPCEP TCPCEP_001 {
     cREP[0] = REP_000.eREP;
-    ..
+    cREP[1] = REP_001.eREP;
+    ...
     cREP[n] = REP_00n.eREP;
 };
 ..
 cell tTCPCEP TCPCEP_00n {
     cREP[0] = REP_000.eREP;
-    ..
+    cREP[1] = REP_001.eREP;
+    ...
     cREP[n] = REP_00n.eREP;
 };
   \end{lstlisting}
@@ -1041,7 +1044,8 @@ cell tTCPCEP TCPCEP_00n {
 /* with Dynamic Connection */
 cell tRepSelector RepSelector {
     cREP[0] = REP_000.eREP;
-    ..
+    cREP[1] = REP_001.eREP;
+    ...
     cREP[n] = REP_00n.eREP;
 };
 cell tTCPCEP TCPCEP_000 {
@@ -1050,7 +1054,7 @@ cell tTCPCEP TCPCEP_000 {
 cell tTCPCEP TCPCEP_001 {
     cRepSelector = RepSelector.eRepSelector;
 };
-..
+...
 cell tTCPCEP TCPCEP_00n {
     cRepSelector = RepSelector.eRepSelector;
 };
@@ -1069,32 +1073,38 @@ It is effective for software that uses many ports because the difference spreads
 
 \section{Adapter overhead}
 
+The TECS adapter which enables to call functions in TECS from existing C codes is implemented between C codes and a TECS component and links a C function to a TECS function.
+Therefore, the existing applications can be applied to the proposed framework.
+However, since real-time processing is important for embedded systems, it is meaningless if the execution time is slower than the existing application.
+
+In the section, it is evaluated whether the TECS adapter affects the system.
 The API execution time when using an adapter such as {\it tcp\_snd\_dat/eAPI\_sendData} was used to analyze the overhead of the TECS adapter supporting existing applications.
-As shown in Fig. \ref{fig:EvaluationOfAdapter}, the overhead of the TECS adapter is very small because the adapter only passes parameters from C codes to TECS components; thus, the TECS adapter overhead does not affect the system.
+As shown in Fig. \ref{fig:EvaluationOfAdapter}, the overhead of the TECS adapter is small because the adapter only passes parameters from C codes to TECS components; thus, the overhead of TECS adapter does not affect the system.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=10cm,clip]{figure/EvaluationOfAdapter.pdf}
+    \includegraphics[width=12cm,clip]{figure/EvaluationOfAdapter.pdf}
     \caption{Execution times in two cases (without/with TECS adapter)}
     \label{fig:EvaluationOfAdapter}
 \end{figure}
 
-\section{Performance of TLSF+TECS}
+\section{Memory statistics using TLSF+TECS}
 
 TLSF+TECS provides a functionality that acquires statistical information on dynamic memory usage status.
 It is possible to analyze the operation status of TLSF such as GC on RiteVMs because TLSF+TECS acquires memory statistical information: the frequency of memory allocation/deallocation and the usage size of heap area.
 
 Fig. \ref{fig:EvaluationOfTLSFStatistics} shows the memory usage of a RiteVM acquired by statistical information of TLSF+TECS.
-When the VM is activated, a large memory is allocated and the initialization is performed.
-After that, the application is running and the VM is terminated.
+When the RiteVM is activated, a large memory is allocated and the initialization is performed for several seconds.
+After that, the application is running for about 20 seconds and the RiteVM is terminated.
 The reduction in memory usage at regular time intervals is due to the GC function of RiteVM.
 TLSF+TECS can visualize the behavior of GC and help to verify its operation.
-Furthermore, when the VM is terminated, the memory used by VM is not completely released and a little used memory remains.
+Furthermore, when the RiteVM is terminated, the memory used by RiteVM is not completely released and a little used memory (a few kilobytes) remains.
+This remaining memory causes a memory leak when the number of RiteVMs increases or a RiteVM repeats activation and shutdown.
 In this way, it is useful for finding bugs related to memory, which is hard to find.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=10cm,clip]{figure/EvaluationOfTLSFStatistics.pdf}
+    \includegraphics[width=12cm,clip]{figure/EvaluationOfTLSFStatistics.pdf}
     \caption{Memory usage of RiteVM (mruby VM) by TLSFStatistics component}
     \label{fig:EvaluationOfTLSFStatistics}
 \end{figure}
@@ -1180,8 +1190,8 @@ In addition to supporting multitasking and co-routines, the mruby on TECS framew
         & \shortstack{Co-routines}
         & \shortstack{RTOS\\functionalities} \\ \hline
         ChaiScript \cite{url:ChaiScript}              &            &            &            &              &              \\
-        python-on-a-chip \cite{url:python-on-a-chip}  &            &            &            & green thread &              \\
-        Owl system \cite{par:owl}                     & \checkmark & Partially  &            & green thread &              \\
+        python-on-a-chip \cite{url:python-on-a-chip}  &            &            &            & Green thread &              \\
+        Owl system \cite{par:owl}                     & \checkmark & Partially  &            & Green thread &              \\
         eLua \cite{url:eLua}                          & \checkmark & Partially  &            & \checkmark   &              \\
         Squirrel \cite{url:Squirrel}                  & \checkmark &            &            & \checkmark   &              \\
         mruby \cite{par:mruby}                        & \checkmark &            &            & \checkmark   &              \\
@@ -1240,20 +1250,24 @@ The proposed framework, TINET+TECS, can configure the TCP/IP protocol stack with
 \chapter{Conclusions}
 \label{sec:Conclusion}
 
-This paper presented an extended framework of mruby on TECS, including TINET+TECS and TLSF+TECS.
+This paper presented an component-based framework that can develop software including network applications for embedded IoT devices using a scripting language.
+It is an extended framework of mruby on TECS, including TINET+TECS and TLSF+TECS.
 In the proposed framework, mruby programs can call TINET+TECS functions through the mruby-TECS bridge.
 Development of software for IoT devices such as sensors and actuators will be more efficient due to the high productivity of mruby.
+
 TINET+TECS is a componentized version of TINET, a compact TCP/IP protocol stack that uses TECS.
 It improves on TINET configurability while suppressing the overhead of componentization.
 Scalability is also improved because the component-based framework simplifies to add/remove and change protocols such as TCP/UDP, IPv4/IPv6, and Ethernet/PPP.
-
 This paper also presented the dynamic connection, a new TECS functionality, to enable dynamic processing while reducing memory consumption.
 TINET+TECS utilizes the dynamic connection to satisfy the TINET specification for supporting the static generation of CEPs and REPs.
+
 TLSF+TECS is a component-based dynamic allocator.
 Since the TLSF+TECS can hold own heap area, memory contention will not occur even if memory is simultaneously allocated or released from multiple threads.
+The TLSF+TECS functionality to get statistical information of memory usage helps developers analyze the systems and find bugs.
+
 In addition, the RiteVMs, TINET+TECS, and TLSF+TECS are implemented as components; therefore, developers can add, remove, or reuse their functionalities easily as required.
-Note that our prototype system and the application programs used in the performance evaluation are all open-source and can be downloaded from our website \cite{url:TECS}.
-In the future, we will support mruby libraries as mrbgems, which is an mruby distribution packaging system.
+Note that our prototype system and the application programs used in the performance evaluation are all open-source and can be downloaded from the website \cite{url:TECS}.
+In the future, mruby libraries will be supported as mrbgems, which is an mruby distribution packaging system.
 
 \begin{acknowledgment}
 I would like to express my deep sense of gratitude to my adviser Professor Toshimitsu Ushio and Assistant Professor Takuya Azumi, Graduate School of Engineering Science, Osaka University, for their invaluable, constructive advice and constant encouragement during this work.
@@ -1276,7 +1290,7 @@ Finally, I would like to thank all members of Ushio Laboratory, especially the m
     Takuro Yamamoto, Takuma Hara, Takuya Ishikawa, Hiroshi Oyama, Hiroaki Takada, and Takuya Azumi,
     ``Component-Based mruby Platform for IoT Devices,"
     \emph{IPSJ Journal of Information Processing},
-    2017 (submitted).
+    2018 (submitted).
 \item
     Takuro Yamamoto, Hiroshi Oyama, and Takuya Azumi,
     ``Component-Based Framework of Lightweight Ruby for Efficient Embedded Software Development,''
