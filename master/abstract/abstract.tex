@@ -43,32 +43,32 @@
 \section{緒論}
 
 近年，IoT (Internet of Things) 市場の拡大により，組込み機器をネットワークに繋げて操作するために，ソフトウェア開発の高い生産性が要求されている．
-組込みソフトウェア開発の生産性向上のため，組込み向けスクリプト言語mruby (軽量Ruby) を用いたコンポーネントベース開発が可能なフレームワークmruby on TECS\cite{par:mrubyonTECS}が提案されている．
+組込みソフトウェア開発の生産性向上のため，スクリプト言語mruby (軽量Ruby) を用いたコンポーネントベース開発が可能なフレームワークmruby on TECS\cite{par:mrubyonTECS}が提案されている．
 
-本研究では，mruby on TECS の拡張として，組込み向けTCP/IPプロトコルスタックTINET の機能をmrubyプログラムから実行できるフレームワークを提案する．
+本研究では，IoT機器に対応するため，mruby on TECS の拡張として組込み向けTCP/IPプロトコルスタックTINET の機能をmrubyプログラムから実行できるフレームワークを提案する．
 提案フレームワークでは，TINETのコンポーネント化を行うことで拡張性やコンフィグラビリティが向上し，プロトコルを容易に設定できるようになる．
 さらに，動的メモリアロケータTLSF (Two-Level Segregate Fit) のコンポーネント化も行い，スレッドセーフに複数のスレッドを動作可能なメモリアロケータもフレームワークに組み込んでいる．
 
 \section{mruby on TECS}
 
-mruby on TECS は，mrubyと，組込みシステムに適したコンポーネントシステムであるTECS (TOPPERS Embedded Component System) を組み合わせたフレームワークである.
+mruby on TECS は，スクリプト言語mrubyと，組込みシステムに適したコンポーネントシステムであるTECS (TOPPERS Embedded Component System) を組み合わせたフレームワークである.
 スクリプト言語はその使いやすさから生産性が高い反面，C 言語に比べると実行速度が遅いため，組込みシステムに適用することは難しい.
-mruby on TECS では，mrubyブリッジというmrubyプログラムからC 言語関数を呼び出す機能を提供しており，mrubyに比べて，アプリケーションを約100 倍速く実行できる.
+mruby on TECS では，mrubyブリッジというmrubyプログラムからC 言語の関数を呼び出す機能を提供しており，mrubyに比べて，アプリケーションを約100 倍速く実行できる.
 
-さらに，TECSによってコンポーネントベースで開発されているため，ソフトウェアの再利用が高く，機能の追加や取り外しが容易に行うことができる．
+さらに，TECSによってコンポーネントベースで開発されているため，ソフトウェアの再利用が高く，機能の追加や取り外しが容易である．
 
 \section{提案フレームワーク}
 
-提案フレームワークでは，mruby on TECSを拡張して，TCP/IPプロトコルスタックTINET+TECSと動的メモリアロケータTLSF+TECSの実装を行った．
+提案フレームワークでは，mruby on TECSを拡張して，TCP/IPプロトコルスタックTINET+TECSと動的メモリアロケータTLSF+TECSの設計・実装を行った．
 図\ref{fig:SystemModel}に提案フレームワークのシステムモデルを示す．
 
 TINET+TECSは，TECSによりTINETをコンポーネント化した組込みシステム向けTCP/IPプロトコルスタックである．
-TINETは組込みシステムに適したコンパクトなTCP/IPプロトコルであるが，多くの複雑なソースコードやマクロのせいでコンフィグラビリティが低く，メンテナンスや拡張，検証が難しい．
+TINETは組込みシステムに適したコンパクトなTCP/IPプロトコルであるが，多くの複雑なソースコードやマクロのせいでコンフィグラビリティが低く，メンテナンスや拡張・検証が難しい．
 TINET+TECSでは，プロトコルの各層をコンポーネントとして実装しているため，TCP層やUDP層の付け外し，IPv4とIPv6の共存，通信用バッファのサイズ変更など，プロトコルの設定が既存のTINETに比べて容易になっている．
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=8cm,clip]{../figure/SystemModel.pdf}
+    \includegraphics[width=8cm,clip]{SystemModel.pdf}
     \vspace{-0.2cm}
     \caption{システムモデル}
     \vspace{-0.4cm}
@@ -80,8 +80,8 @@ TLSFはメモリ利用効率が良く常に$O(1)$で動作する高速なアロ�
 TLSF+TECSでは，TLSFコンポーネントが独自のヒープ領域を保持するため，排他制御なしで複数のスレッドを動作させることができる．
 さらに，コンポーネントの特性により，ヒープメモリのサイズ変更が柔軟になる．
 
-図\ref{src:Application}は，提案フレームワーク上で動作させるアプリケーションの例を示している．
-mrubyのコードからTINETの機能を利用することができ，IoTデバイスに適用できるネットワークソフトウェアを開発することができる．
+図\ref{src:Application}は，提案フレームワーク上で動作させるアプリケーションの例(1秒周期でセンサデータを取得し，送信する)を示している．
+mrubyプログラムからTINETの機能を利用でき，IoTデバイスに適用できるネットワークソフトウェアを開発できる．
 
 \begin{figure}[t]
 \centering
@@ -101,14 +101,14 @@ end
 \end{lstlisting}
 \vspace{-0.2cm}
 \caption{提案フレームワークでのアプリケーション例}  
-\vspace{-0.4cm}
+\vspace{-0.7cm}
 \label{src:Application}
 \end{figure}
 
 \section{結論}
 
-mruby on TECS フレームワークの拡張として，IoTデバイスに適用できる組込みネットワークソフトウェアを開発するフレームワークを提案した．
-提案フレームワークでは，TCP/IPプロトコルスタックであるTINETの機能をmrubyプログラムから呼び出すことができる．
+mruby on TECS フレームワークの拡張として，IoTデバイス向けのソフトウェアを開発するフレームワークを提案した．
+提案フレームワークでは，TCP/IPプロトコルスタックであるTINETの機能をmrubyプログラムから呼び出せる．
 さらに，ソフトウェアコンポーネントとしてTINET+TECSとTLSF+TECSを実装し，コンポーネント化によるソフトウェア開発の生産性向上を示した．
 
 %\bibliographystyle{junsrt}
@@ -117,7 +117,7 @@ mruby on TECS フレームワークの拡張として，IoTデバイスに適用
 \bibitem{par:mrubyonTECS}
     T. Azumi, and Y. Nagahara, and H. Oyama, and N. Nishio, 
     ``mruby on TECS: Component-Based Framework for Running Script Program," 
-    in Proc. of ISORC, 
+    in Proc. of IEEE ISORC, 
     pp.252-259, 
     2015. 
 \end{thebibliography}
