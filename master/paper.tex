@@ -69,9 +69,11 @@
 \vspace{6mm}
 \underline{\Large Takuro Yamamoto}\\
 \vspace{10mm}
-{\Large February 7, 2018}\\
+{\Large February 2, 2018}\\
 \vspace{14mm}
-{\Large Division of Mathematical Science for Social Systems,\\Department of Systems Innovation,\\Graduate School of Engineering Science, Osaka University}\\
+{\Large Division of Mathematical Science for Social Systems,}\\
+{\Large Department of Systems Innovation,}\\
+{\Large Graduate School of Engineering Science, Osaka University}\\
 \end{center}
 \clearpage
 \setcounter{page}{0}
@@ -1093,6 +1095,7 @@ As shown in Fig. \ref{fig:EvaluationOfAdapter}, the overhead of the TECS adapter
 TLSF+TECS provides a functionality that acquires statistical information on dynamic memory usage status.
 It is possible to analyze the operation status of TLSF such as GC on RiteVMs because TLSF+TECS acquires memory statistical information: the frequency of memory allocation/deallocation and the usage size of heap area.
 
+{\bf Memory usage:}
 Fig. \ref{fig:EvaluationOfTLSFStatistics} shows the memory usage of a RiteVM acquired by statistical information of TLSF+TECS.
 When the RiteVM is activated, a large memory is allocated and the initialization is performed for several seconds.
 After that, the application is running for about 20 seconds and the RiteVM is terminated.
@@ -1104,10 +1107,27 @@ In this way, it is useful for finding bugs related to memory, which is hard to f
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=12cm,clip]{figure/EvaluationOfTLSFStatistics.pdf}
+    \includegraphics[width=11cm,clip]{figure/EvaluationOfTLSFStatistics.pdf}
     \caption{Memory usage of RiteVM (mruby VM) by TLSFStatistics component}
     \label{fig:EvaluationOfTLSFStatistics}
 \end{figure}
+
+{\bf Memory frequency:}
+Fig. \ref{fig:EvaluationOfTLSFFrequency} evaluates how much memory size and how often a RiteVM requests.
+In this evaluation, the same application as Fig. \ref{fig:EvaluationOfTLSFStatistics} runs for about 30 seconds.
+During 30 seconds, the RiteVM requests {\it malloc} quite frequency.
+In the case of designating heap areas with fixed-size memory, it is necessary to property configure memory blocks suitable for an application.
+For example, 10 blocks of 64 bytes, 20 blocks of 128 bytes, and 3 blocks of 64 kilobytes.
+In particular, it is not easy to analyze how many memory blocks are needed with RiteVMs, which consumes memory considerably with a high frequency.
+With TLSF+TECS, you only need to prepare a large heap area; therefore, such a workload and useless memory are eliminated.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=11cm,clip]{figure/EvaluationOfTLSFFrequency.pdf}
+    \caption{Memory frequency of RiteVM (mruby VM) by TLSFStatistics component}
+    \label{fig:EvaluationOfTLSFFrequency}
+\end{figure}
+
 
 %5
 \chapter{Related Work}
@@ -1250,7 +1270,7 @@ The proposed framework, TINET+TECS, can configure the TCP/IP protocol stack with
 \chapter{Conclusions}
 \label{sec:Conclusion}
 
-This paper presented an component-based framework that can develop software including network applications for embedded IoT devices using a scripting language.
+This paper presented a component-based framework that can develop software including network applications for embedded IoT devices using a scripting language.
 It is an extended framework of mruby on TECS, including TINET+TECS and TLSF+TECS.
 In the proposed framework, mruby programs can call TINET+TECS functions through the mruby-TECS bridge.
 Development of software for IoT devices such as sensors and actuators will be more efficient due to the high productivity of mruby.
@@ -1290,7 +1310,7 @@ Finally, I would like to thank all members of Ushio Laboratory, especially the m
     Takuro Yamamoto, Takuma Hara, Takuya Ishikawa, Hiroshi Oyama, Hiroaki Takada, and Takuya Azumi,
     ``Component-Based mruby Platform for IoT Devices,"
     \emph{IPSJ Journal of Information Processing},
-    2018 (submitted).
+    2018 (conditionally accepted).
 \item
     Takuro Yamamoto, Hiroshi Oyama, and Takuya Azumi,
     ``Component-Based Framework of Lightweight Ruby for Efficient Embedded Software Development,''
