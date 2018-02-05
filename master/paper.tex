@@ -140,6 +140,7 @@ In addition, this thesis proposes a component-based dynamic memory allocator, TL
 TLSF is a dynamic memory allocator for real-time systems, which can always run with $O(1)$ and improve memory usage efficiency by dividing memory blocks in two stages.
 In the current version of TLSF, memory contention may occur when multiple threads run at the same time.
 TLSF+TECS is a componentized TLSF memory allocator, which can be thread-safe allocator because each component has own heap area.
+In TLSF+TECS, developer can get statistical information of memory usage and frequency, which is helpful for analyzing the memory operation and finding bugs.
 
 
 
