@@ -17,7 +17,7 @@
 
 % cover letter
 \begin{flushleft}
-  2018-03-03\newline 
+  2018-03-02\newline 
   Journal of Information Processing\newline
   Submission ID: 18-Y008e\newline
   Title: Component-Based mruby Platform for IoT Devices\newline
@@ -48,48 +48,205 @@ We hope the editor and the reviewers will be satisfied with our replies to the c
 \begin{enumerate}
 
 \item \begin{flushleft}
-    \textbf{Comment:}
-  \end{flushleft}
+\textbf{Comment:}
 
-  \begin{flushleft}
-    \textbf{Our reply:}
+Please describe the relation between mruby and proposed framework clearly. I think that the developed component can be used as a normal TECS component without mruby. I cannot understand why the paper says "mruby." 
+\end{flushleft}
 
+\begin{flushleft}
+\textbf{Our reply:}
+
+Thank you for your suggestion.
+提案した２つの機能：TINET+TECSとTLSF+TECSは、mrubyに限らず、TECSのみで動作するため、他のシステムにも適用できる。
+〇〇ページのフットノートおよび結論に追加する。
 \begin{itembox}[|]{}
 \end{itembox}\\
-  \end{flushleft}
+\end{flushleft}
 
 
 \item \begin{flushleft}
-    \textbf{Comment:}
-  \end{flushleft}
+\textbf{Comment:}
 
-  \begin{flushleft}
-    \textbf{Our reply:}
-  \end{flushleft}
+Please describe requirements to implement these components for mruby or IoT system using TECS and explain its design associating with the requirements. 
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Our reply:}
+
+2章システムモデルの冒頭に、要件を書き加える。
+\begin{description}
+    \item[R1:] IoTシステムには、ネットワークが重要不可欠であるため、TCP/IP機能が使えること
+    \item[R2:] mrubyはシングルタスクしかサポートしておらず、開発の生産性を高めるためにマルチタスク機能を提供すること
+\end{description}
+\end{flushleft}
+
+\item \begin{flushleft}
+\textbf{Comment:}
+
+The paper should explain evaluation of items described in contribution paragraph in the introduction. 
+
+\begin{enumerate}
+\item The authors said "Improve configurability," but there is no description of it in the evaluation section.  At least you should explain the proposed design can be used in typical cases. I cannot understand the validity of your design shown in Fig. 10 without them.  Please explain.
+
+\item The paper also describes "Thread-safe memory allocator," but there is no evaluation of it. Please explain.
+\end{enumerate}
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Our reply:}
+
+\begin{enumerate}
+\item 少ないコード変更量でプロトコルの設定を変更できるというコンフィグラビリティ評価を強調する。Fig.10（プロトコルのコンポーネント図）を拡大してTCPのみ、UDPのみ、の図を加えて、プロトコルの変更が容易にできると加える。
+\item TLSF+TECS評価部分で、2つのVMを動かしたグラフ（つまり線が２つあるグラフ）を追加し、「２つのVMで違うアプリケーションが並行動作しているので、スレッドセーフに動作していることも示している」と加える。
+\end{enumerate}
+\end{flushleft}
+
+\item \begin{flushleft}
+\textbf{Comment:}
+
+Please add evaluation of typical usage pattern. The authors demonstrate execution time and memory usage using TCP only. 
+
+\begin{enumerate}
+\item Please evaluate execution time of connection time of TCP, UDP, and other supported protocol. If the overhead of them almost same as TCP, please discuss it. 
+
+\item Please show memory usages under the typical configuration.
+\end{enumerate}
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Our reply:}
+
+\begin{enumerate}
+\item コメント3-(a)で協調した部分および、UDPの実行時間とメモリ消費量の評価を加える。また、「既存TINETで対応しているTCPとUDPでの評価を行った」と追記。
+
+\item TCPのみ、UDPのみ、両方のメモリ消費量
+\end{enumerate}
+\end{flushleft}
+
 
 \end{enumerate}
+
+\clearpage
 
 \section{Response to 2\nd reviewer}
 
 \begin{enumerate}
 
 \item \begin{flushleft}
-    \textbf{Comment:}
-  \end{flushleft}
+\textbf{Comment:} 構成
 
-  \begin{flushleft}
-    \textbf{Our reply:}
-  \end{flushleft}
+タイトルとアブストラクトからは、TOPPERS 上にmrubyのプラットフォームを構築することで、IoTデバイスのproductivityを主張しているように思えますが、4章の評価は、execution time と memory consumptionになっており、こちらを主張したい点のようにも見えます。
+主張したい点を明確にし、評価がその根拠となるように、Abstractを含む論文全体の構成とストーリー展開、タイトルを変更してください。
+
+論文から、オリジナリティはTLSFとよぶダイナミックメモリアロケータを構築したことではないかと推測していますが、読み解くのは容易ではありません。
+\begin{flushleft}
+\textbf{Our reply:}
+
+主張したい点はソフトウェア開発の生産性が向上させるプラットフォームであるため、３章Use CaseにmrubyとC言語比較を加え、mrubyだと開発がより簡単になることを強調する。
+コンフィグラビリティは向上しつつ、execution time と memory consumption のオーバヘッドを抑えることができたという流れにする。
+\end{flushleft}
+\begin{enumerate}
+\item AbstractとIntroduction
+
+いずれもproposeが2回使われていますが、proposeは1回にまとめるべきで、提案は1つとし、含まれている特徴（問題点の解決策）を複数個記すようにした方が読みやすいです。「TINET+TECSおよびTLSF+TECSというフレームワークを提案する」というふうにまとめても良いとは思います。
+また、問題点が一般的な背景ばかりが記されていて、提案方法が必要である問題点をAbstractとIntroductionから読み取ることができません。
+シンプルに、解くべき問題点を列挙し、それに対応づく解決策を挙げるようにしてください。
+
+\begin{flushleft}
+\textbf{Our reply:}
+
+提案は、「IoTデバイス向けのmrubyプラットフォーム」であり、TINET+TECSとTLSF+TECSの「2つの機能を組み込んだ」とする。
+貢献部分に、「TINETのコンフィグラビリティを向上させる」「マルチVMを実現する」と追記する。
+\end{flushleft}
+
+\item 2. System Model
+
+章立ての位置付けとして、この章では、IoTデバイスのproductivity向上についての要件や課題が記されていることを期待して読むのですが、TECSとmrubyの説明にとどまっています。論文は、新規性・有用性は何かを探しながら読むことが目的であり、開発に必要な知識を得ることは目的ではありません。新規性・有用性を主張するのに、必要な内容を記すようにしてください。
+
+\begin{flushleft}
+\textbf{Our reply:}
+
+システムモデルの冒頭に要件を加える。
+\end{flushleft}
+
+\item 3章以降
+
+AbstractおよびIntroductionを修正にともない、そのストーリーにあった内容にしてください。
+
+\begin{flushleft}
+\textbf{Our reply:}
+
+3章UseCaseを3-1にするべきか。
+4章の評価の順番を変える。（コンフィグラビリティ評価、オーバヘッド評価の順番）
+\end{flushleft}
+
+\item 5. Related Work
+
+MDDについてサーベイがありますが、execution time と memory consumptionを評価するならば、それと関連したサーベイをしてください。
+
+\begin{flushleft}
+\textbf{Our reply:}
+
+execution time と memory consumption は補足的な評価である。今回のサーベイはIoTシステムにおけるソフトウェア開発手法である。
+\end{flushleft}
+
+\end{enumerate}
+\end{flushleft}
+
+
+\begin{flushleft}
+\textbf{Our reply:}
+\end{flushleft}
 
 
 \item \begin{flushleft}
-    \textbf{Comment:}
-  \end{flushleft}
+\textbf{Comment:} 英語
 
-  \begin{flushleft}
-    \textbf{Our reply:}
-  \end{flushleft}
+理解できる英語ですが、論文誌の英語としては、全体的に、品質を向上させる必要があります。論文中に頻出する誤りとして、代表的な例は、下記が挙げられます。
+abstractの二文目”To improve the productivity, ...”
+この文章のTo…ではじまる文章ですが、懸垂分詞の誤りがあります。また、whichの修飾が適切でなく、主語と述語動詞の距離が長いです。以上のような問題点が散在しています。
+\end{flushleft}
 
+\begin{flushleft}
+\textbf{Our reply:}
+
+不定詞のTo として書いた。
+英文校正をかけた。
+\end{flushleft}
+
+\item \begin{flushleft}
+\textbf{Comment:} 引用
+
+・2.2冒頭
+
+mruby is a light-weight implementation of the Ruby programming language complying to part of the ISO standard.
+は、https://mruby.org/
+の引用と思われます。引用番号を記すようにしてください。また、webの引用については、検索した日付をIPSJ論文誌の決まりに従い、入れるようにしてください。
+
+mruby. Retrieved December 1, 2017 from https://mruby.org/
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Our reply:}
+
+引用を追加する。
+Web引用の日付けを追加する。
+\end{flushleft}
+
+\item \begin{flushleft}
+\textbf{Comment:} 
+
+些細な誤りですが、Abstract の中程” The proposed framework enables that that mruby ” というふうにthat が重複しています。
+上記の懸垂分詞やthatの重複などは、英語校正業者でなくても、メジャーな文法チェッカー程度で十分に修正できます。
+
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Our reply:}
+
+指摘部分は修正した。
+他の部分も英文校正にかけ、修正を行う。
+\end{flushleft}
 
 \end{enumerate}
 
