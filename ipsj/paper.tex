@@ -1032,6 +1032,42 @@ In the right of Fig. \ref{fig:ComparisonOfDynamicConnection}, a CEP dynamically 
 It is effective for software that uses many ports because the difference spreads as the number of CEPs and REPs increases.
 
 
+\subsection{Memory usage of RiteVMs by TLSF+TECS}
+
+The proposed dynamic memory allocator, TLSF+TECS, executes multiple tasks without exclusive control in parallel because each TLSF component holds its own heap area.
+The TLSF+TECS framework provides functionality to acquire statistical information describing dynamic memory usage.
+Therefore, it is possible to analyze the operational status of the TLSF and GC on RiteVMs.
+
+Fig. \ref{fig:EvaluationOfTLSFStatistics} shows the memory usage of two RiteVMs, with presented data acquired from the statistical information available via the TLSF+TECS framework.
+From the figure, we observe that when the RiteVM are first activated, a large amount of memory is allocated for each RiteVM and initialization are performed within one second.
+Next, the applications runs for ~10 s and the RiteVMs subsequently terminate.
+The reduction in memory usage that occurs at regular intervals is due to the GC function of the RiteVM.
+Here, an application that allocates tens of KB of memory runs on RiteVM 1 and an application that allocates hundreds of KB of memory runs on RiteVM 2.
+Fig. \ref{fig:EvaluationOfMemoryUsageWithExclusiveContorol} shows the memory usage when two RiteVMs are executed in one heap area with exclusive control.
+In Fig. \ref{fig:EvaluationOfDynamicConnection}, two applications are finished at 10.837 s, and in Fig. \ref{fig:EvaluationOfMemoryUsageWithExclusiveContorol}, they are finished at 10.877 s, which demonstrates that the execution time of the applications has increased by 0.3 \% due to exclusive contorol.
+
+As such, the TLSF+TECS framework provides users with the ability to visualize GC behavior and help verify its operation.
+Further, when the RiteVM terminates, the memory used by the RiteVM is not completely released, i.e., a few kilobytes remain.
+This remaining memory causes a memory leak when the number of RiteVMs increases or a RiteVM repeatedly activates and shuts down.
+Using the proposed environment here proves useful for detecting bugs related to memory, which in practice can be extremely difficult to detect.
+
+
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/EvaluationOfTLSFStatistics.pdf}
+    \caption{Memory usage of RiteVMs with TLSF+TECS}
+    \label{fig:EvaluationOfTLSFStatistics}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/EvaluationOfMemoryUsageWithExclusiveContorol.pdf}
+    \caption{Memory usage of RiteVMs with exclusive control}
+    \label{fig:EvaluationOfMemoryUsageWithExclusiveContorol}
+\end{figure}
+
+
 
 %5
 \section{Related Work}
