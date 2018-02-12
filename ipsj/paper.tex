@@ -70,7 +70,7 @@
 \begin{abstract}
 
 In embedded network software running on embedded systems within the Internet of Things (IoT), high levels of runtime efficiency and user productivity are required.
-To improve productivity, the mruby on TOPPERS embedded component system (TECS) framework has been proposed; note that mruby on TECS framework employs a scripting language (i.e., a lightweight Ruby implementation) and supports component-based development.
+As an approach to improve the producivity of software development, the mruby on TOPPERS embedded component system (TECS) framework has been proposed; note that mruby on TECS framework employs a scripting language (i.e., a lightweight Ruby implementation) and supports component-based development.
 In this paper, we propose an extended mruby on TECS framework for its application in developing software for IoT devices, including sensors and actuators.
 Our proposed framework enables mruby programs to utilize Tomakomai Internetworking (TINET), a TCP/IP protocol stack specifically designed for use in embedded systems.
 Further, the proposed framework incorporates two component-based functions, i.e., a componentized TINET stack called TINET+TECS and a componentized Two-Level Segregate Fit (TLSF) dynamic memory allocator called TLSF+TECS.
@@ -157,9 +157,19 @@ This section describes the system model of the proposed framework, including fun
 The proposed framework is an extension of mruby on TECS framework \cite{par:mrubyonTECS}\cite{par:mrubyonTECS3}, and utilizes two technologies: mruby and TECS.
 The system model of the proposed framework is shown in Fig.\ref{fig:SystemModel}.
 In the proposed framework, each mruby program runs on a RiteVM mapped to a componentized task of an RTOS.
-mruby programs can call the TINET functions required for network programming through the mruby-TECS bridge, and thus software to be embedded in IoT devices can be developed.
-Moreover, the proposed framework comprises TLSF+TECS.
-TLSF+TECS is utilized for memory management of mruby's RiteVMs and TINET+TECS, which helps to improve the efficiency of memory consumption.
+mruby programs can call the TINET functions required for network software through the mruby-TECS bridge, and thus software to be embedded in IoT devices can be developed.
+
+{\bf Requrements:} The requirements for proposing the mruby platform for IoT devices are defined as follows.
+\begin{description}
+    \item[R1:]
+        TCP/IP functions can be utilized from mruby programs and the protocol stack can be easily configured for producivity since the network function is essential to the IoT systems.
+
+    \item[R2:]
+        Multiple mruby programs can run in pallalel to improve producivity of software development.
+        A theread-safe memory allocator is required to prevent the multiple mruby tasks from conflicting their memory.
+
+\end{description}
+ 
 The following subsection explains TECS, mruby, and mruby on TECS framework.
 
 
