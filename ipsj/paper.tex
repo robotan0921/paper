@@ -610,48 +610,46 @@ eAPI_accept (.., ..) {
 
 \subsubsection{TLSF}
 
-TLSF (Two-Level Segregate Fit) memory allocator\cite{par:TLSF}\cite{url:TLSF} is a dynamic memory allocator suitable for the real-time system proposed by M. Masmano et al.
-TLSF memory allocator has the following features.
+The TLSF (Two-Level Segregate Fit) memory allocator\cite{par:TLSF}\cite{url:TLSF} is a dynamic memory allocator that is suitable for use in the real-time systems.
+As such, the TLSF memory allocator provides the following two features.
 
-{\bf Real-time property:}
-The worst execution time required for allocating and deallocating memory does not depend on the data size.
-TLSF always works with $O(1)$, and it is possible to estimate the response time.
+{\bf Real-time property.}
+In TLSF, the worst-case execution time required for allocating and deallocating memory does not depend on the given data size.
+Instead, TLSF always runs in constant time (i.e., $O(1)$), and it is possible to estimate response time.
 
-{\bf Efficient memory consumption:}
+{\bf Efficient memory consumption.}
 Memory efficiency is improved by suppressing memory fragmentation.
-Various tests have obtained an average fragmentation of less than 15\% and a maximum fragmentation of less than 25\%.
+Various experiments have achieved an average fragmentation of less than 15 \% and a maximum fragmentation of less than 25 \% \cite{url:TLSF}.
 
+\subsubsection{TLSF algorithm}
 
-\subsubsection{TLSF Algorithms}
+As illustrated in Fig. \ref{fig:TLSF}, the TLSF algorithm classifies memory blocks into two stages and searches for a memory block that optimally lines up with the requested memory size.
+Particularly, consider the case in which a request to dynamically allocate 98 bytes is made via $malloc(98)$.
+First, the request is classified based on the leftmost 1 bit in the requested memory size.
+In this example, since 98 is represented in binary as byte 01100010, it falls in the range of 64-128 based on the leftmost 1 bit.
+Second, the request is further classified as follows.
+The range from 64 to 128 is further divided into four equally sized groups, with 98 falling into the block ranging from 96 to 111.
+A free block\footnote{A free block is an available memory block.} in this range is then used to fulfill the memory allocation request.
 
-TLSF algorithm classifies memory blocks into two stages and searches for a memory block that is optimal for the requested memory size.
-The overview of TLSF algorithm is shown in Fig.\ref{fig:TLSF}.
-Consider a case where a request, $malloc(100)$, is called to allocate a memory.
-First, it is classified by the most significant bit of the requested memory size.
-In this case, since 100 is represented by binary number as 1100100, it is in the range from 64 to 128 from the most significant bit.
-Second, it is further classified.
-In this case, 64 to 128 are divided into 4, and 100 is in the block of 96 to 111.
-Free block\footnote{Free block is an available memory block.} in this range is used.
-
-A simple fixed-size memory block allocator results in the waste of up to 50 \%.
-However, TLSF classifies it finely in two steps.
+Without using the above approach, a simple fixed-size memory block allocator results in wasted memory blocks of up to 50 \%.
+As illustrated above, TLSF classifies the memory allocation process finely in two steps.
 Therefore, it is a memory efficient algorithm.
-In addition, TLSF searches at the same speed and at high speed, $O(1)$.
+Fortunately, given its design, TLSF searches for memory blocks in constant time (i.e., $O(1)$.
 
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{figure/TLSF.pdf}
-    \caption{TLSF Algorithm}
+    \caption{TLSF algorithm}
     \label{fig:TLSF}
 \end{figure}
 
 
 \subsubsection{Component Design of TLSF+TECS}
 
-This section describes the component design of TLSF memory allocator.
-In this research, we are using TECS to componentize TLSF.
-The version of TLSF used is 2.4.6\footnote{http://www.gii.upv.es/tlsf/main/repo}.
+In this subsection, we describe the component design of the TLSF memory allocator.
+Note that we use TECS to componentize TLSF.
+Further, the version of TLSF used is 2.4.6\footnote{http://www.gii.upv.es/tlsf/main/repo}.
 
 \begin{figure}[t]
 \centering
@@ -668,8 +666,8 @@ signature sMalloc {
 \label{src:TLSFSignature}
 \end{figure}
 
-Fig.\ref{src:TLSFSignature} is a signature description for memory management used by the allocator.
-It defines the memory pool initialization function {\it initializeMemoryPool}, memory allocation function {\it calloc}, {\it malloc}, {\it realloc}, and memory release function {\it free} as a signature.
+In Fig. \ref{src:TLSFSignature}, we summarize the signature used by the allocator for dynamic memory management.
+Particularly, this component defines the memory pool initialization function {\it initializeMemoryPool()}, memory allocation functions {\it calloc()}, {\it malloc()}, and {\it realloc()}, and the memory release function {\it free()}.
 
 \begin{figure}[t]
 \centering
@@ -688,12 +686,12 @@ celltype tTLSFMalloc {
 \label{src:TLSFCelltype}
 \end{figure}
 
-The celltype description of the TLSF memory allocator component is shown in Fig.\ref{src:TLSFCelltype}.
-An entry port, {\it eMalloc}, is connected to all components that perform memory management such as $malloc$ and $free$.
-Here, {\it [inline]} is a specifier for Implementation as inline functions.
-A memory pool size is defined as an attribute, and a pointer to a memory pool is defined as a variable.
-Each component holds own heap area.
-Therefore, even when calling functions for memory management at the same time in different threads, it is possible to operate without memory contention.
+Next, Fig. \ref{fig:TLSFCelltype} shows the celltype description for the TLSF memory allocator component.
+Here, entry port {\it eMalloc} is connected to all components that perform memory management including $malloc()$ and $free()$.
+Further, {\it [inline]} is a specifier to suggest to the TECS generator to implement as an inline function.
+Memory pool size is defined as an attribute, and a pointer to a memory pool is defined as a variable.
+Note that each component maintains its own heap area.
+Therefore, even when calling memory management functions simultaneously from different threads, it is possible to operate without any memory contention.
 
 \begin{figure}[t]
     \centering
@@ -709,9 +707,9 @@ Therefore, even when calling functions for memory management at the same time in
     \label{fig:WithTECS}
 \end{figure}
 
-As shown in Fig.\ref{fig:WithoutTECS}, since TLSF before componentization shares the heap area with multiple threads, if memory is allocated or released simultaneously from multiple threads, memory competition may occur in some cases.
-In the research, TLSF is componentized using TECS as shown in Fig.\ref{fig:WithTECS}.
-It is possible to operate in thread safe without exclusive control, because each component independently holds a heap area and manages memory within it. 
+As shown in Fig.\ref{fig:WithoutTECS}, since TLSF before componentization shares the heap area with multiple threads, if memory is allocated or released simultaneously via multiple threads, memory contention may occur in some cases, thus causing intermittent synchronization problems that can be extremely difficult to debug.
+In this study, TLSF is componentized using TECS, as shown in Fig.\ref{fig:WithTECS}.
+It is possible to operate in thread safe without exclusive control because each component independently holds a heap area and manages memory within it. 
 
 \begin{figure}[t]
 \centering
@@ -761,18 +759,18 @@ mrb_TECS_allocf(mrb_state *mrb, void *p,
 \label{src:TLSFC}
 \end{figure}
 
-Fig.\ref{src:TLSFBuild} shows the build description of the TLSF memory allocator component shown in Fig.\ref{fig:WithTECS}\footnote{Other call/entry ports, attributes, and valuables are actually described, but it is omitted here for the simplicity.}.
-Two sets of task components and TLSF components are combined.
-Each memory pool size can be configured as a variable (Lines 5 and 11 in Fig.\ref{src:TLSFBuild}).
-Fig.\ref{src:TLSFC} is the part of the code actually calling the function of the TLSF memory allocator component.
-The use part shows a function that the mruby VM allocates memory in the mruby on TECS framework\cite{par:mrubyonTECS}\cite{par:mrubyonTECS3} which is introduced in Section \ref{sec:mrubyonTECS}.
-Line 8 calls the {\it free} function of the TLSF memory allocator component.
-{\it cMalloc\_} represents the name of the call port (Line 2 in Fig.\ref{src:TLSFBuild}).
-Likewise, Lines 13 and 17 call the function for memory allocation.
-The heap area of {\it TLSFMalloc\_001} component is used if the code of \ref{src:TLSFC} is executed in {\it Task\_001}, and if that is executed in {\it Task\_002}, the heap area of {\it TLSFMalloc\_002} component is used, respectively.
-In this way, in the component-based development using TECS, it is possible to operate with the same code without modifying the C code, although the cells are different.
+Next, Fig. \ref{src:TLSFBuild} shows the build description of the TLSF memory allocator component illustrated in Fig. \ref{fig:WithTECS}\footnote{Other call/entry ports, attributes, and valuables are actually described, but it is omitted here for the simplicity.}.
+Here, two sets of task components and TLSF components are combined.
+Further, each memory pool size can be configured as a variable (lines 5 and 11 in Fig. \ref{src:TLSFBuild}).
+Fig. \ref{src:TLSFC} presents the code that actually calls functions of the TLSF memory allocator component.
+The use part shows a function in which the RiteVM allocates memory within the mruby on TECS framework\cite{par:mrubyonTECS}\cite{par:mrubyonTECS3}, which we introduced in Section \ref{sec:mrubyonTECS} above.
+Line 8 calls the {\it free()} function of the TLSF memory allocator component.
+{\it cMalloc\_} represents the name of the call port on line 2 in Fig.\ref{src:TLSFBuild}.
+Similarly, lines 13 and 17 call the memory allocation function.
+Particularly, the heap area for the {\it TLSFMalloc\_001} component is used if the code from \ref{src:TLSFC} is executed in {\it Task\_001}; conversely, if that code is executed in {\it Task\_002}, the heap area of the {\it TLSFMalloc\_002} component is used.
+Using this approach, in component-based development using TECS, it is possible to operate with the same code without modifying the underlying C code, although the resulting cells differ.
 
-\subsubsection*{Multiple RiteVM}
+\subsubsection*{Multiple RiteVM instances}
 
 \begin{figure}[t]
     \centering
@@ -781,17 +779,15 @@ In this way, in the component-based development using TECS, it is possible to op
     \label{fig:UseCase_mruby}
 \end{figure}
 
-The proposed framework uses TLSF memory allocator for memory management of RiteVMs.
-However, since the existing TLSF is not thread-safe, if memory is allocated or deallocated from multiple, memory contention will occur.
-As a RiteVM allocates and deallocates memory at high frequency, the memory contention immediately occurs in the case of multiple VMs.
-
-The TLSF components are connected to the RiteVMs to hold own heap area in each RiteVM as shown in Fig.\ref{fig:UseCase_mruby}.
-Since each TLSF component holds a memory pool, multiple RiteVMs can be executed without memory contention.
-Fig.\ref{fig:UseCase_mruby} shows that the first RiteVM has a heap area of 1 MB (1024*1024) and the second VM has a heap area of 2 MB (2*1024*1024).
-It is easy to set different heap areas in each RiteVM.
-In addition, RiteVM performs incremental GC (Garbage Collection), and a VM that started GC does not disturb the execution of other VMs by running GC.
+The proposed framework uses the TLSF memory allocator for memory management within RiteVMs; however, since the existing TLSF is not thread-safe, if memory is allocated or deallocated from multiple threads, memory contention will likely occur.
+Here, as a RiteVM allocates and deallocates memory at high frequencies, memory contention quickly occurs when multiple RiteVMs are instantiated.
+Note that the TLSF components are connected to the RiteVMs to ensure that each component has its own heap area within each RiteVM, as illustrated in Fig. \ref{fig:UseCase_mruby}.
+Since each TLSF component maintains its own memory pool, multiple RiteVMs can be executed without the possibility of any memory contention.
+In Fig. \ref{fig:UseCase_mruby}, we observe that the first RiteVM has a heap area of 1 MB (i.e., 1024 $\times$ 1024 bytes) and the second RiteVM has a heap area of 2 MB (i.e., 2 $\times$ 1024 $\times$ 1024 bytes).
+As illustrated in Fig. \ref{fig:UseCase_mruby}, it is easy to configure different-sized heap areas for each RiteVM.
+Further, each RiteVM performs incremental garbage collection (GC), and a RiteVM that has started GC does not disturb the execution of other RiteVMs in its GC execution.
     
-\subsubsection*{Memory management for data sending and receiving}
+\subsubsection*{Memory management for sending and receiving data}
 
 \begin{figure}[t]
     \centering
@@ -800,27 +796,25 @@ In addition, RiteVM performs incremental GC (Garbage Collection), and a VM that 
     \label{fig:UseCase_TINET}
 \end{figure}
 
-In the TCP/IP protocol stack, memory allocation and release are repeated in each layer such as TCP layer, IP layer, and Ethernet layer.
-Therefore, the role of allocator is important.
-TINET+TECS combines all components that manage memory with the allocator.
-The TLSF memory allocator can execute at the same speed as compared with the fixed-size memory allocator which TOPPERS/ASP3 supports as standard, and can improve the memory efficiency.
-In addition, as shown in Fig.\ref{fig:UseCase_TINET}, the fixed-size memory allocator needs to prepare memory pools of different sizes, and select a memory pool as necessary.
-TLSF+TECS efficiently manages the memory without selecting a memory pool.
-TLSF+TECS can be easily extended to TINET+TECS since TINET+TECS is a component-based system.
-
-%4
+In the TCP/IP protocol stack, memory allocation and subsequent deallocation are repeated in each layer, including the TCP, IP, Ethernet, and other layers.
+Therefore, the role of the memory allocator is critical.
+The TINET+TECS framework combines all components that manage memory within the allocator.
+The TLSF memory allocator can execute at the same speed as that of the fixed-size memory allocator that TOPPERS/ASP3 supports as standard; further, the TLSF memory allocator can improve memory efficiency.
+As illustrated in Fig. \ref{fig:UseCase_TINET}, the fixed-size memory allocator prepares memory pools of different sizes and selects a memory pool whenever it is necessary.
+Conversely, TLSF+TECS efficiently manages memory without the need to select a memory pool.
+Finally, TLSF+TECS can be easily extended to TINET+TECS since TINET+TECS is a component-based system.
 
 \subsection{Use case}
 \label{sec:UseCase}
 
-In the proposed framework, applications can call TINET functions such as TCP and UDP from mruby programs because mruby-TECS bridge automatically generates the code linking mruby and C.
-Fig.\ref{src:mruby} shows an mruby program to transmit the value acquired from a sensor.
-mruby makes it easier to develop applications than existing TINET, i.e., C language.
+In the proposed framework, applications can call TINET functions, such as specific TCP- and UDP-related functions, from mruby programs because the mruby-TECS bridge automatically generates the code to link mruby and C.
+Fig. \ref{src:mruby} shows an example of mruby program that transmits the value acquired from the sensor to another device or a server.
+In general, mruby makes it easier to develop applications than using C with the existing TINET.
 
-In the case of a simple application, a few functions are only used and there are some unused functions.
-For example, the application only uses a function to send by TCP protocol as shown in Fig.\ref{src:mruby}.
-The proposed framework incorporates TINET+TECS, and can easily customize the TCP/IP protocol stack such as removing UDP functions, supporting only IPv4, or removing TCP receiving function.
-It can be applied to embedded systems with strict memory constraints by removing unused functions.
+For a simple application, typically only a few functions are used, with numerous unused functions.
+As an example, the application code shown in Fig. \ref{src:mruby} only uses a function to send data via TCP.
+The proposed framework incorporates TINET+TECS and can easily customize the TCP/IP protocol stack by removing functions, such as UDP functions, functions that support only IPv4, or TCP receiving functions.
+As such, the proposed framework can be applied to embedded systems with strict memory constraints by removing many unused functions.
 
 
 \begin{figure}[t]
@@ -832,18 +826,18 @@ begin
     cep.accept
     loop do		
         val = io.read  
-        cep.snd val.to_s + "\n"		
+        cep.send val.to_s + "\n"		
         RTOS.delay(1000)			
     end
 rescue => e	
     puts "[ERROR]" + e
 end
 \end{lstlisting}
-\caption{Example of mruby application}
+\caption{An example of mruby application}
 \label{src:mruby}
 \end{figure}
 
-
+%4
 \section{Evaluation}
 \label{sec:Evaluation}
 
@@ -1044,14 +1038,12 @@ Next, the applications runs for ~10 s and the RiteVMs subsequently terminate.
 The reduction in memory usage that occurs at regular intervals is due to the GC function of the RiteVM.
 Here, an application that allocates tens of KB of memory runs on RiteVM 1 and an application that allocates hundreds of KB of memory runs on RiteVM 2.
 Fig. \ref{fig:EvaluationOfMemoryUsageWithExclusiveContorol} shows the memory usage when two RiteVMs are executed in one heap area with exclusive control.
-In Fig. \ref{fig:EvaluationOfDynamicConnection}, two applications are finished at 10.837 s, and in Fig. \ref{fig:EvaluationOfMemoryUsageWithExclusiveContorol}, they are finished at 10.877 s, which demonstrates that the execution time of the applications has increased by 0.3 \% due to exclusive contorol.
+In Fig. \ref{fig:EvaluationOfDynamicConnection}, two applications are finished at 10.837 s, and in Fig. \ref{fig:EvaluationOfMemoryUsageWithExclusiveContorol}, they are finished at 10.877 s, which demonstrates that the execution time of the applications has increased by 0.4 \% due to exclusive control.
 
 As such, the TLSF+TECS framework provides users with the ability to visualize GC behavior and help verify its operation.
 Further, when the RiteVM terminates, the memory used by the RiteVM is not completely released, i.e., a few kilobytes remain.
 This remaining memory causes a memory leak when the number of RiteVMs increases or a RiteVM repeatedly activates and shuts down.
 Using the proposed environment here proves useful for detecting bugs related to memory, which in practice can be extremely difficult to detect.
-
-
 
 \begin{figure}[t]
     \centering
