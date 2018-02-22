@@ -875,7 +875,29 @@ To pretest the system, we connected the board to a host PC via a LAN cable and e
 
 \subsection{Performance of TINET+TECS}
 
-To demonstrate the low overhead of TINET+TECS, we compared its execution time and memory consumption with that of TINET, producing the results shown in Fig. \ref{fig:EvaluationOfExecutionTime}.
+As shown in Table \ref{tab:EvaluationOfConfigurability}, the code lines for modification were measured to demonstrate the improved configurability.
+This demonstrated the ability to change the composition of the protocol stack with a small workload, confirming that the proposed framework improves the configurability.
+
+\begin{table}[t]
+    \centering
+    \caption{Modified code lines of CDL}
+    \begin{tabular}{c|r|r|r}
+        \hline\hline
+                         &   Size       &   Size (-- Default) & CDL  \\ \hline
+        Default          &   325.23 KB  &              0 KB   &  0 lines   \\
+        I                &   305.40 KB  &       -- 19.83 KB   & 18 lines   \\
+        I + I\hspace{-.1em}I &   304.12 KB  &   -- 21.10 KB   & 27 lines   \\
+        I + I\hspace{-.1em}I + I\hspace{-.1em}I\hspace{-.1em}I & 303.45 KB & -- 21.77 KB  & 32 lines \\
+        \hline
+        \multicolumn{4}{l}{I: Remove TCP}\\
+        \multicolumn{4}{l}{I\hspace{-.1em}I: Remove ICMP}\\
+        \multicolumn{4}{l}{I\hspace{-.1em}I\hspace{-.1em}I: Change network buffer (Remove memory pools)}
+    \end{tabular}
+    \label{tab:EvaluationOfConfigurability}
+\end{table}
+
+
+Next, to demonstrate the low overhead of TINET+TECS, we compared its execution time and memory consumption with that of TINET, producing the results shown in Fig. \ref{fig:EvaluationOfExecutionTime}.
 
 The {\it tcp\_snd\_dat} and {\it tcp\_rcv\_dat} APIs were used in the evaluation to, respectively, send and receive TCP data.
 For {\it tcp\_snd\_dat}, we measured the executing time starting from the API call through the application until the return of the processing result.
@@ -908,28 +930,6 @@ The memory consumption of TINET+TECS is about 1\% higher than that of TINET, as 
     \end{tabular}
     \label{tab:EvaluationOfMemoryConsumption}
 \end{table}
-
-As shown in Table \ref{tab:EvaluationOfConfigurability}, the code lines for modification were measured to demonstrate the improved configurability.
-This demonstrated the ability to change the composition of the protocol stack with a small workload, confirming that the proposed framework improves the configurability.
-
-\begin{table}[t]
-    \centering
-    \caption{Modified code lines of CDL}
-    \begin{tabular}{c|r|r|r}
-        \hline\hline
-                         &   Size       &   Size (-- Default) & CDL  \\ \hline
-        Default          &   325.23 KB  &              0 KB   &  0 lines   \\
-        I                &   305.40 KB  &       -- 19.83 KB   & 18 lines   \\
-        I + I\hspace{-.1em}I &   304.12 KB  &   -- 21.10 KB   & 27 lines   \\
-        I + I\hspace{-.1em}I + I\hspace{-.1em}I\hspace{-.1em}I & 303.45 KB & -- 21.77 KB  & 32 lines \\
-        \hline
-        \multicolumn{4}{l}{I: Remove TCP}\\
-        \multicolumn{4}{l}{I\hspace{-.1em}I: Remove ICMP}\\
-        \multicolumn{4}{l}{I\hspace{-.1em}I\hspace{-.1em}I: Change network buffer (Remove memory pools)}
-    \end{tabular}
-    \label{tab:EvaluationOfConfigurability}
-\end{table}
-
 
 \subsection{Dynamic connection}
 
