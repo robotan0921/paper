@@ -1049,7 +1049,11 @@ Next, the applications runs for ~10 s and the RiteVMs subsequently terminate.
 The reduction in memory usage that occurs at regular intervals is due to the GC function of the RiteVM.
 Here, an application that allocates tens of KB of memory runs on RiteVM 1 and an application that allocates hundreds of KB of memory runs on RiteVM 2.
 Fig. \ref{fig:EvaluationOfMemoryUsageWithExclusiveContorol} shows the memory usage when two RiteVMs are executed in one heap area with exclusive control.
-In Fig. \ref{fig:EvaluationOfDynamicConnection}, two applications are finished at 10.837 s, and in Fig. \ref{fig:EvaluationOfMemoryUsageWithExclusiveContorol}, they are finished at 10.877 s, which demonstrates that the execution time of the applications has increased by 0.4 \% due to exclusive control.
+In Fig. \ref{fig:EvaluationOfDynamicConnection}, two applications are finished at 10.837 s, and in Fig. \ref{fig:EvaluationOfMemoryUsageWithExclusiveContorol}, they are finished at 10.877 s, which demonstrates that the execution time of the applications has increased due to exclusive control.
+In addition to the overhead of execution time, a RiteVM is not affected by other RiteVMs since TLSF+TECS keeps heap area independently.
+GC on a RiteVM is performed periodically; however, there is a part that GC is not performed periodically in RiteVM 1 of Fig. \ref{fig:EvaluationOfExecutionTime}.
+In Fig. \ref{fig:EvaluationOfMemoryUsageWithExclusiveContorol}, two RiteVMs share one heap area; therefore, RiteVM 2 is affected by RiteVM 1.
+On the other hand, in Fig. \ref{fig:EvaluationOfTLSFStatistics}, RiteVM 2 is not affected by RiteVM 1.
 
 As such, the TLSF+TECS framework provides users with the ability to visualize GC behavior and help verify its operation.
 Further, when the RiteVM terminates, the memory used by the RiteVM is not completely released, i.e., a few kilobytes remain.
@@ -1108,14 +1112,16 @@ mruby has the same syntax as Ruby which has advantages to web application develo
 This paper presented an extended framework of mruby on TECS, including TINET+TECS and TLSF+TECS.
 In the proposed framework, mruby programs can call TINET+TECS functions through the mruby-TECS brigde.
 Development of software for IoT devices such as sensors and actuators will be more efficient due to the high productivity of mruby.
+
 TINET+TECS is a componentized version of TINET, a compact TCP/IP protocol stack that uses TECS.
 It improves on TINET configurability while suppressing the overhead of componentization.
 Scalability is also improved because the component-based framework simplifies to add/remove and change protocols such as TCP/UDP, IPv4/IPv6, and Ethernet/PPP.
-
 This paper also presented the dynamic connection, a new TECS functionality, to enable dynamic processing while reducing memory consumption.
 TINET+TECS utilizes the dynamic connection to satisfy the TINET specification for supporting the static generation of CEPs and REPs.
 TLSF+TECS is a component-based dynamic allocator.
 Since the TLSF+TECS can hold own heap area, memory contention will not occur even if memory is simultaneously allocated or released from multiple threads.
+TINET+TECS and TLSF+TECS can be applicable to various embedded systems because these frameworks are executed on TECS and not limited to mruby.
+
 In addition, the RiteVMs, TINET+TECS, and TLSF+TECS are implemented as components; therefore, developers can add, remove, or reuse their functionalities easily as required.
 Note that our prototype system and the application programs used in the performance evaluation are all open-source and can be downloaded from our website \cite{url:TECS}.
 In the future, we will support mruby libraries as mrbgems, which is an mruby distribution packaging system.\newline
