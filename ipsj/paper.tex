@@ -790,7 +790,7 @@ Using this approach, in component-based development using TECS, it is possible t
     \label{fig:UseCase_mruby}
 \end{figure}
 
-The proposed framework uses the TLSF memory allocator for memory management within RiteVMs; however, since the existing TLSF is not thread-safe, if memory is allocated or deallocated from multiple threads, memory contention will likely occur.
+The proposed framework uses the TLSF memory allocator for memory management within RiteVMs; however, since it is difficult to hundle multiple memory pools in the existing TLSF, if memory is allocated or deallocated from multiple threads, memory contention will likely occur.
 Here, as a RiteVM allocates and deallocates memory at high frequencies, memory contention quickly occurs when multiple RiteVMs are instantiated.
 Note that the TLSF components are connected to the RiteVMs to ensure that each component has its own heap area within each RiteVM, as illustrated in Fig. \ref{fig:UseCase_mruby}.
 Since each TLSF component maintains its own memory pool, multiple RiteVMs can be executed without the possibility of any memory contention.
