@@ -57,10 +57,14 @@ Please describe the relation between mruby and proposed framework clearly. I thi
 \textbf{Our reply:}
 
 Thank you for your suggestion.
-提案した２つの機能：TINET+TECSとTLSF+TECSは、mrubyに限らず、TECSのみで動作するため、他のシステムにも適用できる。
-〇〇ページのフットノートおよび結論に追加する。
-\begin{itembox}[|]{}
+The main contribution of this paper is to build a platform for IoT devices with high productivity using mruby.
+However, as the reviewer 1 says, the proposed two functionalities, TINET+TECS and TLSF+TECS, can be applicable to various embedded systems because these frameworks are executed on TECS and not limited to mruby.
+We added the following sentence in Section 6.
+
+\begin{itembox}[|]{Conclusion}
+TINET+TECS and TLSF+TECS can be applicable to various embedded systems because these frameworks are executed on TECS and not limited to mruby.
 \end{itembox}\\
+
 \end{flushleft}
 
 
@@ -73,11 +77,20 @@ Please describe requirements to implement these components for mruby or IoT syst
 \begin{flushleft}
 \textbf{Our reply:}
 
-2章システムモデルの冒頭に、要件を書き加える。
+We added the requirements at the beginning of Section 2.
+\begin{itembox}[|]{}
+{\bf Requrements:} The requirements for proposing the mruby platform for IoT devices are defined as follows.
 \begin{description}
-    \item[R1:] IoTシステムには、ネットワークが重要不可欠であるため、TCP/IP機能が使えること
-    \item[R2:] mrubyはシングルタスクしかサポートしておらず、開発の生産性を高めるためにマルチタスク機能を提供すること
+    \item[R1:]
+        TCP/IP functions can be utilized from mruby programs and the protocol stack can be easily configured for producivity since the network function is essential to the IoT systems.
+
+    \item[R2:]
+        Multiple mruby programs can run in pallalel to improve producivity of software development.
+        A theread-safe memory allocator is required to prevent the multiple mruby tasks from conflicting their memory.
+
 \end{description}
+\end{itembox}\\
+
 \end{flushleft}
 
 \item \begin{flushleft}
@@ -96,8 +109,19 @@ The paper should explain evaluation of items described in contribution paragraph
 \textbf{Our reply:}
 
 \begin{enumerate}
-\item 少ないコード変更量でプロトコルの設定を変更できるというコンフィグラビリティ評価を強調する。Fig.10（プロトコルのコンポーネント図）を拡大してTCPのみ、UDPのみ、の図を加えて、プロトコルの変更が容易にできると加える。
-\item TLSF+TECS評価部分で、2つのVMを動かしたグラフ（つまり線が２つあるグラフ）を追加し、「２つのVMで違うアプリケーションが並行動作しているので、スレッドセーフに動作していることも示している」と加える。
+\item 
+    Table 3 (Modified code lines of CDL) showed the configurability evaluation, but since it is hard to understand, we moved to the beginning of the evaluation section and clarified the point we would like to claim.
+
+\begin{itembox}[|]{Evaluation}
+As shown in Table 2, the code lines for modification were measured to demonstrate the improved configurability.
+This demonstrated the ability to change the composition of the protocol stack with a small workload, confirming that the proposed framework improves the configurability.
+\end{itembox}\\
+
+
+\item We added evaluations of TLSF+TECS in Section 4.3.
+    This section shows a comparison which two diffrent applications are executed with two ways.
+    One is to hold its own heap (TLSF+TECS), and the other is to utilize a execulusive control such as semaphore.
+
 \end{enumerate}
 \end{flushleft}
 
@@ -117,9 +141,19 @@ Please add evaluation of typical usage pattern. The authors demonstrate executio
 \textbf{Our reply:}
 
 \begin{enumerate}
-\item コメント3-(a)で協調した部分および、UDPの実行時間とメモリ消費量の評価を加える。また、「既存TINETで対応しているTCPとUDPでの評価を行った」と追記。
+\item
+    TODO: 
+    We added the execution times with UDP and discussed it.
+    Note, we evaluated only TCP and UDP which are supported by TINET.
+\begin{itembox}[|]{Evaluation}
+Conversely, we evaluated the execution times with UDP as shown in Fig. 29.
+TINET+TECS can run at the same speed as TINET; therefore, the overheads of TINET+TECS are low.
+\end{itembox}\\
 
-\item TCPのみ、UDPのみ、両方のメモリ消費量
+\item
+    TODO:
+    We added the memory usage of only TCP, only UDP, and both TCP and UDP.
+
 \end{enumerate}
 \end{flushleft}
 
@@ -139,63 +173,94 @@ Please add evaluation of typical usage pattern. The authors demonstrate executio
 主張したい点を明確にし、評価がその根拠となるように、Abstractを含む論文全体の構成とストーリー展開、タイトルを変更してください。
 
 論文から、オリジナリティはTLSFとよぶダイナミックメモリアロケータを構築したことではないかと推測していますが、読み解くのは容易ではありません。
+\end{flushleft}
 \begin{flushleft}
 \textbf{Our reply:}
 
-主張したい点はソフトウェア開発の生産性が向上させるプラットフォームであるため、３章Use CaseにmrubyとC言語比較を加え、mrubyだと開発がより簡単になることを強調する。
-コンフィグラビリティは向上しつつ、execution time と memory consumption のオーバヘッドを抑えることができたという流れにする。
+評価部分は，コンポーネント化による実行時間やメモリ消費のオーバヘッドを抑えることができたことを示しています．
+コンフィグラビリティ評価を冒頭におき，主張したい点が分かりやすいように変更しました．
+
 \end{flushleft}
-\begin{enumerate}
-\item AbstractとIntroduction
+
+\begin{flushleft}
+\textbf{1-(a):} AbstractとIntroduction
 
 いずれもproposeが2回使われていますが、proposeは1回にまとめるべきで、提案は1つとし、含まれている特徴（問題点の解決策）を複数個記すようにした方が読みやすいです。「TINET+TECSおよびTLSF+TECSというフレームワークを提案する」というふうにまとめても良いとは思います。
 また、問題点が一般的な背景ばかりが記されていて、提案方法が必要である問題点をAbstractとIntroductionから読み取ることができません。
 シンプルに、解くべき問題点を列挙し、それに対応づく解決策を挙げるようにしてください。
-
+\end{flushleft}
 \begin{flushleft}
 \textbf{Our reply:}
 
-提案は、「IoTデバイス向けのmrubyプラットフォーム」であり、TINET+TECSとTLSF+TECSの「2つの機能を組み込んだ」とする。
-貢献部分に、「TINETのコンフィグラビリティを向上させる」「マルチVMを実現する」と追記する。
+ご指摘ありがとうございます．
+提案すべきは，「IoTデバイス向けのmrubyプラットフォーム」とし，それを実現するためにTINET+TECSとTLSF+TECSの２つの機能を組み込むという表現に修正を行いました(AbstractおよびIntroduction).
+また，問題点と解決策が対応づくように，貢献部分や要件を修正・加筆しました．
+
+\begin{itembox}[|]{Abstract}
+In this paper, we propose an extended mruby on TECS framework for its application in developing software for IoT devices, including sensors and actuators. Our proposed framework enables mruby programs to utilize Tomakomai Internetworking (TINET), a TCP/IP protocol stack specifically designed for use in embedded systems. Further, the proposed framework incorporates two component-based functions, i.e., a componentized TINET stack called TINET+TECS and a componentized Two-Level Segregate Fit (TLSF) dynamic memory allocator called TLSF+TECS.
+\end{itembox}\\
+
+% 提案は、「IoTデバイス向けのmrubyプラットフォーム」であり、TINET+TECSとTLSF+TECSの「2つの機能を組み込んだ」とする。
+% 貢献部分に、「TINETのコンフィグラビリティを向上させる」「マルチVMを実現する」と追記する。
 \end{flushleft}
 
-\item 2. System Model
+\begin{flushleft}
+\textbf{1-(b):} 2. System Model
 
 章立ての位置付けとして、この章では、IoTデバイスのproductivity向上についての要件や課題が記されていることを期待して読むのですが、TECSとmrubyの説明にとどまっています。論文は、新規性・有用性は何かを探しながら読むことが目的であり、開発に必要な知識を得ることは目的ではありません。新規性・有用性を主張するのに、必要な内容を記すようにしてください。
-
+\end{flushleft}
 \begin{flushleft}
 \textbf{Our reply:}
 
-システムモデルの冒頭に要件を加える。
+2章システムモデルの冒頭に，提案フレームワークを実現するための要件を書き加えました．
+
+\begin{itembox}[|]{}
+{\bf Requrements:} The requirements for proposing the mruby platform for IoT devices are defined as follows.
+\begin{description}
+    \item[R1:]
+        TCP/IP functions can be utilized from mruby programs and the protocol stack can be easily configured for producivity since the network function is essential to the IoT systems.
+
+    \item[R2:]
+        Multiple mruby programs can run in pallalel to improve producivity of software development.
+        A theread-safe memory allocator is required to prevent the multiple mruby tasks from conflicting their memory.
+
+\end{description}
+\end{itembox}\\
 \end{flushleft}
 
-\item 3章以降
+\begin{flushleft}
+\textbf{1-(c):} 3章以降
 
 AbstractおよびIntroductionを修正にともない、そのストーリーにあった内容にしてください。
 
+\end{flushleft}
 \begin{flushleft}
 \textbf{Our reply:}
 
-3章UseCaseを3-1にするべきか。
-4章の評価の順番を変える。（コンフィグラビリティ評価、オーバヘッド評価の順番）
+上で述べたように，「IoTデバイス向けのmrubyプラットフォーム」を提案し，それを実現するために，２つの機能TINET+TECSとTLSF+TECSを組み込んだというストーリーにしました．
+それに伴い，実現するための要件を加筆し，UDPの評価およびTLSF+TECSの評価を付け加えました．
 \end{flushleft}
 
-\item 5. Related Work
+\begin{flushleft}
+\textbf{1-(d):} 5. Related Work
 
 MDDについてサーベイがありますが、execution time と memory consumptionを評価するならば、それと関連したサーベイをしてください。
 
+\end{flushleft}
+
 \begin{flushleft}
 \textbf{Our reply:}
 
-execution time と memory consumption は補足的な評価である。今回のサーベイはIoTシステムにおけるソフトウェア開発手法である。
-\end{flushleft}
+関連研究に，提案フレームワークの利点として，速い実行時間とコンフィグラビリティ性による小さいメモリ消費の2点を加筆しました．
 
-\end{enumerate}
-\end{flushleft}
+\begin{itembox}[|]{Related work}
+mruby programs on TECS can be executed approximately 100 times faster than standard mruby programs.
+That is, mruby programs can be executed at the same speed as C, which is faster than other scripting languages.
 
+The proposed framework can configure the TCP/IP protocol stack with minimum set compared to the other platforms.
+Therefore, the proposed framework can reduce memory consumption.
+\end{itembox}\\
 
-\begin{flushleft}
-\textbf{Our reply:}
 \end{flushleft}
 
 
@@ -210,8 +275,8 @@ abstractの二文目”To improve the productivity, ...”
 \begin{flushleft}
 \textbf{Our reply:}
 
-不定詞のTo として書いた。
-英文校正をかけた。
+ご指摘ありがとうございます．
+英文校正を依頼し，表現のミスや誤字・脱字の修正を行いました．
 \end{flushleft}
 
 \item \begin{flushleft}
@@ -229,8 +294,8 @@ mruby. Retrieved December 1, 2017 from https://mruby.org/
 \begin{flushleft}
 \textbf{Our reply:}
 
-引用を追加する。
-Web引用の日付けを追加する。
+ご指摘の通り，引用を追加いたしました．
+また，IPSJ論文誌のサンプルを参考にWebの引用について修正を行いました．
 \end{flushleft}
 
 \item \begin{flushleft}
@@ -244,8 +309,8 @@ Web引用の日付けを追加する。
 \begin{flushleft}
 \textbf{Our reply:}
 
-指摘部分は修正した。
-他の部分も英文校正にかけ、修正を行う。
+ご指摘ありがとうございます．
+英文校正を依頼し，表現のミスや誤字・脱字の修正を行いました．
 \end{flushleft}
 
 \end{enumerate}
