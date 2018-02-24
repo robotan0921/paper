@@ -138,7 +138,7 @@ Because TINET+TECS is a component-based system, its software can flexibly change
 Further, the use of individual component diagrams enables visualizations of the entire system.
 
 {\bf Thread-safe memory allocation}
-TLSF+TECS safely runs multiple threads without exclusive control even if the threads operate in parallel.
+TLSF+TECS safely runs multiple threads without exclusive control even if the threads operate concurrently.
 To achieve this, each thread can easily set up its own heap area.
 Further, statistical information is available to help developers debug and verify the specific memory usage of the given system.
 
@@ -159,14 +159,14 @@ The system model of the proposed framework is shown in Fig.\ref{fig:SystemModel}
 In the proposed framework, each mruby program runs on a RiteVM mapped to a componentized task of an RTOS.
 mruby programs can call the TINET functions required for network software through the mruby-TECS bridge, and thus software to be embedded in IoT devices can be developed.
 
-{\bf Requrements:} The requirements for proposing the mruby platform for IoT devices are defined as follows.
+{\bf Requrements:} The requirements of the proposed mruby platform for IoT devices are defined as follows.
 \begin{description}
     \item[R1:]
         TCP/IP functions can be utilized from mruby programs and the protocol stack can be easily configured for producivity since the network function is essential to the IoT systems.
 
     \item[R2:]
-        Multiple mruby programs can run in pallalel to improve producivity of software development.
-        A theread-safe memory allocator is required to prevent the multiple mruby tasks from conflicting their memory.
+        Multiple mruby programs can run concurrently to improve productivity of software development.
+        A thread-safe memory allocator is required to prevent the multiple mruby tasks from conflicting their memory.
 
 \end{description}
  
@@ -564,7 +564,7 @@ The cREP ports form a call port array connecting to connecting to all tREP cells
 {\it [ref\_desc]} is used to identify call ports referring to descriptors. 
 In the case of Fig.\ref{fig:DynamicConnectionUseCase}, the tRepSelector cell connects all tREP cells.
 
-A CEP component has two call ports: the cRepSelector port, which connects to the eRepSelector port of tRepSelector cell, and the cREP4 port, which connects to either of the tREP cells (Lines 11--13 in Fig. \ref{src:DynamicCDLcode}).
+A CEP component has two call ports: the cRepSelector port, which connects to the eRepSelector port of tRepSelector cell, and the cREP4 port, which connects to either of the tREP cells (Lines 11--13 in Fig.\ref{src:DynamicCDLcode}).
 The cREP port is defined using {\it [dynamic]} to identify the call port used to dynamically switch the components.
 The call port with the {\it [dynamic]} specifier is not optimized and is allocated in RAM using a plug-in.
 
@@ -634,7 +634,7 @@ Various experiments have achieved an average fragmentation of less than 15 \% an
 
 \subsubsection{TLSF algorithm}
 
-As illustrated in Fig. \ref{fig:TLSF}, the TLSF algorithm classifies memory blocks into two stages and searches for a memory block that optimally lines up with the requested memory size.
+As illustrated in Fig.\ref{fig:TLSF}, the TLSF algorithm classifies memory blocks into two stages and searches for a memory block that optimally lines up with the requested memory size.
 Particularly, consider the case in which a request to dynamically allocate 98 bytes is made via $malloc(98)$.
 First, the request is classified based on the leftmost 1 bit in the requested memory size.
 In this example, since 98 is represented in binary as byte 01100010, it falls in the range of 64-128 based on the leftmost 1 bit.
@@ -677,7 +677,7 @@ signature sMalloc {
 \label{src:TLSFSignature}
 \end{figure}
 
-In Fig. \ref{src:TLSFSignature}, we summarize the signature used by the allocator for dynamic memory management.
+In Fig.\ref{src:TLSFSignature}, we summarize the signature used by the allocator for dynamic memory management.
 Particularly, this component defines the memory pool initialization function {\it initializeMemoryPool()}, memory allocation functions {\it calloc()}, {\it malloc()}, and {\it realloc()}, and the memory release function {\it free()}.
 
 \begin{figure}[t]
@@ -697,7 +697,7 @@ celltype tTLSFMalloc {
 \label{src:TLSFCelltype}
 \end{figure}
 
-Next, Fig. \ref{fig:TLSFCelltype} shows the celltype description for the TLSF memory allocator component.
+Next, Fig.\ref{fig:TLSFCelltype} shows the celltype description for the TLSF memory allocator component.
 Here, entry port {\it eMalloc} is connected to all components that perform memory management including $malloc()$ and $free()$.
 Further, {\it [inline]} is a specifier to suggest to the TECS generator to implement as an inline function.
 Memory pool size is defined as an attribute, and a pointer to a memory pool is defined as a variable.
@@ -770,10 +770,10 @@ mrb_TECS_allocf(mrb_state *mrb, void *p,
 \label{src:TLSFC}
 \end{figure}
 
-Next, Fig. \ref{src:TLSFBuild} shows the build description of the TLSF memory allocator component illustrated in Fig. \ref{fig:WithTECS}\footnote{Other call/entry ports, attributes, and valuables are actually described, but it is omitted here for the simplicity.}.
+Next, Fig.\ref{src:TLSFBuild} shows the build description of the TLSF memory allocator component illustrated in Fig.\ref{fig:WithTECS}\footnote{Other call/entry ports, attributes, and valuables are actually described, but it is omitted here for the simplicity.}.
 Here, two sets of task components and TLSF components are combined.
-Further, each memory pool size can be configured as a variable (lines 5 and 11 in Fig. \ref{src:TLSFBuild}).
-Fig. \ref{src:TLSFC} presents the code that actually calls functions of the TLSF memory allocator component.
+Further, each memory pool size can be configured as a variable (lines 5 and 11 in Fig.\ref{src:TLSFBuild}).
+Fig.\ref{src:TLSFC} presents the code that actually calls functions of the TLSF memory allocator component.
 The use part shows a function in which the RiteVM allocates memory within the mruby on TECS framework\cite{par:mrubyonTECS}\cite{par:mrubyonTECS3}, which we introduced in Section \ref{sec:mrubyonTECS} above.
 Line 8 calls the {\it free()} function of the TLSF memory allocator component.
 {\it cMalloc\_} represents the name of the call port on line 2 in Fig.\ref{src:TLSFBuild}.
@@ -792,10 +792,10 @@ Using this approach, in component-based development using TECS, it is possible t
 
 The proposed framework uses the TLSF memory allocator for memory management within RiteVMs; however, since it is difficult to hundle multiple memory pools in the existing TLSF, if memory is allocated or deallocated from multiple threads, memory contention will likely occur.
 Here, as a RiteVM allocates and deallocates memory at high frequencies, memory contention quickly occurs when multiple RiteVMs are instantiated.
-Note that the TLSF components are connected to the RiteVMs to ensure that each component has its own heap area within each RiteVM, as illustrated in Fig. \ref{fig:UseCase_mruby}.
+Note that the TLSF components are connected to the RiteVMs to ensure that each component has its own heap area within each RiteVM, as illustrated in Fig.\ref{fig:UseCase_mruby}.
 Since each TLSF component maintains its own memory pool, multiple RiteVMs can be executed without the possibility of any memory contention.
-In Fig. \ref{fig:UseCase_mruby}, we observe that the first RiteVM has a heap area of 1 MB (i.e., 1024 $\times$ 1024 bytes) and the second RiteVM has a heap area of 2 MB (i.e., 2 $\times$ 1024 $\times$ 1024 bytes).
-As illustrated in Fig. \ref{fig:UseCase_mruby}, it is easy to configure different-sized heap areas for each RiteVM.
+In Fig.\ref{fig:UseCase_mruby}, we observe that the first RiteVM has a heap area of 1 MB (i.e., 1024 $\times$ 1024 bytes) and the second RiteVM has a heap area of 2 MB (i.e., 2 $\times$ 1024 $\times$ 1024 bytes).
+As illustrated in Fig.\ref{fig:UseCase_mruby}, it is easy to configure different-sized heap areas for each RiteVM.
 Further, each RiteVM performs incremental garbage collection (GC), and a RiteVM that has started GC does not disturb the execution of other RiteVMs in its GC execution.
     
 \subsubsection*{Memory management for sending and receiving data}
@@ -811,7 +811,7 @@ In the TCP/IP protocol stack, memory allocation and subsequent deallocation are 
 Therefore, the role of the memory allocator is critical.
 The TINET+TECS framework combines all components that manage memory within the allocator.
 The TLSF memory allocator can execute at the same speed as that of the fixed-size memory allocator that TOPPERS/ASP3 supports as standard; further, the TLSF memory allocator can improve memory efficiency.
-As illustrated in Fig. \ref{fig:UseCase_TINET}, the fixed-size memory allocator prepares memory pools of different sizes and selects a memory pool whenever it is necessary.
+As illustrated in Fig.\ref{fig:UseCase_TINET}, the fixed-size memory allocator prepares memory pools of different sizes and selects a memory pool whenever it is necessary.
 Conversely, TLSF+TECS efficiently manages memory without the need to select a memory pool.
 Finally, TLSF+TECS can be easily extended to TINET+TECS since TINET+TECS is a component-based system.
 
@@ -819,11 +819,11 @@ Finally, TLSF+TECS can be easily extended to TINET+TECS since TINET+TECS is a co
 \label{sec:UseCase}
 
 In the proposed framework, applications can call TINET functions, such as specific TCP- and UDP-related functions, from mruby programs because the mruby-TECS bridge automatically generates the code to link mruby and C.
-Fig. \ref{src:mruby} shows an example of mruby program that transmits the value acquired from the sensor to another device or a server.
+Fig.\ref{src:mruby} shows an example of mruby program that transmits the value acquired from the sensor to another device or a server.
 In general, mruby makes it easier to develop applications than using C with the existing TINET.
 
 For a simple application, typically only a few functions are used, with numerous unused functions.
-As an example, the application code shown in Fig. \ref{src:mruby} only uses a function to send data via TCP.
+As an example, the application code shown in Fig.\ref{src:mruby} only uses a function to send data via TCP.
 The proposed framework incorporates TINET+TECS and can easily customize the TCP/IP protocol stack by removing functions, such as UDP functions, functions that support only IPv4, or TCP receiving functions.
 As such, the proposed framework can be applied to embedded systems with strict memory constraints by removing many unused functions.
 
@@ -873,7 +873,7 @@ To pretest the system, we connected the board to a host PC via a LAN cable and e
     \label{tab:EvaluationBoardEnvironment}
 \end{table}
 
-\subsection{Performance of TINET+TECS}
+\subsection{Improved configurability}
 
 As shown in Table \ref{tab:EvaluationOfConfigurability}, the code lines for modification were measured to demonstrate the improved configurability.
 This demonstrated the ability to change the composition of the protocol stack with a small workload, confirming that the proposed framework improves the configurability.
@@ -896,22 +896,32 @@ This demonstrated the ability to change the composition of the protocol stack wi
     \label{tab:EvaluationOfConfigurability}
 \end{table}
 
+\subsection{Performance of TINET+TECS}
 
-Next, to demonstrate the low overhead of TINET+TECS, we compared its execution time and memory consumption with that of TINET, producing the results shown in Fig. \ref{fig:EvaluationOfExecutionTime}.
-
+To demonstrate the low overhead of TINET+TECS, we compared its execution time and memory consumption with that of TINET.
+The results with TCP are shown in Fig.\ref{fig:EvaluationOfExecutionTime}.
 The {\it tcp\_snd\_dat} and {\it tcp\_rcv\_dat} APIs were used in the evaluation to, respectively, send and receive TCP data.
 For {\it tcp\_snd\_dat}, we measured the executing time starting from the API call through the application until the return of the processing result.
-In TINET+TECS, this process is performed in the order tApplication, tTCPCEP, tTCPOutputTaskBody, tIPv4Output, tEthernetOutput, tArp, tEthernetOutputTaskBody, and tIfMbed, as shown in Fig. \ref{fig:ComponentProtocolStack}.
+In TINET+TECS, this process is performed in the order tApplication, tTCPCEP, tTCPOutputTaskBody, tIPv4Output, tEthernetOutput, tArp, tEthernetOutputTaskBody, and tIfMbed, as shown in Fig.\ref{fig:ComponentProtocolStack}.
 For {\it tcp\_rcv\_dat}, we measured the execution time from the data receipt in the LAN driver until data acquisition in the application.
-In TINET+TECS, the process is performed in the order tIfMbed, tEthernetInputTaskBody, tIPv4Input, tTCPInput, tTCPCEP, and tApplication, as shown in Fig. \ref{fig:ComponentProtocolStack}.
+In TINET+TECS, the process is performed in the order tIfMbed, tEthernetInputTaskBody, tIPv4Input, tTCPInput, tTCPCEP, and tApplication, as shown in Fig.\ref{fig:ComponentProtocolStack}.
 The execution time of TINET+TECS is close to that of TINET, with an overhead of about 3 us.
+Conversely, we evaluated the execution times with UDP as shown in Fig.\ref{fig:EvaluationOfExecutionTimeUDP}.
+TINET+TECS can run at the same speed as TINET; therefore, the overheads of TINET+TECS are low.
 As the use of the {\it send/receive} specifier enables accessing of the buffer address without data copying, the componentization overhead does not affect the execution time.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=8cm,clip]{figure/EvaluationOfExecutionTime.pdf}
-    \caption{Execution times of TINET and TINET+TECS}
+    \caption{Execution times of TINET and TINET+TECS with TCP}
     \label{fig:EvaluationOfExecutionTime}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=8cm,clip]{figure/EvaluationOfExecutionTimeUDP.pdf}
+    \caption{Execution times of TINET and TINET+TECS with UDP}
+    \label{fig:EvaluationOfExecutionTimeUDP}
 \end{figure}
 
 The memory consumptions of TINET and TINET+TECS are compared in Table \ref{tab:EvaluationOfMemoryConsumption}.
@@ -920,14 +930,18 @@ The memory consumption of TINET+TECS is about 1\% higher than that of TINET, as 
 \begin{table}[t]
     \centering
     \caption{Memory consumption of TINET and TINET+TECS}
+    {\tabcolsep = 1mm
     \begin{tabular}{c|r|r|r|r}
         \hline\hline
-                    &   text       &  data    &   bss      &  total     \\ \hline
-        TINET       &   183.94 KB  &  5.37 KB &  132.03 KB &  322.34 KB \\
-        TINET+TECS  &   170.73 KB  &  5.37 KB &  149.13 KB &  325.23 KB \\
+                               &   text       &  data    &   bss      &  total     \\ \hline
+        TINET                  &   183.94 KB  &  5.37 KB &  132.03 KB &  322.34 KB \\
+        TINET+TECS (TCP)       &   169.48 KB  &  5.37 KB &  149.01 KB &  323.96 KB \\
+        TINET+TECS (UDP)       &   169.26 KB  &  5.37 KB &  149.04 KB &  323.77 KB \\
+        TINET+TECS (TCP+UDP)   &   170.73 KB  &  5.37 KB &  149.13 KB &  325.23 KB \\
         \hline
         \multicolumn{5}{r}{Including the application and kernel objects}
     \end{tabular}
+    }
     \label{tab:EvaluationOfMemoryConsumption}
 \end{table}
 
@@ -941,9 +955,9 @@ The memory consumption of TINET+TECS is about 1\% higher than that of TINET, as 
 \end{figure}
 
 Memory consumption without and with TECS dynamic connection was then evaluated.
-As shown in the left of Fig. \ref{fig:ComparisonOfDynamicConnection}, each CEP component should be statically connected to all REP components if the dynamic connection is not used.
+As shown in the left of Fig.\ref{fig:ComparisonOfDynamicConnection}, each CEP component should be statically connected to all REP components if the dynamic connection is not used.
 As the number of REPs increases, additional call ports of CEP are required, in turn increasing the consumption of memory. 
-The dynamic connection reduces memory consumption because only one CEP-to-REP call port is required per CEP, as illustrated with red lines in the right paneof Fig. \ref{fig:ComparisonOfDynamicConnection}.
+The dynamic connection reduces memory consumption because only one CEP-to-REP call port is required per CEP, as illustrated with red lines in the right paneof Fig.\ref{fig:ComparisonOfDynamicConnection}.
 Even if the number of REPs increases, additional call ports can be joined through the selector, instead of the CEPs.
 
 Memory consumption of without and with dynamic connection is shown in TABLE \ref{fig:EvaluationOfDynamicConnection}.
@@ -1032,33 +1046,11 @@ cell tTCPCEP TCPCEP_00n {
 
 The code lines in CDL of without and with the dynamic connection is shown in TABLE \ref{tab:EvaluationOfConfigurabilityByDynamicConnection} to demonstrate improved configurability.
 As the number of CEPs and REPs increases, the amount of CDL code lines to be added increases.
-In the left of Fig. \ref{fig:ComparisonOfDynamicConnection}, each CEP connects all REPs as shown in the upper of Fig. \ref{src:ComparisonOfCDL}. 
-In the right of Fig. \ref{fig:ComparisonOfDynamicConnection}, a CEP dynamically connects an REP, and only the selector connects all REPs as shown in the lower of Fig. \ref{src:ComparisonOfCDL}. 
+In the left of Fig.\ref{fig:ComparisonOfDynamicConnection}, each CEP connects all REPs as shown in the upper of Fig.\ref{src:ComparisonOfCDL}. 
+In the right of Fig.\ref{fig:ComparisonOfDynamicConnection}, a CEP dynamically connects an REP, and only the selector connects all REPs as shown in the lower of Fig.\ref{src:ComparisonOfCDL}. 
 It is effective for software that uses many ports because the difference spreads as the number of CEPs and REPs increases.
 
 
-\subsection{Memory usage of RiteVMs by TLSF+TECS}
-
-The proposed dynamic memory allocator, TLSF+TECS, executes multiple tasks without exclusive control in parallel because each TLSF component holds its own heap area.
-The TLSF+TECS framework provides functionality to acquire statistical information describing dynamic memory usage.
-Therefore, it is possible to analyze the operational status of the TLSF and GC on RiteVMs.
-
-Fig. \ref{fig:EvaluationOfTLSFStatistics} shows the memory usage of two RiteVMs, with presented data acquired from the statistical information available via the TLSF+TECS framework.
-From the figure, we observe that when the RiteVM are first activated, a large amount of memory is allocated for each RiteVM and initialization are performed within one second.
-Next, the applications runs for ~10 s and the RiteVMs subsequently terminate.
-The reduction in memory usage that occurs at regular intervals is due to the GC function of the RiteVM.
-Here, an application that allocates tens of KB of memory runs on RiteVM 1 and an application that allocates hundreds of KB of memory runs on RiteVM 2.
-Fig. \ref{fig:EvaluationOfMemoryUsageWithExclusiveContorol} shows the memory usage when two RiteVMs are executed in one heap area with exclusive control.
-In Fig. \ref{fig:EvaluationOfDynamicConnection}, two applications are finished at 10.837 s, and in Fig. \ref{fig:EvaluationOfMemoryUsageWithExclusiveContorol}, they are finished at 10.877 s, which demonstrates that the execution time of the applications has increased due to exclusive control.
-In addition to the overhead of execution time, a RiteVM is not affected by other RiteVMs since TLSF+TECS keeps heap area independently.
-GC on a RiteVM is performed periodically; however, there is a part that GC is not performed periodically in RiteVM 1 of Fig. \ref{fig:EvaluationOfExecutionTime}.
-In Fig. \ref{fig:EvaluationOfMemoryUsageWithExclusiveContorol}, two RiteVMs share one heap area; therefore, RiteVM 2 is affected by RiteVM 1.
-On the other hand, in Fig. \ref{fig:EvaluationOfTLSFStatistics}, RiteVM 2 is not affected by RiteVM 1.
-
-As such, the TLSF+TECS framework provides users with the ability to visualize GC behavior and help verify its operation.
-Further, when the RiteVM terminates, the memory used by the RiteVM is not completely released, i.e., a few kilobytes remain.
-This remaining memory causes a memory leak when the number of RiteVMs increases or a RiteVM repeatedly activates and shuts down.
-Using the proposed environment here proves useful for detecting bugs related to memory, which in practice can be extremely difficult to detect.
 
 \begin{figure}[t]
     \centering
@@ -1073,6 +1065,29 @@ Using the proposed environment here proves useful for detecting bugs related to 
     \caption{Memory usage of RiteVMs with exclusive control}
     \label{fig:EvaluationOfMemoryUsageWithExclusiveContorol}
 \end{figure}
+
+\subsection{Memory usage of RiteVMs by TLSF+TECS}
+
+The proposed dynamic memory allocator, TLSF+TECS, executes multiple tasks without exclusive control concurrently because each TLSF component holds its own heap area.
+The TLSF+TECS framework provides functionality to acquire statistical information describing dynamic memory usage.
+Therefore, it is possible to analyze the operational status of the TLSF and GC on RiteVMs.
+
+Fig.\ref{fig:EvaluationOfTLSFStatistics} shows the memory usage of two RiteVMs, with presented data acquired from the statistical information available via the TLSF+TECS framework.
+From the figure, we observe that when the RiteVM are first activated, a large amount of memory is allocated for each RiteVM and initialization are performed within one second.
+Next, the applications runs for ~10 s and the RiteVMs subsequently terminate.
+The reduction in memory usage that occurs at regular intervals is due to the GC function of the RiteVM.
+Here, an application that allocates tens of KB of memory runs on RiteVM 1 and an application that allocates hundreds of KB of memory runs on RiteVM 2.
+Fig.\ref{fig:EvaluationOfMemoryUsageWithExclusiveContorol} shows the memory usage when two RiteVMs are executed in one heap area with exclusive control.
+In Fig.\ref{fig:EvaluationOfDynamicConnection}, two applications are finished at 10.837 s, and in Fig.\ref{fig:EvaluationOfMemoryUsageWithExclusiveContorol}, they are finished at 10.877 s, which demonstrates that the execution time of the applications has increased due to exclusive control.
+In addition to the overhead of execution time, a RiteVM is not affected by other RiteVMs since TLSF+TECS keeps heap area independently.
+GC on a RiteVM is performed periodically; however, there is a part that GC is not performed periodically in RiteVM 1 of Fig.\ref{fig:EvaluationOfExecutionTime}.
+In Fig.\ref{fig:EvaluationOfMemoryUsageWithExclusiveContorol}, two RiteVMs share one heap area; therefore, RiteVM 2 is affected by RiteVM 1.
+On the other hand, in Fig.\ref{fig:EvaluationOfTLSFStatistics}, RiteVM 2 is not affected by RiteVM 1.
+
+As such, the TLSF+TECS framework provides users with the ability to visualize GC behavior and help verify its operation.
+Further, when the RiteVM terminates, the memory used by the RiteVM is not completely released, i.e., a few kilobytes remain.
+This remaining memory causes a memory leak when the number of RiteVMs increases or a RiteVM repeatedly activates and shuts down.
+Using the proposed environment here proves useful for detecting bugs related to memory, which in practice can be extremely difficult to detect.
 
 
 
@@ -1098,7 +1113,7 @@ MDD provides the benefits of reusable, platform-independent, extensible design, 
 The development using GPLs such as C, JavaScript, Python, and Android allows the extremely efficient systems based on the complete control over individual devices.
 However, GPLs need more development effort, and it is difficult to reuse software due to platform-dependent design.
 Several Open-source runtime systems for scripting languages have been proposed such as python-on-a-chip \cite{url:python-on-a-chip}, the Owl system \cite{par:owl}, eLua \cite{url:eLua}.
-mruby programs on TECS can be executed approximately 100 times faster than standard mruby programs.
+mruby programs on TECS can be executed approximately 100 times faster than standard mruby programs \cite{par:mrubyonTECS}.
 That is, mruby programs can be executed at the same speed as C, which is faster than other scripting languages.
 
 The proposed framework can configure the TCP/IP protocol stack with minimum set compared to the other platforms.
@@ -1139,6 +1154,8 @@ We would like to thank Hiroaki Nagashima and Kazuaki Tanaka for supporting this 
 \bibliographystyle{ipsj_v2/UTF8/ipsjunsrt-e}
 \bibliography{ref}
 
+% \input{chosha}
+
 % \begin{biography}
 % \profile{Taro Joho}{was born in 1970. He received his M.S. degree from
 % Johoshori University in 1994.
@@ -1156,7 +1173,7 @@ We would like to thank Hiroaki Nagashima and Kazuaki Tanaka for supporting this 
 % professor at Johoshori University in 1997. Her current research
 % interest is online publishing systems. She received the Kiyasu Kinen
 % award in 2010. She is a Board Member of the IPSJ and a member of the
-% IEICE, IEEE-CS, and ACM\@.} 
+% IEICE, IEEE-CS, and ACM\@.}
 % %
 % \profile{Jiro Gakkai}{was born in 1970. He received his M.S.\ degree
 % from Johoshori University in 1994 and has been engaged in the
