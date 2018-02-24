@@ -1,7 +1,7 @@
 \documentclass{article}
 
 \usepackage{a4wide}
-\usepackage{graphicx}
+\usepackage[dvipdfmx]{graphicx}
 \usepackage{fancybox}
 \usepackage{ascmac}
 \usepackage{xspace}
@@ -43,6 +43,33 @@ We hope the editor and the reviewers will be satisfied with our replies to the c
 
 \clearpage
 
+\section{Response to Meta-reviewer}
+\begin{enumerate}
+
+\item \begin{flushleft}
+\textbf{Comment:}
+
+Basically, the proposed framework seems to be useful.
+However as the reviewers suggest, this paper is not sophisticated as a research paper including English.
+
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Our reply:}
+
+Thank you for the comments.
+In order to reflect the comments of reviewers, we fixed abstract and introduction, and added requirements and evaluations such as the execution time and memory consumption of UDP (4.2) and TLSF+TECS (4.4).
+Furthermore, we fixed our English in this paper by a native speaker in a proofreading company.
+For more detail, please see our replies as follows.
+
+\end{flushleft}
+
+
+\end{enumerate}
+
+\clearpage
+
+
 \section{Response to 1\st reviewer}
 
 \begin{enumerate}
@@ -58,8 +85,15 @@ Please describe the relation between mruby and proposed framework clearly. I thi
 
 Thank you for your suggestion.
 The main contribution of this paper is to build a platform for IoT devices with high productivity using mruby.
-However, as the reviewer 1 says, the proposed two functionalities, TINET+TECS and TLSF+TECS, can be applicable to various embedded systems because these frameworks are executed on TECS and not limited to mruby.
+We modified Abstract as follows. 
+
+However, as the reviewer 1 mentioned, the proposed two functionalities, TINET+TECS and TLSF+TECS, can be applicable to various embedded systems because these frameworks are executed on TECS and not limited to mruby.
 We added the following sentence in Section 6.
+
+\begin{itembox}[|]{Abstract}
+In this paper, we propose an extended mruby on TECS framework for its application in developing software for IoT devices, including sensors and actuators. Our proposed framework enables mruby programs to utilize Tomakomai Internetworking (TINET), a TCP/IP protocol stack specifically designed for use in embedded systems. Further, the proposed framework incorporates two component-based functions, i.e., a componentized TINET stack called TINET+TECS and a componentized Two-Level Segregate Fit (TLSF) dynamic memory allocator called TLSF+TECS.
+\end{itembox}\\
+
 
 \begin{itembox}[|]{Conclusion}
 TINET+TECS and TLSF+TECS can be applicable to various embedded systems because these frameworks are executed on TECS and not limited to mruby.
@@ -79,14 +113,14 @@ Please describe requirements to implement these components for mruby or IoT syst
 
 We added the requirements at the beginning of Section 2.
 \begin{itembox}[|]{}
-{\bf Requrements:} The requirements for proposing the mruby platform for IoT devices are defined as follows.
+{\bf Requrements:} The requirements of the proposed mruby platform for IoT devices are defined as follows.
 \begin{description}
     \item[R1:]
         TCP/IP functions can be utilized from mruby programs and the protocol stack can be easily configured for producivity since the network function is essential to the IoT systems.
 
     \item[R2:]
-        Multiple mruby programs can run in pallalel to improve producivity of software development.
-        A theread-safe memory allocator is required to prevent the multiple mruby tasks from conflicting their memory.
+        Multiple mruby programs can run concurrently to improve productivity of software development.
+        A thread-safe memory allocator is required to prevent the multiple mruby tasks from conflicting their memory.
 
 \end{description}
 \end{itembox}\\
@@ -109,18 +143,34 @@ The paper should explain evaluation of items described in contribution paragraph
 \textbf{Our reply:}
 
 \begin{enumerate}
-\item 
-    Table 3 (Modified code lines of CDL) showed the configurability evaluation, but since it is hard to understand, we moved to the beginning of the evaluation section and clarified the point we would like to claim.
+\item
+    We added the new subsection (4.1) for the configurability evaluation.
 
-\begin{itembox}[|]{Evaluation}
+\begin{itembox}[|]{4.1 Improved configurability}
 As shown in Table 2, the code lines for modification were measured to demonstrate the improved configurability.
 This demonstrated the ability to change the composition of the protocol stack with a small workload, confirming that the proposed framework improves the configurability.
 \end{itembox}\\
 
 
-\item We added evaluations of TLSF+TECS in Section 4.3.
-    This section shows a comparison which two diffrent applications are executed with two ways.
-    One is to hold its own heap (TLSF+TECS), and the other is to utilize a execulusive control such as semaphore.
+\item
+    We added evaluations of TLSF+TECS in Section 4.3.
+    This section shows a comparison which two different applications are executed with two ways.
+    One is to hold its own heap (TLSF+TECS), and the other is to utilize an exclusive control such as a semaphore.
+
+\begin{itembox}[|]{4.4 Memory usage of RiteVMs by TLSF+TECS}
+The proposed dynamic memory allocator, TLSF+TECS, executes multiple tasks without exclusive control concurrently because each TLSF component holds its own heap area.
+The TLSF+TECS framework provides functionality to acquire statistical information describing dynamic memory usage.
+Therefore, it is possible to analyze the operational status of the TLSF and GC on RiteVMs.
+\ldots\ldots
+
+% \begin{figure}[h]
+    \centering
+    \includegraphics[width=8cm,clip]{../figure/EvaluationOfTLSFStatistics.pdf}
+    % \caption{Memory usage of RiteVMs with TLSF+TECS}
+    % \label{fig:EvaluationOfTLSFStatistics}
+% \end{figure}
+
+\end{itembox}\\
 
 \end{enumerate}
 \end{flushleft}
@@ -142,17 +192,19 @@ Please add evaluation of typical usage pattern. The authors demonstrate executio
 
 \begin{enumerate}
 \item
-    TODO: 
     We added the execution times with UDP and discussed it.
-    Note, we evaluated only TCP and UDP which are supported by TINET.
-\begin{itembox}[|]{Evaluation}
+    Note that we evaluated TCP and UDP which are supported by TINET.
+
+\begin{itembox}[|]{4.2 Performance of TINET+TECS}
 Conversely, we evaluated the execution times with UDP as shown in Fig. 29.
 TINET+TECS can run at the same speed as TINET; therefore, the overheads of TINET+TECS are low.
 \end{itembox}\\
 
 \item
-    TODO:
     We added the memory usage of only TCP, only UDP, and both TCP and UDP.
+
+\begin{itembox}[|]{4.2 Performance of TINET+TECS}
+\end{itembox}\\
 
 \end{enumerate}
 \end{flushleft}
@@ -177,8 +229,13 @@ TINET+TECS can run at the same speed as TINET; therefore, the overheads of TINET
 \begin{flushleft}
 \textbf{Our reply:}
 
-評価部分は，コンポーネント化による実行時間やメモリ消費のオーバヘッドを抑えることができたことを示しています．
-コンフィグラビリティ評価を冒頭におき，主張したい点が分かりやすいように変更しました．
+productivityに関する評価(configurability)の節を新規に追加し，主張したい点が分かりやすいように変更しました．
+execution timeとmemory consumptionの評価は，提案フレームワークを用いたオーバヘッドが小さいことを示しています．
+
+\begin{itembox}[|]{4.1 Improved configurability}
+As shown in Table 2, the code lines for modification were measured to demonstrate the improved configurability.
+This demonstrated the ability to change the composition of the protocol stack with a small workload, confirming that the proposed framework improves the configurability.
+\end{itembox}\\
 
 \end{flushleft}
 
@@ -194,14 +251,12 @@ TINET+TECS can run at the same speed as TINET; therefore, the overheads of TINET
 
 ご指摘ありがとうございます．
 提案すべきは，「IoTデバイス向けのmrubyプラットフォーム」とし，それを実現するためにTINET+TECSとTLSF+TECSの２つの機能を組み込むという表現に修正を行いました(AbstractおよびIntroduction).
-また，問題点と解決策が対応づくように，貢献部分や要件を修正・加筆しました．
+さらに，問題点と解決策が対応づくように，Introductionの貢献部分や要件(2章)を修正・加筆いたしました．
 
 \begin{itembox}[|]{Abstract}
 In this paper, we propose an extended mruby on TECS framework for its application in developing software for IoT devices, including sensors and actuators. Our proposed framework enables mruby programs to utilize Tomakomai Internetworking (TINET), a TCP/IP protocol stack specifically designed for use in embedded systems. Further, the proposed framework incorporates two component-based functions, i.e., a componentized TINET stack called TINET+TECS and a componentized Two-Level Segregate Fit (TLSF) dynamic memory allocator called TLSF+TECS.
 \end{itembox}\\
 
-% 提案は、「IoTデバイス向けのmrubyプラットフォーム」であり、TINET+TECSとTLSF+TECSの「2つの機能を組み込んだ」とする。
-% 貢献部分に、「TINETのコンフィグラビリティを向上させる」「マルチVMを実現する」と追記する。
 \end{flushleft}
 
 \begin{flushleft}
@@ -215,14 +270,14 @@ In this paper, we propose an extended mruby on TECS framework for its applicatio
 2章システムモデルの冒頭に，提案フレームワークを実現するための要件を書き加えました．
 
 \begin{itembox}[|]{}
-{\bf Requrements:} The requirements for proposing the mruby platform for IoT devices are defined as follows.
+{\bf Requrements:} The requirements of the proposed mruby platform for IoT devices are defined as follows.
 \begin{description}
     \item[R1:]
         TCP/IP functions can be utilized from mruby programs and the protocol stack can be easily configured for producivity since the network function is essential to the IoT systems.
 
     \item[R2:]
         Multiple mruby programs can run in pallalel to improve producivity of software development.
-        A theread-safe memory allocator is required to prevent the multiple mruby tasks from conflicting their memory.
+        A thread-safe memory allocator is required to prevent the multiple mruby tasks from conflicting their memory.
 
 \end{description}
 \end{itembox}\\
@@ -237,7 +292,7 @@ AbstractおよびIntroductionを修正にともない、そのストーリーに
 \begin{flushleft}
 \textbf{Our reply:}
 
-上で述べたように，「IoTデバイス向けのmrubyプラットフォーム」を提案し，それを実現するために，２つの機能TINET+TECSとTLSF+TECSを組み込んだというストーリーにしました．
+上で述べた通り，「IoTデバイス向けのmrubyプラットフォーム」を提案し，それを実現するために，２つの機能TINET+TECSとTLSF+TECSを組み込んだというストーリーにしました．
 それに伴い，実現するための要件を加筆し，UDPの評価およびTLSF+TECSの評価を付け加えました．
 \end{flushleft}
 
@@ -251,10 +306,10 @@ MDDについてサーベイがありますが、execution time と memory consum
 \begin{flushleft}
 \textbf{Our reply:}
 
-関連研究に，提案フレームワークの利点として，速い実行時間とコンフィグラビリティ性による小さいメモリ消費の2点を加筆しました．
+提案フレームワークの利点として，速い実行時間とコンフィグラビリティ性による小さいメモリ消費の2点を関連研究に加筆いたしました．
 
 \begin{itembox}[|]{Related work}
-mruby programs on TECS can be executed approximately 100 times faster than standard mruby programs.
+mruby programs on TECS can be executed approximately 100 times faster than standard mruby programs [9].
 That is, mruby programs can be executed at the same speed as C, which is faster than other scripting languages.
 
 The proposed framework can configure the TCP/IP protocol stack with minimum set compared to the other platforms.
@@ -276,7 +331,7 @@ abstractの二文目”To improve the productivity, ...”
 \textbf{Our reply:}
 
 ご指摘ありがとうございます．
-英文校正を依頼し，表現のミスや誤字・脱字の修正を行いました．
+英文校正業者にネイティブ校正を依頼し，ご指摘頂いた点を含め，表現のミスや誤字・脱字の修正を行いました．
 \end{flushleft}
 
 \item \begin{flushleft}
@@ -295,7 +350,7 @@ mruby. Retrieved December 1, 2017 from https://mruby.org/
 \textbf{Our reply:}
 
 ご指摘の通り，引用を追加いたしました．
-また，IPSJ論文誌のサンプルを参考にWebの引用について修正を行いました．
+IPSJ論文誌のサンプルを参考にWebの引用について修正を行いました．
 \end{flushleft}
 
 \item \begin{flushleft}
@@ -310,7 +365,7 @@ mruby. Retrieved December 1, 2017 from https://mruby.org/
 \textbf{Our reply:}
 
 ご指摘ありがとうございます．
-英文校正を依頼し，表現のミスや誤字・脱字の修正を行いました．
+英文校正業者にネイティブ校正を依頼し，ご指摘頂いた点を含め，表現のミスや誤字・脱字の修正を行いました．
 \end{flushleft}
 
 \end{enumerate}
