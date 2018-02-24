@@ -29,7 +29,7 @@
 We highly appreciate the insightful suggestions and detailed valuable comments on our paper.
 The suggestions of the reviewers are very helpful for us and the suggestions are now incorporated in the revised paper as follows.
 We have attached the last paper review and revised paper in our reply letter.
-In the revised paper, newly added and modified sentences are written in the bold and red colored font so that the reviewers can easily find them.
+In the revised paper, newly added and modified sentences are highlighted so that the reviewers can easily find them.
 We hope the editor and the reviewers will be satisfied with our replies to the comments and the revised paper.
 \newline\newline
 
@@ -204,6 +204,19 @@ TINET+TECS can run at the same speed as TINET; therefore, the overheads of TINET
     We added the memory usage of only TCP, only UDP, and both TCP and UDP.
 
 \begin{itembox}[|]{4.2 Performance of TINET+TECS}
+    \centering
+    {\tabcolsep = 1mm
+    \begin{tabular}{c|r|r|r|r}
+        \hline\hline
+                               &   text       &  data    &   bss      &  total     \\ \hline
+        TINET                  &   183.94 KB  &  5.37 KB &  132.03 KB &  322.34 KB \\
+        TINET+TECS (TCP)       &   169.48 KB  &  5.37 KB &  149.01 KB &  323.96 KB \\
+        TINET+TECS (UDP)       &   169.26 KB  &  5.37 KB &  149.04 KB &  323.77 KB \\
+        TINET+TECS (TCP+UDP)   &   170.73 KB  &  5.37 KB &  149.13 KB &  325.23 KB \\
+        \hline
+        \multicolumn{5}{r}{Including the application and kernel objects}
+    \end{tabular}
+    }
 \end{itembox}\\
 
 \end{enumerate}
