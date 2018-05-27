@@ -79,7 +79,7 @@ Here, TINET+TECS improves configurability and scalability and offers software de
 TINET+TECS utilizes a dynamic TECS component connection method to satisfy the original TINET specifications.
 Further, TLSF+TECS is a thread-safe memory allocator that runs at high speeds and efficiently consumes memory.
 The experimental results of the comparison between TINET+TECS and the original TINET show that execution time and memory consumption overhead are both reduced; further, we conclude that configurability is improved.
-Finally, the TLSF+TECS function which obtains and report statistical information regarding mruby's virtual machine (VM) memory usage, helps developers debug and verify their embedded IoT systems.
+Finally, the TLSF+TECS function which obtains and reports statistical information regarding mruby's virtual machine (VM) memory usage, helps developers debug and verify their embedded IoT systems.
 
 \end{abstract}
 
@@ -166,7 +166,7 @@ mruby programs can call the TINET functions required for network software throug
         TCP/IP functions can be utilized from mruby programs and the protocol stack can be easily configured for productivity since the network function is essential to the IoT systems.
 
     \item[R2:]
-        Multiple mruby programs can run concurrently to improve productivity of software development.
+        Multiple mruby programs can run concurrently to improve the productivity of software development.
         A thread-safe memory allocator is required to prevent the multiple mruby tasks from conflicting their memory.
 
 \end{description}
@@ -189,8 +189,8 @@ TECS can increase productivity and reduce development costs due to improved reus
 TECS also provides component diagrams, which help developers visualize the overall structure of a system.
 
 TECS statically performs component deployment and composition.
-Consequently, connecting components does not incur significant overhead and memory requirements can be reduced.
-TECS can be implemented in C, and demonstrates various feature such as source level portability and fine-grained components.
+Consequently, connecting components does not incur significant overheads and memory requirements can be reduced.
+TECS can be implemented in C, and demonstrates various features such as source level portability and fine-grained components.
 
 \begin{figure}[t]
     \centering
@@ -323,11 +323,11 @@ The mruby compiler translates an mruby code into a bytecode, which can be interp
 \label{sec:mrubyonTECS}
 
 mruby on TECS is a component-based framework for running an mruby script language on embedded systems.
-This framework integrates two technologies, mruby and TECS, and enables to develop embedded software using a script language without slowing down the execution time. 
+This framework integrates two technologies, mruby and TECS, and enables the development of embedded software using a script language without slowing down the execution time. 
 
 \subsubsection{System Model of mruby on TECS}
 % The present mruby on TECS system model is shown in Fig.\ref{fig:mrubyonTECS}.
-Each mruby program, which is a bytecode, runs on own RiteVM as a componentized task of an RTOS.
+Each mruby program, which is a bytecode, runs on its own RiteVM as a componentized task of an RTOS.
 TECS components support various embedded drivers such as motor and sensor drivers.
 An mruby-TECS bridge provides native libraries for mruby and can call a native program (e.g., C legacy code) from an mruby program.
 The mruby-TECS bridge also provides TECS components for receiving the invocation from an mruby program.
@@ -352,7 +352,7 @@ However, some C language codes are required to manipulate actuators and sensors 
 
 Fig.\ref{fig:mrubyTECSbridge} illustrates an mruby-TECS bridge used to control a motor.
 The left side of BridgeMotor belongs to the mruby program.
-The right side of BridgeMotor belongs to TECS component.
+The right side of BridgeMotor belongs to the TECS component.
 
 \begin{figure}[t]
     \centering
@@ -362,7 +362,7 @@ The right side of BridgeMotor belongs to TECS component.
 \end{figure}
 
 The mruby-TECS bridge generates a {\it celltype}, which is called from the mruby code, and an mruby class, which corresponds to a developer-specified TECS component to invoke a C function from the mruby program.
-The generated mruby-TECS bridge supports registration of classes and methods for mruby.
+The generated mruby-TECS bridge supports the registration of classes and methods for mruby.
 Methods in an mruby class are defined by generation codes for an mruby-TECS bridge, such as setPower and stop.
 Thus, when a method is called in an mruby program, the mruby-TECS bridge calls the function defined in the TECS component such as a Motor {\it cell}.
 
@@ -374,7 +374,7 @@ The proposed framework is an extended mruby on TECS framework to develop network
 Developers can use TCP- and UDP-related functions from mruby programs.
 The proposed framework incorporates two functionalities: TINET+TECS and TLSF+TECS.
 TINET+TECS is a component-based TCP/IP protocol stack comprised in the proposed framework, and it compensates for the original TINET's weak point that it is hard to maintain, extend, and analyze the software due to many complex source codes and improves the configurability.
-TLSF+TECS which is a component-based dynamic memory allocator is used for memory management of RiteVMs and TCP/IP buffers in the proposed framework.
+TLSF+TECS which is a component-based dynamic memory allocator is used for the memory management of RiteVMs and TCP/IP buffers in the proposed framework.
 Since each TLSF component maintains its own heap area, TLSF+TECS allows concurrent operation without exclusive control while improving the efficiency of memory consumption, which is the advantage of TLSF.
 
 
@@ -385,7 +385,7 @@ Since each TLSF component maintains its own heap area, TLSF+TECS allows concurre
 
 TINET is a compact TCP/IP protocol stack for embedded systems based on the ITRON\footnote{ITRON is an RTOS developed by the TRON project.} TCP/IP API Specification \cite{url:ITRON_TCP/IP_API_Spec}, developed by the TOPPERS Project \cite{url:TOPPERS}.
 TINET has been released as an open-source tool.
-To satisfy restrictions for embedded systems in terms of, for example, memory capacity, size, and power consumption, TINET supports the functions such as minimum copy frequency, elimination of dynamic memory control, asynchronous interfacing, error detailing per API.
+To satisfy restrictions for embedded systems in terms of, for example, memory capacity, size, and power consumption, TINET supports functions such as minimum copy frequency, elimination of dynamic memory control, asynchronous interfacing, error detailing per API.
 
 {\bf Overview:}
 TINET runs as middleware on TOPPERS/ASP3 \cite{par:ASP3} \cite{url:ASP3}, a real-time kernel based on $\mu$ITRON \cite{par:microITRON}.
@@ -465,7 +465,7 @@ Though its use of IPv6 and Point-to-Point Protocol (PPP) components, TINET+TECS 
 
 The original TINET eliminates dynamic memory control to meet the severe memory restrictions of embedded systems.
 A memory area for sending/receiving data in the protocol stack is allocated and released within a predetermined area.
-The memory allocator component allows for elimination of dynamic memory control in TINET+TECS by providing a requested memory area from the statically allocated memory area.
+The memory allocator component allows for the elimination of dynamic memory control in TINET+TECS by providing a requested memory area from the statically allocated memory area.
 
 The memory allocator component connects to as many tFixedSizeMemoryPool as required, as shown in Fig.\ref{fig:tMemoryAllocator}.
 tFixedSizeMemoryPool is a componentized kernel object of TOPPERS/ASP3 for allocating and releasing memory areas of a requested size. 
@@ -771,7 +771,7 @@ mrb_TECS_allocf(mrb_state *mrb, void *p,
 \label{src:TLSFC}
 \end{figure}
 
-Next, Fig.\ref{src:TLSFBuild} shows the build description of the TLSF memory allocator component illustrated in Fig.\ref{fig:WithTECS}\footnote{Other call/entry ports, attributes, and valuables are actually described, but it is omitted here for the simplicity.}.
+Next, Fig.\ref{src:TLSFBuild} shows the build description of the TLSF memory allocator component illustrated in Fig.\ref{fig:WithTECS}\footnote{Other call/entry ports, attributes, and valuables are actually described, but it is omitted here for simplicity.}.
 Here, two sets of task components and TLSF components are combined.
 Further, each memory pool size can be configured as a variable (lines 5 and 11 in Fig.\ref{src:TLSFBuild}).
 Fig.\ref{src:TLSFC} presents the code that actually calls functions of the TLSF memory allocator component.
@@ -1074,7 +1074,7 @@ The TLSF+TECS framework provides functionality to acquire statistical informatio
 Therefore, it is possible to analyze the operational status of the TLSF and GC on RiteVMs.
 
 Fig.\ref{fig:EvaluationOfTLSFStatistics} shows the memory usage of two RiteVMs, with presented data acquired from the statistical information available via the TLSF+TECS framework.
-From the figure, we observe that when the RiteVM are first activated, a large amount of memory is allocated for each RiteVM and initialization are performed within one second.
+From the figure, we observe that when the RiteVM are first activated, a large amount of memory is allocated for each RiteVM and initialization is performed within one second.
 Next, the applications runs for ~10 s and the RiteVMs subsequently terminate.
 The reduction in memory usage that occurs at regular intervals is due to the GC function of the RiteVM.
 Here, an application that allocates tens of KB of memory runs on RiteVM 1 and an application that allocates hundreds of KB of memory runs on RiteVM 2.
@@ -1102,14 +1102,14 @@ WSN macroprogramming provides abstractions to specify high-level collaborative b
 nesC, a programming language used to build applications for the TinyOS platform \cite{par:nesc}, has been proposed.
 nesC/TinyOS is designed for WSN nodes with limited resources e.g., 8 KB of program memory, 512 bytes of RAM, but not supported TCP/IP implementation.
 
-Cloud-based platform reduces development efforts by providing cloud-base APIs and high-level constructs (e.g., drag-and-drop) \cite{par:cloud-based}.
-In addition, it offers the ease deployment and evolution because the application logic is centrally located in a cloud platform.
-However, it is platform-dependent design, and restricts developers in terms of functionality such as in-network aggregation or direct node-to-node communication locally.
+A cloud-based platform reduces development efforts by providing cloud-base APIs and high-level constructs (e.g., drag-and-drop) \cite{par:cloud-based}.
+In addition, it offers easy deployment and evolution because the application logic is centrally located in a cloud platform.
+However, it is a platform-dependent design, and restricts developers in terms of functionality such as in-network aggregation or direct node-to-node communication locally.
 The cloud-based mruby framework, enzi Board \cite{url:enzi}, has been proposed.
-enzi can be developed and simulated on the Web, and developer can download and run the program on the board.
+enzi can be developed and simulated on the Web, and the developer can download and run the program on the board.
 
 To address the issues of development efforts and platform-dependent design, MDD has been proposed \cite{par:MDD}.
-MDD provides the benefits of reusable, platform-independent, extensible design, however it needs long development time to build MDD systems.
+MDD provides the benefits of reusable, platform-independent, extensible design, however it needs a long development time to build MDD systems.
 
 The development using GPLs such as C, JavaScript, Python, and Android allows the extremely efficient systems based on the complete control over individual devices.
 However, GPLs need more development effort, and it is difficult to reuse software due to platform-dependent design.
@@ -1119,8 +1119,8 @@ That is, mruby programs can be executed at the same speed as C, which is faster 
 
 The proposed framework can configure the TCP/IP protocol stack with minimum set compared to the other platforms.
 Therefore, the proposed framework can reduce memory consumption.
-In addition, the extended mruby on TECS supports legacy code such as a motor driver.
-mruby has the same syntax as Ruby which has advantages to web application development as it uses in Rails framework \cite{url:rubyonrails}.
+In addition, the extended mruby on TECS supports a legacy code such as a motor driver.
+mruby has the same syntax as Ruby which has advantages for web application development as it uses in Rails framework \cite{url:rubyonrails}.
 
 
 
@@ -1130,7 +1130,7 @@ mruby has the same syntax as Ruby which has advantages to web application develo
 
 This paper presented an extended framework of mruby on TECS, including TINET+TECS and TLSF+TECS.
 In the proposed framework, mruby programs can call TINET+TECS functions through the mruby-TECS bridge.
-Development of software for IoT devices such as sensors and actuators will be more efficient due to the high productivity of mruby.
+The development of software for IoT devices such as sensors and actuators will be more efficient due to the high productivity of mruby.
 
 TINET+TECS is a componentized version of TINET, a compact TCP/IP protocol stack that uses TECS.
 It improves on TINET configurability while suppressing the overhead of componentization.
@@ -1138,7 +1138,7 @@ Scalability is also improved because the component-based framework simplifies to
 This paper also presented the dynamic connection, a new TECS functionality, to enable dynamic processing while reducing memory consumption.
 TINET+TECS utilizes the dynamic connection to satisfy the TINET specification for supporting the static generation of CEPs and REPs.
 TLSF+TECS is a component-based dynamic allocator.
-Since the TLSF+TECS can hold own heap area, memory contention will not occur even if memory is simultaneously allocated or released from multiple threads.
+Since the TLSF+TECS can hold its own heap area, memory contention will not occur even if memory is simultaneously allocated or released from multiple threads.
 TINET+TECS and TLSF+TECS can be applicable to various embedded systems because these frameworks are executed on TECS and not limited to mruby.
 
 In addition, the RiteVMs, TINET+TECS, and TLSF+TECS are implemented as components; therefore, developers can add, remove, or reuse their functionalities easily as required.
